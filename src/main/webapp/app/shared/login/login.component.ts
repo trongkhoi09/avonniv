@@ -1,10 +1,11 @@
-import { Component, OnInit, AfterViewInit, Renderer, ElementRef } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
-import { JhiLanguageService, EventManager } from 'ng-jhipster';
+import {Component, OnInit, AfterViewInit, Renderer, ElementRef} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Router} from '@angular/router';
+import {JhiLanguageService, EventManager} from 'ng-jhipster';
 
-import { LoginService } from './login.service';
-import { StateStorageService } from '../auth/state-storage.service';
+import {LoginService} from './login.service';
+import {StateStorageService} from '../auth/state-storage.service';
+import {Register} from '../../account/register/register.service';
 
 @Component({
     selector: 'jhi-login-modal',
@@ -16,26 +17,40 @@ export class JhiLoginModalComponent implements OnInit, AfterViewInit {
     rememberMe: boolean;
     username: string;
     credentials: any;
+    isRegistration: boolean;
+    confirmPassword: string;
+    doNotMatch: string;
+    error: string;
+    errorEmailExists: string;
+    errorUserExists: string;
+    registerAccount: any;
+    success: boolean;
 
-    constructor(
-        private eventManager: EventManager,
-        private languageService: JhiLanguageService,
-        private loginService: LoginService,
-        private stateStorageService: StateStorageService,
-        private elementRef: ElementRef,
-        private renderer: Renderer,
-        private router: Router,
-        public activeModal: NgbActiveModal
-    ) {
+    constructor(private eventManager: EventManager,
+                private languageService: JhiLanguageService,
+                private loginService: LoginService,
+                private registerService: Register,
+                private stateStorageService: StateStorageService,
+                private elementRef: ElementRef,
+                private renderer: Renderer,
+                private router: Router,
+                public activeModal: NgbActiveModal) {
         this.credentials = {};
+        this.isRegistration = false;
     }
 
     ngOnInit() {
         this.languageService.addLocation('login');
+        this.success = false;
+        this.registerAccount = {};
     }
 
     ngAfterViewInit() {
-        this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#username'), 'focus', []);
+        if (this.isRegistration) {
+            this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#login'), 'focus', []);
+        } else {
+            this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#username'), 'focus', []);
+        }
     }
 
     cancel() {
@@ -77,13 +92,36 @@ export class JhiLoginModalComponent implements OnInit, AfterViewInit {
         });
     }
 
-    register() {
-        this.activeModal.dismiss('to state register');
-        this.router.navigate(['/register']);
-    }
-
     requestResetPassword() {
         this.activeModal.dismiss('to state requestReset');
         this.router.navigate(['/reset', 'request']);
+    }
+
+    register() {
+        if (this.registerAccount.password !== this.confirmPassword) {
+            this.doNotMatch = 'ERROR';
+        } else {
+            this.doNotMatch = null;
+            this.error = null;
+            this.errorUserExists = null;
+            this.errorEmailExists = null;
+            this.languageService.getCurrent().then((key) => {
+                this.registerAccount.langKey = key;
+                this.registerService.save(this.registerAccount).subscribe(() => {
+                    this.success = true;
+                }, (response) => this.processError(response));
+            });
+        }
+    }
+
+    private processError(response) {
+        this.success = null;
+        if (response.status === 400 && response._body === 'login already in use') {
+            this.errorUserExists = 'ERROR';
+        } else if (response.status === 400 && response._body === 'email address already in use') {
+            this.errorEmailExists = 'ERROR';
+        } else {
+            this.error = 'ERROR';
+        }
     }
 }

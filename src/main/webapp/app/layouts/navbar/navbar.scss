@@ -8,8 +8,12 @@ Navbar
 }
 
 .jh-navbar {
+    height: 150px;
     background-color: #353d47;
     padding: .2em 1em;
+    -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
     .profile-image {
         margin: -10px 0px;
         height: 40px;
@@ -23,9 +27,8 @@ Navbar
         margin-left: 0.15em;
     }
     ul.navbar-nav {
-        padding: 0.5em;
         .nav-item {
-            margin-left: 1.5rem;
+            margin-left: 0.5rem;
         }
     }
     a.nav-link {
@@ -38,6 +41,43 @@ Navbar
         &:hover {
             color: #fff;
         }
+    }
+    .top-absolute{
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+    }
+    .app-search {
+        position: relative;
+        margin: 15px 5px 15px 10px;
+    }
+
+    .app-search a {
+        position: absolute;
+        top: 3px;
+        right: 20px;
+        color: #c4c4cd;
+    }
+
+    .app-search .form-control,
+    .app-search .form-control:focus {
+        border: none;
+        font-size: 13px;
+        color: #ffffff;
+        padding-left: 20px;
+        padding-right: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: none;
+        border-radius: 30px;
+        height: 30px;
+        width: 180px;
+    }
+    .nav-item-custom {
+        margin: 11px 2px 15px 5px;
+    }
+    .jh-logo-container {
+        margin: 0 auto;
     }
 }
 

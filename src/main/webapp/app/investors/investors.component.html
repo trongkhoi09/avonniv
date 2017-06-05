@@ -1,0 +1,83 @@
+<div class="investors">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card-box">
+                <div class="filtering-item">
+                    <div class="heading">
+                        <span class="glyphicon glyphicon-folder-open"></span>Utylysare
+                    </div>
+                    <div class="content">
+                        <ul>
+                            <li *ngFor="let fi of filters; let i = index">
+                                <div class="checkbox checkbox-custom">
+                                    <input id="filter-{{i}}" type="checkbox" [(ngModel)]="fi.value"
+                                           (ngModelChange)="onFiltering()"/>
+                                    <label for="filter-{{i}}">{{fi.name}}</label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="filtering-item">
+                    <select name="singleSelect" id="singleSelect" ng-model="data.singleSelect">
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card-box row">
+                <div class="col-md-6 text-center">
+                    <input id="public" type="checkbox"
+                           (ngModelChange)="onFiltering()"/>
+                    <label for="public">Public</label>
+                </div>
+                <div class="col-md-6 text-center">
+                    <input id="private" type="checkbox"
+                           (ngModelChange)="onFiltering()"/>
+                    <label for="private">Private</label>
+                </div>
+            </div>
+            <div class="card-box row margin-top-20">
+                <div class="col-md-12">
+                    <div class="card-box row margin-10">
+                        <div class="col-md-2 text-center" *ngFor="let title of titles; let i = index" >
+                            <a><span>{{title}}</span></a>
+                        </div>
+                    </div>
+                    <div class="card-box row margin-10" *ngFor="let d of investors; let i = index" >
+                        <div class="col-md-2 text-center" >
+                            <span>{{d.value}}</span>
+                        </div>
+                        <div class="col-md-2 text-center" >
+                            <span>{{d.title}}</span>
+                        </div>
+                        <div class="col-md-2 text-center" >
+                            <span>{{d.description}}</span>
+                        </div>
+                        <div class="col-md-2 text-center" >
+                            <span>{{d.financing}}</span>
+                        </div>
+                        <div class="col-md-2 text-center" >
+                            <span>{{d.applyBy}}</span>
+                        </div>
+                        <div class="col-md-2 text-center" >
+                            <span class="badge badge-success">{{d.status}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="investors">
+                <div class="row justify-content-center">
+                    <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </div>
+                <div class="row justify-content-center">
+                    <ngb-pagination [pageSize]="itemsPerPage" [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -13,7 +13,7 @@
         "indicator": {
             "diskSpace": "Diskutrymme",
             "mail": "E-post",
-            "db": "Databas"
+            "mongo": "MongoDB"
         },
         "table": {
             "service": "Service namn",

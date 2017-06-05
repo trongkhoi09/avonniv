@@ -2,13 +2,33 @@
 /* ==========================================================================
 Main page styles
 ========================================================================== */
-
+.border-grant{
+    border: 3px solid black;
+}
+.margin-grant{
+    margin-left: 12.5%;
+}
+.margin-introduce{
+    margin-left: 7.5%;
+}
 .hipster {
     display: inline-block;
-    width: 347px;
-    height: 497px;
+    width: 122px;
+    height: 170px;
     background: url("../../content/images/hipster.png") no-repeat center top;
     background-size: contain;
+}
+
+.icon-social {
+    border: 2px solid;
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    margin: 5px;
+}
+
+.margin-auto {
+    margin: 0 auto;
 }
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */

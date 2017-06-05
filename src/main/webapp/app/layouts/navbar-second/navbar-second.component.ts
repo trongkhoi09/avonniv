@@ -1,22 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { JhiLanguageService } from 'ng-jhipster';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {JhiLanguageService} from 'ng-jhipster';
 
-import { ProfileService } from '../profiles/profile.service';
-import { JhiLanguageHelper, Principal, LoginModalService, LoginService } from '../../shared';
-import {ProfilesModalService} from '../../account/profiles/profiles-modal.service';
+import {ProfileService} from '../profiles/profile.service';
+import {JhiLanguageHelper, Principal, LoginModalService, LoginService} from '../../shared';
 
-import { VERSION, DEBUG_INFO_ENABLED } from '../../app.constants';
+import {VERSION, DEBUG_INFO_ENABLED} from '../../app.constants';
 
 @Component({
-    selector: 'jhi-navbar',
-    templateUrl: './navbar.component.html',
+    selector: 'jhi-navbar-second',
+    templateUrl: './navbar-second.component.html',
     styleUrls: [
-        'navbar.scss'
+        'navbar-second.scss'
     ]
 })
-export class NavbarComponent implements OnInit {
+export class NavbarSecondComponent implements OnInit {
 
     inProduction: boolean;
     isNavbarCollapsed: boolean;
@@ -25,16 +24,13 @@ export class NavbarComponent implements OnInit {
     modalRef: NgbModalRef;
     version: string;
 
-    constructor(
-        private loginService: LoginService,
-        private languageHelper: JhiLanguageHelper,
-        private languageService: JhiLanguageService,
-        private principal: Principal,
-        private loginModalService: LoginModalService,
-        private profilesModalService: ProfilesModalService,
-        private profileService: ProfileService,
-        private router: Router
-    ) {
+    constructor(private loginService: LoginService,
+                private languageHelper: JhiLanguageHelper,
+                private languageService: JhiLanguageService,
+                private principal: Principal,
+                private loginModalService: LoginModalService,
+                private profileService: ProfileService,
+                private router: Router) {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
         this.languageService.addLocation('home');
@@ -52,7 +48,7 @@ export class NavbarComponent implements OnInit {
     }
 
     changeLanguage(languageKey: string) {
-      this.languageService.changeLanguage(languageKey);
+        this.languageService.changeLanguage(languageKey);
     }
 
     collapseNavbar() {
@@ -65,10 +61,6 @@ export class NavbarComponent implements OnInit {
 
     login() {
         this.modalRef = this.loginModalService.open();
-    }
-
-    settings() {
-        this.modalRef = this.profilesModalService.open();
     }
 
     logout() {
@@ -84,4 +76,5 @@ export class NavbarComponent implements OnInit {
     getImageUrl() {
         return this.isAuthenticated() ? this.principal.getImageUrl() : null;
     }
+
 }

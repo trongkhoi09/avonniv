@@ -11,6 +11,8 @@ export * from './password-reset/finish/password-reset-finish.route';
 export * from './password-reset/init/password-reset-init.component';
 export * from './password-reset/init/password-reset-init.service';
 export * from './password-reset/init/password-reset-init.route';
+export * from './profiles/profiles.component';
+export * from './profiles/profiles-modal.service';
 export * from './register/register.component';
 export * from './register/register.service';
 export * from './register/register.route';

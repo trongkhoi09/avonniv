@@ -221,4 +221,35 @@
                   separator=";"
                   tableName="oauth_client_details"/>
     </changeSet>
+
+    <changeSet id="1" author="sylt">
+        <createTable tableName="jhi_investor">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="bigint"/>
+
+            <column name="value" type="varchar(255)"/>
+            <column name="title" type="varchar(255)"/>
+            <column name="description" type="varchar(255)"/>
+            <column name="financing" type="varchar(255)"/>
+            <column name="apply_by" type="varchar(255)"/>
+            <column name="status" type="INT"/>
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reset_date" type="timestamp">
+                <constraints nullable="true"/>
+            </column>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="jhi_investor" baseColumnNames="user_id" constraintName="FK_INVESTOR_USER_ID"
+                                 referencedTableName="jhi_user"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
 </databaseChangeLog>

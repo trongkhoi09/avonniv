@@ -1,6 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import {ProfilesModalService} from './profiles/profiles-modal.service';
 import { AvonnivSharedModule } from '../shared';
 
 import {
@@ -16,6 +17,7 @@ import {
     PasswordResetInitComponent,
     PasswordResetFinishComponent,
     SettingsComponent,
+    ProfilesComponent,
     accountState
 } from './';
 
@@ -31,14 +33,19 @@ import {
         PasswordStrengthBarComponent,
         PasswordResetInitComponent,
         PasswordResetFinishComponent,
-        SettingsComponent
+        SettingsComponent,
+        ProfilesComponent
     ],
     providers: [
         Register,
         Activate,
         Password,
         PasswordResetInit,
-        PasswordResetFinish
+        PasswordResetFinish,
+        ProfilesModalService
+    ],
+    entryComponents: [
+        ProfilesComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

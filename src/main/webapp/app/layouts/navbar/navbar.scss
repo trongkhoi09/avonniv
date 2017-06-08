@@ -1,4 +1,3 @@
-
 /* ==========================================================================
 Navbar
 ========================================================================== */
@@ -42,7 +41,7 @@ Navbar
             color: #fff;
         }
     }
-    .top-absolute{
+    .top-absolute {
         position: absolute;
         top: 0;
         right: 0;
@@ -78,6 +77,13 @@ Navbar
     }
     .jh-logo-container {
         margin: 0 auto;
+        img {
+            margin: 0 auto;
+        }
+        a {
+            color: white;
+            text-decoration: none;
+        }
     }
 }
 

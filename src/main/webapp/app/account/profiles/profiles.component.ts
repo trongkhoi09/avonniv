@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JhiLanguageService } from 'ng-jhipster';
 
 import { Principal, AccountService, JhiLanguageHelper } from '../../shared';
+import {Password} from '../password/password.service';
 
 @Component({
     selector: 'jhi-profiles',
@@ -10,11 +11,16 @@ import { Principal, AccountService, JhiLanguageHelper } from '../../shared';
 export class ProfilesComponent implements OnInit {
     error: string;
     success: string;
+    account: string;
     settingsAccount: any;
     languages: any[];
+    doNotMatch: string;
+    password: string;
+    confirmPassword: string;
 
     constructor(
-        private account: AccountService,
+        private accountService: AccountService,
+        private passwordService: Password,
         private principal: Principal,
         private languageService: JhiLanguageService,
         private languageHelper: JhiLanguageHelper
@@ -24,6 +30,7 @@ export class ProfilesComponent implements OnInit {
     ngOnInit() {
         this.principal.identity().then((account) => {
             this.settingsAccount = this.copyAccount(account);
+            this.account = account;
         });
         this.languageHelper.getAll().then((languages) => {
             this.languages = languages;
@@ -31,7 +38,7 @@ export class ProfilesComponent implements OnInit {
     }
 
     save() {
-        this.account.save(this.settingsAccount).subscribe(() => {
+        this.accountService.save(this.settingsAccount).subscribe(() => {
             this.error = null;
             this.success = 'OK';
             this.principal.identity(true).then((account) => {
@@ -58,5 +65,22 @@ export class ProfilesComponent implements OnInit {
             login: account.login,
             imageUrl: account.imageUrl
         };
+    }
+
+    changePassword() {
+        if (this.password !== this.confirmPassword) {
+            this.error = null;
+            this.success = null;
+            this.doNotMatch = 'ERROR';
+        } else {
+            this.doNotMatch = null;
+            this.passwordService.save(this.password).subscribe(() => {
+                this.error = null;
+                this.success = 'OK';
+            }, () => {
+                this.success = null;
+                this.error = 'ERROR';
+            });
+        }
     }
 }

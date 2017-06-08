@@ -8,7 +8,7 @@ Navbar
 }
 
 .jh-navbar {
-    height: 150px;
+    height: 250px;
     background-color: #353d47;
     padding: .2em 1em;
     -webkit-box-shadow: 0 8px 6px -6px #999;
@@ -21,7 +21,7 @@ Navbar
         border-radius: 50%;
     }
     .dropdown-item.active, .dropdown-item.active:focus, .dropdown-item.active:hover {
-        background-color: #353d47;
+        background-color: #5bc0de;
     }
     .dropdown-toggle::after {
         margin-left: 0.15em;

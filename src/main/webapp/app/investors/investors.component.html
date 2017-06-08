@@ -1,81 +1,97 @@
 <div class="investors">
     <div class="row">
         <div class="col-md-3">
-            <div class="card-box">
-                <div class="filtering-item">
-                    <div class="heading">
-                        <span class="glyphicon glyphicon-folder-open"></span>Utylysare
+            <div class="card container">
+                <fieldset class="form-group row">
+                    <legend class="col-form-legend col-sm-2">
+                        <span class="glyphicon glyphicon-folder-open"></span> Utylysare
+                    </legend>
+                    <div class="col-sm-10">
+                        <div class="form-check" *ngFor="let fi of filters; let i = index">
+                            <label class="form-check-label">
+                                <input class="form-check-input" (ngModelChange)="onFiltering()"
+                                       [(ngModel)]="fi.value" type="checkbox"> {{fi.name}}
+                            </label>
+                        </div>
                     </div>
-                    <div class="content">
-                        <ul>
-                            <li *ngFor="let fi of filters; let i = index">
-                                <div class="checkbox checkbox-custom">
-                                    <input id="filter-{{i}}" type="checkbox" [(ngModel)]="fi.value"
-                                           (ngModelChange)="onFiltering()"/>
-                                    <label for="filter-{{i}}">{{fi.name}}</label>
-                                </div>
-                            </li>
-                        </ul>
+
+                </fieldset>
+                <fieldset class="form-group row">
+                    <legend class="col-form-legend col-sm-2">
+                        <span class="glyphicon glyphicon-folder-open"></span> Utylysare
+                    </legend>
+                    <div class="col-sm-10">
+                        <select class="custom-select" ng-model="data.singleSelect">
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
                     </div>
-                </div>
-                <div class="filtering-item">
-                    <select name="singleSelect" id="singleSelect" ng-model="data.singleSelect">
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
-                    </select>
-                </div>
+                </fieldset>
             </div>
         </div>
         <div class="col-md-9">
-            <div class="card-box row">
-                <div class="col-md-6 text-center">
-                    <input id="public" type="checkbox"
-                           (ngModelChange)="onFiltering()"/>
-                    <label for="public">Public</label>
-                </div>
-                <div class="col-md-6 text-center">
-                    <input id="private" type="checkbox"
-                           (ngModelChange)="onFiltering()"/>
-                    <label for="private">Private</label>
-                </div>
-            </div>
-            <div class="card-box row margin-top-20">
-                <div class="col-md-12">
-                    <div class="card-box row margin-10">
-                        <div class="col-md-2 text-center" *ngFor="let title of titles; let i = index" >
-                            <a><span>{{title}}</span></a>
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox"
+                                       (ngModelChange)="onFiltering()" value="option1"> Public
+                            </label>
                         </div>
                     </div>
-                    <div class="card-box row margin-10" *ngFor="let d of investors; let i = index" >
-                        <div class="col-md-2 text-center" >
-                            <span>{{d.value}}</span>
-                        </div>
-                        <div class="col-md-2 text-center" >
-                            <span>{{d.title}}</span>
-                        </div>
-                        <div class="col-md-2 text-center" >
-                            <span>{{d.description}}</span>
-                        </div>
-                        <div class="col-md-2 text-center" >
-                            <span>{{d.financing}}</span>
-                        </div>
-                        <div class="col-md-2 text-center" >
-                            <span>{{d.applyBy}}</span>
-                        </div>
-                        <div class="col-md-2 text-center" >
-                            <span class="badge badge-success">{{d.status}}</span>
+                    <div class="col-md-6 text-center">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox"
+                                       (ngModelChange)="onFiltering()" value="option2"> Private
+                            </label>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="card margin-top-20">
+                <div class="table-responsive" *ngIf="investors">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse"
+                            [callback]="transition.bind(this)">
+                            <th jhiSortBy="value"><span>value</span><span class="fa fa-sort"></span></th>
+                            <th jhiSortBy="title"><span>title</span><span class="fa fa-sort"></span></th>
+                            <th><span>description</span></th>
+                            <th jhiSortBy="financing"><span>financing</span><span class="fa fa-sort"></span></th>
+                            <th jhiSortBy="applyBy"><span>applyBy</span><span class="fa fa-sort"></span></th>
+                            <th jhiSortBy="status"><span>status</span><span class="fa fa-sort"></span></th>
+                            <th jhiSortBy="createdDate"><span>createdDate</span><span class="fa fa-sort"></span></th>
+                            <th jhiSortBy="lastModifiedDate"><span>lastModifiedDate</span><span
+                                class="fa fa-sort"></span></th>
+                        </tr>
+                        </thead>
+                        <tbody *ngIf="investors">
+                        <tr *ngFor="let d of investors; let i = index">
+                            <td>{{d.value}}</td>
+                            <td>{{d.title}}</td>
+                            <td>{{d.description}}</td>
+                            <td>{{d.financing}}</td>
+                            <td>{{d.applyBy}}</td>
+                            <td><span class="badge badge-success">{{d.status}}</span></td>
+                            <td>{{d.createdDate | date:'dd/MM/yy HH:mm'}}</td>
+                            <td>{{d.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-            <div *ngIf="investors">
-                <div class="row justify-content-center">
-                    <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-                </div>
-                <div class="row justify-content-center">
-                    <ngb-pagination [pageSize]="itemsPerPage" [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+                <div *ngIf="investors">
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="totalItems"
+                                        [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                    <div class="row justify-content-center">
+                        <ngb-pagination [pageSize]="itemsPerPage" [collectionSize]="totalItems" [(page)]="page"
+                                        (pageChange)="loadPage(page)"></ngb-pagination>
+                    </div>
                 </div>
             </div>
         </div>

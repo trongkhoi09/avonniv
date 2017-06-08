@@ -1,13 +1,26 @@
 <div>
     <div class="row">
-        <div class="offset-1 col-md-4 border-grant text-center margin-grant">
-            <a class="nav-link" routerLink="investors">
-                <span class="hipster img-fluid img-rounded"></span>
+        <div class="offset-1 col-md-4 text-center margin-grant grant">
+            <a routerLink="investors">
+                <div class="item">
+                    <img style="height: 300px; width: 100%" src="../../content/images/images.jpg"/>
+                    <div class="content">
+                        <p class="title-custom" >Public Grants</p>
+                        <p class="description-custom">Description Public Grants Description Public Grants Description Public Grants Description Public Grants Description Public Grants</p>
+                    </div>
+                </div>
             </a>
         </div>
-        <div class="offset-1 col-md-4 border-grant text-center">
-            <h1 class="display-4" jhiTranslate="home.title">Welcome, Java Hipster!</h1>
-            <p class="lead" jhiTranslate="home.subtitle">This is your homepage</p>
+        <div class="offset-1 col-md-4 grant text-center">
+            <a routerLink="investors">
+                <div class="item">
+                    <img style="height: 300px; width: 100%" src="../../content/images/images.jpg"/>
+                    <div class="content">
+                        <p class="title-custom" >Private Grants</p>
+                        <p class="description-custom">Description Public Grants Description Public Grants Description Public Grants Description Public Grants Description Public Grants</p>
+                    </div>
+                </div>
+            </a>
 
             <!--<div [ngSwitch]="isAuthenticated()">-->
                 <!--<div class="alert alert-success" *ngSwitchCase="true">-->
@@ -30,26 +43,38 @@
         </div>
     </div>
     <div class="row" style="margin: 20px">
-        <div class="col-md-8 border-grant text-center">
-            <h1 class="display-4" jhiTranslate="home.title">Welcome, Java Hipster!</h1>
-            <p class="lead" jhiTranslate="home.subtitle">This is your homepage</p>
-        </div>
-        <div class="col-md-3 border-grant text-center margin-introduce">
-            <div class="row text-center">
-                <p class="lead" jhiTranslate="home.subtitle">This is your homepage</p>
+        <div class="col-md-8">
+            <div class="card height-100">
+                <div class="card-block">
+                    <h4 class="card-title">About us</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.
+                        Some quick example text to build on the card title and make up the bulk of the
+                        card's content.
+                        Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                </div>
             </div>
-            <div class="row">
-                <div class="margin-auto">
-                    <div class="row">
-                        <div class="icon-social">
+        </div>
+
+        <div class="col-md-4  ">
+            <div class="card height-100">
+                <div class="card-block">
+                    <div class="text-center">
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                            card's content.
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <span class="icon-social">
                             <i class="fa fa-facebook" aria-hidden="true"></i>
-                        </div>
-                        <div class="icon-social">
+                        </span>
+                        <span class="icon-social">
                             <i class="fa fa-twitter" aria-hidden="true"></i>
-                        </div>
-                        <div class="icon-social">
+                        </span>
+                        <span class="icon-social">
                             <i class="fa fa-instagram" aria-hidden="true"></i>
-                        </div>
+                        </span>
                     </div>
                 </div>
             </div>

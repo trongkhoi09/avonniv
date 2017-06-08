@@ -18,9 +18,9 @@ import {
     PasswordResetFinishComponent,
     SettingsComponent,
     ProfilesComponent,
+    PasswordResetModalService,
     accountState
 } from './';
-
 @NgModule({
     imports: [
         AvonnivSharedModule,
@@ -42,7 +42,8 @@ import {
         Password,
         PasswordResetInit,
         PasswordResetFinish,
-        ProfilesModalService
+        ProfilesModalService,
+        PasswordResetModalService
     ],
     entryComponents: [
         ProfilesComponent

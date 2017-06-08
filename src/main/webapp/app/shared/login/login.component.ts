@@ -6,6 +6,7 @@ import {JhiLanguageService, EventManager} from 'ng-jhipster';
 import {LoginService} from './login.service';
 import {StateStorageService} from '../auth/state-storage.service';
 import {Register} from '../../account/register/register.service';
+import {PasswordResetModalService} from '../../account/password-reset/init/password-reset-init-modal.service';
 
 @Component({
     selector: 'jhi-login-modal',
@@ -31,6 +32,7 @@ export class JhiLoginModalComponent implements OnInit, AfterViewInit {
                 private loginService: LoginService,
                 private registerService: Register,
                 private stateStorageService: StateStorageService,
+                private passwordResetModalService: PasswordResetModalService,
                 private elementRef: ElementRef,
                 private renderer: Renderer,
                 private router: Router,
@@ -49,7 +51,7 @@ export class JhiLoginModalComponent implements OnInit, AfterViewInit {
         if (this.isRegistration) {
             this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#login'), 'focus', []);
         } else {
-            this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#username'), 'focus', []);
+            this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#usernameLogin'), 'focus', []);
         }
     }
 
@@ -94,7 +96,8 @@ export class JhiLoginModalComponent implements OnInit, AfterViewInit {
 
     requestResetPassword() {
         this.activeModal.dismiss('to state requestReset');
-        this.router.navigate(['/reset', 'request']);
+        this.passwordResetModalService.open();
+        // this.router.navigate(['/reset', 'request']);
     }
 
     register() {

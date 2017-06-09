@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { EventManager } from 'ng-jhipster';
 
@@ -12,7 +12,7 @@ import { Account, LoginModalService, Principal } from '../shared';
     ]
 
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
     account: Account;
     modalRef: NgbModalRef;
 
@@ -24,10 +24,15 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.principal.setHomepage(true);
         this.principal.identity().then((account) => {
             this.account = account;
         });
         this.registerAuthenticationSuccess();
+    }
+
+    ngOnDestroy(): void {
+        this.principal.setHomepage(false);
     }
 
     registerAuthenticationSuccess() {

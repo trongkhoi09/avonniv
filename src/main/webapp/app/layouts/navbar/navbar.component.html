@@ -1,5 +1,18 @@
-<nav class="navbar navbar-inverse navbar-toggleable-md jh-navbar">
-    <div class="navbar-collapse collapse top-absolute" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed"
+<nav class="navbar navbar-inverse navbar-toggleable-md" [ngClass]="{'jh-navbar-homepage': isHomepage(), 'jh-navbar': !isHomepage()}">
+    <div class="jh-logo-container">
+        <!--<a class="jh-navbar-toggler hidden-lg-up float-right" href="javascript:void(0);" data-toggle="collapse"-->
+        <!--data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"-->
+        <!--aria-label="Toggle navigation" (click)="toggleNavbar()">-->
+        <!--<i class="fa fa-bars"></i>-->
+        <!--</a>-->
+        <a routerLink="/" (click)="collapseNavbar()" class="row text-center" [ngSwitch]="isHomepage()">
+            <img src="../../../content/images/logo-jhipster.png">
+            <span class="col-md-12" *ngSwitchCase="true">Duis lectus ante, fringilla eu volutpat quis, vestibulum eu risus.</span>
+            <span class="col-md-12" *ngSwitchCase="true"> Morbi sit amet elit vestibulum tortor molestie aliquet quis sit amet leo. </span>
+            <span class="short-payoff" *ngSwitchCase="false"> Morbi sit amet elit vestibulum tortor molestie aliquet quis sit amet leo. </span>
+        </a>
+    </div>
+    <div class="navbar-collapse collapse navbar-custom" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed"
          [ngSwitch]="isAuthenticated()">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -130,17 +143,5 @@
                 </ul>
             </li>
         </ul>
-    </div>
-    <div class="jh-logo-container">
-        <!--<a class="jh-navbar-toggler hidden-lg-up float-right" href="javascript:void(0);" data-toggle="collapse"-->
-        <!--data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"-->
-        <!--aria-label="Toggle navigation" (click)="toggleNavbar()">-->
-        <!--<i class="fa fa-bars"></i>-->
-        <!--</a>-->
-        <a routerLink="/" (click)="collapseNavbar()" class="row text-center">
-            <img src="../../../content/images/logo-jhipster.png">
-            <span class="col-md-12">Duis lectus ante, fringilla eu volutpat quis, vestibulum eu risus.</span>
-            <span class="col-md-12"> Morbi sit amet elit vestibulum tortor molestie aliquet quis sit amet leo. </span>
-        </a>
     </div>
 </nav>

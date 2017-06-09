@@ -7,6 +7,7 @@ import { JhiTrackerService } from '../tracker/tracker.service'; // Barrel doesn'
 @Injectable()
 export class Principal {
     private userIdentity: any;
+    private homepage = false;
     private authenticated = false;
     private authenticationState = new Subject<any>();
 
@@ -87,6 +88,14 @@ export class Principal {
 
     isAuthenticated(): boolean {
         return this.authenticated;
+    }
+
+    setHomepage(homepage: boolean) {
+        this.homepage = homepage;
+    }
+
+    isHomepage(): boolean {
+        return this.homepage;
     }
 
     isIdentityResolved(): boolean {

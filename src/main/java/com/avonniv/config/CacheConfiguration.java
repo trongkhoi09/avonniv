@@ -17,8 +17,8 @@ import org.springframework.context.annotation.*;
 
 @Configuration
 @EnableCaching
-@AutoConfigureAfter(value = { MetricsConfiguration.class })
-@AutoConfigureBefore(value = { WebConfigurer.class, DatabaseConfiguration.class })
+@AutoConfigureAfter(value = {MetricsConfiguration.class})
+@AutoConfigureBefore(value = {WebConfigurer.class, DatabaseConfiguration.class})
 public class CacheConfiguration {
 
     private final javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration;
@@ -41,6 +41,13 @@ public class CacheConfiguration {
             cm.createCache(com.avonniv.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.avonniv.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(com.avonniv.domain.Investor.class.getName(), jcacheConfiguration);
+            cm.createCache(com.avonniv.domain.Area.class.getName(), jcacheConfiguration);
+            cm.createCache(com.avonniv.domain.CallDescription.class.getName(), jcacheConfiguration);
+            cm.createCache(com.avonniv.domain.FileInfo.class.getName(), jcacheConfiguration);
+            cm.createCache(com.avonniv.domain.Grant.class.getName(), jcacheConfiguration);
+            cm.createCache(com.avonniv.domain.Grant.class.getName() + ".areas", jcacheConfiguration);
+            cm.createCache(com.avonniv.domain.GrantCall.class.getName(), jcacheConfiguration);
+            cm.createCache(com.avonniv.domain.Publisher.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

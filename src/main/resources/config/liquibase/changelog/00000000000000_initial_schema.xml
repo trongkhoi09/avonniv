@@ -252,4 +252,153 @@
                                  referencedColumnNames="id"/>
     </changeSet>
 
+    <changeSet id="2" author="sylt">
+        <createTable tableName="tbl_publisher">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="description" type="text"/>
+            <column name="address" type="varchar(255)"/>
+            <column name="email" type="varchar(255)"/>
+            <column name="phone" type="varchar(255)"/>
+            <column name="url" type="varchar(255)"/>
+            <column name="status" type="INT"/>
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="timestamp"/>
+        </createTable>
+
+        <createTable tableName="tbl_grant">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="publisher_id" type="bigint"/>
+            <column name="name" type="varchar(255)"/>
+            <column name="type" type="INT"/>
+            <column name="description" type="TEXT"/>
+            <column name="status" type="INT"/>
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="timestamp"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="tbl_grant"
+                                 baseColumnNames="publisher_id"
+                                 constraintName="fk_publisher_id"
+                                 referencedTableName="tbl_publisher"
+                                 referencedColumnNames="id"/>
+
+        <createTable tableName="tbl_area">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="status" type="INT"/>
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="timestamp"/>
+        </createTable>
+
+        <createIndex indexName="idx_area_name"
+                     tableName="tbl_area"
+                     unique="true">
+            <column name="name" type="varchar(255)"/>
+        </createIndex>
+
+        <createTable tableName="tbl_grant_area">
+            <column name="grant_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="area_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="grant_id, area_id" tableName="tbl_grant_area"/>
+
+        <addForeignKeyConstraint baseColumnNames="grant_id"
+                                 baseTableName="tbl_grant_area"
+                                 constraintName="fk_grant_id_grant_area"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tbl_grant"/>
+
+        <addForeignKeyConstraint baseColumnNames="area_id"
+                                 baseTableName="tbl_grant_area"
+                                 constraintName="fk_area_id_grant_area"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tbl_area"/>
+
+        <createTable tableName="tbl_file_info">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="mine_type" type="varchar(255)"/>
+            <column name="size" type="LONG"/>
+            <column name="path" type="varchar(255)"/>
+            <column name="check_sum" type="varchar(255)"/>
+            <column name="status" type="INT"/>
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="timestamp"/>
+        </createTable>
+
+        <createTable tableName="tbl_grant_call">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="grant_id" type="bigint"/>
+            <column name="title" type="varchar(255)"/>
+            <column name="excerpt" type="varchar(255)"/>
+            <column name="description" type="TEXT"/>
+            <column name="open_date" type="timestamp"/>
+            <column name="close_date" type="timestamp"/>
+            <column name="announced_date" type="timestamp"/>
+            <column name="project_start_date" type="timestamp"/>
+            <column name="status" type="INT"/>
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="timestamp"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="tbl_grant_call"
+                                 baseColumnNames="grant_id"
+                                 constraintName="fk_grant_id"
+                                 referencedTableName="tbl_grant"
+                                 referencedColumnNames="id"/>
+
+        <createTable tableName="tbl_call_description">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="grant_call_id" type="bigint"/>
+            <column name="file_info_id" type="bigint"/>
+            <column name="title" type="varchar(255)"/>
+            <column name="description" type="TEXT"/>
+            <column name="status" type="INT"/>
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="timestamp"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="tbl_call_description"
+                                 baseColumnNames="grant_call_id"
+                                 constraintName="fk_grant_call_id"
+                                 referencedTableName="tbl_grant_call"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="tbl_call_description"
+                                 baseColumnNames="file_info_id"
+                                 constraintName="fk_file_info_id"
+                                 referencedTableName="tbl_file_info"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
 </databaseChangeLog>

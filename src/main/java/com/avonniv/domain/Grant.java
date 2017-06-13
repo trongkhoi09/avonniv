@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -27,6 +28,7 @@ public class Grant extends AbstractEntity {
 
     private String name;
 
+    @Lob
     private String description;
 
     private int type;
@@ -76,11 +78,26 @@ public class Grant extends AbstractEntity {
     public void setPublisher(Publisher publisher) {
         this.publisher = publisher;
     }
+
     public Set<Area> getAreas() {
         return areas;
     }
 
     public void setAreas(Set<Area> areas) {
         this.areas = areas;
+    }
+
+    public enum Type {
+        PUBLIC(0), PRIVATE(1);
+
+        private final int value;
+
+        Type(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 }

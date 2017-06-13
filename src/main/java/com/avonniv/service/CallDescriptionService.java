@@ -56,7 +56,7 @@ public class CallDescriptionService {
         return callDescriptionRepository.findAll().stream().map(CallDescriptionDTO::new).collect(Collectors.toList());
     }
 
-    public Optional<CallDescriptionDTO> updateCallDescription(CallDescriptionDTO callDescriptionDTO) {
+    public Optional<CallDescription> updateCallDescription(CallDescriptionDTO callDescriptionDTO) {
         return Optional.of(callDescriptionRepository
             .findOne(callDescriptionDTO.getId()))
             .map(callDescription -> {
@@ -70,8 +70,7 @@ public class CallDescriptionService {
                 callDescription.setFileInfo(fileInfo);
                 log.debug("Changed Information for Call Description: {}", callDescription);
                 return callDescription;
-            })
-            .map(CallDescriptionDTO::new);
+            });
     }
 
     public void deleteCallDescription(CallDescriptionDTO callDescriptionDTO) {

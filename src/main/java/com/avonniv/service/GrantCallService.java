@@ -52,7 +52,7 @@ public class GrantCallService {
         return grantCallRepository.findAll().stream().map(GrantCallDTO::new).collect(Collectors.toList());
     }
 
-    public Optional<GrantCallDTO> updateGrantCall(GrantCallDTO grantCallDTO) {
+    public Optional<GrantCall> updateGrantCall(GrantCallDTO grantCallDTO) {
         return Optional.of(grantCallRepository
             .findOne(grantCallDTO.getId()))
             .map(grantCall -> {
@@ -68,8 +68,7 @@ public class GrantCallService {
                 grantCall.setGrant(grant);
                 log.debug("Changed Information for Grant Call: {}", grantCall);
                 return grantCall;
-            })
-            .map(GrantCallDTO::new);
+            });
     }
 
     public void deleteGrantCall(GrantCallDTO grantCallDTO) {

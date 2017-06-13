@@ -4,6 +4,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -15,6 +16,7 @@ public class Publisher extends AbstractEntity{
 
     private String name;
 
+    @Lob
     private String description;
 
     private String address;

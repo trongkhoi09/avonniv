@@ -45,7 +45,7 @@ public class FileInfoService {
         return fileInfoRepository.findAll().stream().map(FileInfoDTO::new).collect(Collectors.toList());
     }
 
-    public Optional<FileInfoDTO> updateFileInfo(FileInfoDTO fileInfoDTO) {
+    public Optional<FileInfo> updateFileInfo(FileInfoDTO fileInfoDTO) {
         return Optional.of(fileInfoRepository
             .findOne(fileInfoDTO.getId()))
             .map(fileInfo -> {
@@ -56,8 +56,7 @@ public class FileInfoService {
                 fileInfo.setCheckSum(fileInfoDTO.getCheckSum());
                 log.debug("Changed Information for File Info: {}", fileInfo);
                 return fileInfo;
-            })
-            .map(FileInfoDTO::new);
+            });
     }
 
     public void deleteFileInfo(FileInfoDTO fileInfoDTO) {

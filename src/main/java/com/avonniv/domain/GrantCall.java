@@ -6,6 +6,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.Instant;
@@ -26,6 +27,7 @@ public class GrantCall extends AbstractEntity {
 
     private String excerpt;
 
+    @Lob
     private String description;
 
     @Column(name = "open_date")

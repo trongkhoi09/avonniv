@@ -42,7 +42,7 @@ public class PublisherService {
         return publisherRepository.findAll().stream().map(PublisherDTO::new).collect(Collectors.toList());
     }
 
-    public Optional<PublisherDTO> updatePublisher(PublisherDTO publisherDTO) {
+    public Optional<Publisher> updatePublisher(PublisherDTO publisherDTO) {
         return Optional.of(publisherRepository
             .findOne(publisherDTO.getId()))
             .map(publisher -> {
@@ -54,8 +54,7 @@ public class PublisherService {
                 publisher.setUrl(publisherDTO.getUrl());
                 log.debug("Changed Information for Publisher: {}", publisher);
                 return publisher;
-            })
-            .map(PublisherDTO::new);
+            });
     }
 
     public void deletePublisher(PublisherDTO publisherDTO) {

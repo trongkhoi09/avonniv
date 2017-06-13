@@ -63,7 +63,7 @@ public class GrantService {
         return grantRepository.findAll().stream().map(GrantDTO::new).collect(Collectors.toList());
     }
 
-    public Optional<GrantDTO> updateGrant(GrantDTO grantDTO) {
+    public Optional<Grant> updateGrant(GrantDTO grantDTO) {
         return Optional.of(grantRepository
             .findOne(grantDTO.getId()))
             .map(grant -> {
@@ -82,8 +82,7 @@ public class GrantService {
                 }
                 log.debug("Changed Information for Grant: {}", grant);
                 return grant;
-            })
-            .map(GrantDTO::new);
+            });
     }
 
     public void deleteGrant(GrantDTO grantDTO) {

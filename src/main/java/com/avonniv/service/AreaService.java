@@ -32,13 +32,17 @@ public class AreaService {
         return newArea;
     }
 
+    public Optional<Area> getByName(String name) {
+        return areaRepository.findOneByName(name);
+    }
+
     public List<AreaDTO> getAll() {
         return areaRepository.findAll().stream()
             .map(AreaDTO::new)
             .collect(Collectors.toList());
     }
 
-    public Optional<AreaDTO> updateArea(AreaDTO areaDTO) {
+    public Optional<Area> updateArea(AreaDTO areaDTO) {
         return Optional.of(areaRepository
             .findOne(areaDTO.getId()))
             .map(area -> {
@@ -46,11 +50,10 @@ public class AreaService {
                 area.setStatus(areaDTO.getStatus());
                 log.debug("Changed Information for Area: {}", area);
                 return area;
-            })
-            .map(AreaDTO::new);
+            });
     }
 
-    public void deleteArea(String name) {
+    public void delete(String name) {
         areaRepository.findOneByName(name).ifPresent(area -> {
             areaRepository.delete(area);
             log.debug("Deleted Area: {}", area);

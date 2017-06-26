@@ -1,22 +1,15 @@
 package com.avonniv.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.Instant;
 
 
 @Entity
@@ -26,33 +19,60 @@ public class Grant extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
 
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "grant_program_id")
+    private GrantProgram grantProgram;
+
+    private String title;
+
+    private String excerpt;
+
+    @Column(name = "external_id")
+    private String externalId;
+
+    @Column(name = "external_url")
+    private String externalUrl;
+
+    @Column(name = "finance_description")
+    private String financeDescription;
 
     @Lob
     private String description;
 
-    private int type;
+    @Column(name = "open_date")
+    private Instant openDate;
 
-    @ManyToOne
-    @JoinColumn(name = "publisher_id")
-    private Publisher publisher;
+    @Column(name = "close_date")
+    private Instant closeDate;
 
-    @JsonIgnore
-    @ManyToMany
-    @JoinTable(
-        name = "tbl_grant_area",
-        joinColumns = {@JoinColumn(name = "grant_id", referencedColumnName = "id")},
-        inverseJoinColumns = {@JoinColumn(name = "area_id", referencedColumnName = "id")})
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @BatchSize(size = 20)
-    private Set<Area> areas = new HashSet<>();
+    @Column(name = "announced_date")
+    private Instant announcedDate;
 
-    public String getName() {
-        return name;
+    @Column(name = "project_start_date")
+    private Instant projectStartDate;
+
+    public GrantProgram getGrantProgram() {
+        return grantProgram;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setGrantProgram(GrantProgram grantProgram) {
+        this.grantProgram = grantProgram;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getExcerpt() {
+        return excerpt;
+    }
+
+    public void setExcerpt(String excerpt) {
+        this.excerpt = excerpt;
     }
 
     public String getDescription() {
@@ -63,41 +83,59 @@ public class Grant extends AbstractEntity {
         this.description = description;
     }
 
-    public int getType() {
-        return type;
+    public Instant getOpenDate() {
+        return openDate;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setOpenDate(Instant openDate) {
+        this.openDate = openDate;
     }
 
-    public Publisher getPublisher() {
-        return publisher;
+    public Instant getCloseDate() {
+        return closeDate;
     }
 
-    public void setPublisher(Publisher publisher) {
-        this.publisher = publisher;
+    public void setCloseDate(Instant closeDate) {
+        this.closeDate = closeDate;
     }
 
-    public Set<Area> getAreas() {
-        return areas;
+    public Instant getAnnouncedDate() {
+        return announcedDate;
     }
 
-    public void setAreas(Set<Area> areas) {
-        this.areas = areas;
+    public void setAnnouncedDate(Instant announcedDate) {
+        this.announcedDate = announcedDate;
     }
 
-    public enum Type {
-        PUBLIC(0), PRIVATE(1);
+    public Instant getProjectStartDate() {
+        return projectStartDate;
+    }
 
-        private final int value;
+    public void setProjectStartDate(Instant projectStartDate) {
+        this.projectStartDate = projectStartDate;
+    }
 
-        Type(int value) {
-            this.value = value;
-        }
+    public String getExternalId() {
+        return externalId;
+    }
 
-        public int getValue() {
-            return value;
-        }
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
+    }
+
+    public String getExternalUrl() {
+        return externalUrl;
+    }
+
+    public void setExternalUrl(String externalUrl) {
+        this.externalUrl = externalUrl;
+    }
+
+    public String getFinanceDescription() {
+        return financeDescription;
+    }
+
+    public void setFinanceDescription(String financeDescription) {
+        this.financeDescription = financeDescription;
     }
 }

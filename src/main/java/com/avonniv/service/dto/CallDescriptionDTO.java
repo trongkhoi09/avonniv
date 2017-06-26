@@ -10,7 +10,7 @@ public class CallDescriptionDTO extends AbstractEntityDTO {
 
     private String description;
 
-    private GrantCallDTO grantCallDTO;
+    private GrantDTO grantDTO;
 
     private FileInfoDTO fileInfoDTO;
 
@@ -19,18 +19,18 @@ public class CallDescriptionDTO extends AbstractEntityDTO {
 
     public CallDescriptionDTO(CallDescription callDescription) {
         this(callDescription.getId(), callDescription.getCreatedDate(), callDescription.getLastModifiedDate(), callDescription.getStatus(),
-            callDescription.getTitle(), callDescription.getDescription(), new GrantCallDTO(callDescription.getGrantCall()), new FileInfoDTO(callDescription.getFileInfo()));
+            callDescription.getTitle(), callDescription.getDescription(), new GrantDTO(callDescription.getGrant()), new FileInfoDTO(callDescription.getFileInfo()));
     }
 
     public CallDescriptionDTO(Long id, Instant createdDate, Instant lastModifiedDate, int status,
-                              String title, String description, GrantCallDTO grantCallDTO, FileInfoDTO fileInfoDTO) {
+                              String title, String description, GrantDTO grantDTO, FileInfoDTO fileInfoDTO) {
         this.id = id;
         this.createdDate = createdDate;
         this.lastModifiedDate = lastModifiedDate;
         this.status = status;
         this.title = title;
         this.description = description;
-        this.grantCallDTO = grantCallDTO;
+        this.grantDTO = grantDTO;
         this.fileInfoDTO = fileInfoDTO;
     }
 
@@ -50,12 +50,12 @@ public class CallDescriptionDTO extends AbstractEntityDTO {
         this.description = description;
     }
 
-    public GrantCallDTO getGrantCallDTO() {
-        return grantCallDTO;
+    public GrantDTO getGrantDTO() {
+        return grantDTO;
     }
 
-    public void setGrantCallDTO(GrantCallDTO grantCallDTO) {
-        this.grantCallDTO = grantCallDTO;
+    public void setGrantDTO(GrantDTO grantDTO) {
+        this.grantDTO = grantDTO;
     }
 
     public FileInfoDTO getFileInfoDTO() {

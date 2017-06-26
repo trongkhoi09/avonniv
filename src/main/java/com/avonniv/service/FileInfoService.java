@@ -1,11 +1,7 @@
 package com.avonniv.service;
 
 import com.avonniv.domain.FileInfo;
-import com.avonniv.domain.FileInfo;
-import com.avonniv.domain.GrantCall;
 import com.avonniv.repository.FileInfoRepository;
-import com.avonniv.repository.FileInfoRepository;
-import com.avonniv.repository.GrantCallRepository;
 import com.avonniv.service.dto.FileInfoDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

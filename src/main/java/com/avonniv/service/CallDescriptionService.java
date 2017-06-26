@@ -2,10 +2,10 @@ package com.avonniv.service;
 
 import com.avonniv.domain.CallDescription;
 import com.avonniv.domain.FileInfo;
-import com.avonniv.domain.GrantCall;
+import com.avonniv.domain.Grant;
 import com.avonniv.repository.CallDescriptionRepository;
 import com.avonniv.repository.FileInfoRepository;
-import com.avonniv.repository.GrantCallRepository;
+import com.avonniv.repository.GrantRepository;
 import com.avonniv.service.dto.CallDescriptionDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,15 +24,15 @@ public class CallDescriptionService {
 
     private final CallDescriptionRepository callDescriptionRepository;
 
-    private final GrantCallRepository grantCallRepository;
+    private final GrantRepository grantRepository;
 
     private final FileInfoRepository fileInfoRepository;
 
     public CallDescriptionService(CallDescriptionRepository callDescriptionRepository,
-                                  GrantCallRepository grantCallRepository,
+                                  GrantRepository grantRepository,
                                   FileInfoRepository fileInfoRepository) {
         this.callDescriptionRepository = callDescriptionRepository;
-        this.grantCallRepository = grantCallRepository;
+        this.grantRepository = grantRepository;
         this.fileInfoRepository = fileInfoRepository;
     }
 
@@ -41,8 +41,8 @@ public class CallDescriptionService {
         newCallDescription.setTitle(callDescriptionDTO.getTitle());
         newCallDescription.setDescription(callDescriptionDTO.getDescription());
 
-        GrantCall grantCall = grantCallRepository.findOne(callDescriptionDTO.getGrantCallDTO().getId());
-        newCallDescription.setGrantCall(grantCall);
+        Grant grant = grantRepository.findOne(callDescriptionDTO.getGrantDTO().getId());
+        newCallDescription.setGrant(grant);
 
         FileInfo fileInfo = fileInfoRepository.findOne(callDescriptionDTO.getFileInfoDTO().getId());
         newCallDescription.setFileInfo(fileInfo);
@@ -63,8 +63,8 @@ public class CallDescriptionService {
                 callDescription.setTitle(callDescriptionDTO.getTitle());
                 callDescription.setDescription(callDescriptionDTO.getDescription());
 
-                GrantCall grantCall = grantCallRepository.findOne(callDescriptionDTO.getGrantCallDTO().getId());
-                callDescription.setGrantCall(grantCall);
+                Grant grant = grantRepository.findOne(callDescriptionDTO.getGrantDTO().getId());
+                callDescription.setGrant(grant);
 
                 FileInfo fileInfo = fileInfoRepository.findOne(callDescriptionDTO.getFileInfoDTO().getId());
                 callDescription.setFileInfo(fileInfo);

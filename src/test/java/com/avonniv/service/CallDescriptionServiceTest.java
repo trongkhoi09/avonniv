@@ -4,18 +4,17 @@ import com.avonniv.AvonnivApp;
 import com.avonniv.domain.Area;
 import com.avonniv.domain.CallDescription;
 import com.avonniv.domain.FileInfo;
+import com.avonniv.domain.GrantProgram;
 import com.avonniv.domain.Grant;
-import com.avonniv.domain.GrantCall;
 import com.avonniv.domain.Publisher;
 import com.avonniv.repository.AreaRepository;
 import com.avonniv.repository.CallDescriptionRepository;
 import com.avonniv.repository.FileInfoRepository;
-import com.avonniv.repository.GrantCallRepository;
 import com.avonniv.repository.GrantRepository;
+import com.avonniv.repository.GrantProgramRepository;
 import com.avonniv.repository.PublisherRepository;
 import com.avonniv.service.dto.CallDescriptionDTO;
 import com.avonniv.service.dto.FileInfoDTO;
-import com.avonniv.service.dto.GrantCallDTO;
 import com.avonniv.service.dto.GrantDTO;
 import org.junit.After;
 import org.junit.Before;
@@ -43,10 +42,10 @@ public class CallDescriptionServiceTest {
     private PublisherRepository publisherRepository;
 
     @Autowired
-    private GrantCallRepository grantCallRepository;
+    private GrantRepository grantRepository;
 
     @Autowired
-    private GrantRepository grantRepository;
+    private GrantProgramRepository grantProgramRepository;
     @Autowired
     private CallDescriptionService callDescriptionService;
 
@@ -57,7 +56,7 @@ public class CallDescriptionServiceTest {
     private FileInfoRepository fileInfoRepository;
 
 
-    private GrantCallDTO grantCallDTO;
+    private GrantDTO grantDTO;
 
     private FileInfoDTO fileInfoDTO;
 
@@ -79,24 +78,24 @@ public class CallDescriptionServiceTest {
 
         publisher = publisherRepository.save(publisher);
 
-        Grant grant = new Grant();
-        grant.setAreas(areas);
-        grant.setPublisher(publisher);
-        grant.setName("Grant");
-        grant.setDescription("Grant description");
-        grant.setType(Grant.Type.PUBLIC.getValue());
-        grant = grantRepository.save(grant);
+        GrantProgram grantProgram = new GrantProgram();
+        grantProgram.setAreas(areas);
+        grantProgram.setPublisher(publisher);
+        grantProgram.setName("GrantProgram");
+        grantProgram.setDescription("GrantProgram description");
+        grantProgram.setType(GrantProgram.Type.PUBLIC.getValue());
+        grantProgram = grantProgramRepository.save(grantProgram);
 
-        GrantCall grantCall = new GrantCall();
-        grantCall.setGrant(grant);
-        grantCall.setTitle("Title grant call");
-        grantCall.setExcerpt("Excerpt grant call");
-        grantCall.setDescription("Description grant call");
-        grantCall.setOpenDate(Instant.now());
-        grantCall.setCloseDate(Instant.now());
-        grantCall.setAnnouncedDate(Instant.now());
-        grantCall.setProjectStartDate(Instant.now());
-        grantCallDTO = new GrantCallDTO(grantCallRepository.save(grantCall));
+        Grant grant = new Grant();
+        grant.setGrantProgram(grantProgram);
+        grant.setTitle("Title grantProgram call");
+        grant.setExcerpt("Excerpt grantProgram call");
+        grant.setDescription("Description grantProgram call");
+        grant.setOpenDate(Instant.now());
+        grant.setCloseDate(Instant.now());
+        grant.setAnnouncedDate(Instant.now());
+        grant.setProjectStartDate(Instant.now());
+        grantDTO = new GrantDTO(grantRepository.save(grant));
 
         FileInfo fileInfo = new FileInfo();
         fileInfo.setName("File_Info_Test_1");
@@ -109,8 +108,8 @@ public class CallDescriptionServiceTest {
     @After
     public void tearDown() throws Exception {
         callDescriptionRepository.deleteAll();
-        grantCallRepository.deleteAll();
         grantRepository.deleteAll();
+        grantProgramRepository.deleteAll();
         publisherRepository.deleteAll();
         areaRepository.deleteAll();
     }
@@ -125,7 +124,7 @@ public class CallDescriptionServiceTest {
             0,
             "Title Call Description",
             "Description",
-            grantCallDTO,
+            grantDTO,
             fileInfoDTO
         );
         callDescriptionService.createCallDescription(callDescriptionDTO);
@@ -140,7 +139,7 @@ public class CallDescriptionServiceTest {
             CallDescription callDescription = new CallDescription();
             callDescription.setTitle("Title Call Description" + (i + 1));
             callDescription.setDescription("Description" + (i + 1));
-            callDescription.setGrantCall(grantCallRepository.findOne(grantCallDTO.getId()));
+            callDescription.setGrant(grantRepository.findOne(grantDTO.getId()));
             callDescription.setFileInfo(fileInfoRepository.findOne(fileInfoDTO.getId()));
             callDescriptionRepository.save(callDescription);
         }
@@ -153,7 +152,7 @@ public class CallDescriptionServiceTest {
         CallDescription callDescription = new CallDescription();
         callDescription.setTitle("Title Call Description");
         callDescription.setDescription("Description");
-        callDescription.setGrantCall(grantCallRepository.findOne(grantCallDTO.getId()));
+        callDescription.setGrant(grantRepository.findOne(grantDTO.getId()));
         callDescription.setFileInfo(fileInfoRepository.findOne(fileInfoDTO.getId()));
         CallDescriptionDTO callDescriptionDTO = new CallDescriptionDTO(callDescriptionRepository.save(callDescription));
 
@@ -173,7 +172,7 @@ public class CallDescriptionServiceTest {
         CallDescription callDescription = new CallDescription();
         callDescription.setTitle("Title Call Description");
         callDescription.setDescription("Description");
-        callDescription.setGrantCall(grantCallRepository.findOne(grantCallDTO.getId()));
+        callDescription.setGrant(grantRepository.findOne(grantDTO.getId()));
         callDescription.setFileInfo(fileInfoRepository.findOne(fileInfoDTO.getId()));
 
         CallDescriptionDTO callDescriptionDTO = new CallDescriptionDTO(callDescriptionRepository.save(callDescription));

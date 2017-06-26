@@ -3,52 +3,84 @@ package com.avonniv.service.dto;
 import com.avonniv.domain.Grant;
 
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class GrantDTO extends AbstractEntityDTO {
 
-    private String name;
+    private GrantProgramDTO grantProgramDTO;
+
+    private String title;
+
+    private String excerpt;
 
     private String description;
 
-    private int type;
+    private Instant openDate;
 
-    private PublisherDTO publisherDTO;
+    private Instant closeDate;
 
-    private Set<AreaDTO> areaDTOs = new HashSet<>();
+    private Instant announcedDate;
+
+    private Instant projectStartDate;
+
+    private String externalId;
+
+    private String externalUrl;
+
+    private String financeDescription;
 
     public GrantDTO() {
     }
 
     public GrantDTO(Grant grant) {
         this(grant.getId(), grant.getCreatedDate(), grant.getLastModifiedDate(), grant.getStatus(),
-            grant.getName(), grant.getDescription(), grant.getType(), new PublisherDTO(grant.getPublisher()),
-            grant.getAreas().stream().map(AreaDTO::new).collect(Collectors.toSet()));
+            new GrantProgramDTO(grant.getGrantProgram()), grant.getTitle(), grant.getExcerpt(), grant.getDescription(),
+            grant.getOpenDate(), grant.getCloseDate(), grant.getAnnouncedDate(), grant.getProjectStartDate(),
+            grant.getExternalId(), grant.getExternalUrl(), grant.getFinanceDescription());
     }
 
-
     public GrantDTO(Long id, Instant createdDate, Instant lastModifiedDate, int status,
-                    String name, String description, int type, PublisherDTO publisherDTO,
-                    Set<AreaDTO> areaDTOs) {
+                    GrantProgramDTO grantProgramDTO, String title, String excerpt, String description,
+                    Instant openDate, Instant closeDate, Instant announcedDate, Instant projectStartDate,
+                    String externalId, String externalUrl, String financeDescription) {
         this.id = id;
         this.createdDate = createdDate;
         this.lastModifiedDate = lastModifiedDate;
         this.status = status;
-        this.name = name;
+        this.grantProgramDTO = grantProgramDTO;
+        this.title = title;
+        this.excerpt = excerpt;
         this.description = description;
-        this.type = type;
-        this.publisherDTO = publisherDTO;
-        this.areaDTOs = areaDTOs;
+        this.openDate = openDate;
+        this.closeDate = closeDate;
+        this.announcedDate = announcedDate;
+        this.projectStartDate = projectStartDate;
+        this.externalId = externalId;
+        this.externalUrl = externalUrl;
+        this.financeDescription = financeDescription;
     }
 
-    public String getName() {
-        return name;
+    public GrantProgramDTO getGrantProgramDTO() {
+        return grantProgramDTO;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setGrantProgramDTO(GrantProgramDTO grantProgramDTO) {
+        this.grantProgramDTO = grantProgramDTO;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getExcerpt() {
+        return excerpt;
+    }
+
+    public void setExcerpt(String excerpt) {
+        this.excerpt = excerpt;
     }
 
     public String getDescription() {
@@ -59,27 +91,59 @@ public class GrantDTO extends AbstractEntityDTO {
         this.description = description;
     }
 
-    public int getType() {
-        return type;
+    public Instant getOpenDate() {
+        return openDate;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setOpenDate(Instant openDate) {
+        this.openDate = openDate;
     }
 
-    public PublisherDTO getPublisherDTO() {
-        return publisherDTO;
+    public Instant getCloseDate() {
+        return closeDate;
     }
 
-    public void setPublisherDTO(PublisherDTO publisherDTO) {
-        this.publisherDTO = publisherDTO;
+    public void setCloseDate(Instant closeDate) {
+        this.closeDate = closeDate;
     }
 
-    public Set<AreaDTO> getAreaDTOs() {
-        return areaDTOs;
+    public Instant getAnnouncedDate() {
+        return announcedDate;
     }
 
-    public void setAreaDTOs(Set<AreaDTO> areaDTOs) {
-        this.areaDTOs = areaDTOs;
+    public void setAnnouncedDate(Instant announcedDate) {
+        this.announcedDate = announcedDate;
+    }
+
+    public Instant getProjectStartDate() {
+        return projectStartDate;
+    }
+
+    public void setProjectStartDate(Instant projectStartDate) {
+        this.projectStartDate = projectStartDate;
+    }
+
+    public String getExternalId() {
+        return externalId;
+    }
+
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
+    }
+
+    public String getExternalUrl() {
+        return externalUrl;
+    }
+
+    public void setExternalUrl(String externalUrl) {
+        this.externalUrl = externalUrl;
+    }
+
+    public String getFinanceDescription() {
+        return financeDescription;
+    }
+
+    public void setFinanceDescription(String financeDescription) {
+        this.financeDescription = financeDescription;
     }
 }

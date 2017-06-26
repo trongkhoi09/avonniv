@@ -1,21 +1,17 @@
 package com.avonniv.service;
 
-import com.avonniv.domain.Area;
+import com.avonniv.domain.GrantProgram;
 import com.avonniv.domain.Grant;
-import com.avonniv.domain.Publisher;
-import com.avonniv.repository.AreaRepository;
 import com.avonniv.repository.GrantRepository;
-import com.avonniv.repository.PublisherRepository;
+import com.avonniv.repository.GrantProgramRepository;
 import com.avonniv.service.dto.GrantDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,36 +22,29 @@ public class GrantService {
 
     private final GrantRepository grantRepository;
 
-    private final PublisherRepository publisherRepository;
-
-    private final AreaRepository areaRepository;
+    private final GrantProgramRepository grantProgramRepository;
 
     public GrantService(GrantRepository grantRepository,
-                        PublisherRepository publisherRepository,
-                        AreaRepository areaRepository) {
+                        GrantProgramRepository grantProgramRepository) {
         this.grantRepository = grantRepository;
-        this.publisherRepository = publisherRepository;
-        this.areaRepository = areaRepository;
+        this.grantProgramRepository = grantProgramRepository;
     }
 
-    public Grant createGrant(GrantDTO grantDTO) {
+    public Grant createGrantCall(GrantDTO grantDTO) {
         Grant newGrant = new Grant();
-        newGrant.setName(grantDTO.getName());
+        newGrant.setTitle(grantDTO.getTitle());
+        newGrant.setExcerpt(grantDTO.getExcerpt());
         newGrant.setDescription(grantDTO.getDescription());
-        newGrant.setType(grantDTO.getType());
-        Publisher publisher = publisherRepository.findOne(grantDTO.getPublisherDTO().getId());
-        newGrant.setPublisher(publisher);
+        newGrant.setOpenDate(grantDTO.getOpenDate());
+        newGrant.setCloseDate(grantDTO.getCloseDate());
+        newGrant.setAnnouncedDate(grantDTO.getAnnouncedDate());
+        newGrant.setProjectStartDate(grantDTO.getProjectStartDate());
 
-        if (grantDTO.getAreaDTOs() != null) {
-            Set<Area> areas = new HashSet<>();
-            grantDTO.getAreaDTOs().forEach(
-                areaDTO -> areas.add(areaRepository.findOne(areaDTO.getId()))
-            );
-            newGrant.setAreas(areas);
-        }
+        GrantProgram grantProgram = grantProgramRepository.findOne(grantDTO.getGrantProgramDTO().getId());
+        newGrant.setGrantProgram(grantProgram);
 
         grantRepository.save(newGrant);
-        log.debug("Created Information for Grant: {}", newGrant);
+        log.debug("Created Information for GrantProgram Call: {}", newGrant);
         return newGrant;
     }
 
@@ -63,29 +52,26 @@ public class GrantService {
         return grantRepository.findAll().stream().map(GrantDTO::new).collect(Collectors.toList());
     }
 
-    public Optional<Grant> updateGrant(GrantDTO grantDTO) {
+    public Optional<Grant> updateGrantCall(GrantDTO grantDTO) {
         return Optional.of(grantRepository
             .findOne(grantDTO.getId()))
-            .map(grant -> {
-                grant.setName(grantDTO.getName());
-                grant.setDescription(grantDTO.getDescription());
-                grant.setType(grantDTO.getType());
-                Publisher publisher = publisherRepository.findOne(grantDTO.getPublisherDTO().getId());
-                grant.setPublisher(publisher);
+            .map(grantCall -> {
+                grantCall.setTitle(grantDTO.getTitle());
+                grantCall.setExcerpt(grantDTO.getExcerpt());
+                grantCall.setDescription(grantDTO.getDescription());
+                grantCall.setOpenDate(grantDTO.getOpenDate());
+                grantCall.setCloseDate(grantDTO.getCloseDate());
+                grantCall.setAnnouncedDate(grantDTO.getAnnouncedDate());
+                grantCall.setProjectStartDate(grantDTO.getProjectStartDate());
 
-                if (grantDTO.getAreaDTOs() != null) {
-                    Set<Area> areas = new HashSet<>();
-                    grantDTO.getAreaDTOs().forEach(
-                        areaDTO -> areas.add(areaRepository.findOne(areaDTO.getId()))
-                    );
-                    grant.setAreas(areas);
-                }
-                log.debug("Changed Information for Grant: {}", grant);
-                return grant;
+                GrantProgram grantProgram = grantProgramRepository.findOne(grantDTO.getGrantProgramDTO().getId());
+                grantCall.setGrantProgram(grantProgram);
+                log.debug("Changed Information for GrantProgram Call: {}", grantCall);
+                return grantCall;
             });
     }
 
-    public void deleteGrant(GrantDTO grantDTO) {
+    public void deleteGrantCall(GrantDTO grantDTO) {
         grantRepository.delete(grantDTO.getId());
     }
 }

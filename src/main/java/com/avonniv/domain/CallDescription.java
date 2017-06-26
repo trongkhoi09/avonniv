@@ -3,15 +3,10 @@ package com.avonniv.domain;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -28,19 +23,19 @@ public class CallDescription extends AbstractEntity {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "grant_call_id")
-    private GrantCall grantCall;
+    @JoinColumn(name = "grant_id")
+    private Grant grant;
 
     @ManyToOne
     @JoinColumn(name = "file_info_id")
     private FileInfo fileInfo;
 
-    public GrantCall getGrantCall() {
-        return grantCall;
+    public Grant getGrant() {
+        return grant;
     }
 
-    public void setGrantCall(GrantCall grantCall) {
-        this.grantCall = grantCall;
+    public void setGrant(Grant grant) {
+        this.grant = grant;
     }
 
     public String getTitle() {

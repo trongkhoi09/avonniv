@@ -30,7 +30,7 @@
             </column>
             <column name="image_url" type="varchar(256)"/>
             <column name="activated" type="boolean" valueBoolean="false">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
             <column name="lang_key" type="varchar(5)"/>
             <column name="activation_key" type="varchar(20)"/>
@@ -48,14 +48,14 @@
             <column name="last_modified_date" type="timestamp"/>
         </createTable>
         <createIndex indexName="idx_user_login"
-            tableName="jhi_user"
-            unique="true">
+                     tableName="jhi_user"
+                     unique="true">
             <column name="login" type="varchar(50)"/>
         </createIndex>
 
         <createIndex indexName="idx_user_email"
-            tableName="jhi_user"
-            unique="true">
+                     tableName="jhi_user"
+                     unique="true">
             <column name="email" type="varchar(100)"/>
         </createIndex>
         <createTable tableName="jhi_authority">
@@ -109,7 +109,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="principal" type="varchar(50)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
             <column name="event_date" type="timestamp"/>
             <column name="event_type" type="varchar(255)"/>
@@ -173,16 +173,16 @@
         </createTable>
 
         <addForeignKeyConstraint baseColumnNames="user_name"
-            baseTableName="oauth_client_token"
-            constraintName="fk_oauth_client_token_username"
-            referencedColumnNames="login"
-            referencedTableName="jhi_user"/>
+                                 baseTableName="oauth_client_token"
+                                 constraintName="fk_oauth_client_token_username"
+                                 referencedColumnNames="login"
+                                 referencedTableName="jhi_user"/>
 
         <createTable tableName="oauth_access_token">
             <column name="token_id" type="varchar(255)"/>
             <column name="token" type="BLOB"/>
             <column name="authentication_id" type="varchar(255)">
-                 <constraints nullable="false" primaryKey="true"/>
+                <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="user_name" type="varchar(50)"/>
             <column name="client_id" type="varchar(255)"/>
@@ -191,10 +191,10 @@
         </createTable>
 
         <addForeignKeyConstraint baseColumnNames="user_name"
-            baseTableName="oauth_access_token"
-            constraintName="fk_oauth_access_token_username"
-            referencedColumnNames="login"
-            referencedTableName="jhi_user"/>
+                                 baseTableName="oauth_access_token"
+                                 constraintName="fk_oauth_access_token_username"
+                                 referencedColumnNames="login"
+                                 referencedTableName="jhi_user"/>
 
         <createTable tableName="oauth_refresh_token">
             <column name="token_id" type="varchar(255)"/>
@@ -247,7 +247,8 @@
             <column name="last_modified_by" type="varchar(50)"/>
             <column name="last_modified_date" type="timestamp"/>
         </createTable>
-        <addForeignKeyConstraint baseTableName="jhi_investor" baseColumnNames="user_id" constraintName="FK_INVESTOR_USER_ID"
+        <addForeignKeyConstraint baseTableName="jhi_investor" baseColumnNames="user_id"
+                                 constraintName="FK_INVESTOR_USER_ID"
                                  referencedTableName="jhi_user"
                                  referencedColumnNames="id"/>
     </changeSet>
@@ -270,10 +271,12 @@
             <column name="last_modified_date" type="timestamp"/>
         </createTable>
 
-        <createTable tableName="tbl_grant">
+        <createTable tableName="tbl_grant_program">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
+            <column name="external_id" type="varchar(255)"/>
+            <column name="external_url" type="varchar(255)"/>
             <column name="publisher_id" type="bigint"/>
             <column name="name" type="varchar(255)"/>
             <column name="type" type="INT"/>
@@ -285,7 +288,7 @@
             <column name="last_modified_date" type="timestamp"/>
         </createTable>
 
-        <addForeignKeyConstraint baseTableName="tbl_grant"
+        <addForeignKeyConstraint baseTableName="tbl_grant_program"
                                  baseColumnNames="publisher_id"
                                  constraintName="fk_publisher_id"
                                  referencedTableName="tbl_publisher"
@@ -309,8 +312,8 @@
             <column name="name" type="varchar(255)"/>
         </createIndex>
 
-        <createTable tableName="tbl_grant_area">
-            <column name="grant_id" type="bigint">
+        <createTable tableName="tbl_grant_program_area">
+            <column name="grant_program_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="area_id" type="bigint">
@@ -318,17 +321,17 @@
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="grant_id, area_id" tableName="tbl_grant_area"/>
+        <addPrimaryKey columnNames="grant_program_id, area_id" tableName="tbl_grant_program_area"/>
 
-        <addForeignKeyConstraint baseColumnNames="grant_id"
-                                 baseTableName="tbl_grant_area"
-                                 constraintName="fk_grant_id_grant_area"
+        <addForeignKeyConstraint baseColumnNames="grant_program_id"
+                                 baseTableName="tbl_grant_program_area"
+                                 constraintName="fk_grant_program_id_grant_program_area"
                                  referencedColumnNames="id"
-                                 referencedTableName="tbl_grant"/>
+                                 referencedTableName="tbl_grant_program"/>
 
         <addForeignKeyConstraint baseColumnNames="area_id"
-                                 baseTableName="tbl_grant_area"
-                                 constraintName="fk_area_id_grant_area"
+                                 baseTableName="tbl_grant_program_area"
+                                 constraintName="fk_area_id_grant_program_area"
                                  referencedColumnNames="id"
                                  referencedTableName="tbl_area"/>
 
@@ -348,11 +351,14 @@
             <column name="last_modified_date" type="timestamp"/>
         </createTable>
 
-        <createTable tableName="tbl_grant_call">
+        <createTable tableName="tbl_grant">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="grant_id" type="bigint"/>
+            <column name="grant_program_id" type="bigint"/>
+            <column name="external_id" type="varchar(255)"/>
+            <column name="external_url" type="varchar(255)"/>
+            <column name="finance_description" type="varchar(1000)"/>
             <column name="title" type="varchar(255)"/>
             <column name="excerpt" type="varchar(255)"/>
             <column name="description" type="TEXT"/>
@@ -367,17 +373,17 @@
             <column name="last_modified_date" type="timestamp"/>
         </createTable>
 
-        <addForeignKeyConstraint baseTableName="tbl_grant_call"
-                                 baseColumnNames="grant_id"
-                                 constraintName="fk_grant_id"
-                                 referencedTableName="tbl_grant"
+        <addForeignKeyConstraint baseTableName="tbl_grant"
+                                 baseColumnNames="grant_program_id"
+                                 constraintName="fk_grant_program_id"
+                                 referencedTableName="tbl_grant_program"
                                  referencedColumnNames="id"/>
 
         <createTable tableName="tbl_call_description">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="grant_call_id" type="bigint"/>
+            <column name="grant_id" type="bigint"/>
             <column name="file_info_id" type="bigint"/>
             <column name="title" type="varchar(255)"/>
             <column name="description" type="TEXT"/>
@@ -389,9 +395,9 @@
         </createTable>
 
         <addForeignKeyConstraint baseTableName="tbl_call_description"
-                                 baseColumnNames="grant_call_id"
-                                 constraintName="fk_grant_call_id"
-                                 referencedTableName="tbl_grant_call"
+                                 baseColumnNames="grant_id"
+                                 constraintName="fk_grant_id"
+                                 referencedTableName="tbl_grant"
                                  referencedColumnNames="id"/>
 
         <addForeignKeyConstraint baseTableName="tbl_call_description"

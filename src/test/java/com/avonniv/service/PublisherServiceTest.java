@@ -48,6 +48,7 @@ public class PublisherServiceTest {
 
     @Test
     public void getAll() throws Exception {
+        publisherRepository.deleteAll();
         List<PublisherDTO> publisherDTOS = publisherService.getAll();
         assertThat(publisherDTOS.size()).isEqualTo(0);
         for (int i = 0; i < 4; i++) {

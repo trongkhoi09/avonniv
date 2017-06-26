@@ -13,6 +13,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,6 +32,8 @@ public class GrantProgram extends AbstractEntity {
 
     private int type;
 
+    @Column(name = "release_date")
+    private Instant releaseDate;
 
     @Column(name = "external_id")
     private String externalId;
@@ -106,6 +109,14 @@ public class GrantProgram extends AbstractEntity {
 
     public void setExternalUrl(String externalUrl) {
         this.externalUrl = externalUrl;
+    }
+
+    public Instant getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(Instant releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     public enum Type {

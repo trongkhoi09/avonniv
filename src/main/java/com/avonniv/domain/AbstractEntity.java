@@ -36,7 +36,7 @@ public abstract class AbstractEntity implements Serializable {
     @JsonIgnore
     private Instant lastModifiedDate = Instant.now();
 
-    private int status;
+    private int status = 0;
 
     public Long getId() {
         return id;

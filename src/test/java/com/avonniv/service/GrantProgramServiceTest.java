@@ -93,6 +93,7 @@ public class GrantProgramServiceTest {
             publisherDTO,
             areaDTOSNew,
             null,
+            null,
             null
         );
         grantProgramService.createGrant(grantProgramDTO);
@@ -104,6 +105,7 @@ public class GrantProgramServiceTest {
             GrantProgram.Type.PUBLIC.getValue(),
             publisherDTO,
             areaDTOSNew2,
+            null,
             null,
             null
         );

@@ -1,12 +1,7 @@
 package com.avonniv.service.dto;
 
-import com.avonniv.domain.AbstractEntity;
 import com.avonniv.domain.Publisher;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.time.Instant;
 
 public class PublisherDTO extends AbstractEntityDTO {

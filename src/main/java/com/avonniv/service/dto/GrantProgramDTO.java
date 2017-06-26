@@ -23,19 +23,23 @@ public class GrantProgramDTO extends AbstractEntityDTO {
 
     private String externalUrl;
 
+    private Instant releaseDate;
+
     public GrantProgramDTO() {
     }
 
     public GrantProgramDTO(GrantProgram grantProgram) {
         this(grantProgram.getId(), grantProgram.getCreatedDate(), grantProgram.getLastModifiedDate(), grantProgram.getStatus(),
             grantProgram.getName(), grantProgram.getDescription(), grantProgram.getType(), new PublisherDTO(grantProgram.getPublisher()),
-            grantProgram.getAreas().stream().map(AreaDTO::new).collect(Collectors.toSet()), grantProgram.getExternalId(), grantProgram.getExternalUrl());
+            grantProgram.getAreas().stream().map(AreaDTO::new).collect(Collectors.toSet()), grantProgram.getExternalId(), grantProgram.getExternalUrl(),
+            grantProgram.getReleaseDate());
     }
 
 
     public GrantProgramDTO(Long id, Instant createdDate, Instant lastModifiedDate, int status,
                            String name, String description, int type, PublisherDTO publisherDTO,
-                           Set<AreaDTO> areaDTOs, String externalId, String externalUrl) {
+                           Set<AreaDTO> areaDTOs, String externalId, String externalUrl,
+                           Instant releaseDate) {
         this.id = id;
         this.createdDate = createdDate;
         this.lastModifiedDate = lastModifiedDate;
@@ -47,6 +51,7 @@ public class GrantProgramDTO extends AbstractEntityDTO {
         this.areaDTOs = areaDTOs;
         this.externalId = externalId;
         this.externalUrl = externalUrl;
+        this.releaseDate = releaseDate;
     }
 
     public String getName() {
@@ -103,5 +108,26 @@ public class GrantProgramDTO extends AbstractEntityDTO {
 
     public void setExternalUrl(String externalUrl) {
         this.externalUrl = externalUrl;
+    }
+
+    public Instant getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(Instant releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public enum TYPE {
+        PUBLIC(1), PRIVATE(2);
+        final int value;
+
+        TYPE(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 }

@@ -11,4 +11,7 @@ public interface GrantProgramRepository extends JpaRepository<GrantProgram, Long
     List<GrantProgram> findAllByAreasContains(Area area);
 
     Optional<GrantProgram> findOneByName(String name);
+
+
+    Optional<GrantProgram> findOneByExternalId(String externalId);
 }

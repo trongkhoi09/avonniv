@@ -39,7 +39,8 @@ public class GrantService {
         newGrant.setCloseDate(grantDTO.getCloseDate());
         newGrant.setAnnouncedDate(grantDTO.getAnnouncedDate());
         newGrant.setProjectStartDate(grantDTO.getProjectStartDate());
-
+        newGrant.setExternalId(grantDTO.getExternalId());
+        newGrant.setExternalUrl(grantDTO.getExternalUrl());
         GrantProgram grantProgram = grantProgramRepository.findOne(grantDTO.getGrantProgramDTO().getId());
         newGrant.setGrantProgram(grantProgram);
 
@@ -50,6 +51,10 @@ public class GrantService {
 
     public List<GrantDTO> getAll() {
         return grantRepository.findAll().stream().map(GrantDTO::new).collect(Collectors.toList());
+    }
+
+    public Optional<Grant> getByExternalId(String externalId) {
+        return grantRepository.findOneByExternalId(externalId);
     }
 
     public Optional<Grant> updateGrantCall(GrantDTO grantDTO) {

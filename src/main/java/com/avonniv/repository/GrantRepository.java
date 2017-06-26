@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface GrantRepository extends JpaRepository<Grant, Long> {
     Optional<Grant> findOneByTitle(String title);
+
+    Optional<Grant> findOneByExternalId(String externalId);
 }

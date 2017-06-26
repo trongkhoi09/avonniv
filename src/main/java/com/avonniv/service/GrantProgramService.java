@@ -45,6 +45,9 @@ public class GrantProgramService {
         newGrantProgram.setType(grantProgramDTO.getType());
         Publisher publisher = publisherRepository.findOne(grantProgramDTO.getPublisherDTO().getId());
         newGrantProgram.setPublisher(publisher);
+        newGrantProgram.setExternalId(grantProgramDTO.getExternalId());
+        newGrantProgram.setExternalUrl(grantProgramDTO.getExternalUrl());
+        newGrantProgram.setReleaseDate(grantProgramDTO.getReleaseDate());
 
         if (grantProgramDTO.getAreaDTOs() != null) {
             Set<Area> areas = new HashSet<>();
@@ -61,6 +64,10 @@ public class GrantProgramService {
 
     public List<GrantProgramDTO> getAll() {
         return grantProgramRepository.findAll().stream().map(GrantProgramDTO::new).collect(Collectors.toList());
+    }
+
+    public Optional<GrantProgram> getByExternalId(String externalId) {
+        return grantProgramRepository.findOneByExternalId(externalId);
     }
 
     public Optional<GrantProgram> updateGrant(GrantProgramDTO grantProgramDTO) {

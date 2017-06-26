@@ -50,6 +50,7 @@ public class CacheConfiguration {
             cm.createCache(GrantProgram.class.getName() + ".areas", jcacheConfiguration);
             cm.createCache(Grant.class.getName(), jcacheConfiguration);
             cm.createCache(com.avonniv.domain.Publisher.class.getName(), jcacheConfiguration);
+            cm.createCache(com.avonniv.domain.CrawlHistory.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

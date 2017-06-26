@@ -42,6 +42,10 @@ public class PublisherService {
         return publisherRepository.findAll().stream().map(PublisherDTO::new).collect(Collectors.toList());
     }
 
+    public Optional<Publisher> getByName(String name) {
+        return publisherRepository.findOneByName(name);
+    }
+
     public Optional<Publisher> updatePublisher(PublisherDTO publisherDTO) {
         return Optional.of(publisherRepository
             .findOne(publisherDTO.getId()))

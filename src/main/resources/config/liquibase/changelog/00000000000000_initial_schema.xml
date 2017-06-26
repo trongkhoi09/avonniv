@@ -277,6 +277,7 @@
             </column>
             <column name="external_id" type="varchar(255)"/>
             <column name="external_url" type="varchar(255)"/>
+            <column name="release_date" type="timestamp"/>
             <column name="publisher_id" type="bigint"/>
             <column name="name" type="varchar(255)"/>
             <column name="type" type="INT"/>
@@ -394,6 +395,19 @@
             <column name="last_modified_date" type="timestamp"/>
         </createTable>
 
+        <createTable tableName="tbl_crawl_history">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="lastDateCrawl" type="timestamp"/>
+            <column name="status" type="INT"/>
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="timestamp"/>
+        </createTable>
+
         <addForeignKeyConstraint baseTableName="tbl_call_description"
                                  baseColumnNames="grant_id"
                                  constraintName="fk_grant_id"
@@ -405,6 +419,13 @@
                                  constraintName="fk_file_info_id"
                                  referencedTableName="tbl_file_info"
                                  referencedColumnNames="id"/>
+
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/publisher.csv"
+                  separator=";"
+                  tableName="tbl_publisher">
+            <column name="created_date" type="timestamp"/>
+        </loadData>
     </changeSet>
 
 </databaseChangeLog>

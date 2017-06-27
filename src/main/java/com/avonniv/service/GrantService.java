@@ -44,11 +44,12 @@ public class GrantService {
         newGrant.setProjectStartDate(grantDTO.getProjectStartDate());
         newGrant.setExternalId(grantDTO.getExternalId());
         newGrant.setExternalUrl(grantDTO.getExternalUrl());
+        newGrant.setFinanceDescription(grantDTO.getFinanceDescription());
         GrantProgram grantProgram = grantProgramRepository.findOne(grantDTO.getGrantProgramDTO().getId());
         newGrant.setGrantProgram(grantProgram);
 
         grantRepository.save(newGrant);
-        log.debug("Created Information for GrantProgram Call: {}", newGrant);
+        log.debug("Created Information for Grant: {}", newGrant);
         return newGrant;
     }
 
@@ -74,7 +75,7 @@ public class GrantService {
 
                 GrantProgram grantProgram = grantProgramRepository.findOne(grantDTO.getGrantProgramDTO().getId());
                 grantCall.setGrantProgram(grantProgram);
-                log.debug("Changed Information for GrantProgram Call: {}", grantCall);
+                log.debug("Changed Information for Grant: {}", grantCall);
                 return grantCall;
             });
     }

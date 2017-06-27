@@ -55,6 +55,8 @@ public class GrantProgramService {
                 areaDTO -> areas.add(areaRepository.findOne(areaDTO.getId()))
             );
             newGrantProgram.setAreas(areas);
+        }else {
+            newGrantProgram.setAreas(new HashSet<>());
         }
 
         grantProgramRepository.save(newGrantProgram);

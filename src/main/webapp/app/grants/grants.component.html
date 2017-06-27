@@ -57,22 +57,27 @@
                         <thead>
                         <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse"
                             [callback]="transition.bind(this)">
-                            <th jhiSortBy="value"><span>Value</span><span class="fa fa-sort"></span></th>
+                            <th jhiSortBy="grantProgramDTO.publisherDTO.name"><span>Utylysare</span><span
+                                class="fa fa-sort"></span></th>
                             <th jhiSortBy="title"><span>Title</span><span class="fa fa-sort"></span></th>
                             <th><span>Description</span></th>
-                            <th jhiSortBy="financing"><span>Financing</span><span class="fa fa-sort"></span></th>
-                            <th jhiSortBy="applyBy"><span>Apply by</span><span class="fa fa-sort"></span></th>
-                            <th jhiSortBy="status"><span>Status</span><span class="fa fa-sort"></span></th>
+                            <th><span>Finance Description</span></th>
+                            <th jhiSortBy="openDate"><span>Open Date</span><span class="fa fa-sort"></span></th>
+                            <th jhiSortBy="closeDate"><span>Close Date</span><span class="fa fa-sort"></span></th>
                         </tr>
                         </thead>
                         <tbody *ngIf="grantDTOs">
                         <tr *ngFor="let grantDTO of grantDTOs; let i = index">
                             <td>{{grantDTO.grantProgramDTO.publisherDTO.name}}</td>
-                            <td>{{grantDTO.title}}</td>
+                            <td>
+                                <a href="{{grantDTO.externalUrl?grantDTO.externalUrl:'javascript:void(0)'}}">
+                                    {{grantDTO.title}}
+                                </a>
+                            </td>
                             <td>{{grantDTO.description}}</td>
-                            <td>{{grantDTO.financing}}</td>
-                            <td></td>
-                            <td><span class="badge badge-success">{{grantDTO.status==0?'open':'close'}}</span></td>
+                            <td [innerHTML]="grantDTO.financeDescription"></td>
+                            <td>{{grantDTO.openDate| date: 'dd/MM/yyyy'}}</td>
+                            <td>{{grantDTO.closeDate| date: 'dd/MM/yyyy'}}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -84,7 +89,8 @@
                                         [itemsPerPage]="itemsPerPage"></jhi-item-count>
                     </div>
                     <div class="row justify-content-center">
-                        <ngb-pagination [pageSize]="itemsPerPage" [collectionSize]="totalItems" [(page)]="page"
+                        <ngb-pagination [maxSize]="7" [pageSize]="itemsPerPage" [collectionSize]="totalItems"
+                                        [(page)]="page"
                                         (pageChange)="loadPage(page)"></ngb-pagination>
                     </div>
                 </div>

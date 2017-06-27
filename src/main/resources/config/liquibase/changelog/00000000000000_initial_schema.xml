@@ -400,7 +400,7 @@
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="name" type="varchar(255)"/>
-            <column name="lastDateCrawl" type="timestamp"/>
+            <column name="last_date_crawl" type="timestamp"/>
             <column name="status" type="INT"/>
             <column name="created_date" type="timestamp" defaultValueDate="${now}">
                 <constraints nullable="false"/>

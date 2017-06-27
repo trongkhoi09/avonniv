@@ -19,6 +19,7 @@ public class CrawlHistory extends AbstractEntity {
     private String name;
 
     @NotNull
+    @Column(name = "last_date_crawl")
     private Instant lastDateCrawl;
 
     public String getName() {

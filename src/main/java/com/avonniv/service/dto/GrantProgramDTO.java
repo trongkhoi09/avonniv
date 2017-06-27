@@ -31,15 +31,15 @@ public class GrantProgramDTO extends AbstractEntityDTO {
     public GrantProgramDTO(GrantProgram grantProgram) {
         this(grantProgram.getId(), grantProgram.getCreatedDate(), grantProgram.getLastModifiedDate(), grantProgram.getStatus(),
             grantProgram.getName(), grantProgram.getDescription(), grantProgram.getType(), new PublisherDTO(grantProgram.getPublisher()),
-            grantProgram.getAreas().stream().map(AreaDTO::new).collect(Collectors.toSet()), grantProgram.getExternalId(), grantProgram.getExternalUrl(),
-            grantProgram.getReleaseDate());
+            grantProgram.getAreas() == null ? null : grantProgram.getAreas().stream().map(AreaDTO::new).collect(Collectors.toSet()),
+            grantProgram.getExternalId(), grantProgram.getExternalUrl(), grantProgram.getReleaseDate());
     }
 
 
     public GrantProgramDTO(Long id, Instant createdDate, Instant lastModifiedDate, int status,
                            String name, String description, int type, PublisherDTO publisherDTO,
-                           Set<AreaDTO> areaDTOs, String externalId, String externalUrl,
-                           Instant releaseDate) {
+                           Set<AreaDTO> areaDTOs,
+                           String externalId, String externalUrl, Instant releaseDate) {
         this.id = id;
         this.createdDate = createdDate;
         this.lastModifiedDate = lastModifiedDate;

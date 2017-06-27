@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
-import { Investor } from './investor.model';
+import { GrantDTO } from './grant.model';
 import { ResponseWrapper } from '../model/response-wrapper.model';
 import { createRequestOption } from '../model/request-util';
 
 @Injectable()
-export class InvestorService {
-    private resourceUrl = 'api/investors';
+export class GrantsService {
+    private resourceUrl = 'api/grant';
 
     constructor(private http: Http) { }
 

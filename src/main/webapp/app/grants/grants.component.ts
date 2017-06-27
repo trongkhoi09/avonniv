@@ -2,19 +2,19 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AlertService, ParseLinks} from 'ng-jhipster';
 import {ResponseWrapper} from '../shared/model/response-wrapper.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import {InvestorService} from '../shared/investor/investor.service';
+import {GrantsService} from '../shared/grant/grant.service';
 import {ITEMS_PER_PAGE} from '../shared/constants/pagination.constants';
 import {Principal} from '../shared/auth/principal.service';
-import {Investor} from '../shared/investor/investor.model';
+import {GrantDTO} from '../shared/grant/grant.model';
 
 @Component({
-    selector: 'jhi-investors',
-    templateUrl: './investors.component.html',
+    selector: 'jhi-grants',
+    templateUrl: './grants.component.html',
     styleUrls: [
-        'investors.scss'
+        'grants.scss'
     ]
 })
-export class InvestorsComponent implements OnInit, OnDestroy {
+export class GrantssComponent implements OnInit, OnDestroy {
     routeData: any;
     links: any;
     totalItems: any;
@@ -24,7 +24,7 @@ export class InvestorsComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
     currentAccount: any;
-    investors: Investor[];
+    grantDTOs: GrantDTO[];
     filters = [
         {name: 'Vinnova', value: 1},
         {name: 'Tillväxtverket', value: 2},
@@ -34,7 +34,7 @@ export class InvestorsComponent implements OnInit, OnDestroy {
 
     constructor(private alertService: AlertService,
                 private parseLinks: ParseLinks,
-                private investorService: InvestorService,
+                private grantService: GrantsService,
                 private principal: Principal,
                 private activatedRoute: ActivatedRoute,
                 private router: Router) {
@@ -62,7 +62,7 @@ export class InvestorsComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
-        this.investorService.query({
+        this.grantService.query({
             page: this.page - 1,
             size: this.itemsPerPage,
             sort: this.sort()
@@ -88,7 +88,7 @@ export class InvestorsComponent implements OnInit, OnDestroy {
     }
 
     transition() {
-        this.router.navigate(['/investors'], {
+        this.router.navigate(['/grants'], {
             queryParams: {
                 page: this.page,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
@@ -100,7 +100,7 @@ export class InvestorsComponent implements OnInit, OnDestroy {
     private onSuccess(data, headers) {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = headers.get('X-Total-Count');
-        this.investors = data;
+        this.grantDTOs = data;
     }
 
     private onError(error) {

@@ -59,7 +59,7 @@ public class FetchDataVinnovaService {
     public void autoFetchDataFromVinnova() {
         try {
             String name = "Vinnova";
-            Optional<Publisher> publisherOptional = publisherService.getByName(name);
+            Optional<Publisher> publisherOptional = publisherService.getById(1L);
             Optional<CrawlHistory> crawlHistoryOptional = crawHistoryService.findByName(name);
             //1483228800L = Sunday, January 1, 2017 12:00:00 AM
             Instant lastDateCrawl = Instant.ofEpochSecond(1483228800L);

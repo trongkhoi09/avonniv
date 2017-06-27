@@ -9,7 +9,7 @@ import { AvonnivHomeModule } from './home/home.module';
 import { AvonnivAdminModule } from './admin/admin.module';
 import { AvonnivAccountModule } from './account/account.module';
 import { AvonnivEntityModule } from './entities/entity.module';
-import { AvonnivInvestorsModule } from './investors/investors.module';
+import { AvonnivGrantssModule } from './grants/grants.module';
 
 import { customHttpProvider } from './blocks/interceptor/http.provider';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
@@ -25,7 +25,7 @@ import {
     ErrorComponent,
     NavbarSecondComponent
 } from './layouts';
-import {InvestorService} from './shared/investor/investor.service';
+import {GrantsService} from './shared/grant/grant.service';
 
 @NgModule({
     imports: [
@@ -37,7 +37,7 @@ import {InvestorService} from './shared/investor/investor.service';
         AvonnivAdminModule,
         AvonnivAccountModule,
         AvonnivEntityModule,
-        AvonnivInvestorsModule
+        AvonnivGrantssModule
     ],
     declarations: [
         JhiMainComponent,
@@ -53,7 +53,7 @@ import {InvestorService} from './shared/investor/investor.service';
         customHttpProvider(),
         PaginationConfig,
         UserRouteAccessService,
-        InvestorService
+        GrantsService
     ],
     bootstrap: [ JhiMainComponent ]
 })

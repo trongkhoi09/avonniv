@@ -1,6 +1,6 @@
-<div class="investors">
+<div class="grants">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="card container">
                 <fieldset class="form-group row">
                     <legend class="col-form-legend col-sm-2">
@@ -30,7 +30,7 @@
                 </fieldset>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-10">
             <div class="card">
                 <div class="row">
                     <div class="col-md-6 text-center">
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="card margin-top-20">
-                <div class="table-responsive" *ngIf="investors">
+                <div class="table-responsive" *ngIf="grantDTOs">
                     <table class="table table-striped">
                         <thead>
                         <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse"
@@ -63,27 +63,22 @@
                             <th jhiSortBy="financing"><span>Financing</span><span class="fa fa-sort"></span></th>
                             <th jhiSortBy="applyBy"><span>Apply by</span><span class="fa fa-sort"></span></th>
                             <th jhiSortBy="status"><span>Status</span><span class="fa fa-sort"></span></th>
-                            <th jhiSortBy="createdDate"><span>CreatedDate</span><span class="fa fa-sort"></span></th>
-                            <th jhiSortBy="lastModifiedDate"><span>Last Modified Date</span><span
-                                class="fa fa-sort"></span></th>
                         </tr>
                         </thead>
-                        <tbody *ngIf="investors">
-                        <tr *ngFor="let d of investors; let i = index">
-                            <td>{{d.value}}</td>
-                            <td>{{d.title}}</td>
-                            <td>{{d.description}}</td>
-                            <td>{{d.financing}}</td>
-                            <td>{{d.applyBy}}</td>
-                            <td><span class="badge badge-success">{{d.status}}</span></td>
-                            <td>{{d.createdDate | date:'dd/MM/yy HH:mm'}}</td>
-                            <td>{{d.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</td>
+                        <tbody *ngIf="grantDTOs">
+                        <tr *ngFor="let grantDTO of grantDTOs; let i = index">
+                            <td>{{grantDTO.grantProgramDTO.publisherDTO.name}}</td>
+                            <td>{{grantDTO.title}}</td>
+                            <td>{{grantDTO.description}}</td>
+                            <td>{{grantDTO.financing}}</td>
+                            <td></td>
+                            <td><span class="badge badge-success">{{grantDTO.status==0?'open':'close'}}</span></td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <div *ngIf="investors">
+                <div *ngIf="grantDTOs">
                     <div class="row justify-content-center">
                         <jhi-item-count [page]="page" [total]="totalItems"
                                         [itemsPerPage]="itemsPerPage"></jhi-item-count>

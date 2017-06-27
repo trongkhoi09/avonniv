@@ -1,11 +1,11 @@
 import {ActivatedRouteSnapshot, Resolve, Route, RouterStateSnapshot} from '@angular/router';
 
-import {InvestorsComponent} from './investors.component';
+import {GrantssComponent} from './grants.component';
 import {Injectable} from '@angular/core';
 import {PaginationUtil} from 'ng-jhipster';
 
 @Injectable()
-export class InvestorsResolvePagingParams implements Resolve<any> {
+export class GrantssResolvePagingParams implements Resolve<any> {
 
     constructor(private paginationUtil: PaginationUtil) {}
 
@@ -19,13 +19,13 @@ export class InvestorsResolvePagingParams implements Resolve<any> {
         };
     }
 }
-export const investorsRoute: Route = {
-    path: 'investors',
-    component: InvestorsComponent,
+export const grantsRoute: Route = {
+    path: 'grants',
+    component: GrantssComponent,
     data: {
-        pageTitle: 'investors.title'
+        pageTitle: 'grants.title'
     },
     resolve: {
-        'pagingParams': InvestorsResolvePagingParams
+        'pagingParams': GrantssResolvePagingParams
     },
 };

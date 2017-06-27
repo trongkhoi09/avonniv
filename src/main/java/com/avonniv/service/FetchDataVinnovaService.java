@@ -224,7 +224,12 @@ public class FetchDataVinnovaService {
                 if (date.toCharArray()[date.length() - 1] != 'Z') {
                     date = date + "Z";
                 }
-                return Instant.parse(date);
+                Instant instant = Instant.parse(date);
+                if (instant.getEpochSecond() < 0) {
+                    return null;
+                } else {
+                    return instant;
+                }
             } catch (Exception e) {
             }
         }

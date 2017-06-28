@@ -1,5 +1,20 @@
 {
     "grants": {
         "title": "Grants"
+    },
+    "grantDialog": {
+        "editLabel": "Edit a Grant",
+        "title": "Title",
+        "excerpt": "Excerpt",
+        "description": "Description",
+        "status": "Status",
+        "openDate": "Open Date",
+        "closeDate": "Close Date",
+        "announcedDate": "Anounced Date",
+        "projectStartDate": "Project Start Date",
+        "externalId": "External Id",
+        "externalUrl": "External Url",
+        "financeDescription": "Finance Description",
+        "updated": "An grants is updated with identifier {{ param }}"
     }
 }

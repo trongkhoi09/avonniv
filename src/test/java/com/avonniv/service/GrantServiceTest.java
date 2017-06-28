@@ -138,7 +138,7 @@ public class GrantServiceTest {
         assertThat(grantRepository.findOneByTitle("Title grant call").isPresent()).isTrue();
         grantDTO.setTitle("Title grant call change");
 
-        grantService.updateGrantCall(grantDTO);
+        grantService.update(grantDTO);
 
         assertThat(grantRepository.findOneByTitle("Title grant call").isPresent()).isFalse();
         assertThat(grantRepository.findOneByTitle("Title grant call change").isPresent()).isTrue();

@@ -3,22 +3,28 @@ import {RouterModule} from '@angular/router';
 
 import {AvonnivSharedModule} from '../shared';
 
-import {grantsRoute, GrantssComponent} from './';
-import {GrantssResolvePagingParams} from './grants.route';
+import {grantsRoute, GrantModalService, GrantsComponent, GrantMgmtDialogComponent} from './';
+import {GrantsResolvePagingParams} from './grants.route';
+import {GrantDialogComponent} from './grant-dialog.component';
 
 @NgModule({
     imports: [
         AvonnivSharedModule,
-        RouterModule.forRoot([grantsRoute], {useHash: true})
+        RouterModule.forRoot(grantsRoute, {useHash: true})
     ],
     declarations: [
-        GrantssComponent,
+        GrantsComponent,
+        GrantDialogComponent,
+        GrantMgmtDialogComponent
     ],
-    entryComponents: [],
+    entryComponents: [
+        GrantMgmtDialogComponent
+    ],
     providers: [
-        GrantssResolvePagingParams
+        GrantsResolvePagingParams,
+        GrantModalService
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AvonnivGrantssModule {
+export class AvonnivGrantsModule {
 }

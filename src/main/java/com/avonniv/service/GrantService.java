@@ -61,7 +61,11 @@ public class GrantService {
         return grantRepository.findOneByExternalId(externalId);
     }
 
-    public Optional<Grant> updateGrantCall(GrantDTO grantDTO) {
+    public Optional<Grant> getById(Long id) {
+        return Optional.of(grantRepository.findOne(id));
+    }
+
+    public Optional<GrantDTO> update(GrantDTO grantDTO) {
         return Optional.of(grantRepository
             .findOne(grantDTO.getId()))
             .map(grantCall -> {
@@ -77,7 +81,8 @@ public class GrantService {
                 grantCall.setGrantProgram(grantProgram);
                 log.debug("Changed Information for Grant: {}", grantCall);
                 return grantCall;
-            });
+            })
+            .map(GrantDTO::new);
     }
 
     public void deleteGrantCall(GrantDTO grantDTO) {

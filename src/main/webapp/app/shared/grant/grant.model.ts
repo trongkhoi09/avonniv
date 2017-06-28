@@ -4,8 +4,8 @@ export class GrantDTO {
     public title?: string;
     public excerpt?: string;
     public description?: string;
-    public openDate?: any;
     public status?: number;
+    public openDate?: any;
     public closeDate?: any;
     public announcedDate?: any;
     public projectStartDate?: any;

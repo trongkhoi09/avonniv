@@ -64,6 +64,7 @@
                             <th><span>Finance Description</span></th>
                             <th jhiSortBy="openDate"><span>Open Date</span><span class="fa fa-sort"></span></th>
                             <th jhiSortBy="closeDate"><span>Close Date</span><span class="fa fa-sort"></span></th>
+                            <th *jhiHasAnyAuthority="'ROLE_ADMIN'"></th>
                         </tr>
                         </thead>
                         <tbody *ngIf="grantDTOs">
@@ -78,6 +79,17 @@
                             <td [innerHTML]="grantDTO.financeDescription"></td>
                             <td>{{grantDTO.openDate| date: 'dd/MM/yyyy'}}</td>
                             <td>{{grantDTO.closeDate| date: 'dd/MM/yyyy'}}</td>
+                            <td *jhiHasAnyAuthority="'ROLE_ADMIN'" class="text-right">
+                                <div class="btn-group flex-btn-group-container">
+                                    <button type="submit"
+                                            [routerLink]="['/', { outlets: { popup: 'grant-management/'+ grantDTO.id + '/edit'} }]"
+                                            replaceUrl="true"
+                                            class="btn btn-primary btn-sm">
+                                        <span class="fa fa-pencil"></span>
+                                        <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                                    </button>
+                                </div>
+                            </td>
                         </tr>
                         </tbody>
                     </table>

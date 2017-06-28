@@ -9,7 +9,7 @@ import { AvonnivHomeModule } from './home/home.module';
 import { AvonnivAdminModule } from './admin/admin.module';
 import { AvonnivAccountModule } from './account/account.module';
 import { AvonnivEntityModule } from './entities/entity.module';
-import { AvonnivGrantssModule } from './grants/grants.module';
+import { AvonnivGrantsModule } from './grants/grants.module';
 
 import { customHttpProvider } from './blocks/interceptor/http.provider';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
@@ -25,7 +25,7 @@ import {
     ErrorComponent,
     NavbarSecondComponent
 } from './layouts';
-import {GrantsService} from './shared/grant/grant.service';
+import {Grantservice} from './shared/grant/grant.service';
 
 @NgModule({
     imports: [
@@ -37,7 +37,7 @@ import {GrantsService} from './shared/grant/grant.service';
         AvonnivAdminModule,
         AvonnivAccountModule,
         AvonnivEntityModule,
-        AvonnivGrantssModule
+        AvonnivGrantsModule
     ],
     declarations: [
         JhiMainComponent,
@@ -53,7 +53,7 @@ import {GrantsService} from './shared/grant/grant.service';
         customHttpProvider(),
         PaginationConfig,
         UserRouteAccessService,
-        GrantsService
+        Grantservice
     ],
     bootstrap: [ JhiMainComponent ]
 })

@@ -395,5 +395,13 @@
             <column name="created_date" type="timestamp"/>
         </loadData>
     </changeSet>
+    <changeSet id="2" author="sylt">
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/areas.csv"
+                  separator=";"
+                  tableName="tbl_area">
+            <column name="created_date" type="timestamp"/>
+        </loadData>
+    </changeSet>
 
 </databaseChangeLog>

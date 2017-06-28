@@ -1,17 +1,19 @@
-import {ActivatedRouteSnapshot, Resolve, Route, RouterStateSnapshot} from '@angular/router';
+import {ActivatedRouteSnapshot, Resolve, Route, RouterStateSnapshot, Routes} from '@angular/router';
 
-import {GrantssComponent} from './grants.component';
+import {GrantsComponent} from './grants.component';
 import {Injectable} from '@angular/core';
 import {PaginationUtil} from 'ng-jhipster';
+import {GrantDialogComponent} from './grant-dialog.component';
 
 @Injectable()
-export class GrantssResolvePagingParams implements Resolve<any> {
+export class GrantsResolvePagingParams implements Resolve<any> {
 
-    constructor(private paginationUtil: PaginationUtil) {}
+    constructor(private paginationUtil: PaginationUtil) {
+    }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const page = route.queryParams['page'] ? route.queryParams['page'] : '1';
-        const sort = route.queryParams['sort'] ? route.queryParams['sort'] : 'createdDate,desc';
+        const sort = route.queryParams['sort'] ? route.queryParams['sort'] : 'openDate,desc';
         return {
             page: this.paginationUtil.parsePage(page),
             predicate: this.paginationUtil.parsePredicate(sort),
@@ -19,13 +21,18 @@ export class GrantssResolvePagingParams implements Resolve<any> {
         };
     }
 }
-export const grantsRoute: Route = {
+
+export const grantsRoute: Routes = [{
     path: 'grants',
-    component: GrantssComponent,
+    component: GrantsComponent,
     data: {
         pageTitle: 'grants.title'
     },
     resolve: {
-        'pagingParams': GrantssResolvePagingParams
-    },
-};
+        'pagingParams': GrantsResolvePagingParams
+    }
+}, {
+    path: 'grant-management/:grantId/edit',
+    component: GrantDialogComponent,
+    outlet: 'popup'
+}];

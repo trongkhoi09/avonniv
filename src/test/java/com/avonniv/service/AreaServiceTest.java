@@ -45,6 +45,7 @@ public class AreaServiceTest {
 
     @Test
     public void getAll() throws Exception {
+        areaRepository.deleteAll();
         List<AreaDTO> areaDTOS = areaService.getAll();
         assertThat(areaDTOS.size()).isEqualTo(0);
         for (int i = 0; i < 4; i++) {

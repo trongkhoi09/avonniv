@@ -7,7 +7,7 @@ import {ResponseWrapper} from '../model/response-wrapper.model';
 import {createRequestOption} from '../model/request-util';
 
 @Injectable()
-export class GrantsService {
+export class GrantsProgramService {
     private resourceUrl = 'api/grants';
 
     constructor(private http: Http) {

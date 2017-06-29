@@ -155,7 +155,7 @@ public class GrantProgramServiceTest {
 
         GrantProgramDTO grantProgramDTO = new GrantProgramDTO(grantProgram);
         grantProgramDTO.setName("GrantProgram2");
-        grantProgramService.updateGrant(grantProgramDTO);
+        grantProgramService.update(grantProgramDTO);
         Optional<GrantProgram> maybeGrantDTO = grantProgramRepository.findOneByName("GrantProgram");
         assertThat(maybeGrantDTO.isPresent()).isFalse();
         maybeGrantDTO = grantProgramRepository.findOneByName("GrantProgram2");

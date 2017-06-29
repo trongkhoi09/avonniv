@@ -1,0 +1,62 @@
+<div *ngIf="grantProgram">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 jhiTranslate="grantProgramEdit.editLabel">Edit a Grant Program</h2>
+            <jhi-alert></jhi-alert>
+            <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="grantProgramEdit.name">Name</label>
+                    <input type="text" class="form-control" name="name" #nameInput="ngModel"
+                           [(ngModel)]="grantProgram.name" required minlength="1" maxlength="255">
+
+                    <div *ngIf="nameInput.dirty && nameInput.invalid">
+                        <small class="form-text text-danger"
+                               *ngIf="nameInput.errors.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+
+                        <small class="form-text text-danger"
+                               *ngIf="nameInput.errors.maxlength" jhiTranslate="entity.validation.maxlength"
+                               translate-value-max="255">
+                            This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="grantProgramEdit.description">Description</label>
+                    <textarea rows="3" class="form-control" name="description" #descriptionInput="ngModel"
+                              [(ngModel)]="grantProgram.description" maxlength="200"></textarea>
+                    <div *ngIf="descriptionInput.dirty && descriptionInput.invalid">
+                        <small class="form-text text-danger"
+                               *ngIf="descriptionInput.errors.maxlength" jhiTranslate="entity.validation.maxlength"
+                               translate-value-max="200">
+                            This field cannot be longer than 200 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="grantProgramEdit.externalUrl">External Url</label>
+                    <input type="text" class="form-control" name="externalUrl" #externalUrlInput="ngModel"
+                           [(ngModel)]="grantProgram.externalUrl" maxlength="255">
+
+                    <div *ngIf="externalUrlInput.dirty && externalUrlInput.invalid">
+                        <small class="form-text text-danger"
+                               *ngIf="externalUrlInput.errors.maxlength" jhiTranslate="entity.validation.maxlength"
+                               translate-value-max="255">
+                            This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="grantProgramEdit.releaseDate">Release Date</label>
+                    <input type="date" class="form-control" name="releaseDate" #releaseDateInput="ngModel"
+                           [(ngModel)]="grantProgram.releaseDate">
+                </div>
+                <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <span class="fa fa-floppy-o"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

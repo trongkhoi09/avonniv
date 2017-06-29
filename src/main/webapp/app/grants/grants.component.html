@@ -85,7 +85,16 @@
                                             [routerLink]="'/grant-edit/'+ grantDTO.id"
                                             class="btn btn-primary btn-sm">
                                         <span class="fa fa-pencil"></span>
-                                        <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                                        <span class="hidden-md-down"
+                                              jhiTranslate="grants.action.editGrant">Edit Grant</span>
+                                    </button>
+                                </div>
+                                <div class="btn-group flex-btn-group-container">
+                                    <button type="button"
+                                            [routerLink]="'/grant-program-edit/'+ grantDTO.grantProgramDTO.id"
+                                            class="btn btn-primary btn-sm">
+                                        <span class="fa fa-pencil"></span>
+                                        <span class="hidden-md-down" jhiTranslate="grants.action.editGrantProgram">Edit Grant Program</span>
                                     </button>
                                 </div>
                             </td>

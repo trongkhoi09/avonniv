@@ -1,5 +1,5 @@
 import {PublisherDTO} from '../publisher/publisher.model';
-export class GrantsProgramDTO {
+export class GrantProgramDTO {
     public id?: any;
     public name?: string;
     public description?: string;

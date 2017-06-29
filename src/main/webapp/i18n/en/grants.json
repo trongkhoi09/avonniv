@@ -1,9 +1,16 @@
 {
     "grants": {
-        "title": "Grants"
+        "title": "Grants",
+        "action": {
+            "editGrant": "Edit Grant",
+            "editGrantProgram": "Edit Grant Program"
+        }
     },
     "grant": {
         "edit": "Edit a Grant"
+    },
+    "grantProgram": {
+        "edit": "Edit a Grant Program"
     },
     "grantEdit": {
         "editLabel": "Edit a Grant",
@@ -19,5 +26,14 @@
         "externalUrl": "External Url",
         "financeDescription": "Finance Description",
         "updated": "An grant is updated"
+    },
+    "grantProgramEdit": {
+        "editLabel": "Edit a Grant Program",
+        "name": "Name",
+        "description": "Description",
+        "releaseDate": "Release Date",
+        "externalId": "External Id",
+        "externalUrl": "External Url",
+        "updated": "An grant program is updated"
     }
 }

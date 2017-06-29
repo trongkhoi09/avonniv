@@ -72,7 +72,7 @@ public class GrantProgramService {
         return grantProgramRepository.findOneByExternalId(externalId);
     }
 
-    public Optional<GrantProgram> updateGrant(GrantProgramDTO grantProgramDTO) {
+    public Optional<GrantProgramDTO> update(GrantProgramDTO grantProgramDTO) {
         return Optional.of(grantProgramRepository
             .findOne(grantProgramDTO.getId()))
             .map(grant -> {
@@ -91,10 +91,15 @@ public class GrantProgramService {
                 }
                 log.debug("Changed Information for GrantProgram: {}", grant);
                 return grant;
-            });
+            })
+            .map(GrantProgramDTO::new);
     }
 
     public void deleteGrant(GrantProgramDTO grantProgramDTO) {
         grantProgramRepository.delete(grantProgramDTO.getId());
+    }
+
+    public Optional<GrantProgram> getById(Long grantProgramId) {
+        return Optional.of(grantProgramRepository.findOne(grantProgramId));
     }
 }

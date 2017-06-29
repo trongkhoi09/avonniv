@@ -15,7 +15,9 @@ import {
     Principal,
     JhiTrackerService,
     HasAnyAuthorityDirective,
-    JhiLoginModalComponent
+    JhiLoginModalComponent,
+    GrantService,
+    GrantProgramService
 } from './';
 
 @NgModule({
@@ -38,7 +40,9 @@ import {
         JhiTrackerService,
         AuthServerProvider,
         UserService,
-        DatePipe
+        DatePipe,
+        GrantService,
+        GrantProgramService
     ],
     entryComponents: [JhiLoginModalComponent],
     exports: [

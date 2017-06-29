@@ -7,7 +7,7 @@ import {createRequestOption} from '../model/request-util';
 import {GrantDTO} from './grant.model';
 
 @Injectable()
-export class Grantservice {
+export class GrantService {
     private resourceUrl = 'api/grant';
 
     constructor(private http: Http) {

@@ -3,41 +3,38 @@ import {ActivatedRoute} from '@angular/router';
 
 import {AlertService} from 'ng-jhipster';
 
-import {GrantDTO, GrantService} from '../shared';
+import {GrantProgramDTO, GrantProgramService} from '../shared';
 
 @Component({
-    selector: 'jhi-grant-edit',
-    templateUrl: './grant-edit.component.html'
+    selector: 'jhi-grant-program-edit',
+    templateUrl: './grant-program-edit.component.html'
 })
-export class GrantEditComponent implements OnInit, OnDestroy {
+export class GrantProgramEditComponent implements OnInit, OnDestroy {
 
-    grant: GrantDTO;
+    grantProgram: GrantProgramDTO;
     isSaving: Boolean;
     routeSub: any;
 
     constructor(private route: ActivatedRoute,
-                private grantservice: GrantService,
+                private grantProgramService: GrantProgramService,
                 private alertService: AlertService) {
     }
 
     ngOnInit() {
         this.isSaving = false;
         this.routeSub = this.route.params.subscribe((params) => {
-            if (params['grantId']) {
-                const grantId = params['grantId'];
+            if (params['grantProgramId']) {
+                const grantId = params['grantProgramId'];
                 if (grantId) {
-                    this.grantservice.find(grantId).subscribe((grant) => this.grant = this.parser(grant));
+                    this.grantProgramService.find(grantId).subscribe((grantProgram) => this.grantProgram = this.parser(grantProgram));
                 }
             }
         });
     }
 
-    parser(grant: GrantDTO) {
-        grant.openDate = this.parserDate(grant.openDate);
-        grant.closeDate = this.parserDate(grant.closeDate);
-        grant.announcedDate = this.parserDate(grant.announcedDate);
-        grant.projectStartDate = this.parserDate(grant.projectStartDate);
-        return grant;
+    parser(grantProgram: GrantProgramDTO) {
+        grantProgram.releaseDate = this.parserDate(grantProgram.releaseDate);
+        return grantProgram;
     }
 
     parserDate(date) {
@@ -50,12 +47,9 @@ export class GrantEditComponent implements OnInit, OnDestroy {
         return date;
     }
 
-    format(grant: GrantDTO) {
-        grant.openDate = this.formatDate(grant.openDate);
-        grant.closeDate = this.formatDate(grant.closeDate);
-        grant.announcedDate = this.formatDate(grant.announcedDate);
-        grant.projectStartDate = this.formatDate(grant.projectStartDate);
-        return grant;
+    format(grantProgram: GrantProgramDTO) {
+        grantProgram.releaseDate = this.formatDate(grantProgram.releaseDate);
+        return grantProgram;
     }
 
     formatDate(date) {
@@ -74,8 +68,8 @@ export class GrantEditComponent implements OnInit, OnDestroy {
 
     save() {
         this.isSaving = true;
-        this.grantservice.update(this.format(this.grant)).subscribe((response) => this.onSaveSuccess(response), () => this.onSaveError());
-        this.grant = this.parser(this.grant);
+        this.grantProgramService.update(this.format(this.grantProgram)).subscribe((response) => this.onSaveSuccess(response), () => this.onSaveError());
+        this.grantProgram = this.parser(this.grantProgram);
     }
 
     private onSaveSuccess(result) {

@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AlertService, ParseLinks, EventManager} from 'ng-jhipster';
+import {AlertService, ParseLinks} from 'ng-jhipster';
 import {ResponseWrapper} from '../shared/model/response-wrapper.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Grantservice} from '../shared/grant/grant.service';
+import {GrantService} from '../shared/grant/grant.service';
 import {ITEMS_PER_PAGE} from '../shared/constants/pagination.constants';
 import {Principal} from '../shared/auth/principal.service';
 import {GrantDTO} from '../shared/grant/grant.model';
@@ -34,9 +34,8 @@ export class GrantsComponent implements OnInit, OnDestroy {
 
     constructor(private alertService: AlertService,
                 private parseLinks: ParseLinks,
-                private grantService: Grantservice,
+                private grantService: GrantService,
                 private principal: Principal,
-                private eventManager: EventManager,
                 private activatedRoute: ActivatedRoute,
                 private router: Router) {
         this.itemsPerPage = ITEMS_PER_PAGE;

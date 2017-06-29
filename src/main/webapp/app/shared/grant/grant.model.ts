@@ -1,4 +1,4 @@
-import {GrantsProgramDTO} from '../grant-program/grant-program.model';
+import {GrantProgramDTO} from '../grant-program/grant-program.model';
 export class GrantDTO {
     public id?: any;
     public title?: string;
@@ -12,5 +12,5 @@ export class GrantDTO {
     public externalId?: string;
     public externalUrl?: string;
     public financeDescription?: string;
-    public grantProgramDTO: GrantsProgramDTO;
+    public grantProgramDTO: GrantProgramDTO;
 }

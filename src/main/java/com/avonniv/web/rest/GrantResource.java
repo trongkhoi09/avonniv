@@ -71,6 +71,6 @@ public class GrantResource {
     @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<GrantDTO> updateGrant(@RequestBody GrantDTO grantDTO) {
         return ResponseUtil.wrapOrNotFound(grantService.update(grantDTO),
-            HeaderUtil.createAlert("grantManagement.updated", grantDTO.getTitle()));
+            HeaderUtil.createAlert("grantEdit.updated", grantDTO.getTitle()));
     }
 }

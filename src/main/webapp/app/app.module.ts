@@ -12,8 +12,8 @@ import { AvonnivAccountModule } from './account/account.module';
 import { AvonnivEntityModule } from './entities/entity.module';
 import { AvonnivGrantsModule } from './grants/grants.module';
 import {AvonnivGrantEditModule} from './grant-edit/grant-edit.module';
+import {AvonnivGrantProgramEditModule} from './grant-program-edit/grant-program-edit.module';
 
-import { Grantservice } from './shared/grant/grant.service';
 import { customHttpProvider } from './blocks/interceptor/http.provider';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
 
@@ -41,6 +41,7 @@ import {
         AvonnivEntityModule,
         AvonnivGrantsModule,
         AvonnivGrantEditModule,
+        AvonnivGrantProgramEditModule,
         FormsModule
     ],
     declarations: [
@@ -56,8 +57,7 @@ import {
         ProfileService,
         customHttpProvider(),
         PaginationConfig,
-        UserRouteAccessService,
-        Grantservice
+        UserRouteAccessService
     ],
     bootstrap: [ JhiMainComponent ]
 })

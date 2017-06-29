@@ -3,7 +3,6 @@ import {ActivatedRouteSnapshot, Resolve, Route, RouterStateSnapshot, Routes} fro
 import {GrantsComponent} from './grants.component';
 import {Injectable} from '@angular/core';
 import {PaginationUtil} from 'ng-jhipster';
-import {GrantDialogComponent} from './grant-dialog.component';
 
 @Injectable()
 export class GrantsResolvePagingParams implements Resolve<any> {
@@ -31,8 +30,4 @@ export const grantsRoute: Routes = [{
     resolve: {
         'pagingParams': GrantsResolvePagingParams
     }
-}, {
-    path: 'grant-management/:grantId/edit',
-    component: GrantDialogComponent,
-    outlet: 'popup'
 }];

@@ -1,0 +1,108 @@
+<div *ngIf="grant">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 jhiTranslate="grantEdit.editLabel">Edit a Grant</h2>
+            <jhi-alert></jhi-alert>
+            <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="grantEdit.title">Title</label>
+                    <input type="text" class="form-control" name="title" #titleInput="ngModel"
+                           [(ngModel)]="grant.title" required minlength="1" maxlength="255">
+
+                    <div *ngIf="titleInput.dirty && titleInput.invalid">
+                        <small class="form-text text-danger"
+                               *ngIf="titleInput.errors.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+
+                        <small class="form-text text-danger"
+                               *ngIf="titleInput.errors.maxlength" jhiTranslate="entity.validation.maxlength"
+                               translate-value-max="255">
+                            This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="grantEdit.financeDescription">Finance
+                        Description</label>
+
+                    <textarea rows="3" class="form-control" name="financeDescription"
+                              #financeDescriptionInput="ngModel"
+                              [(ngModel)]="grant.financeDescription" maxlength="1000"></textarea>
+
+                    <div *ngIf="financeDescriptionInput.dirty && financeDescriptionInput.invalid">
+                        <small class="form-text text-danger"
+                               *ngIf="financeDescriptionInput.errors.maxlength"
+                               jhiTranslate="entity.validation.maxlength"
+                               translate-value-max="1000">
+                            This field cannot be longer than 1000 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="grantEdit.description">Description</label>
+                    <textarea rows="3" class="form-control" name="description" #descriptionInput="ngModel"
+                              [(ngModel)]="grant.description" maxlength="200"></textarea>
+                    <div *ngIf="descriptionInput.dirty && descriptionInput.invalid">
+                        <small class="form-text text-danger"
+                               *ngIf="descriptionInput.errors.maxlength" jhiTranslate="entity.validation.maxlength"
+                               translate-value-max="200">
+                            This field cannot be longer than 200 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="grantEdit.externalUrl">External Url</label>
+                    <input type="text" class="form-control" name="externalUrl" #externalUrlInput="ngModel"
+                           [(ngModel)]="grant.externalUrl" maxlength="255">
+
+                    <div *ngIf="externalUrlInput.dirty && externalUrlInput.invalid">
+                        <small class="form-text text-danger"
+                               *ngIf="externalUrlInput.errors.maxlength" jhiTranslate="entity.validation.maxlength"
+                               translate-value-max="255">
+                            This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="grantEdit.openDate">Open Date</label>
+                            <input type="date" class="form-control" name="openDate" #openDateInput="ngModel"
+                                   [(ngModel)]="grant.openDate">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="grantEdit.closeDate">Close Date</label>
+                            <input type="date" class="form-control" name="closeDate" #closeDateInput="ngModel"
+                                   [(ngModel)]="grant.closeDate">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="grantEdit.announcedDate">Announced
+                                Date</label>
+                            <input type="date" class="form-control" name="announcedDate" #announcedDateInput="ngModel"
+                                   [(ngModel)]="grant.announcedDate">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="grantEdit.projectStartDate">Project Start
+                                Date</label>
+                            <input type="date" class="form-control" name="projectStartDate"
+                                   #projectStartDateInput="ngModel"
+                                   [(ngModel)]="grant.projectStartDate">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <span class="fa fa-floppy-o"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

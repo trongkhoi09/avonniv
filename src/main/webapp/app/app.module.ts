@@ -1,6 +1,7 @@
 import './vendor.ts';
 
 import { NgModule } from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { Ng2Webstorage } from 'ng2-webstorage';
 
@@ -10,7 +11,9 @@ import { AvonnivAdminModule } from './admin/admin.module';
 import { AvonnivAccountModule } from './account/account.module';
 import { AvonnivEntityModule } from './entities/entity.module';
 import { AvonnivGrantsModule } from './grants/grants.module';
+import {AvonnivGrantEditModule} from './grant-edit/grant-edit.module';
 
+import { Grantservice } from './shared/grant/grant.service';
 import { customHttpProvider } from './blocks/interceptor/http.provider';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
 
@@ -25,7 +28,6 @@ import {
     ErrorComponent,
     NavbarSecondComponent
 } from './layouts';
-import {Grantservice} from './shared/grant/grant.service';
 
 @NgModule({
     imports: [
@@ -37,7 +39,9 @@ import {Grantservice} from './shared/grant/grant.service';
         AvonnivAdminModule,
         AvonnivAccountModule,
         AvonnivEntityModule,
-        AvonnivGrantsModule
+        AvonnivGrantsModule,
+        AvonnivGrantEditModule,
+        FormsModule
     ],
     declarations: [
         JhiMainComponent,

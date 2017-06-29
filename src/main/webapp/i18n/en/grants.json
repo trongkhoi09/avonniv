@@ -2,7 +2,10 @@
     "grants": {
         "title": "Grants"
     },
-    "grantDialog": {
+    "grant": {
+        "edit": "Edit a Grant"
+    },
+    "grantEdit": {
         "editLabel": "Edit a Grant",
         "title": "Title",
         "excerpt": "Excerpt",
@@ -15,6 +18,6 @@
         "externalId": "External Id",
         "externalUrl": "External Url",
         "financeDescription": "Finance Description",
-        "updated": "An grants is updated with identifier {{ param }}"
+        "updated": "An grant is updated"
     }
 }

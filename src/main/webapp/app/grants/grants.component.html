@@ -81,9 +81,8 @@
                             <td>{{grantDTO.closeDate| date: 'dd/MM/yyyy'}}</td>
                             <td *jhiHasAnyAuthority="'ROLE_ADMIN'" class="text-right">
                                 <div class="btn-group flex-btn-group-container">
-                                    <button type="submit"
-                                            [routerLink]="['/', { outlets: { popup: 'grant-management/'+ grantDTO.id + '/edit'} }]"
-                                            replaceUrl="true"
+                                    <button type="button"
+                                            [routerLink]="'/grant-edit/'+ grantDTO.id"
                                             class="btn btn-primary btn-sm">
                                         <span class="fa fa-pencil"></span>
                                         <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>

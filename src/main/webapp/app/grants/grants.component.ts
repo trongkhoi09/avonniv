@@ -53,15 +53,10 @@ export class GrantsComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.loadAll();
-        this.registerChangeInGrants();
     }
 
     ngOnDestroy() {
         this.routeData.unsubscribe();
-    }
-
-    registerChangeInGrants() {
-        this.eventManager.subscribe('grantListModification', (response) => this.loadAll());
     }
 
     onFiltering() {

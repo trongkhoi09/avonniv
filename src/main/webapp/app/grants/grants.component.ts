@@ -6,7 +6,6 @@ import {GrantService} from '../shared/grant/grant.service';
 import {ITEMS_PER_PAGE} from '../shared/constants/pagination.constants';
 import {Principal} from '../shared/auth/principal.service';
 import {GrantDTO} from '../shared/grant/grant.model';
-
 @Component({
     selector: 'jhi-grants',
     templateUrl: './grants.component.html',
@@ -25,6 +24,10 @@ export class GrantsComponent implements OnInit, OnDestroy {
     reverse: any;
     currentAccount: any;
     grantDTOs: GrantDTO[];
+    grantFilter = {
+        publicGrant: true,
+        privateGrant: false
+    };
     filters = [
         {name: 'Vinnova', value: 1},
         {name: 'Tillväxtverket', value: 2},

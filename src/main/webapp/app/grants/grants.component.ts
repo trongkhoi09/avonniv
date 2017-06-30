@@ -26,14 +26,18 @@ export class GrantsComponent implements OnInit, OnDestroy {
     grantDTOs: GrantDTO[];
     grantFilter = {
         publicGrant: true,
-        privateGrant: false
+        privateGrant: false,
+        publisher: [
+            {name: 'Vinnova', isCheck: true},
+            {name: 'Tillväxtverket', isCheck: true},
+            {name: 'Almi', isCheck: true}
+        ]
     };
     filters = [
         {name: 'Vinnova', value: 1},
         {name: 'Tillväxtverket', value: 2},
         {name: 'Almi', value: 3}
     ];
-    titles = ['Utlysare', 'Titel', 'Beskrivning', 'Finansiering', 'Ansök senast', 'Status'];
 
     constructor(private alertService: AlertService,
                 private parseLinks: ParseLinks,
@@ -62,6 +66,10 @@ export class GrantsComponent implements OnInit, OnDestroy {
     }
 
     onFiltering() {
+    }
+
+    isAdmin() {
+        return this.principal.hasAnyAuthorityDirect(['ROLE_ADMIN']);
     }
 
     loadAll() {

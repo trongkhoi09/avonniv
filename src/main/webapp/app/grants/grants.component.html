@@ -6,12 +6,11 @@
                     <legend class="col-form-legend col-sm-2">
                         <span class="glyphicon glyphicon-folder-open"></span> <b>Utylysare</b>
                     </legend>
-                    <div class="col-sm-10">
-                        <div class="form-check" *ngFor="let fi of filters; let i = index">
-                            <label class="form-check-label">
-                                <input class="form-check-input" (ngModelChange)="onFiltering()"
-                                       [(ngModel)]="fi.value" type="checkbox"> {{fi.name}}
-                            </label>
+                    <div class="col-sm-10 utylysare">
+                        <div *ngFor="let publisher of grantFilter.publisher; let i = index">
+                            <a><span (click)="publisher.isCheck=!publisher.isCheck"><i
+                                [ngClass]="publisher.isCheck?'fa fa-check-square-o':'fa fa-square-o'"
+                                aria-hidden="true"></i> {{publisher.name}} </span></a>
                         </div>
                     </div>
 
@@ -32,50 +31,52 @@
         </div>
         <div class="col-md-10">
             <div class="card">
-                <div class="row" style="font-size: 30px">
+                <div class="row grant-filter-type">
                     <div class="col-md-6 text-center">
-                        <span (click)="grantFilter.publicGrant=!grantFilter.publicGrant"><i
+                        <a><span (click)="grantFilter.publicGrant=!grantFilter.publicGrant"><i
                             [ngClass]="grantFilter.publicGrant?'fa fa-check-square-o':'fa fa-square-o'"
-                            aria-hidden="true"></i> Public </span>
+                            aria-hidden="true"></i> Public </span></a>
                     </div>
                     <div class="col-md-6 text-center">
-                        <span (click)="grantFilter.privateGrant=!grantFilter.privateGrant"><i
+                        <a><span (click)="grantFilter.privateGrant=!grantFilter.privateGrant"><i
                             [ngClass]="grantFilter.privateGrant?'fa fa-check-square-o':'fa fa-square-o'"
-                            aria-hidden="true"></i> Private </span>
+                            aria-hidden="true"></i> Private </span></a>
                     </div>
                 </div>
             </div>
             <div class="card margin-top-20">
                 <div class="table-responsive" *ngIf="grantDTOs">
-                    <table class="table">
-                        <thead class="thead-default">
+                    <table class="table table-hover">
+                        <thead>
                         <tr class="row m-0" jhiSort [(predicate)]="predicate" [(ascending)]="reverse"
                             [callback]="transition.bind(this)">
                             <th class="col-1 text-center"><span>Utylysare</span></th>
-                            <th class="col-2 text-center" jhiSortBy="title"><span>Title</span><span
-                                class="fa fa-sort"></span></th>
-                            <th class="col-3 text-center"><span>Description</span></th>
+                            <th class="col-2 text-center"><a jhiSortBy="title"><span>Title</span><span
+                                class="fa fa-sort"></span></a></th>
+                            <th class="text-center" [ngClass]="isAdmin()?'col-2':'col-3'"><span>Description</span></th>
                             <th class="col-2 text-center"><span>Finance Description</span></th>
-                            <th class="col-2 text-center" jhiSortBy="openDate"><span>Open Date</span><span
-                                class="fa fa-sort"></span></th>
-                            <th class="col-2 text-center" jhiSortBy="closeDate"><span>Close Date</span><span
-                                class="fa fa-sort"></span></th>
+                            <th class="col-2 text-center"><a jhiSortBy="openDate"><span>Open Date</span><span
+                                class="fa fa-sort"></span></a></th>
+                            <th class="col-2 text-center"><a jhiSortBy="closeDate"><span>Close Date</span><span
+                                class="fa fa-sort"></span></a></th>
+                            <th class="col-1" *jhiHasAnyAuthority="'ROLE_ADMIN'"></th>
                         </tr>
                         </thead>
                         <tbody *ngIf="grantDTOs">
                         <tr *ngFor="let grantDTO of grantDTOs; let i = index" class="row m-0">
                             <td class="col-1">{{grantDTO.grantProgramDTO.publisherDTO.name}}</td>
                             <td class="col-2">
-                                <a href="{{grantDTO.externalUrl?grantDTO.externalUrl:'javascript:void(0)'}}">
+                                <a href="{{grantDTO.grantProgramDTO.externalUrl?grantDTO.grantProgramDTO.externalUrl:'javascript:void(0)'}}"
+                                   [target]="grantDTO.grantProgramDTO.externalUrl ? '_blank' : ''">
                                     {{grantDTO.grantProgramDTO.name}}
                                 </a>
                             </td>
-                            <td class="col-3">{{grantDTO.grantProgramDTO.description}}</td>
+                            <td [ngClass]="isAdmin()?'col-2':'col-3'">{{grantDTO.grantProgramDTO.description}}</td>
                             <td class="col-2" [innerHTML]="grantDTO.financeDescription"></td>
-                            <td class="col-2">{{grantDTO.openDate| date: 'dd/MM/yyyy'}}</td>
-                            <td class="col-2">{{grantDTO.closeDate| date: 'dd/MM/yyyy'}}</td>
-                            <td class="col-6 text-center" *jhiHasAnyAuthority="'ROLE_ADMIN'">
-                                <div class="btn-group">
+                            <td class="col-2 text-center">{{grantDTO.openDate| date: 'dd MMM yyyy'}}</td>
+                            <td class="col-2 text-center">{{grantDTO.closeDate| date: 'dd MMM yyyy'}}</td>
+                            <td class="col-1 text-right" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                                <div class="btn-group flex-btn-group-container">
                                     <button type="button"
                                             [routerLink]="'/grant-edit/'+ grantDTO.id"
                                             class="btn btn-primary btn-sm">
@@ -84,9 +85,7 @@
                                               jhiTranslate="grants.action.editGrant">Edit Grant</span>
                                     </button>
                                 </div>
-                            </td>
-                            <td class="col-6 text-center" *jhiHasAnyAuthority="'ROLE_ADMIN'">
-                                <div class="btn-group">
+                                <div class="btn-group flex-btn-group-container">
                                     <button type="button"
                                             [routerLink]="'/grant-program-edit/'+ grantDTO.grantProgramDTO.id"
                                             class="btn btn-primary btn-sm">

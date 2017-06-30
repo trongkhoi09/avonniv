@@ -2,8 +2,8 @@
     "grants": {
         "title": "Grants",
         "action": {
-            "editGrant": "Edit Grant",
-            "editGrantProgram": "Edit Grant Program"
+            "editGrant": "Grant",
+            "editGrantProgram": "Grant Program"
         }
     },
     "grant": {

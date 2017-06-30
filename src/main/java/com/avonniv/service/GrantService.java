@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -92,6 +93,6 @@ public class GrantService {
     @Transactional(readOnly = true)
     public Page<GrantDTO> getAll(Pageable pageable) {
         List<Long> list = Arrays.asList(1L);
-        return grantRepository.findAllByGrantProgram_Publisher_IdIn(pageable, list).map(GrantDTO::new);
+        return grantRepository.findAllByGrantProgram_Publisher_IdInAndCloseDateAfter(pageable, list, Instant.now()).map(GrantDTO::new);
     }
 }

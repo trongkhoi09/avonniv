@@ -17,7 +17,8 @@ import {
     HasAnyAuthorityDirective,
     JhiLoginModalComponent,
     GrantService,
-    GrantProgramService
+    GrantProgramService,
+    AreaService
 } from './';
 
 @NgModule({
@@ -42,7 +43,8 @@ import {
         UserService,
         DatePipe,
         GrantService,
-        GrantProgramService
+        GrantProgramService,
+        AreaService
     ],
     entryComponents: [JhiLoginModalComponent],
     exports: [

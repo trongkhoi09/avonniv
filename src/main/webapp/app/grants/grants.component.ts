@@ -6,6 +6,8 @@ import {GrantService} from '../shared/grant/grant.service';
 import {ITEMS_PER_PAGE} from '../shared/constants/pagination.constants';
 import {Principal} from '../shared/auth/principal.service';
 import {GrantDTO} from '../shared/grant/grant.model';
+import {AreaService} from '../shared/area/area.service';
+import {AreaDTO} from '../shared/area/area.model';
 @Component({
     selector: 'jhi-grants',
     templateUrl: './grants.component.html',
@@ -24,6 +26,7 @@ export class GrantsComponent implements OnInit, OnDestroy {
     reverse: any;
     currentAccount: any;
     grantDTOs: GrantDTO[];
+    areaDTOs: AreaDTO[];
     grantFilter = {
         publicGrant: true,
         privateGrant: false,
@@ -42,6 +45,7 @@ export class GrantsComponent implements OnInit, OnDestroy {
     constructor(private alertService: AlertService,
                 private parseLinks: ParseLinks,
                 private grantService: GrantService,
+                private areaService: AreaService,
                 private principal: Principal,
                 private activatedRoute: ActivatedRoute,
                 private router: Router) {
@@ -59,6 +63,7 @@ export class GrantsComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.loadAll();
+        this.loadArea();
     }
 
     ngOnDestroy() {
@@ -81,6 +86,10 @@ export class GrantsComponent implements OnInit, OnDestroy {
             (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
         );
+    }
+
+    loadArea() {
+        this.areaService.getAll().subscribe((areaDTOs) => this.areaDTOs = areaDTOs);
     }
 
     sort() {

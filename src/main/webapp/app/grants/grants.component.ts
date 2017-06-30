@@ -8,6 +8,7 @@ import {Principal} from '../shared/auth/principal.service';
 import {GrantDTO} from '../shared/grant/grant.model';
 import {AreaService} from '../shared/area/area.service';
 import {AreaDTO} from '../shared/area/area.model';
+import {Observable} from 'rxjs/Observable';
 @Component({
     selector: 'jhi-grants',
     templateUrl: './grants.component.html',
@@ -25,8 +26,9 @@ export class GrantsComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
     currentAccount: any;
+    area: AreaDTO;
     grantDTOs: GrantDTO[];
-    areaDTOs: AreaDTO[];
+    areaDTOs: AreaDTO[] = [];
     grantFilter = {
         publicGrant: true,
         privateGrant: false,
@@ -34,13 +36,9 @@ export class GrantsComponent implements OnInit, OnDestroy {
             {name: 'Vinnova', isCheck: true},
             {name: 'Tillväxtverket', isCheck: true},
             {name: 'Almi', isCheck: true}
-        ]
+        ],
+        areaDTOs: []
     };
-    filters = [
-        {name: 'Vinnova', value: 1},
-        {name: 'Tillväxtverket', value: 2},
-        {name: 'Almi', value: 3}
-    ];
 
     constructor(private alertService: AlertService,
                 private parseLinks: ParseLinks,
@@ -88,8 +86,27 @@ export class GrantsComponent implements OnInit, OnDestroy {
         );
     }
 
+    inputFormatter = (x: { name: string }) => x.name;
+
+    resultFormatter = (result: AreaDTO) => result.name.toUpperCase();
+
+    searchArea = (text$: Observable<string>) =>
+        text$
+            .debounceTime(200)
+            .map((term) => term === '' ? []
+                : this.areaDTOs.filter((v) => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
+
     loadArea() {
         this.areaService.getAll().subscribe((areaDTOs) => this.areaDTOs = areaDTOs);
+    }
+
+    onChangeArea() {
+        if (this.area && this.area.name) {
+            if (this.grantFilter.areaDTOs.indexOf(this.area) === -1) {
+                this.grantFilter.areaDTOs.unshift(this.area);
+            }
+            this.area = null;
+        }
     }
 
     sort() {

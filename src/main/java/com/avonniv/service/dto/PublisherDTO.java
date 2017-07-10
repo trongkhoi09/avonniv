@@ -17,12 +17,15 @@ public class PublisherDTO extends AbstractEntityDTO {
 
     private String url;
 
+    private boolean crawled;
+
     public PublisherDTO() {
     }
 
     public PublisherDTO(Publisher publisher) {
         this(publisher.getId(), publisher.getCreatedDate(), publisher.getLastModifiedDate(), publisher.getStatus(),
-            publisher.getName(), publisher.getDescription(), publisher.getAddress(), publisher.getEmail(), publisher.getPhone(), publisher.getUrl());
+            publisher.getName(), publisher.getDescription(), publisher.getAddress(), publisher.getEmail(), publisher.getPhone(), publisher.getUrl(),
+            publisher.isCrawled());
     }
 
     public PublisherDTO(Long id, Instant createdDate, Instant lastModifiedDate, int status,
@@ -37,6 +40,23 @@ public class PublisherDTO extends AbstractEntityDTO {
         this.email = email;
         this.phone = phone;
         this.url = url;
+        this.crawled = false;
+    }
+
+    public PublisherDTO(Long id, Instant createdDate, Instant lastModifiedDate, int status,
+                        String name, String description, String address, String email, String phone, String url,
+                        boolean crawled) {
+        this.id = id;
+        this.createdDate = createdDate;
+        this.lastModifiedDate = lastModifiedDate;
+        this.status = status;
+        this.name = name;
+        this.description = description;
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
+        this.url = url;
+        this.crawled = crawled;
     }
 
     public String getName() {
@@ -85,5 +105,13 @@ public class PublisherDTO extends AbstractEntityDTO {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public boolean isCrawled() {
+        return crawled;
+    }
+
+    public void setCrawled(boolean crawled) {
+        this.crawled = crawled;
     }
 }

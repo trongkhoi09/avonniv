@@ -5,6 +5,8 @@ import com.avonniv.repository.PublisherRepository;
 import com.avonniv.service.dto.PublisherDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,10 +34,21 @@ public class PublisherService {
         newPublisher.setEmail(publisherDTO.getEmail());
         newPublisher.setPhone(publisherDTO.getPhone());
         newPublisher.setUrl(publisherDTO.getUrl());
+        newPublisher.setCrawled(publisherDTO.isCrawled());
 
         publisherRepository.save(newPublisher);
         log.debug("Created Information for Publisher: {}", newPublisher);
         return newPublisher;
+    }
+
+    @Transactional(readOnly = true)
+    public Page<PublisherDTO> getAllPublisher(Pageable pageable) {
+        return publisherRepository.findAll(pageable).map(PublisherDTO::new);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<Publisher> getPublisherByName(String name) {
+        return publisherRepository.findOneByName(name);
     }
 
     public List<PublisherDTO> getAll() {
@@ -46,7 +59,7 @@ public class PublisherService {
         return Optional.of(publisherRepository.findOne(id));
     }
 
-    public Optional<Publisher> updatePublisher(PublisherDTO publisherDTO) {
+    public Optional<PublisherDTO> updatePublisher(PublisherDTO publisherDTO) {
         return Optional.of(publisherRepository
             .findOne(publisherDTO.getId()))
             .map(publisher -> {
@@ -56,12 +69,21 @@ public class PublisherService {
                 publisher.setEmail(publisherDTO.getEmail());
                 publisher.setPhone(publisherDTO.getPhone());
                 publisher.setUrl(publisherDTO.getUrl());
+                publisher.setCrawled(publisherDTO.isCrawled());
                 log.debug("Changed Information for Publisher: {}", publisher);
                 return publisher;
-            });
+            })
+            .map(PublisherDTO::new);
     }
 
     public void deletePublisher(PublisherDTO publisherDTO) {
         publisherRepository.delete(publisherDTO.getId());
+    }
+
+    public void deletePublisher(String name) {
+        publisherRepository.findOneByName(name).ifPresent(publisher -> {
+            publisherRepository.delete(publisher);
+            log.debug("Deleted Publisher: {}", publisher);
+        });
     }
 }

@@ -1,0 +1,71 @@
+<div>
+    <h2>
+        <span jhiTranslate="publisherManagement.home.title">Publishers</span>
+        <button class="btn btn-primary float-right" [routerLink]="['/', { outlets: { popup: ['publisher-management-new'] } }]">
+            <span class="fa fa-plus"></span> <span jhiTranslate="publisherManagement.home.createLabel">Create a new publisher</span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="table-responsive" *ngIf="publishers">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span><span class="fa fa-sort"></span></th>
+                <th jhiSortBy="name"><span jhiTranslate="publisherManagement.name">Name</span> <span class="fa fa-sort"></span></th>
+                <th><span jhiTranslate="publisherManagement.url">Url</span></th>
+                <th jhiSortBy="crawled"><span jhiTranslate="publisherManagement.crawled">Crawled</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="createdDate"><span jhiTranslate="publisherManagement.createdDate">Created Date</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="lastModifiedDate"><span jhiTranslate="publisherManagement.lastModifiedDate">Last Modified Date</span> <span class="fa fa-sort"></span></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody *ngIf ="publishers">
+            <tr *ngFor="let publisher of publishers; trackBy: trackIdentity">
+                <td><a [routerLink]="['../publisher-management', publisher.name]">{{publisher.id}}</a></td>
+                <td>{{publisher.name}}</td>
+                <td>{{publisher.url}}</td>
+                <td>
+                    <span class="badge badge-danger hand" (click)="setCrawled(publisher, true)" *ngIf="!publisher.crawled"
+                          jhiTranslate="publisherManagement.notCrawled">Not Crawled</span>
+                    <span class="badge badge-success hand" (click)="setCrawled(publisher, false)" *ngIf="publisher.crawled"
+                          jhiTranslate="publisherManagement.crawled">Crawled</span>
+                </td>
+                <td>{{publisher.createdDate | date:'dd/MM/yy HH:mm'}}</td>
+                <td>{{publisher.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../publisher-management', publisher.name]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'publisher-management/'+ publisher.name + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'publisher-management/'+ publisher.name + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm" [disabled]="publisher.crawled">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="publishers">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

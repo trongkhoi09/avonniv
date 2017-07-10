@@ -403,5 +403,11 @@
             <column name="created_date" type="timestamp"/>
         </loadData>
     </changeSet>
+    <changeSet id="3" author="sylt">
+        <addColumn
+            tableName="tbl_publisher">
+            <column name="is_crawled" type="Boolean" defaultValueBoolean="false"/>
+        </addColumn>
+    </changeSet>
 
 </databaseChangeLog>

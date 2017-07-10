@@ -3,6 +3,7 @@ package com.avonniv.domain;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.Table;
@@ -26,6 +27,9 @@ public class Publisher extends AbstractEntity{
     private String phone;
 
     private String url;
+
+    @Column(name = "is_crawled")
+    private boolean crawled;
 
     public String getName() {
         return name;
@@ -73,5 +77,17 @@ public class Publisher extends AbstractEntity{
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public boolean isCrawled() {
+        return crawled;
+    }
+
+    public void setCrawled(boolean crawled) {
+        this.crawled = crawled;
     }
 }

@@ -8,6 +8,8 @@ import {
     logsRoute,
     metricsRoute,
     trackerRoute,
+    publisherMgmtRoute,
+    publisherDialogRoute,
     userMgmtRoute,
     userDialogRoute
 } from './';
@@ -22,6 +24,7 @@ const ADMIN_ROUTES = [
     logsRoute,
     trackerRoute,
     ...userMgmtRoute,
+    ...publisherMgmtRoute,
     metricsRoute
 ];
 
@@ -34,4 +37,6 @@ export const adminState: Routes = [{
     children: ADMIN_ROUTES
 },
     ...userDialogRoute
+    ,
+    ...publisherDialogRoute
 ];

@@ -1,0 +1,34 @@
+<div *ngIf="publisher">
+    <h2>
+        <span jhiTranslate="publisherManagement.detail.title">Publisher</span> [<b>{{publisher.name}}</b>]
+    </h2>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="publisherManagement.name">Name</span></dt>
+        <dd>
+            <span>{{publisher.name}}</span>
+            <span class="badge badge-danger" *ngIf="!publisher.crawled"
+                  jhiTranslate="publisherManagement.notCrawled">Not Crawled</span>
+            <span class="badge badge-success" *ngIf="publisher.crawled"
+                  jhiTranslate="publisherManagement.crawled">Crawled</span>
+        </dd>
+        <dt><span jhiTranslate="publisherManagement.description">Description</span></dt>
+        <dd>{{publisher.description}}</dd>
+        <dt><span jhiTranslate="publisherManagement.address">Address</span></dt>
+        <dd>{{publisher.address}}</dd>
+        <dt><span jhiTranslate="publisherManagement.email">Email</span></dt>
+        <dd>{{publisher.email}}</dd>
+        <dt><span jhiTranslate="publisherManagement.phone">Phone</span></dt>
+        <dd>{{publisher.phone}}</dd>
+        <dt><span jhiTranslate="publisherManagement.url">Url</span></dt>
+        <dd>{{publisher.url}}</dd>
+        <dt><span jhiTranslate="publisherManagement.createdDate">Created Date</span></dt>
+        <dd>{{publisher.createdDate | date:'dd/MM/yy HH:mm' }}</dd>
+        <dt><span jhiTranslate="publisherManagement.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>{{publisher.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</dd>
+    </dl>
+    <button type="submit"
+            routerLink="/publisher-management"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+</div>

@@ -20,6 +20,8 @@ export * from './tracker/tracker.service';
 export * from './login/login.component';
 export * from './login/login.service';
 export * from './login/login-modal.service';
+export * from './publisher/publisher.model';
+export * from './publisher/publisher.service';
 export * from './user/account.model';
 export * from './user/user.model';
 export * from './user/user.service';

@@ -95,7 +95,8 @@ export class GrantsComponent implements OnInit, OnDestroy {
         text$
             .debounceTime(200)
             .map((term) => term === '' ? []
-                : this.areaDTOs.filter((v) => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
+                : this.areaDTOs.filter((v) => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1
+                && this.grantFilter.areaDTOs.indexOf(v) === -1).slice(0, 10));
 
     loadArea() {
         this.areaService.getAll().subscribe((areaDTOs) => this.areaDTOs = areaDTOs);
@@ -112,6 +113,13 @@ export class GrantsComponent implements OnInit, OnDestroy {
                 this.grantFilter.areaDTOs.unshift(this.area);
             }
             this.area = null;
+        }
+    }
+
+    removeArea(area: AreaDTO) {
+        const index: number = this.grantFilter.areaDTOs.indexOf(area);
+        if (index !== -1) {
+            this.grantFilter.areaDTOs.splice(index, 1);
         }
     }
 

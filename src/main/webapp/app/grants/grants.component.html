@@ -28,7 +28,7 @@
                         <div *ngFor="let area of grantFilter.areaDTOs; let i = index"
                              class="alert alert-success alert-dismissible fade show custom-tag" role="alert">
                             <strong>{{area.name}}</strong>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <button (click)="removeArea(area)" type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>

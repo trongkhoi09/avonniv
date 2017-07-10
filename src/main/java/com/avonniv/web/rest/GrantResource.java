@@ -57,6 +57,12 @@ public class GrantResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/count")
+    @Timed
+    public ResponseEntity<Integer> getCount() {
+        return new ResponseEntity<>(grantService.getCount(), HttpStatus.OK);
+    }
+
     @GetMapping("/{grantId}")
     @Timed
     public ResponseEntity<GrantDTO> getGrant(@PathVariable Long grantId) {

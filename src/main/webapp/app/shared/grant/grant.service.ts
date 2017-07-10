@@ -19,6 +19,11 @@ export class GrantService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    count(): Observable<Number> {
+        return this.http.get(`${this.resourceUrl}/count`)
+            .map((res: Response) => res.json());
+    }
+
     private convertResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();
         return new ResponseWrapper(res.headers, jsonResponse, res.status);

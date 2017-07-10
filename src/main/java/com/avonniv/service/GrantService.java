@@ -95,4 +95,9 @@ public class GrantService {
         List<Long> list = Arrays.asList(1L);
         return grantRepository.findAllByGrantProgram_Publisher_IdInAndCloseDateAfter(pageable, list, Instant.now()).map(GrantDTO::new);
     }
+
+    public int getCount() {
+        Instant instant = Instant.now();
+        return grantRepository.countAllByOpenDateBeforeAndCloseDateAfter(instant, instant);
+    }
 }

@@ -4,7 +4,7 @@ import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {JhiLanguageService} from 'ng-jhipster';
 
 import {ProfileService} from '../profiles/profile.service';
-import {JhiLanguageHelper, Principal, LoginModalService, LoginService} from '../../shared';
+import {JhiLanguageHelper, Principal, LoginModalService, LoginService, GrantService} from '../../shared';
 
 import {VERSION, DEBUG_INFO_ENABLED} from '../../app.constants';
 
@@ -18,6 +18,7 @@ import {VERSION, DEBUG_INFO_ENABLED} from '../../app.constants';
 export class NavbarSecondComponent implements OnInit {
 
     inProduction: boolean;
+    count: Number;
     isNavbarCollapsed: boolean;
     languages: any[];
     swaggerEnabled: boolean;
@@ -30,6 +31,7 @@ export class NavbarSecondComponent implements OnInit {
                 private principal: Principal,
                 private loginModalService: LoginModalService,
                 private profileService: ProfileService,
+                private grantService: GrantService,
                 private router: Router) {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
@@ -44,6 +46,9 @@ export class NavbarSecondComponent implements OnInit {
         this.profileService.getProfileInfo().subscribe((profileInfo) => {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
+        });
+        this.grantService.count().subscribe((count) => {
+            this.count = count;
         });
     }
 

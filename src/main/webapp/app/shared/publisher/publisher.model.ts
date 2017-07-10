@@ -7,6 +7,7 @@ export class PublisherDTO {
     public phone?: string;
     public url?: string;
     public crawled?: Boolean;
+    public check?: Boolean;
     public createdDate?: Date;
     public lastModifiedDate?: Date;
 
@@ -30,5 +31,6 @@ export class PublisherDTO {
         this.url = url ? url : null;
         this.createdDate = createdDate ? createdDate : null;
         this.lastModifiedDate = lastModifiedDate ? lastModifiedDate : null;
+        this.check = true;
     }
 }

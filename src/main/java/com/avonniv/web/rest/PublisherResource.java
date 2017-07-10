@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -99,6 +100,12 @@ public class PublisherResource {
         final Page<PublisherDTO> page = publisherService.getAllPublisher(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/publishers");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    @Timed
+    public ResponseEntity<List<PublisherDTO>> getAllPublishers(@RequestParam("crawled") boolean crawled) {
+        return new ResponseEntity<>(publisherService.getAllPublisher(crawled), HttpStatus.OK);
     }
 
     @GetMapping("/{name}")

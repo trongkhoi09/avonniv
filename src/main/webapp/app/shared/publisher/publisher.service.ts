@@ -26,6 +26,10 @@ export class PublisherService {
         return this.http.get(`${this.resourceUrl}/${name}`).map((res: Response) => res.json());
     }
 
+    getAllByCrawled(crawled: boolean): Observable<PublisherDTO[]> {
+        return this.http.get(`${this.resourceUrl}/all?crawled=${crawled}`).map((res: Response) => res.json());
+    }
+
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)

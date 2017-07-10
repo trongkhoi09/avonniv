@@ -47,6 +47,13 @@ public class PublisherService {
     }
 
     @Transactional(readOnly = true)
+    public List<PublisherDTO> getAllPublisher(Boolean crawled) {
+        return publisherRepository.findAllByCrawledIs(crawled).stream()
+            .map(PublisherDTO::new)
+            .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
     public Optional<Publisher> getPublisherByName(String name) {
         return publisherRepository.findOneByName(name);
     }

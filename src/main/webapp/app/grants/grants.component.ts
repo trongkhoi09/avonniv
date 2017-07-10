@@ -4,10 +4,7 @@ import {ResponseWrapper} from '../shared/model/response-wrapper.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GrantService} from '../shared/grant/grant.service';
 import {ITEMS_PER_PAGE} from '../shared/constants/pagination.constants';
-import {Principal} from '../shared/auth/principal.service';
-import {GrantDTO} from '../shared/grant/grant.model';
-import {AreaService} from '../shared/area/area.service';
-import {AreaDTO} from '../shared/area/area.model';
+import {Principal, AreaDTO, GrantDTO, PublisherDTO, PublisherService, AreaService} from '../shared';
 import {Observable} from 'rxjs/Observable';
 @Component({
     selector: 'jhi-grants',
@@ -28,6 +25,8 @@ export class GrantsComponent implements OnInit, OnDestroy {
     currentAccount: any;
     area: AreaDTO;
     grantDTOs: GrantDTO[];
+    publisherCrawled: PublisherDTO[] = [];
+    publisherNotCrawled: PublisherDTO[] = [];
     areaDTOs: AreaDTO[] = [];
     grantFilter = {
         publicGrant: true,
@@ -44,6 +43,7 @@ export class GrantsComponent implements OnInit, OnDestroy {
                 private parseLinks: ParseLinks,
                 private grantService: GrantService,
                 private areaService: AreaService,
+                private publisherService: PublisherService,
                 private principal: Principal,
                 private activatedRoute: ActivatedRoute,
                 private router: Router) {
@@ -62,6 +62,7 @@ export class GrantsComponent implements OnInit, OnDestroy {
         });
         this.loadAll();
         this.loadArea();
+        this.loadPublisher();
     }
 
     ngOnDestroy() {
@@ -98,6 +99,11 @@ export class GrantsComponent implements OnInit, OnDestroy {
 
     loadArea() {
         this.areaService.getAll().subscribe((areaDTOs) => this.areaDTOs = areaDTOs);
+    }
+
+    loadPublisher() {
+        this.publisherService.getAllByCrawled(true).subscribe((publisherCrawled) => this.publisherCrawled = publisherCrawled);
+        this.publisherService.getAllByCrawled(false).subscribe((publisherNotCrawled) => this.publisherNotCrawled = publisherNotCrawled);
     }
 
     onChangeArea() {

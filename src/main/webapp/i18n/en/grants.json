@@ -1,6 +1,9 @@
 {
     "grants": {
         "title": "Grants",
+        "publisher": "Publisher",
+        "area": "Area",
+        "otherPublisher": "Other publisher",
         "action": {
             "editGrant": "Grant",
             "editGrantProgram": "Grant Program"

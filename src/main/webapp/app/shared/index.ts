@@ -2,6 +2,7 @@ export * from './constants/pagination.constants';
 export * from './alert/alert.component';
 export * from './alert/alert-error.component';
 export * from './area/area.service';
+export * from './area/area.model';
 export * from './auth/csrf.service';
 export * from './auth/state-storage.service';
 export * from './auth/account.service';

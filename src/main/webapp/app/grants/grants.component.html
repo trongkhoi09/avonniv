@@ -2,22 +2,23 @@
     <div class="row">
         <div class="col-md-2">
             <div class="card container">
-                <fieldset class="form-group row">
+                <fieldset class="form-group row" *ngIf="publisherCrawled.length>0">
                     <legend class="col-form-legend col-sm-2">
-                        <span class="glyphicon glyphicon-folder-open"></span> <b>Utylysare</b>
+                        <span class="glyphicon glyphicon-folder-open"></span>
+                        <b jhiTranslate="grants.publisher">Publisher</b>
                     </legend>
                     <div class="col-sm-12 utylysare">
-                        <div *ngFor="let publisher of grantFilter.publisher; let i = index">
+                        <div *ngFor="let publisher of publisherCrawled; let i = index">
                             <a><span (click)="publisher.isCheck=!publisher.isCheck"><i
                                 [ngClass]="publisher.isCheck?'fa fa-check-square-o':'fa fa-square-o'"
                                 aria-hidden="true"></i> {{publisher.name}} </span></a>
                         </div>
                     </div>
-
                 </fieldset>
                 <fieldset class="form-group row">
                     <legend class="col-form-legend col-sm-2">
-                        <span class="glyphicon glyphicon-folder-open"></span> <b>Område</b>
+                        <span class="glyphicon glyphicon-folder-open"></span>
+                        <b jhiTranslate="grants.area">Area</b>
                     </legend>
                     <div class="col-sm-12">
                         <input type="text" class="form-control" [(ngModel)]="area"
@@ -30,6 +31,19 @@
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="form-group row" *ngIf="publisherNotCrawled.length>0">
+                    <legend class="col-form-legend col-sm-2">
+                        <span class="glyphicon glyphicon-folder-open"></span>
+                        <b jhiTranslate="grants.otherPublisher">Other publisher</b>
+                    </legend>
+                    <div class="col-sm-12 utylysare">
+                        <div *ngFor="let publisher of publisherNotCrawled; let i = index">
+                            <a href="{{publisher.url?publisher.url:'javascript:void(0)'}}"
+                               [target]="publisher.url ? '_blank' : ''">{{publisher.name}}
+                            </a>
                         </div>
                     </div>
                 </fieldset>

@@ -1,10 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AlertService, ParseLinks} from 'ng-jhipster';
-import {ResponseWrapper} from '../shared/model/response-wrapper.model';
-import {ActivatedRoute, Router} from '@angular/router';
-import {GrantService} from '../shared/grant/grant.service';
-import {ITEMS_PER_PAGE} from '../shared/constants/pagination.constants';
-import {Principal, AreaDTO, GrantDTO, PublisherDTO, PublisherService, AreaService} from '../shared';
+import {Component, OnInit} from '@angular/core';
+import {Principal, AreaDTO, PublisherDTO, PublisherService, AreaService} from '../shared';
 import {Observable} from 'rxjs/Observable';
 @Component({
     selector: 'jhi-grants',
@@ -13,74 +8,51 @@ import {Observable} from 'rxjs/Observable';
         'grants.scss'
     ]
 })
-export class GrantsComponent implements OnInit, OnDestroy {
-    routeData: any;
-    links: any;
-    totalItems: any;
-    itemsPerPage: any;
-    page: any;
-    predicate: any;
-    previousPage: any;
-    reverse: any;
+export class GrantsComponent implements OnInit {
     currentAccount: any;
+    loadPublisherFinished = false;
     area: AreaDTO;
-    grantDTOs: GrantDTO[];
     publisherCrawled: PublisherDTO[] = [];
     publisherNotCrawled: PublisherDTO[] = [];
     areaDTOs: AreaDTO[] = [];
     grantFilter = {
+        navigate: '/grants',
+        search: '',
         publicGrant: true,
         privateGrant: false,
         areaDTOs: [],
         publisherDTOs: []
     };
+    data = this.grantFilter;
 
-    constructor(private alertService: AlertService,
-                private parseLinks: ParseLinks,
-                private grantService: GrantService,
-                private areaService: AreaService,
+    constructor(private areaService: AreaService,
                 private publisherService: PublisherService,
-                private principal: Principal,
-                private activatedRoute: ActivatedRoute,
-                private router: Router) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
-        this.routeData = this.activatedRoute.data.subscribe((data) => {
-            this.page = data['pagingParams'].page;
-            this.previousPage = data['pagingParams'].page;
-            this.reverse = data['pagingParams'].ascending;
-            this.predicate = data['pagingParams'].predicate;
-        });
+                private principal: Principal) {
     }
 
     ngOnInit() {
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
-        this.loadAll();
         this.loadArea();
         this.loadPublisher();
     }
 
-    ngOnDestroy() {
-        this.routeData.unsubscribe();
-    }
-
     onFiltering() {
-    }
-
-    isAdmin() {
-        return this.principal.hasAnyAuthorityDirect(['ROLE_ADMIN']);
-    }
-
-    loadAll() {
-        this.grantService.query({
-            page: this.page - 1,
-            size: this.itemsPerPage,
-            sort: this.sort()
-        }).subscribe(
-            (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
-            (res: ResponseWrapper) => this.onError(res.json)
-        );
+        const publisherDTOs = [];
+        for (let i = 0; i < this.publisherCrawled.length; i++) {
+            if (this.publisherCrawled[i].check) {
+                publisherDTOs.push(this.publisherCrawled[i].name);
+            }
+        }
+        const areaDTOs = [];
+        for (let i = 0; i < this.grantFilter.areaDTOs.length; i++) {
+            areaDTOs.push(this.grantFilter.areaDTOs[i].name);
+        }
+        const data = Object.assign({}, this.grantFilter);
+        data.publisherDTOs = publisherDTOs;
+        data.areaDTOs = areaDTOs;
+        this.data = Object.assign({}, data);
     }
 
     inputFormatter = (x: { name: string }) => x.name;
@@ -104,6 +76,8 @@ export class GrantsComponent implements OnInit, OnDestroy {
             for (let i = 0; i < publisherCrawled.length; i++) {
                 publisherCrawled[i].check = true;
             }
+            this.loadPublisherFinished = true;
+            this.onFiltering();
         });
         this.publisherService.getAllByCrawled(false).subscribe((publisherNotCrawled) => this.publisherNotCrawled = publisherNotCrawled);
     }
@@ -114,6 +88,7 @@ export class GrantsComponent implements OnInit, OnDestroy {
                 this.grantFilter.areaDTOs.unshift(this.area);
             }
             this.area = null;
+            this.onFiltering();
         }
     }
 
@@ -121,41 +96,7 @@ export class GrantsComponent implements OnInit, OnDestroy {
         const index: number = this.grantFilter.areaDTOs.indexOf(area);
         if (index !== -1) {
             this.grantFilter.areaDTOs.splice(index, 1);
+            this.onFiltering();
         }
-    }
-
-    sort() {
-        const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
-        if (this.predicate !== 'id') {
-            result.push('id');
-        }
-        return result;
-    }
-
-    loadPage(page: number) {
-        if (page !== this.previousPage) {
-            this.previousPage = page;
-            this.transition();
-        }
-    }
-
-    transition() {
-        this.router.navigate(['/grants'], {
-            queryParams: {
-                page: this.page,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        });
-        this.loadAll();
-    }
-
-    private onSuccess(data, headers) {
-        this.links = this.parseLinks.parse(headers.get('link'));
-        this.totalItems = headers.get('X-Total-Count');
-        this.grantDTOs = data;
-    }
-
-    private onError(error) {
-        this.alertService.error(error.error, error.message, null);
     }
 }

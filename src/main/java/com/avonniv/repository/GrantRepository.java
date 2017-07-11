@@ -14,7 +14,11 @@ public interface GrantRepository extends JpaRepository<Grant, Long> {
 
     Optional<Grant> findOneByExternalId(String externalId);
 
-    Page<Grant> findAllByGrantProgram_Publisher_IdInAndCloseDateAfter(Pageable pageable, List<Long> listPublisherId, Instant dateTime);
+    Page<Grant> findAllByCloseDateAfterAndGrantProgramTypeIn(Pageable pageable, Instant dateTime, List<Integer> listType);
+
+    Page<Grant> findAllByGrantProgram_Publisher_NameInAndCloseDateAfterAndGrantProgramTypeIn(Pageable pageable, List<String> listPublisherId, Instant dateTime, List<Integer> listType);
+
+    Page<Grant> findAllByGrantProgramNameLikeAndCloseDateAfter(Pageable pageable, String search, Instant dateTime);
 
     Integer countAllByOpenDateBeforeAndCloseDateAfter(Instant dateBefore, Instant dateAfter);
 }

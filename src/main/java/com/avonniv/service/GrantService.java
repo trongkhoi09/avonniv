@@ -1,10 +1,12 @@
 package com.avonniv.service;
 
-import com.avonniv.domain.GrantProgram;
 import com.avonniv.domain.Grant;
-import com.avonniv.repository.GrantRepository;
+import com.avonniv.domain.GrantFilter;
+import com.avonniv.domain.GrantProgram;
 import com.avonniv.repository.GrantProgramRepository;
+import com.avonniv.repository.GrantRepository;
 import com.avonniv.service.dto.GrantDTO;
+import com.avonniv.service.dto.GrantProgramDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -13,7 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -91,9 +93,24 @@ public class GrantService {
     }
 
     @Transactional(readOnly = true)
-    public Page<GrantDTO> getAll(Pageable pageable) {
-        List<Long> list = Arrays.asList(1L);
-        return grantRepository.findAllByGrantProgram_Publisher_IdInAndCloseDateAfter(pageable, list, Instant.now()).map(GrantDTO::new);
+    public Page<GrantDTO> getAll(GrantFilter grantFilter, Pageable pageable) {
+        if (grantFilter.getSearch() != null && !grantFilter.getSearch().trim().isEmpty()) {
+            return grantRepository.findAllByGrantProgramNameLikeAndCloseDateAfter(pageable, "%" + grantFilter.getSearch().trim() + "%", Instant.now()).map(GrantDTO::new);
+        }
+        List<String> listPublisher = new ArrayList<>();
+        List<Integer> listType = new ArrayList<>();
+        if (grantFilter.isPrivateGrant()) {
+            listType.add(GrantProgramDTO.TYPE.PRIVATE.getValue());
+        }
+        if (grantFilter.isPublicGrant()) {
+            listType.add(GrantProgramDTO.TYPE.PUBLIC.getValue());
+        }
+        listPublisher.addAll(grantFilter.getPublisherDTOs());
+//        if (listPublisher.isEmpty()) {
+//            return grantRepository.findAllByCloseDateAfterAndGrantProgramTypeIn(pageable, Instant.now(), listType).map(GrantDTO::new);
+//        } else {
+        return grantRepository.findAllByGrantProgram_Publisher_NameInAndCloseDateAfterAndGrantProgramTypeIn(pageable, listPublisher, Instant.now(), listType).map(GrantDTO::new);
+//        }
     }
 
     public int getCount() {

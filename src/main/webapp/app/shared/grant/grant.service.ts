@@ -3,7 +3,7 @@ import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 
 import {ResponseWrapper} from '../model/response-wrapper.model';
-import {createRequestOption} from '../model/request-util';
+import {createRequestGrantOption} from '../model/request-util';
 import {GrantDTO} from './grant.model';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class GrantService {
     }
 
     query(req?: any): Observable<ResponseWrapper> {
-        const options = createRequestOption(req);
+        const options = createRequestGrantOption(req);
         return this.http.get(this.resourceUrl, options)
             .map((res: Response) => this.convertResponse(res));
     }

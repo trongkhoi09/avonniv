@@ -13,6 +13,7 @@ import { AvonnivEntityModule } from './entities/entity.module';
 import { AvonnivGrantsModule } from './grants/grants.module';
 import {AvonnivGrantEditModule} from './grant-edit/grant-edit.module';
 import {AvonnivGrantProgramEditModule} from './grant-program-edit/grant-program-edit.module';
+import {AvonnivSearchModule} from './search/search.module';
 
 import { customHttpProvider } from './blocks/interceptor/http.provider';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
@@ -36,6 +37,7 @@ import {
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),
         AvonnivSharedModule,
         AvonnivHomeModule,
+        AvonnivSearchModule,
         AvonnivAdminModule,
         AvonnivAccountModule,
         AvonnivEntityModule,

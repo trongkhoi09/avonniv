@@ -1,5 +1,6 @@
 package com.avonniv.web.rest;
 
+import com.avonniv.domain.GrantFilter;
 import com.avonniv.repository.UserRepository;
 import com.avonniv.security.AuthoritiesConstants;
 import com.avonniv.service.GrantService;
@@ -51,8 +52,8 @@ public class GrantResource {
 
     @GetMapping("")
     @Timed
-    public ResponseEntity<List<GrantDTO>> getAllGrant(@ApiParam Pageable pageable) {
-        final Page<GrantDTO> page = grantService.getAll(pageable);
+    public ResponseEntity<List<GrantDTO>> getAllGrant(@ApiParam GrantFilter grantFilter, @ApiParam Pageable pageable) {
+        final Page<GrantDTO> page = grantService.getAll(grantFilter, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/grant");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

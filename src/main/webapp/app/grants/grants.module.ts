@@ -5,6 +5,7 @@ import {AvonnivSharedModule} from '../shared';
 
 import {grantsRoute, GrantsComponent} from './';
 import {GrantsResolvePagingParams} from './grants.route';
+import {ListGrantComponent} from './list-grant/list-grant.component';
 
 @NgModule({
     imports: [
@@ -12,13 +13,17 @@ import {GrantsResolvePagingParams} from './grants.route';
         RouterModule.forRoot(grantsRoute, {useHash: true})
     ],
     declarations: [
-        GrantsComponent
+        GrantsComponent,
+        ListGrantComponent
     ],
     entryComponents: [],
     providers: [
         GrantsResolvePagingParams
     ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    exports: [
+        ListGrantComponent
+    ]
 })
 export class AvonnivGrantsModule {
 }

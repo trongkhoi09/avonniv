@@ -1,5 +1,5 @@
 export class PublisherDTO {
-    public id?: any;
+    public id?: any = null;
     public name?: string;
     public description?: string;
     public address?: string;

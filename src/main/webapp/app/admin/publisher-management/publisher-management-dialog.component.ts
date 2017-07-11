@@ -33,7 +33,6 @@ export class PublisherMgmtDialogComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        console.log(this.publisher.id);
         if (this.publisher.id !== null) {
             this.publisherService.update(this.publisher).subscribe((response) => this.onSaveSuccess(response, false), () => this.onSaveError());
         } else {

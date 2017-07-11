@@ -7,6 +7,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
@@ -46,11 +47,11 @@ public class GrantProgram extends AbstractEntity {
     private Publisher publisher;
 
     @JsonIgnore
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "tbl_grant_program_area",
-        joinColumns = {@JoinColumn(name = "grant_program_id", referencedColumnName = "id")},
-        inverseJoinColumns = {@JoinColumn(name = "area_id", referencedColumnName = "id")})
+        joinColumns = @JoinColumn(name = "grant_program_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "area_id", referencedColumnName = "id"))
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @BatchSize(size = 20)
     private Set<Area> areas = new HashSet<>();

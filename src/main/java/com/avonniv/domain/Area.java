@@ -17,6 +17,9 @@ public class Area extends AbstractEntity {
     @Column(unique = true, nullable = false)
     private String name;
 
+    public Area() {
+    }
+
     public String getName() {
         return name;
     }

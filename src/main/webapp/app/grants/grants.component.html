@@ -9,8 +9,8 @@
                     </legend>
                     <div class="col-sm-12 utylysare">
                         <div *ngFor="let publisher of publisherCrawled; let i = index">
-                            <a><span (click)="publisher.isCheck=!publisher.isCheck"><i
-                                [ngClass]="publisher.isCheck?'fa fa-check-square-o':'fa fa-square-o'"
+                            <a><span (click)="publisher.check=!publisher.check"><i
+                                [ngClass]="publisher.check?'fa fa-check-square-o':'fa fa-square-o'"
                                 aria-hidden="true"></i> {{publisher.name}} </span></a>
                         </div>
                     </div>

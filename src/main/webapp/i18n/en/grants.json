@@ -34,6 +34,7 @@
         "editLabel": "Edit a Grant Program",
         "name": "Name",
         "description": "Description",
+        "area": "Area",
         "releaseDate": "Release Date",
         "externalId": "External Id",
         "externalUrl": "External Url",

@@ -31,12 +31,8 @@ export class GrantsComponent implements OnInit, OnDestroy {
     grantFilter = {
         publicGrant: true,
         privateGrant: false,
-        publisher: [
-            {name: 'Vinnova', isCheck: true},
-            {name: 'Tillväxtverket', isCheck: true},
-            {name: 'Almi', isCheck: true}
-        ],
-        areaDTOs: []
+        areaDTOs: [],
+        publisherDTOs: []
     };
 
     constructor(private alertService: AlertService,
@@ -103,7 +99,12 @@ export class GrantsComponent implements OnInit, OnDestroy {
     }
 
     loadPublisher() {
-        this.publisherService.getAllByCrawled(true).subscribe((publisherCrawled) => this.publisherCrawled = publisherCrawled);
+        this.publisherService.getAllByCrawled(true).subscribe((publisherCrawled) => {
+            this.publisherCrawled = publisherCrawled;
+            for (let i = 0; i < publisherCrawled.length; i++) {
+                publisherCrawled[i].check = true;
+            }
+        });
         this.publisherService.getAllByCrawled(false).subscribe((publisherNotCrawled) => this.publisherNotCrawled = publisherNotCrawled);
     }
 

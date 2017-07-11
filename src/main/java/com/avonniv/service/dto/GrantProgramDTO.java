@@ -5,6 +5,7 @@ import com.avonniv.domain.GrantProgram;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class GrantProgramDTO extends AbstractEntityDTO {
 
@@ -30,8 +31,7 @@ public class GrantProgramDTO extends AbstractEntityDTO {
     public GrantProgramDTO(GrantProgram grantProgram) {
         this(grantProgram.getId(), grantProgram.getCreatedDate(), grantProgram.getLastModifiedDate(), grantProgram.getStatus(),
             grantProgram.getName(), grantProgram.getDescription(), grantProgram.getType(), new PublisherDTO(grantProgram.getPublisher()),
-//            grantProgram.getAreas().stream().map(AreaDTO::new).collect(Collectors.toSet()),
-            new HashSet<>(),
+            grantProgram.getAreas().stream().map(AreaDTO::new).collect(Collectors.toSet()),
             grantProgram.getExternalId(), grantProgram.getExternalUrl(), grantProgram.getReleaseDate());
     }
 

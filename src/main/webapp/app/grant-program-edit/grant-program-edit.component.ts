@@ -4,19 +4,27 @@ import {ActivatedRoute} from '@angular/router';
 import {AlertService} from 'ng-jhipster';
 
 import {GrantProgramDTO, GrantProgramService} from '../shared';
+import {Observable} from 'rxjs/Observable';
+import {AreaDTO, AreaService} from '../shared';
 
 @Component({
     selector: 'jhi-grant-program-edit',
-    templateUrl: './grant-program-edit.component.html'
+    templateUrl: './grant-program-edit.component.html',
+    styleUrls: [
+        'grant-program-edit.scss'
+    ]
 })
 export class GrantProgramEditComponent implements OnInit, OnDestroy {
 
     grantProgram: GrantProgramDTO;
     isSaving: Boolean;
     routeSub: any;
+    area: AreaDTO;
+    areaDTOs: AreaDTO[] = [];
 
     constructor(private route: ActivatedRoute,
                 private grantProgramService: GrantProgramService,
+                private areaService: AreaService,
                 private alertService: AlertService) {
     }
 
@@ -30,6 +38,7 @@ export class GrantProgramEditComponent implements OnInit, OnDestroy {
                 }
             }
         });
+        this.loadArea();
     }
 
     parser(grantProgram: GrantProgramDTO) {
@@ -81,5 +90,45 @@ export class GrantProgramEditComponent implements OnInit, OnDestroy {
     private onSaveError() {
         this.isSaving = false;
         window.scrollTo(0, 0);
+    }
+
+    inputFormatter = (x: { name: string }) => x.name;
+
+    resultFormatter = (result: AreaDTO) => result.name.toUpperCase();
+
+    searchArea = (text$: Observable<string>) =>
+        text$
+            .debounceTime(200)
+            .map((term) => term === '' ? []
+                : this.areaDTOs.filter((v) => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1
+                && this.getIndexOf(v) === -1).slice(0, 10));
+
+    loadArea() {
+        this.areaService.getAll().subscribe((areaDTOs) => this.areaDTOs = areaDTOs);
+    }
+
+    getIndexOf(area: AreaDTO) {
+        for (let i = 0; i < this.grantProgram.areaDTOs.length; i++) {
+            if (this.grantProgram.areaDTOs[i].name === area.name) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    onChangeArea() {
+        if (this.area && this.area.name) {
+            if (this.getIndexOf(this.area) === -1) {
+                this.grantProgram.areaDTOs.unshift(this.area);
+            }
+            this.area = null;
+        }
+    }
+
+    removeArea(area: AreaDTO) {
+        const index: number = this.getIndexOf(area);
+        if (index !== -1) {
+            this.grantProgram.areaDTOs.splice(index, 1);
+        }
     }
 }

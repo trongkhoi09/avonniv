@@ -1,4 +1,5 @@
 import {PublisherDTO} from '../publisher/publisher.model';
+import {AreaDTO} from '../area/area.model';
 export class GrantProgramDTO {
     public id?: any;
     public name?: string;
@@ -8,5 +9,5 @@ export class GrantProgramDTO {
     public externalId?: string;
     public externalUrl?: string;
     public publisherDTO?: PublisherDTO;
-    public areas?: any;
+    public areaDTOs?: AreaDTO[] = [];
 }

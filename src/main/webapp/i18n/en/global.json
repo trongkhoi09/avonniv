@@ -38,6 +38,9 @@
         "form": {
             "username": "Username",
             "username.placeholder": "Your username",
+            "password": "Password",
+            "oldpassword": "Old password",
+            "oldpassword.placeholder": "Old password",
             "newpassword": "New password",
             "newpassword.placeholder": "New password",
             "confirmpassword": "New password confirmation",
@@ -66,6 +69,11 @@
                     "minlength": "Your password is required to be at least 4 characters.",
                     "maxlength": "Your password cannot be longer than 50 characters.",
                     "strength": "Password strength:"
+                },
+                "oldpassword": {
+                    "required": "Your old password is required.",
+                    "minlength": "Your old password is required to be at least 4 characters.",
+                    "maxlength": "Your old password cannot be longer than 50 characters."
                 },
                 "confirmpassword": {
                     "required": "Your confirmation password is required.",

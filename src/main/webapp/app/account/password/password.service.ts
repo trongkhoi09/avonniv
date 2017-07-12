@@ -10,4 +10,14 @@ export class Password {
     save(newPassword: string): Observable<any> {
         return this.http.post('api/account/change_password', newPassword);
     }
+
+    saveNewPassword(newPassword: string, oldPassword: string): Observable<any> {
+        const options = {
+            newPassword: '',
+            oldPassword: ''
+        };
+        options.newPassword = newPassword;
+        options.oldPassword = oldPassword;
+        return this.http.post('api/account/change_new_password', options);
+    }
 }

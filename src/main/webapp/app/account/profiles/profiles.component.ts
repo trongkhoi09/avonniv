@@ -1,27 +1,44 @@
 import { Component, OnInit } from '@angular/core';
 import { JhiLanguageService } from 'ng-jhipster';
 
-import { Principal, AccountService, JhiLanguageHelper } from '../../shared';
+import {Principal, AccountService, JhiLanguageHelper, PublisherService, PublisherDTO, User} from '../../shared';
 import {Password} from '../password/password.service';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'jhi-profiles',
-    templateUrl: './profiles.component.html'
+    templateUrl: './profiles.component.html',
+    styleUrls: [
+        'profiles.scss'
+    ]
 })
 export class ProfilesComponent implements OnInit {
+    errorPassword: string;
+    errorOldPassword: string;
+    successPassword: string;
+    errorProfile: string;
+    successProfile: string;
     error: string;
     success: string;
-    account: string;
+    account: User = new User();
     settingsAccount: any;
     languages: any[];
+    publisherCrawled: PublisherDTO[] = [];
     doNotMatch: string;
     password: string;
+    oldPassword: string;
     confirmPassword: string;
+    collapse = {
+        password : true,
+        profile : true
+    };
 
     constructor(
         private accountService: AccountService,
         private passwordService: Password,
+        private activeModal: NgbActiveModal,
         private principal: Principal,
+        private publisherService: PublisherService,
         private languageService: JhiLanguageService,
         private languageHelper: JhiLanguageHelper
     ) {
@@ -35,13 +52,18 @@ export class ProfilesComponent implements OnInit {
         this.languageHelper.getAll().then((languages) => {
             this.languages = languages;
         });
+
+        this.publisherService.getAllByCrawled(true).subscribe((publisherCrawled) => {
+            this.publisherCrawled = publisherCrawled;
+        });
     }
 
     save() {
         this.accountService.save(this.settingsAccount).subscribe(() => {
-            this.error = null;
-            this.success = 'OK';
+            this.errorProfile = null;
+            this.successProfile = 'OK';
             this.principal.identity(true).then((account) => {
+                this.account = account;
                 this.settingsAccount = this.copyAccount(account);
             });
             this.languageService.getCurrent().then((current) => {
@@ -50,9 +72,13 @@ export class ProfilesComponent implements OnInit {
                 }
             });
         }, () => {
-            this.success = null;
-            this.error = 'ERROR';
+            this.successProfile = null;
+            this.errorProfile = 'ERROR';
         });
+    }
+
+    clear() {
+        this.activeModal.dismiss('cancel');
     }
 
     copyAccount(account) {
@@ -69,17 +95,29 @@ export class ProfilesComponent implements OnInit {
 
     changePassword() {
         if (this.password !== this.confirmPassword) {
-            this.error = null;
-            this.success = null;
+            this.errorPassword = null;
+            this.errorOldPassword = null;
+            this.successPassword = null;
             this.doNotMatch = 'ERROR';
         } else {
             this.doNotMatch = null;
-            this.passwordService.save(this.password).subscribe(() => {
-                this.error = null;
-                this.success = 'OK';
-            }, () => {
-                this.success = null;
-                this.error = 'ERROR';
+            this.passwordService.saveNewPassword(this.password, this.oldPassword).subscribe(() => {
+                this.password = null;
+                this.oldPassword = null;
+                this.confirmPassword = null;
+                this.errorOldPassword = null;
+                this.errorPassword = null;
+                this.successPassword = 'OK';
+            }, (res) => {
+                if (res.status === 304) {
+                    this.errorOldPassword = 'ERROR';
+                    this.errorPassword = null;
+                    this.successPassword = null;
+                } else {
+                    this.successPassword = null;
+                    this.errorPassword = 'ERROR';
+                    this.errorOldPassword = null;
+                }
             });
         }
     }

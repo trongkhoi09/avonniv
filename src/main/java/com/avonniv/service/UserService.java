@@ -204,6 +204,19 @@ public class UserService {
         });
     }
 
+    public boolean changePassword(String oldPassword, String newPassword) {
+        return userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).map(user -> {
+            if (passwordEncoder.matches(oldPassword, user.getPassword())) {
+                String encryptedPassword = passwordEncoder.encode(newPassword);
+                user.setPassword(encryptedPassword);
+                log.debug("Changed password for User: {}", user);
+                return true;
+            } else {
+                return false;
+            }
+        }).orElse(false);
+    }
+
     @Transactional(readOnly = true)
     public Page<UserDTO> getAllManagedUsers(Pageable pageable) {
         return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserDTO::new);

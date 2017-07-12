@@ -1,17 +1,16 @@
 package com.avonniv.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-
 import com.avonniv.domain.User;
 import com.avonniv.repository.UserRepository;
 import com.avonniv.security.SecurityUtils;
 import com.avonniv.service.MailService;
 import com.avonniv.service.UserService;
 import com.avonniv.service.dto.UserDTO;
+import com.avonniv.web.rest.util.HeaderUtil;
 import com.avonniv.web.rest.vm.KeyAndPasswordVM;
 import com.avonniv.web.rest.vm.ManagedUserVM;
-import com.avonniv.web.rest.util.HeaderUtil;
-
+import com.avonniv.web.rest.vm.OldPasswordAndNewPasswordVM;
+import com.codahale.metrics.annotation.Timed;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,11 +18,16 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.*;
+import java.util.Optional;
 
 /**
  * REST controller for managing the current user's account.
@@ -158,6 +162,17 @@ public class AccountResource {
         }
         userService.changePassword(password);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/account/change_new_password",
+        produces = MediaType.TEXT_PLAIN_VALUE)
+    @Timed
+    public ResponseEntity changeNewPassword(@RequestBody OldPasswordAndNewPasswordVM oldPasswordAndNewPasswordVM) {
+        if (!checkPasswordLength(oldPasswordAndNewPasswordVM.getNewPassword())) {
+            return new ResponseEntity<>("Incorrect password", HttpStatus.BAD_REQUEST);
+        }
+        boolean update = userService.changePassword(oldPasswordAndNewPasswordVM.getOldPassword(), oldPasswordAndNewPasswordVM.getNewPassword());
+        return update ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
     /**

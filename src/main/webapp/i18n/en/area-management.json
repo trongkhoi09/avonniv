@@ -1,0 +1,28 @@
+{
+    "areaManagement": {
+        "home": {
+            "title": "Areas",
+            "createLabel": "Create a new area",
+            "createOrEditLabel": "Create or edit a area"
+        },
+        "created": "A new area is created with identifier {{ param }}",
+        "updated": "An area is updated with identifier {{ param }}",
+        "deleted": "An area is deleted with identifier {{ param }}",
+        "delete": {
+            "question": "Are you sure you want to delete area {{ name }}?"
+        },
+        "detail": {
+            "title": "Area"
+        },
+        "name": "Name",
+        "url": "URL",
+        "email": "Email",
+        "crawled": "Crawled",
+        "notCrawled": "Not Crawled",
+        "phone": "Phone",
+        "address": "Address",
+        "description": "Description",
+        "createdDate": "Created date",
+        "lastModifiedDate": "Modified date"
+    }
+}

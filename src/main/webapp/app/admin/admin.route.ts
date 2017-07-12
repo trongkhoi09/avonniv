@@ -11,7 +11,9 @@ import {
     publisherMgmtRoute,
     publisherDialogRoute,
     userMgmtRoute,
-    userDialogRoute
+    userDialogRoute,
+    areaMgmtRoute,
+    areaDialogRoute
 } from './';
 
 import { UserRouteAccessService } from '../shared';
@@ -25,6 +27,7 @@ const ADMIN_ROUTES = [
     trackerRoute,
     ...userMgmtRoute,
     ...publisherMgmtRoute,
+    ...areaMgmtRoute,
     metricsRoute
 ];
 
@@ -39,4 +42,6 @@ export const adminState: Routes = [{
     ...userDialogRoute
     ,
     ...publisherDialogRoute
+    ,
+    ...areaDialogRoute
 ];

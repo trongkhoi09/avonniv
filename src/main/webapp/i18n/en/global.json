@@ -22,6 +22,7 @@
                 "main": "Administration",
                 "userManagement": "User management",
                 "publisherManagement": "Publisher management",
+                "areaManagement": "Area management",
                 "tracker": "User tracker",
                 "metrics": "Metrics",
                 "health": "Health",

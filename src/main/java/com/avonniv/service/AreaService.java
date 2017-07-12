@@ -5,6 +5,8 @@ import com.avonniv.repository.AreaRepository;
 import com.avonniv.service.dto.AreaDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +34,10 @@ public class AreaService {
         return newArea;
     }
 
+    public Area createArea(AreaDTO areaDTO) {
+        return createArea(areaDTO.getName());
+    }
+
     public Optional<Area> getByName(String name) {
         return areaRepository.findOneByName(name);
     }
@@ -42,7 +48,7 @@ public class AreaService {
             .collect(Collectors.toList());
     }
 
-    public Optional<Area> updateArea(AreaDTO areaDTO) {
+    public Optional<AreaDTO> updateArea(AreaDTO areaDTO) {
         return Optional.of(areaRepository
             .findOne(areaDTO.getId()))
             .map(area -> {
@@ -50,10 +56,28 @@ public class AreaService {
                 area.setStatus(areaDTO.getStatus());
                 log.debug("Changed Information for Area: {}", area);
                 return area;
-            });
+            })
+            .map(AreaDTO::new);
     }
 
     public void delete(String name) {
+        areaRepository.findOneByName(name).ifPresent(area -> {
+            areaRepository.delete(area);
+            log.debug("Deleted Area: {}", area);
+        });
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<Area> getAreaByName(String name) {
+        return areaRepository.findOneByName(name);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<AreaDTO> getAllArea(Pageable pageable) {
+        return areaRepository.findAll(pageable).map(AreaDTO::new);
+    }
+
+    public void deleteArea(String name) {
         areaRepository.findOneByName(name).ifPresent(area -> {
             areaRepository.delete(area);
             log.debug("Deleted Area: {}", area);

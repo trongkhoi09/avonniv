@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,9 @@ import java.net.URLConnection;
 import java.text.Normalizer;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
@@ -94,6 +97,7 @@ public class FetchDataVinnovaService {
                     if (jsonObject.has("AnsokningsomgangLista")) {
                         GrantProgramDTO grantProgramDTO = new GrantProgramDTO(grantProgram);
                         JSONArray AnsokningsomgangLista = jsonObject.getJSONArray("AnsokningsomgangLista");
+                        List<DataFetch> listURL = getURLGrant(grantProgramDTO.getExternalUrl());
                         for (int j = 0; j < AnsokningsomgangLista.length(); j++) {
                             JSONObject object = AnsokningsomgangLista.getJSONObject(j);
                             String externalIdGrant = readStringJSONObject(object, "Diarienummer");
@@ -113,10 +117,13 @@ public class FetchDataVinnovaService {
                                     null,
                                     null
                                 );
-                                if (grantProgramDTO.getExternalUrl() != null) {
-                                    grantDTO.setExternalUrl(getURLString(grantProgramDTO.getName() + "/" + grantDTO.getTitle()));
-                                    if (grantDTO.getExternalUrl() != null) {
-                                        grantDTO.setFinanceDescription(getFinanceDescriptionByURL(grantDTO.getExternalUrl()));
+                                for (int k = 0; k < listURL.size(); k++) {
+                                    DataFetch dataFetch = listURL.get(k);
+                                    if (dataFetch.getTitle().equals(grantDTO.getTitle())) {
+                                        grantDTO.setFinanceDescription(dataFetch.getFinanceDescription());
+                                        grantDTO.setExternalUrl(dataFetch.getExternalUrl());
+                                        listURL.remove(k);
+                                        break;
                                     }
                                 }
                                 grantService.createGrantCall(grantDTO);
@@ -157,20 +164,49 @@ public class FetchDataVinnovaService {
         }
     }
 
-    public String getFinanceDescriptionByURL(String url) {
+    private List<DataFetch> getURLGrant(String url) {
         try {
+            if (url == null) {
+                return new ArrayList<>();
+            }
             Document doc = Jsoup.connect(url)
                 .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36")
                 .timeout(30000)
                 .get();
-            Element element = doc.select("#area_main .module-utlysning-three-col .row .items .item").last();
-            element = element.select(".text p").first();
-            return element.toString();
+            Elements elements = doc.select("#area_main .module-utlysning-call-collection .clearfix");
+            List<DataFetch> listURL = new ArrayList<>();
+            for (Element element : elements) {
+                DataFetch dataFetch = new DataFetch();
+                dataFetch.setExternalUrl("https://www.vinnova.se" + (element.select(".medium-15 .element-link--arrow-after").attr("href")));
+                getDataFromURL(dataFetch);
+                listURL.add(dataFetch);
+            }
+            return listURL;
         } catch (Exception e) {
-            return null;
+            return new ArrayList<>();
         }
     }
 
+    private void getDataFromURL(DataFetch dataFetch) {
+        try {
+            Document doc = Jsoup.connect(dataFetch.getExternalUrl())
+                .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36")
+                .timeout(30000)
+                .get();
+            Elements elements = doc.select("#area_main .module-utlysning-three-col .row .items .item");
+            if (elements.size() != 0) {
+                elements = elements.last().select(".text p");
+                if (elements.size() != 0) {
+                    dataFetch.setFinanceDescription(elements.first().toString());
+                }
+            }
+            elements = doc.select("#area_main .navigation__container .current a span");
+            if (elements.size() != 0) {
+                dataFetch.setTitle(elements.first().text());
+            }
+        } catch (Exception ignored) {
+        }
+    }
 
     public String getURLString(Instant lastDateCrawl) {
         Calendar calendar = Calendar.getInstance();
@@ -235,5 +271,35 @@ public class FetchDataVinnovaService {
         }
         return null;
 
+    }
+
+    class DataFetch {
+        private String title;
+        private String externalUrl;
+        private String financeDescription;
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getExternalUrl() {
+            return externalUrl;
+        }
+
+        public void setExternalUrl(String externalUrl) {
+            this.externalUrl = externalUrl;
+        }
+
+        public String getFinanceDescription() {
+            return financeDescription;
+        }
+
+        public void setFinanceDescription(String financeDescription) {
+            this.financeDescription = financeDescription;
+        }
     }
 }

@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Principal, AreaDTO, PublisherDTO, PublisherService, AreaService} from '../shared';
 import {Observable} from 'rxjs/Observable';
+import {ActivatedRoute} from '@angular/router';
 @Component({
     selector: 'jhi-grants',
     templateUrl: './grants.component.html',
@@ -8,7 +9,8 @@ import {Observable} from 'rxjs/Observable';
         'grants.scss'
     ]
 })
-export class GrantsComponent implements OnInit {
+export class GrantsComponent implements OnInit, OnDestroy {
+    routeSub: any;
     currentAccount: any;
     loadPublisherFinished = false;
     area: AreaDTO;
@@ -26,11 +28,16 @@ export class GrantsComponent implements OnInit {
     data = this.grantFilter;
 
     constructor(private areaService: AreaService,
+                private route: ActivatedRoute,
                 private publisherService: PublisherService,
                 private principal: Principal) {
     }
 
     ngOnInit() {
+        this.routeSub = this.route.queryParams.subscribe((params) => {
+            this.grantFilter.publicGrant = !('false' === params['publicGrant']);
+            this.grantFilter.privateGrant = !('false' === params['privateGrant']);
+        });
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
@@ -38,6 +45,9 @@ export class GrantsComponent implements OnInit {
         this.loadPublisher();
     }
 
+    ngOnDestroy(): void {
+        this.routeSub.unsubscribe();
+    }
     onFiltering() {
         const publisherDTOs = [];
         for (let i = 0; i < this.publisherCrawled.length; i++) {

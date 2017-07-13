@@ -12,7 +12,6 @@ import com.avonniv.service.dto.GrantDTO;
 import com.avonniv.service.dto.GrantProgramDTO;
 import com.avonniv.service.dto.PublisherDTO;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -21,11 +20,8 @@ import org.jsoup.select.Elements;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.text.Normalizer;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -72,12 +68,12 @@ public class FetchDataVinnovaService {
             PublisherDTO publisherDTO = publisherOptional.map(PublisherDTO::new).orElse(null);
             while (true) {
                 String url = getURLString(lastDateCrawl);
-                String json = readUrl(url);
+                String json = Util.readUrl(url);
                 JSONArray jsonArray = new JSONArray(json);
                 for (int i = 0; i < jsonArray.length(); ++i) {
 
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    String externalIdGrantProgram = name + "_" + readStringJSONObject(jsonObject, "Diarienummer");
+                    String externalIdGrantProgram = name + "_" + Util.readStringJSONObject(jsonObject, "Diarienummer");
                     Optional<GrantProgram> optional = grantProgramService.getByExternalId(externalIdGrantProgram);
                     GrantProgram grantProgram;
                     if (optional.isPresent()) {
@@ -85,8 +81,8 @@ public class FetchDataVinnovaService {
                     } else {
                         GrantProgramDTO grantProgramDTO = new GrantProgramDTO(
                             null, null, null, 0,
-                            readStringJSONObject(jsonObject, "Titel"),
-                            readStringJSONObject(jsonObject, "Beskrivning"),
+                            Util.readStringJSONObject(jsonObject, "Titel"),
+                            Util.readStringJSONObject(jsonObject, "Beskrivning"),
                             GrantProgramDTO.TYPE.PUBLIC.getValue(),
                             publisherDTO,
                             null,
@@ -104,15 +100,15 @@ public class FetchDataVinnovaService {
                         List<DataFetch> listURL = getURLGrant(grantProgramDTO.getExternalUrl());
                         for (int j = 0; j < AnsokningsomgangLista.length(); j++) {
                             JSONObject object = AnsokningsomgangLista.getJSONObject(j);
-                            String externalIdGrant = name + "_" + readStringJSONObject(object, "Diarienummer");
+                            String externalIdGrant = name + "_" + Util.readStringJSONObject(object, "Diarienummer");
                             Optional<Grant> grantOptional = grantService.getByExternalId(externalIdGrant);
                             if (!grantOptional.isPresent()) {
                                 GrantDTO grantDTO = new GrantDTO(
                                     null, null, null, 0,
                                     grantProgramDTO,
-                                    readStringJSONObject(object, "Titel"),
+                                    Util.readStringJSONObject(object, "Titel"),
                                     null,
-                                    readStringJSONObject(object, "Beskrivning"),
+                                    Util.readStringJSONObject(object, "Beskrivning"),
                                     readDateJSONObject(object, "Oppningsdatum"),
                                     readDateJSONObject(object, "Stangningsdatum"),
                                     readDateJSONObject(object, "UppskattatBeslutsdatum"),
@@ -145,27 +141,6 @@ public class FetchDataVinnovaService {
             e.printStackTrace();
         }
 
-    }
-
-    private static String readUrl(String urlString) throws Exception {
-        BufferedReader reader = null;
-        try {
-            URL url = new URL(urlString);
-            URLConnection urlConnection = url.openConnection();
-            urlConnection.setConnectTimeout(60000);
-            urlConnection.setReadTimeout(60000);
-            reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-            StringBuffer buffer = new StringBuffer();
-            int read;
-            char[] chars = new char[1024];
-            while ((read = reader.read(chars)) != -1)
-                buffer.append(chars, 0, read);
-
-            return buffer.toString();
-        } finally {
-            if (reader != null)
-                reader.close();
-        }
     }
 
     private List<DataFetch> getURLGrant(String url) {
@@ -243,18 +218,6 @@ public class FetchDataVinnovaService {
         txt = pattern.matcher(temp).replaceAll("");
         txt = txt.replaceAll("[^\\p{ASCII}]", "");
         return txt;
-    }
-
-    private static String readStringJSONObject(JSONObject object, String key) {
-        if (object.has(key)) {
-            try {
-                return object.getString(key);
-            } catch (JSONException e) {
-                return null;
-            }
-        } else {
-            return null;
-        }
     }
 
     private static Instant readDateJSONObject(JSONObject object, String key) {

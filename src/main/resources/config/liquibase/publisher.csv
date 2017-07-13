@@ -1,2 +1,11 @@
-id;name;description;address;phone;email;url;status
-1;Vinnova;;Mäster Samuelsgatan 56, 101 58 Stockholm, Sweden;+46 8 473 30 00;vinnova@vinnova.se;https://www.vinnova.se/;0
+id;name;description;address;phone;email;url;is_crawled;status
+1;Vinnova;;Mäster Samuelsgatan 56, 101 58 Stockholm, Sweden;+46 8 473 30 00;vinnova@vinnova.se;https://www.vinnova.se/;true;0
+2;Almi;;;0771-55 85 00;info.lanadm@almi.se;https://www.almi.se/;false;0
+3;Internetfonden;;;;staffan.hagnell@iis.se;https://www.internetfonden.se/;false;0
+4;Konstnärsnämnden;;;;rickard.carlsson@konstnarsnamnden.se;https://www.konstnarsnamnden.se/;false;0
+5;Nordiskt samarbete;;;+45 2969 2910;alfkro@norden.org;https://www.norden.org/;false;0
+6;Stiftelsen för strategisk forskning;;;+46 (0)8 - 505 816 00;info@stratresearch.se;http://stratresearch.se/;false;0
+7;Tillväxtverket;;;08-681 91 00;tillvaxtverket@tillvaxtverket.se;https://tillvaxtverket.se/;false;0
+8;Formas;;Drottninggatan 89, Box 1206, 111 82 Stockholm;08-775 40 00;registrator@formas.se;http://formas.se/;false;0
+9;SME instrument;;;+32 2 299 96 96;;http://ec.europa.eu/;false;0
+10;Europeiska socialfonden;;Box 47141, 100 74 Stockholm;020-33 33 90;esf@esf.se;http://www.esf.se/;false;0

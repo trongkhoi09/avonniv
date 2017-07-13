@@ -232,6 +232,7 @@
             <column name="email" type="varchar(255)"/>
             <column name="phone" type="varchar(255)"/>
             <column name="url" type="varchar(255)"/>
+            <column name="is_crawled" type="Boolean" defaultValueBoolean="false"/>
             <column name="status" type="INT"/>
             <column name="created_date" type="timestamp" defaultValueDate="${now}">
                 <constraints nullable="false"/>
@@ -394,20 +395,12 @@
                   tableName="tbl_publisher">
             <column name="created_date" type="timestamp"/>
         </loadData>
-    </changeSet>
-    <changeSet id="2" author="sylt">
         <loadData encoding="UTF-8"
                   file="config/liquibase/areas.csv"
                   separator=";"
                   tableName="tbl_area">
             <column name="created_date" type="timestamp"/>
         </loadData>
-    </changeSet>
-    <changeSet id="3" author="sylt">
-        <addColumn
-            tableName="tbl_publisher">
-            <column name="is_crawled" type="Boolean" defaultValueBoolean="false"/>
-        </addColumn>
     </changeSet>
 
 </databaseChangeLog>

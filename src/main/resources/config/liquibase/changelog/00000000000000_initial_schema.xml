@@ -226,19 +226,27 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="name" type="varchar(255)"/>
+            <column name="name" type="varchar(255)">
+                <constraints unique="true" nullable="false"/>
+            </column>
             <column name="description" type="text"/>
             <column name="address" type="varchar(255)"/>
             <column name="email" type="varchar(255)"/>
             <column name="phone" type="varchar(255)"/>
             <column name="url" type="varchar(255)"/>
-            <column name="is_crawled" type="Boolean" defaultValueBoolean="false"/>
+            <column name="is_crawled" type="boolean" valueBoolean="false"/>
             <column name="status" type="INT"/>
             <column name="created_date" type="timestamp" defaultValueDate="${now}">
                 <constraints nullable="false"/>
             </column>
             <column name="last_modified_date" type="timestamp"/>
         </createTable>
+
+        <createIndex indexName="idx_publisher_name"
+                     tableName="tbl_publisher"
+                     unique="true">
+            <column name="name" type="varchar(255)"/>
+        </createIndex>
 
         <createTable tableName="tbl_grant_program">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
@@ -394,6 +402,7 @@
                   separator=";"
                   tableName="tbl_publisher">
             <column name="created_date" type="timestamp"/>
+            <column name="is_crawled" type="boolean"/>
         </loadData>
         <loadData encoding="UTF-8"
                   file="config/liquibase/areas.csv"

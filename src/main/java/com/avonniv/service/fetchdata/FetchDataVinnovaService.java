@@ -1,9 +1,13 @@
-package com.avonniv.service;
+package com.avonniv.service.fetchdata;
 
 import com.avonniv.domain.CrawlHistory;
 import com.avonniv.domain.Grant;
 import com.avonniv.domain.GrantProgram;
 import com.avonniv.domain.Publisher;
+import com.avonniv.service.CrawHistoryService;
+import com.avonniv.service.GrantProgramService;
+import com.avonniv.service.GrantService;
+import com.avonniv.service.PublisherService;
 import com.avonniv.service.dto.GrantDTO;
 import com.avonniv.service.dto.GrantProgramDTO;
 import com.avonniv.service.dto.PublisherDTO;
@@ -58,7 +62,7 @@ public class FetchDataVinnovaService {
     public void autoFetchDataFromVinnova() {
         try {
             String name = "Vinnova";
-            Optional<Publisher> publisherOptional = publisherService.getById(1L);
+            Optional<Publisher> publisherOptional = publisherService.getPublisherByName(name);
             Optional<CrawlHistory> crawlHistoryOptional = crawHistoryService.findByName(name);
             //1483228800L = Sunday, January 1, 2017 12:00:00 AM
             Instant lastDateCrawl = Instant.ofEpochSecond(1483228800L);
@@ -73,7 +77,7 @@ public class FetchDataVinnovaService {
                 for (int i = 0; i < jsonArray.length(); ++i) {
 
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    String externalIdGrantProgram = readStringJSONObject(jsonObject, "Diarienummer");
+                    String externalIdGrantProgram = name + "_" + readStringJSONObject(jsonObject, "Diarienummer");
                     Optional<GrantProgram> optional = grantProgramService.getByExternalId(externalIdGrantProgram);
                     GrantProgram grantProgram;
                     if (optional.isPresent()) {
@@ -100,7 +104,7 @@ public class FetchDataVinnovaService {
                         List<DataFetch> listURL = getURLGrant(grantProgramDTO.getExternalUrl());
                         for (int j = 0; j < AnsokningsomgangLista.length(); j++) {
                             JSONObject object = AnsokningsomgangLista.getJSONObject(j);
-                            String externalIdGrant = readStringJSONObject(object, "Diarienummer");
+                            String externalIdGrant = name + "_" + readStringJSONObject(object, "Diarienummer");
                             Optional<Grant> grantOptional = grantService.getByExternalId(externalIdGrant);
                             if (!grantOptional.isPresent()) {
                                 GrantDTO grantDTO = new GrantDTO(

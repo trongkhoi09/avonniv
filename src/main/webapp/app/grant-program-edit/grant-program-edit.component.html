@@ -25,14 +25,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="grantProgramEdit.description">Description</label>
                     <textarea rows="3" class="form-control" name="description" #descriptionInput="ngModel"
-                              [(ngModel)]="grantProgram.description" maxlength="200"></textarea>
-                    <div *ngIf="descriptionInput.dirty && descriptionInput.invalid">
-                        <small class="form-text text-danger"
-                               *ngIf="descriptionInput.errors.maxlength" jhiTranslate="entity.validation.maxlength"
-                               translate-value-max="200">
-                            This field cannot be longer than 200 characters.
-                        </small>
-                    </div>
+                              [(ngModel)]="grantProgram.description"></textarea>
                 </div>
                 <div class="form-group" *ngIf="areaDTOs.length>0">
                     <label class="form-control-label" jhiTranslate="grantProgramEdit.area">Area</label>

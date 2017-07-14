@@ -55,7 +55,7 @@ public class GrantProgramService {
                 areaDTO -> areas.add(areaRepository.findOne(areaDTO.getId()))
             );
             newGrantProgram.setAreas(areas);
-        }else {
+        } else {
             newGrantProgram.setAreas(new HashSet<>());
         }
 
@@ -75,22 +75,24 @@ public class GrantProgramService {
     public Optional<GrantProgramDTO> update(GrantProgramDTO grantProgramDTO) {
         return Optional.of(grantProgramRepository
             .findOne(grantProgramDTO.getId()))
-            .map(grant -> {
-                grant.setName(grantProgramDTO.getName());
-                grant.setDescription(grantProgramDTO.getDescription());
-                grant.setType(grantProgramDTO.getType());
+            .map(grantProgram -> {
+                grantProgram.setName(grantProgramDTO.getName());
+                grantProgram.setDescription(grantProgramDTO.getDescription());
+                grantProgram.setType(grantProgramDTO.getType());
+                grantProgram.setReleaseDate(grantProgramDTO.getReleaseDate());
+                grantProgram.setExternalUrl(grantProgramDTO.getExternalUrl());
                 Publisher publisher = publisherRepository.findOne(grantProgramDTO.getPublisherDTO().getId());
-                grant.setPublisher(publisher);
+                grantProgram.setPublisher(publisher);
 
                 if (grantProgramDTO.getAreaDTOs() != null) {
                     Set<Area> areas = new HashSet<>();
                     grantProgramDTO.getAreaDTOs().forEach(
                         areaDTO -> areas.add(areaRepository.findOne(areaDTO.getId()))
                     );
-                    grant.setAreas(areas);
+                    grantProgram.setAreas(areas);
                 }
-                log.debug("Changed Information for GrantProgram: {}", grant);
-                return grant;
+                log.debug("Changed Information for GrantProgram: {}", grantProgram);
+                return grantProgram;
             })
             .map(GrantProgramDTO::new);
     }

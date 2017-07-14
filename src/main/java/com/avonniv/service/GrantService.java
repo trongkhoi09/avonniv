@@ -79,6 +79,8 @@ public class GrantService {
                 grantCall.setCloseDate(grantDTO.getCloseDate());
                 grantCall.setAnnouncedDate(grantDTO.getAnnouncedDate());
                 grantCall.setProjectStartDate(grantDTO.getProjectStartDate());
+                grantCall.setFinanceDescription(grantDTO.getFinanceDescription());
+                grantCall.setExternalUrl(grantDTO.getExternalUrl());
 
                 GrantProgram grantProgram = grantProgramRepository.findOne(grantDTO.getGrantProgramDTO().getId());
                 grantCall.setGrantProgram(grantProgram);

@@ -106,11 +106,7 @@ public class GrantService {
             listType.add(GrantProgramDTO.TYPE.PUBLIC.getValue());
         }
         listPublisher.addAll(grantFilter.getPublisherDTOs());
-//        if (listPublisher.isEmpty()) {
-//            return grantRepository.findAllByCloseDateAfterAndGrantProgramTypeIn(pageable, Instant.now(), listType).map(GrantDTO::new);
-//        } else {
         return grantRepository.findAllByGrantProgram_Publisher_NameInAndCloseDateAfterAndGrantProgramTypeIn(pageable, listPublisher, Instant.now(), listType).map(GrantDTO::new);
-//        }
     }
 
     public int getCount() {

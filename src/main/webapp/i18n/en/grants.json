@@ -4,6 +4,7 @@
         "publisher": "Publisher",
         "area": "Area",
         "otherPublisher": "Other publisher",
+        "empty": "There is no grant matching with your conditions",
         "action": {
             "editGrant": "Grant",
             "editGrantProgram": "Grant Program"

@@ -17,6 +17,9 @@ import {AvonnivSearchModule} from './search/search.module';
 
 import { customHttpProvider } from './blocks/interceptor/http.provider';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
+import {MissingTranslationHandler} from 'ng2-translate';
+import {missingTranslationHandler} from './blocks/interceptor/translation.interceptor';
+import {ConfigService} from 'ng-jhipster/src/config.service';
 
 import {
     JhiMainComponent,
@@ -59,7 +62,12 @@ import {
         ProfileService,
         customHttpProvider(),
         PaginationConfig,
-        UserRouteAccessService
+        UserRouteAccessService,
+        {
+            provide: MissingTranslationHandler,
+            useFactory: missingTranslationHandler,
+            deps: [ConfigService]
+        }
     ],
     bootstrap: [ JhiMainComponent ]
 })

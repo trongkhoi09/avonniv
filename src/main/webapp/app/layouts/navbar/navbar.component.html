@@ -16,9 +16,9 @@
          [ngSwitch]="isAuthenticated()">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <form role="search" class="navbar-left app-search pull-left hidden-xs">
+                <form role="search" (keydown.enter)="searchWord()" class="navbar-left app-search pull-left hidden-xs">
                     <input type="text" name="search" [(ngModel)]="search" placeholder="Search..." class="form-control">
-                    <a href="" [routerLink]="['../search', search]"><i class="fa fa-search"></i></a>
+                    <a href="javascript:void(0);" (click)="searchWord()"><i class="fa fa-search"></i></a>
                 </form>
             </li>
             <li ngbDropdown class="nav-item dropdown pointer nav-item-custom" *ngIf="languages">

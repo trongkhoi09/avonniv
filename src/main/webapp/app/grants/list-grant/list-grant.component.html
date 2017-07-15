@@ -17,7 +17,10 @@
                     <th class="col-1" *jhiHasAnyAuthority="'ROLE_ADMIN'"></th>
                 </tr>
                 </thead>
-                <tbody *ngIf="grantDTOs">
+                <div *ngIf="grantDTOs.length==0" class="empty-table-custom text-center">
+                    <h5 class="text-muted" jhiTranslate="grants.empty"></h5>
+                </div>
+                <tbody *ngIf="grantDTOs.length!=0">
                 <tr *ngFor="let grantDTO of grantDTOs; let i = index" class="row m-0">
                     <td class="col-1">{{grantDTO.grantProgramDTO.publisherDTO.name}}</td>
                     <td class="col-2">
@@ -54,7 +57,7 @@
             </table>
         </div>
     </div>
-    <div class="margin-top-20" *ngIf="grantDTOs">
+    <div class="margin-top-20" *ngIf="grantDTOs&&grantDTOs.length!=0">
         <div class="row justify-content-center">
             <jhi-item-count [page]="page" [total]="totalItems"
                             [itemsPerPage]="itemsPerPage"></jhi-item-count>

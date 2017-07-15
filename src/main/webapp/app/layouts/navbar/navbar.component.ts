@@ -52,6 +52,10 @@ export class NavbarComponent implements OnInit {
         });
     }
 
+    searchWord() {
+        this.router.navigate(['../search', this.search]);
+    }
+
     changeLanguage(languageKey: string) {
       this.languageService.changeLanguage(languageKey);
     }

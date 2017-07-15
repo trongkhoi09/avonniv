@@ -19,7 +19,10 @@
                 <th></th>
             </tr>
             </thead>
-            <tbody *ngIf ="publishers">
+            <div *ngIf="publishers.length==0" class="empty-table-custom text-center">
+                <h5 class="text-muted" jhiTranslate="publishers.empty"></h5>
+            </div>
+            <tbody *ngIf ="publishers.length!=0">
             <tr *ngFor="let publisher of publishers; trackBy: trackIdentity">
                 <td><a [routerLink]="['../publisher-management', publisher.name]">{{publisher.id}}</a></td>
                 <td>{{publisher.name}}</td>
@@ -60,7 +63,7 @@
             </tbody>
         </table>
     </div>
-    <div *ngIf="publishers">
+    <div *ngIf="publishers&&publishers.length!=0">
         <div class="row justify-content-center">
             <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>

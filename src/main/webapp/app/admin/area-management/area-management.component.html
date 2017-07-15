@@ -17,7 +17,10 @@
                 <th></th>
             </tr>
             </thead>
-            <tbody *ngIf ="areas">
+            <div *ngIf="areas.length==0" class="empty-table-custom text-center">
+                <h5 class="text-muted" jhiTranslate="areas.empty"></h5>
+            </div>
+            <tbody *ngIf ="areas.length!=0">
             <tr *ngFor="let area of areas; trackBy: trackIdentity">
                 <td>{{area.id}}</td>
                 <td>{{area.name}}</td>
@@ -45,7 +48,7 @@
             </tbody>
         </table>
     </div>
-    <div *ngIf="areas">
+    <div *ngIf="areas&&areas.length!=0">
         <div class="row justify-content-center">
             <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>

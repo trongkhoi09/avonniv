@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
-import {AlertService, ParseLinks} from 'ng-jhipster';
+import {AlertService, ParseLinks, PaginationUtil} from 'ng-jhipster';
 import {ResponseWrapper} from '../../shared/model/response-wrapper.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GrantService} from '../../shared/grant/grant.service';
@@ -107,6 +107,8 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
     transition() {
         this.router.navigate([this.data.search ? this.data.navigate + '/' + this.data.search : this.data.navigate], {
             queryParams: {
+                privateGrant: this.grantFilter.privateGrant,
+                publicGrant: this.grantFilter.publicGrant,
                 page: this.page,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }

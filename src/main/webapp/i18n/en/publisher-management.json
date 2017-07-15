@@ -5,7 +5,7 @@
             "createLabel": "Create a new publisher",
             "createOrEditLabel": "Create or edit a publisher"
         },
-        "empty": "There is no publisher matching with your conditions",
+        "empty": "There is no publisher",
         "created": "A new publisher is created with identifier {{ param }}",
         "updated": "An publisher is updated with identifier {{ param }}",
         "deleted": "An publisher is deleted with identifier {{ param }}",

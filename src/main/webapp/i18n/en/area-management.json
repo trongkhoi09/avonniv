@@ -14,7 +14,7 @@
         "detail": {
             "title": "Area"
         },
-        "empty": "There is no area matching with your conditions",
+        "empty": "There is no area",
         "name": "Name",
         "url": "URL",
         "email": "Email",

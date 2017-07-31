@@ -34,8 +34,8 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
         size: ITEMS_PER_PAGE,
         sort: this.sort(),
         search: '',
-        publicGrant: true,
-        privateGrant: true,
+        openGrant: true,
+        comingGrant: true,
         areaDTOs: [],
         publisherDTOs: []
     };
@@ -57,8 +57,8 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
 
     ngOnInit() {
         this.grantFilter.search = this.data.search;
-        this.grantFilter.privateGrant = this.data.privateGrant;
-        this.grantFilter.publicGrant = this.data.publicGrant;
+        this.grantFilter.comingGrant = this.data.comingGrant;
+        this.grantFilter.openGrant = this.data.openGrant;
         this.grantFilter.areaDTOs = this.data.areaDTOs ? this.data.areaDTOs : [];
         this.grantFilter.publisherDTOs = this.data.publisherDTOs ? this.data.publisherDTOs : [];
         this.loadAll();
@@ -70,9 +70,6 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         this.ngOnInit();
-    }
-
-    onFiltering() {
     }
 
     isAdmin() {
@@ -107,8 +104,8 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
     transition() {
         this.router.navigate([this.data.search ? this.data.navigate + '/' + this.data.search : this.data.navigate], {
             queryParams: {
-                privateGrant: this.grantFilter.privateGrant,
-                publicGrant: this.grantFilter.publicGrant,
+                comingGrant: this.grantFilter.comingGrant,
+                openGrant: this.grantFilter.openGrant,
                 page: this.page,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }

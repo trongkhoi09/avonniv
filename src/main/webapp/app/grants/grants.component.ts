@@ -20,8 +20,8 @@ export class GrantsComponent implements OnInit, OnDestroy {
     grantFilter = {
         navigate: '/grants',
         search: '',
-        publicGrant: true,
-        privateGrant: false,
+        openGrant: true,
+        comingGrant: true,
         areaDTOs: [],
         publisherDTOs: []
     };
@@ -35,8 +35,8 @@ export class GrantsComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.routeSub = this.route.queryParams.subscribe((params) => {
-            this.grantFilter.publicGrant = !('false' === params['publicGrant']);
-            this.grantFilter.privateGrant = !('false' === params['privateGrant']);
+            this.grantFilter.openGrant = !('false' === params['openGrant']);
+            this.grantFilter.comingGrant = !('false' === params['comingGrant']);
         });
         this.principal.identity().then((account) => {
             this.currentAccount = account;

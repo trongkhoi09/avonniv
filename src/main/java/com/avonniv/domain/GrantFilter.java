@@ -5,8 +5,8 @@ import java.util.Set;
 
 public class GrantFilter {
     private String search = null;
-    private boolean publicGrant = true;
-    private boolean privateGrant = true;
+    private boolean openGrant = true;
+    private boolean comingGrant = true;
     private Set<String> areaDTOs = new HashSet<>();
     private Set<String> publisherDTOs = new HashSet<>();
 
@@ -18,20 +18,20 @@ public class GrantFilter {
         this.search = search;
     }
 
-    public boolean isPublicGrant() {
-        return publicGrant;
+    public boolean isOpenGrant() {
+        return openGrant;
     }
 
-    public void setPublicGrant(boolean publicGrant) {
-        this.publicGrant = publicGrant;
+    public void setOpenGrant(boolean openGrant) {
+        this.openGrant = openGrant;
     }
 
-    public boolean isPrivateGrant() {
-        return privateGrant;
+    public boolean isComingGrant() {
+        return comingGrant;
     }
 
-    public void setPrivateGrant(boolean privateGrant) {
-        this.privateGrant = privateGrant;
+    public void setComingGrant(boolean comingGrant) {
+        this.comingGrant = comingGrant;
     }
 
     public Set<String> getAreaDTOs() {

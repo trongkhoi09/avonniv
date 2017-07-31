@@ -25,8 +25,8 @@ export const createRequestGrantOption = (req?: any): BaseRequestOptions => {
         if (req.search) {
             params.set('search', req.search);
         }
-        params.set('publicGrant', req.publicGrant);
-        params.set('privateGrant', req.privateGrant);
+        params.set('openGrant', req.openGrant);
+        params.set('comingGrant', req.comingGrant);
         if (req.areaDTOs) {
             params.set('areaDTOs', req.areaDTOs);
         }

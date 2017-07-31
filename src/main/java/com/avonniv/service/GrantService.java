@@ -6,16 +6,17 @@ import com.avonniv.domain.GrantProgram;
 import com.avonniv.repository.GrantProgramRepository;
 import com.avonniv.repository.GrantRepository;
 import com.avonniv.service.dto.GrantDTO;
-import com.avonniv.service.dto.GrantProgramDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -101,16 +102,33 @@ public class GrantService {
         if (grantFilter.getSearch() != null && !grantFilter.getSearch().trim().isEmpty()) {
             return grantRepository.findAllByGrantProgramNameLikeAndCloseDateAfter(pageable, "%" + grantFilter.getSearch().trim() + "%", Instant.now()).map(GrantDTO::new);
         }
+        Instant instant = Instant.now();
         List<String> listPublisher = new ArrayList<>();
-        List<Integer> listType = new ArrayList<>();
-        if (grantFilter.isPrivateGrant()) {
-            listType.add(GrantProgramDTO.TYPE.PRIVATE.getValue());
-        }
-        if (grantFilter.isPublicGrant()) {
-            listType.add(GrantProgramDTO.TYPE.PUBLIC.getValue());
-        }
         listPublisher.addAll(grantFilter.getPublisherDTOs());
-        return grantRepository.findAllByGrantProgram_Publisher_NameInAndCloseDateAfterAndGrantProgramTypeIn(pageable, listPublisher, Instant.now(), listType).map(GrantDTO::new);
+//        List<Integer> listType = new ArrayList<>();
+        if (grantFilter.isOpenGrant()) {
+            if (grantFilter.isComingGrant()) {
+                return grantRepository.findAllByGrantProgram_Publisher_NameInAndCloseDateAfterOrGrantProgram_Publisher_NameInAndStatusIn(
+                    pageable, listPublisher, instant, listPublisher, Arrays.asList(GrantDTO.Status.open.getValue(), GrantDTO.Status.coming.getValue())
+                ).map(GrantDTO::new);
+            } else {
+                return grantRepository.findAllByGrantProgram_Publisher_NameInAndOpenDateBeforeAndCloseDateAfterOrGrantProgram_Publisher_NameInAndOpenDateIsNullAndStatus(
+                    pageable, listPublisher, instant, instant, listPublisher, GrantDTO.Status.open.getValue()
+                ).map(GrantDTO::new);
+            }
+        } else {
+            if (grantFilter.isComingGrant()) {
+                return grantRepository.findAllByGrantProgram_Publisher_NameInAndOpenDateAfterAndCloseDateAfterOrGrantProgram_Publisher_NameInAndOpenDateIsNullAndStatus(
+                    pageable, listPublisher, instant, instant, listPublisher, GrantDTO.Status.coming.getValue()
+                ).map(GrantDTO::new);
+            } else {
+                return new PageImpl<>(new ArrayList<>(), pageable, 0L);
+            }
+        }
+//        if (grantFilter.isOpenGrant()) {
+//            listType.add(GrantProgramDTO.TYPE.PUBLIC.getValue());
+//        }
+//        return grantRepository.findAllByGrantProgram_Publisher_NameInAndCloseDateAfterAndGrantProgramTypeIn(pageable, listPublisher, Instant.now(), listType).map(GrantDTO::new);
     }
 
     public int getCount() {

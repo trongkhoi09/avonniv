@@ -50,6 +50,7 @@ public class GrantService {
         newGrant.setFinanceDescription(grantDTO.getFinanceDescription());
         GrantProgram grantProgram = grantProgramRepository.findOne(grantDTO.getGrantProgramDTO().getId());
         newGrant.setGrantProgram(grantProgram);
+        newGrant.setStatus(grantDTO.getStatus());
 
         grantRepository.save(newGrant);
         log.debug("Created Information for Grant: {}", newGrant);
@@ -81,6 +82,7 @@ public class GrantService {
                 grantCall.setProjectStartDate(grantDTO.getProjectStartDate());
                 grantCall.setFinanceDescription(grantDTO.getFinanceDescription());
                 grantCall.setExternalUrl(grantDTO.getExternalUrl());
+                grantCall.setStatus(grantDTO.getStatus());
 
                 GrantProgram grantProgram = grantProgramRepository.findOne(grantDTO.getGrantProgramDTO().getId());
                 grantCall.setGrantProgram(grantProgram);
@@ -113,6 +115,7 @@ public class GrantService {
 
     public int getCount() {
         Instant instant = Instant.now();
-        return grantRepository.countAllByOpenDateBeforeAndCloseDateAfter(instant, instant);
+        return grantRepository.countAllByOpenDateBeforeAndCloseDateAfter(instant, instant) +
+            grantRepository.countAllByStatusAndOpenDateIsNull(GrantDTO.Status.open.getValue());
     }
 }

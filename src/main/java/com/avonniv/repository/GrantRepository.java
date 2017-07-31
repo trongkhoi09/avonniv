@@ -21,4 +21,6 @@ public interface GrantRepository extends JpaRepository<Grant, Long> {
     Page<Grant> findAllByGrantProgramNameLikeAndCloseDateAfter(Pageable pageable, String search, Instant dateTime);
 
     Integer countAllByOpenDateBeforeAndCloseDateAfter(Instant dateBefore, Instant dateAfter);
+
+    Integer countAllByStatusAndOpenDateIsNull(Integer status);
 }

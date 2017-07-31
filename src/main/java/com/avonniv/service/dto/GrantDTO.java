@@ -146,4 +146,18 @@ public class GrantDTO extends AbstractEntityDTO {
     public void setFinanceDescription(String financeDescription) {
         this.financeDescription = financeDescription;
     }
+
+    public enum Status {
+        open(1), close(-1), coming(2);
+
+        private final int value;
+
+        Status(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
 }

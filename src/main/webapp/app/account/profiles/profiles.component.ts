@@ -72,6 +72,7 @@ export class ProfilesComponent implements OnInit {
                 }
             });
         }, () => {
+            this.collapse.profile = true;
             this.successProfile = null;
             this.errorProfile = 'ERROR';
         });
@@ -108,6 +109,7 @@ export class ProfilesComponent implements OnInit {
                 this.errorOldPassword = null;
                 this.errorPassword = null;
                 this.successPassword = 'OK';
+                this.collapse.password = true;
             }, (res) => {
                 if (res.status === 304) {
                     this.errorOldPassword = 'ERROR';

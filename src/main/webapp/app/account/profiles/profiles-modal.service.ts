@@ -16,6 +16,7 @@ export class ProfilesModalService {
         }
         this.isOpen = true;
         const modalRef = this.modalService.open(ProfilesComponent, {
+            size: 'lg',
             container: 'nav'
         });
         modalRef.result.then((result) => {

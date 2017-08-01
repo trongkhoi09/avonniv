@@ -29,7 +29,13 @@
                             {{grantDTO.grantProgramDTO.name}}
                         </a>
                     </td>
-                    <td [ngClass]="isAdmin()?'col-2':'col-3'">{{grantDTO.grantProgramDTO.description}}</td>
+                    <!--<td [ngClass]="isAdmin()?'col-2':'col-3'" ngbPopover="{{grantDTO.description}}"-->
+                        <!--triggers="mouseenter:mouseleave" placement="right" popoverTitle="Description">-->
+                        <!--{{grantDTO.description|slice:0:200}}-->
+                    <!--</td>-->
+                    <td [ngClass]="isAdmin()?'col-2':'col-3'" [routerLink]="['/', { outlets: { popup: 'description-grant/'+ grantDTO.id} }]"
+                       replaceUrl="true">{{grantDTO.description|slice:0:200}}
+                    </td>
                     <td class="col-2 text-center" [innerHTML]="grantDTO.financeDescription"></td>
                     <td class="col-2 text-center">{{grantDTO.openDate| date: 'dd MMM yyyy'}}</td>
                     <td class="col-2 text-center">{{grantDTO.closeDate| date: 'dd MMM yyyy'}}</td>

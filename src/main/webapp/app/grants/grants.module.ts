@@ -8,7 +8,10 @@ import {
     GrantsComponent,
     OtherPublisherModalService,
     JhiOtherPublisherModalComponent,
-    OtherPublisherDialogComponent
+    JhiDescriptionGrantModalComponent,
+    DescriptionGrantDialogComponent,
+    OtherPublisherDialogComponent,
+    DescriptionGrantModalService
 } from './';
 import {GrantsResolvePagingParams} from './grants.route';
 import {ListGrantComponent} from './list-grant/list-grant.component';
@@ -21,15 +24,19 @@ import {ListGrantComponent} from './list-grant/list-grant.component';
     declarations: [
         GrantsComponent,
         JhiOtherPublisherModalComponent,
+        JhiDescriptionGrantModalComponent,
         OtherPublisherDialogComponent,
+        DescriptionGrantDialogComponent,
         ListGrantComponent
     ],
     entryComponents: [
-        JhiOtherPublisherModalComponent
+        JhiOtherPublisherModalComponent,
+        JhiDescriptionGrantModalComponent
     ],
     providers: [
         GrantsResolvePagingParams,
-        OtherPublisherModalService
+        OtherPublisherModalService,
+        DescriptionGrantModalService
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [

@@ -11,6 +11,7 @@ import com.avonniv.web.rest.util.PaginationUtil;
 import com.codahale.metrics.annotation.Timed;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.ApiParam;
+import org.jsoup.Jsoup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/grant")
@@ -55,7 +57,14 @@ public class GrantResource {
     public ResponseEntity<List<GrantDTO>> getAllGrant(@ApiParam GrantFilter grantFilter, @ApiParam Pageable pageable) {
         final Page<GrantDTO> page = grantService.getAll(grantFilter, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/grant");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        List<GrantDTO> list = page.getContent().stream().map(grantDTO -> {
+            if (grantDTO.getDescription() != null) {
+                String description = Jsoup.parse(grantDTO.getDescription()).text();
+                grantDTO.setDescription(description);
+            }
+            return grantDTO;
+        }).collect(Collectors.toList());
+        return new ResponseEntity<>(list, headers, HttpStatus.OK);
     }
 
     @GetMapping("/count")

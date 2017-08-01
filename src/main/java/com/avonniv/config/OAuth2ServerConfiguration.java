@@ -87,7 +87,7 @@ public class OAuth2ServerConfiguration {
                 .antMatchers("/api/authenticate").permitAll()
                 .antMatchers("/api/register").permitAll()
                 .antMatchers("/api/grant/**").permitAll()
-                .antMatchers("/api/publishers/all").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/publishers/**").permitAll()
                 .antMatchers("/api/areas/all").permitAll()
                 .antMatchers("/api/profile-info").permitAll()
                 .antMatchers("/api/**").authenticated()

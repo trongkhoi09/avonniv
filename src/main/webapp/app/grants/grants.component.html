@@ -43,8 +43,12 @@
                     </legend>
                     <div class="col-sm-12 publisher">
                         <div *ngFor="let publisher of publisherNotCrawled; let i = index">
-                            <a href="{{publisher.url?publisher.url:'javascript:void(0)'}}"
-                               [target]="publisher.url ? '_blank' : ''">{{publisher.name}}
+                            <!--<a href="{{publisher.url?publisher.url:'javascript:void(0)'}}"-->
+                               <!--[target]="publisher.url ? '_blank' : ''">{{publisher.name}}-->
+                            <!--</a>-->
+
+                            <a [routerLink]="['/', { outlets: { popup: 'other-publisher/'+ publisher.name} }]"
+                               replaceUrl="true">{{publisher.name}}
                             </a>
                         </div>
                     </div>

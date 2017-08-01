@@ -3,7 +3,13 @@ import {RouterModule} from '@angular/router';
 
 import {AvonnivSharedModule} from '../shared';
 
-import {grantsRoute, GrantsComponent} from './';
+import {
+    grantsRoute,
+    GrantsComponent,
+    OtherPublisherModalService,
+    JhiOtherPublisherModalComponent,
+    OtherPublisherDialogComponent
+} from './';
 import {GrantsResolvePagingParams} from './grants.route';
 import {ListGrantComponent} from './list-grant/list-grant.component';
 
@@ -14,11 +20,16 @@ import {ListGrantComponent} from './list-grant/list-grant.component';
     ],
     declarations: [
         GrantsComponent,
+        JhiOtherPublisherModalComponent,
+        OtherPublisherDialogComponent,
         ListGrantComponent
     ],
-    entryComponents: [],
+    entryComponents: [
+        JhiOtherPublisherModalComponent
+    ],
     providers: [
-        GrantsResolvePagingParams
+        GrantsResolvePagingParams,
+        OtherPublisherModalService
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [

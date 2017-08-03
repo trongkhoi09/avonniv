@@ -337,7 +337,7 @@
             <column name="external_id" type="varchar(255)"/>
             <column name="external_url" type="varchar(255)"/>
             <column name="finance_description" type="varchar(1000)"/>
-            <column name="title" type="varchar(255)"/>
+            <column name="title" type="varchar(1000)"/>
             <column name="excerpt" type="varchar(255)"/>
             <column name="description" type="TEXT"/>
             <column name="open_date" type="timestamp"/>
@@ -363,7 +363,7 @@
             </column>
             <column name="grant_id" type="bigint"/>
             <column name="file_info_id" type="bigint"/>
-            <column name="title" type="varchar(255)"/>
+            <column name="title" type="varchar(1000)"/>
             <column name="description" type="TEXT"/>
             <column name="status" type="INT"/>
             <column name="created_date" type="timestamp" defaultValueDate="${now}">

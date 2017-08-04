@@ -42,13 +42,13 @@ public class GrantServiceTest {
     @Autowired
     private GrantProgramRepository grantProgramRepository;
 
-    @Autowired
     private GrantService grantService;
 
     private GrantProgramDTO grantProgramDTO;
 
     @Before
     public void setUp() throws Exception {
+        grantService = new GrantService(grantRepository, grantProgramRepository);
         Set<Area> areas = new HashSet<>();
         for (int i = 0; i < 4; i++) {
             Area area = new Area();
@@ -106,6 +106,7 @@ public class GrantServiceTest {
 
     @Test
     public void getAll() throws Exception {
+        grantRepository.deleteAll();
         assertThat(grantService.getAll().size()).isEqualTo(0);
         for (int i = 0; i < 4; i++) {
             Grant grant = new Grant();

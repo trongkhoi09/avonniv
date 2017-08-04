@@ -4,6 +4,7 @@ import com.avonniv.AvonnivApp;
 import com.avonniv.domain.Publisher;
 import com.avonniv.repository.PublisherRepository;
 import com.avonniv.service.dto.PublisherDTO;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = AvonnivApp.class)
 @Transactional
 public class PublisherServiceTest {
-    @Autowired
+
     private PublisherService publisherService;
 
     @Autowired
     private PublisherRepository publisherRepository;
 
+    @Before
+    public void setup() {
+        publisherService = new PublisherService(publisherRepository);
+    }
     @Test
     public void createPublisher() throws Exception {
         assertThat(publisherRepository.findOneByName("Publisher_Test_1").isPresent()).isFalse();

@@ -119,6 +119,7 @@ public class GrantProgramServiceTest {
 
     @Test
     public void getAll() throws Exception {
+        grantProgramRepository.deleteAll();
         for (int i = 0; i < 4; i++) {
             GrantProgram grantProgram = new GrantProgram();
             grantProgram.setAreas(areaDTOS

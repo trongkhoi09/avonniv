@@ -84,7 +84,6 @@ public class FetchDataTillvaxtVerketService {
                     saveGrant(name, element.attr("href"), grantProgramDTO);
                 }
             }
-            System.out.println(elements.size());
             Elements elementsNext = doc.select(".sv-responsive .lp-main .lp-content .lp-list-page-list .lp-list-page-list-pagination .lp-next a");
             if (elementsNext.size() == 1) {
                 getData(name, "https://tillvaxtverket.se" + elementsNext.first().attr("href"), grantProgramDTO);

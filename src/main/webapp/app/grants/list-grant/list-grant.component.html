@@ -24,9 +24,9 @@
                 <tr *ngFor="let grantDTO of grantDTOs; let i = index" class="row m-0">
                     <td class="col-1">{{grantDTO.grantProgramDTO.publisherDTO.name}}</td>
                     <td class="col-2">
-                        <a href="{{grantDTO.grantProgramDTO.externalUrl?grantDTO.grantProgramDTO.externalUrl:'javascript:void(0)'}}"
-                           [target]="grantDTO.grantProgramDTO.externalUrl ? '_blank' : ''">
-                            {{grantDTO.grantProgramDTO.name}}
+                        <a href="{{grantDTO.externalUrl?grantDTO.externalUrl:'javascript:void(0)'}}"
+                           [target]="grantDTO.externalUrl ? '_blank' : ''">
+                            {{grantDTO.title}}
                         </a>
                     </td>
                     <!--<td [ngClass]="isAdmin()?'col-2':'col-3'" ngbPopover="{{grantDTO.description}}"-->

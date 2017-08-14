@@ -63,7 +63,12 @@ public class AreaResource {
     @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity createArea(@Valid @RequestBody AreaDTO areaDTO) throws URISyntaxException {
         log.debug("REST request to save Area : {}", areaDTO);
-
+        areaDTO.setName(areaDTO.getName().trim());
+        if (areaDTO.getName().isEmpty()) {
+            return ResponseEntity.badRequest()
+                .headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "areaEmpty", "Name can not empty"))
+                .body(null);
+        }
         if (areaDTO.getId() != null) {
             return ResponseEntity.badRequest()
                 .headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new area cannot already have an ID"))
@@ -74,7 +79,7 @@ public class AreaResource {
                 .body(null);
         } else {
             Area newArea = areaService.createArea(areaDTO);
-            return ResponseEntity.created(new URI("/api/areas/" + newArea.getName()))
+            return ResponseEntity.created(new URI("/api/areas/" + newArea.getName().replace(" ", "%20")))
                 .headers(HeaderUtil.createAlert("areaManagement.created", newArea.getName()))
                 .body(newArea);
         }

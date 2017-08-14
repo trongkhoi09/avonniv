@@ -64,6 +64,7 @@ public class FetchDataSMEService {
     @Scheduled(fixedDelay = 43200000, initialDelay = 1000)
     public void autoFetchDataFromSME() {
         try {
+            Instant now = Instant.now();
             String name = "SME instrument";
             Optional<Publisher> publisherOptional = publisherService.getPublisherByName(name);
             PublisherDTO publisherDTO = publisherOptional.map(PublisherDTO::new).orElse(null);
@@ -119,6 +120,7 @@ public class FetchDataSMEService {
                                         getURLTopic(urlFetch.getFrameworkProgramme(), topicFileName),
                                         null
                                     );
+                                    Util.setStatus(grantDTO, now);
 
                                     for (int j = 0; j < listCallData.size(); j++) {
                                         boolean check = false;

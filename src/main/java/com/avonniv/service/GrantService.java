@@ -11,14 +11,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -100,7 +98,7 @@ public class GrantService {
     @Transactional(readOnly = true)
     public Page<GrantDTO> getAll(GrantFilter grantFilter, Pageable pageable) {
         if (grantFilter.getSearch() != null && !grantFilter.getSearch().trim().isEmpty()) {
-            return grantRepository.findAllByGrantProgramNameLikeAndCloseDateAfter(pageable, "%" + grantFilter.getSearch().trim() + "%", Instant.now()).map(GrantDTO::new);
+            return grantRepository.findAllByGrantProgramNameLikeAndStatusIn(pageable, "%" + grantFilter.getSearch().trim() + "%", Collections.singletonList(GrantDTO.Status.open.getValue())).map(GrantDTO::new);
         }
         Instant instant = Instant.now();
         List<String> listPublisher = new ArrayList<>();
@@ -108,19 +106,13 @@ public class GrantService {
 //        List<Integer> listType = new ArrayList<>();
         if (grantFilter.isOpenGrant()) {
             if (grantFilter.isComingGrant()) {
-                return grantRepository.findAllByGrantProgram_Publisher_NameInAndCloseDateAfterOrGrantProgram_Publisher_NameInAndStatusIn(
-                    pageable, listPublisher, instant, listPublisher, Arrays.asList(GrantDTO.Status.open.getValue(), GrantDTO.Status.coming.getValue())
-                ).map(GrantDTO::new);
+                return grantRepository.findAllByGrantProgram_Publisher_NameInAndStatusIn(pageable, listPublisher, Arrays.asList(GrantDTO.Status.open.getValue(), GrantDTO.Status.coming.getValue())).map(GrantDTO::new);
             } else {
-                return grantRepository.findAllByGrantProgram_Publisher_NameInAndOpenDateBeforeAndCloseDateAfterOrGrantProgram_Publisher_NameInAndOpenDateIsNullAndStatus(
-                    pageable, listPublisher, instant, instant, listPublisher, GrantDTO.Status.open.getValue()
-                ).map(GrantDTO::new);
+                return grantRepository.findAllByGrantProgram_Publisher_NameInAndStatusIn(pageable, listPublisher, Collections.singletonList(GrantDTO.Status.open.getValue())).map(GrantDTO::new);
             }
         } else {
             if (grantFilter.isComingGrant()) {
-                return grantRepository.findAllByGrantProgram_Publisher_NameInAndOpenDateAfterAndCloseDateAfterOrGrantProgram_Publisher_NameInAndOpenDateIsNullAndStatus(
-                    pageable, listPublisher, instant, instant, listPublisher, GrantDTO.Status.coming.getValue()
-                ).map(GrantDTO::new);
+                return grantRepository.findAllByGrantProgram_Publisher_NameInAndStatusIn(pageable, listPublisher, Collections.singletonList(GrantDTO.Status.coming.getValue())).map(GrantDTO::new);
             } else {
                 return new PageImpl<>(new ArrayList<>(), pageable, 0L);
             }
@@ -132,8 +124,36 @@ public class GrantService {
     }
 
     public int getCount() {
+        return grantRepository.countAllByStatusAndGrantProgram_Publisher_CrawledIsTrue(GrantDTO.Status.open.getValue());
+    }
+
+    //    @Scheduled(cron = "0 0 1 * * ?")
+    @Scheduled(fixedDelay = 10000)
+    public void updateStatusForGrant() {
         Instant instant = Instant.now();
-        return grantRepository.countAllByOpenDateBeforeAndCloseDateAfter(instant, instant) +
-            grantRepository.countAllByStatusAndOpenDateIsNull(GrantDTO.Status.open.getValue());
+        updateStatusForList(
+            grantRepository.findAllByStatusInAndCloseDateBefore(Arrays.asList(GrantDTO.Status.coming.getValue(), GrantDTO.Status.undefined.getValue()), instant),
+            GrantDTO.Status.close.getValue()
+        );
+        updateStatusForList(
+            grantRepository.findAllByStatusInAndOpenDateAfter(Collections.singletonList(GrantDTO.Status.undefined.getValue()), instant),
+            GrantDTO.Status.coming.getValue()
+        );
+        updateStatusForList(
+            grantRepository.findAllByStatusInAndOpenDateBefore(Arrays.asList(GrantDTO.Status.coming.getValue(), GrantDTO.Status.undefined.getValue()), instant),
+            GrantDTO.Status.open.getValue()
+        );
+//        List<Grant> list = grantRepository.findAllByStatus(GrantDTO.Status.undefined.getValue());
+//        System.out.println(list.size());
+    }
+
+    private void updateStatusForList(List<Grant> list, int status) {
+        List<GrantDTO> grantsOpen = list.stream()
+            .map(GrantDTO::new)
+            .collect(Collectors.toList());
+        for (GrantDTO grant : grantsOpen) {
+            grant.setStatus(status);
+            update(grant);
+        }
     }
 }

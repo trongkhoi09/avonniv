@@ -57,6 +57,7 @@ public class FetchDataVinnovaService {
     @Scheduled(fixedDelay = 43200000)
     public void autoFetchDataFromVinnova() {
         try {
+            Instant now = Instant.now();
             String name = "Vinnova";
             Optional<Publisher> publisherOptional = publisherService.getPublisherByName(name);
             Optional<CrawlHistory> crawlHistoryOptional = crawHistoryService.findByName(name);
@@ -117,6 +118,7 @@ public class FetchDataVinnovaService {
                                     null,
                                     null
                                 );
+                                Util.setStatus(grantDTO, now);
                                 for (int k = 0; k < listURL.size(); k++) {
                                     DataFetch dataFetch = listURL.get(k);
                                     if (dataFetch.getTitle().equals(grantDTO.getTitle())) {

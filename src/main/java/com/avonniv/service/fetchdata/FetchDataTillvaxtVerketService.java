@@ -45,34 +45,38 @@ public class FetchDataTillvaxtVerketService {
             String name = "Tillväxtverket";
             Optional<Publisher> publisherOptional = publisherService.getPublisherByName(name);
             PublisherDTO publisherDTO = publisherOptional.map(PublisherDTO::new).orElse(null);
-            String externalUrl = "https://tillvaxtverket.se/vara-tjanster/utlysningar";
-            String externalIdGrantProgram = name + "_" + externalUrl;
-            Optional<GrantProgram> optional = grantProgramService.getByExternalId(externalIdGrantProgram);
-            GrantProgram grantProgram;
-            if (optional.isPresent()) {
-                grantProgram = optional.get();
-            } else {
-                GrantProgramDTO grantProgramDTO = new GrantProgramDTO(
-                    null, null, null, 0,
-                    "Tillväxtverket grant program",
-                    null,
-                    GrantProgramDTO.TYPE.PUBLIC.getValue(),
-                    publisherDTO,
-                    null,
-                    externalIdGrantProgram,
-                    externalUrl,
-                    null
-                );
-                grantProgram = grantProgramService.createGrant(grantProgramDTO);
-            }
-            GrantProgramDTO grantProgramDTO = new GrantProgramDTO(grantProgram);
-            getData(name, externalUrl, grantProgramDTO);
+            fetDataFromURL(name, publisherDTO, "https://tillvaxtverket.se/vara-tjanster/utlysningar", false);
+            fetDataFromURL(name, publisherDTO, "https://tillvaxtverket.se/vara-tjanster/utlysningar/planerade-utlysningar", true);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void getData(String name, String url, GrantProgramDTO grantProgramDTO) {
+    private void fetDataFromURL(String name, PublisherDTO publisherDTO, String externalUrl, boolean planned) {
+        String externalIdGrantProgram = name + "_" + externalUrl;
+        Optional<GrantProgram> optional = grantProgramService.getByExternalId(externalIdGrantProgram);
+        GrantProgram grantProgram;
+        if (optional.isPresent()) {
+            grantProgram = optional.get();
+        } else {
+            GrantProgramDTO grantProgramDTO = new GrantProgramDTO(
+                null, null, null, 0,
+                planned ? "Tillväxtverket grant program planned" : "Tillväxtverket grant program",
+                null,
+                GrantProgramDTO.TYPE.PUBLIC.getValue(),
+                publisherDTO,
+                null,
+                externalIdGrantProgram,
+                externalUrl,
+                null
+            );
+            grantProgram = grantProgramService.createGrant(grantProgramDTO);
+        }
+        GrantProgramDTO grantProgramDTO = new GrantProgramDTO(grantProgram);
+        getData(name, externalUrl, grantProgramDTO, planned);
+    }
+
+    private void getData(String name, String url, GrantProgramDTO grantProgramDTO, boolean planned) {
         try {
             Document doc = Jsoup.connect(url)
                 .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36")
@@ -81,30 +85,31 @@ public class FetchDataTillvaxtVerketService {
             Elements elements = doc.select(".sv-responsive .lp-main .lp-content .lp-list-page-list .lp-list-page-list-item strong a");
             if (elements.size() != 0) {
                 for (Element element : elements) {
-                    saveGrant(name, element.attr("href"), grantProgramDTO);
+                    saveGrant(name, element.attr("href"), grantProgramDTO, planned);
                 }
             }
             Elements elementsNext = doc.select(".sv-responsive .lp-main .lp-content .lp-list-page-list .lp-list-page-list-pagination .lp-next a");
             if (elementsNext.size() == 1) {
-                getData(name, "https://tillvaxtverket.se" + elementsNext.first().attr("href"), grantProgramDTO);
+                getData(name, "https://tillvaxtverket.se" + elementsNext.first().attr("href"), grantProgramDTO, planned);
             }
         } catch (Exception e) {
         }
     }
 
-    private void saveGrant(String name, String url, GrantProgramDTO grantProgramDTO) {
+    private void saveGrant(String name, String url, GrantProgramDTO grantProgramDTO, boolean planned) {
         try {
             String externalIdGrant = name + "_" + url;
             Optional<Grant> grantOptional = grantService.getByExternalId(externalIdGrant);
             if (!grantOptional.isPresent()) {
-                Instant openDate = getDateFromURL(url);
+//                Instant openDate = getDateFromURL(url);
                 GrantDTO grantDTO = new GrantDTO(
-                    null, null, null, 0,
+                    null, null, null,
+                    planned ? GrantDTO.Status.coming.getValue() : GrantDTO.Status.open.getValue(),
                     grantProgramDTO,
                     null,
                     null,
                     null,
-                    openDate,
+                    null,
                     null,
                     null,
                     null,
@@ -119,20 +124,24 @@ public class FetchDataTillvaxtVerketService {
                     .get();
                 Elements elements = doc.select(".sv-vertical .sv-layout .lp-application-metadata span");
                 if (elements.size() == 1) {
-                    Instant closeDate = getDateFromString(elements.first().text());
-                    grantDTO.setCloseDate(closeDate);
+                    Instant date = getDateFromString(elements.first().text(), planned);
+                    if (planned) {
+                        grantDTO.setOpenDate(date);
+                    } else {
+                        grantDTO.setCloseDate(date);
+                    }
                 }
                 Elements elementContent = doc.select(".sv-vertical .sv-layout .pagecontent");
                 if (elementContent.size() == 1) {
                     Element element = elementContent.first();
                     grantDTO.setTitle(element.select(".sv-text-portlet-content h1").first().text());
                     Elements elementDes = element.select(".sv-text-portlet-content");
-
-                    String description = "";
-                    for (int i = 1; i < elementDes.size(); i++) {
-                        description = description + elementDes.get(i).text();
+                    if (elementDes.size() > 2) {
+                        grantDTO.setDescription(elementDes.get(1).text());
                     }
-                    grantDTO.setDescription(description);
+//                    for (int i = 1; i < elementDes.size(); i++) {
+//                        description = description + elementDes.get(i).text();
+//                    }
                 }
                 grantService.createGrantCall(grantDTO);
             }
@@ -149,9 +158,9 @@ public class FetchDataTillvaxtVerketService {
         }
     }
 
-    private Instant getDateFromString(String closeDateString) {
+    private Instant getDateFromString(String closeDateString, boolean planned) {
         try {
-            String dateString = closeDateString.replaceAll("Sista ansökningsdag:", "").trim();
+            String dateString = closeDateString.replaceAll(planned ? "Utlysningen planeras öppna den:" : "Sista ansökningsdag:", "").trim();
             dateString = dateString.replaceAll("januari", "01");
             dateString = dateString.replaceAll("februari", "02");
             dateString = dateString.replaceAll("mars", "03");

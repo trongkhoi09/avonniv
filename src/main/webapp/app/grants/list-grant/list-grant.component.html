@@ -26,7 +26,8 @@
                     <td class="col-2">
                         <a href="{{grantDTO.externalUrl?grantDTO.externalUrl:'javascript:void(0)'}}"
                            [target]="grantDTO.externalUrl ? '_blank' : ''">
-                            {{grantDTO.title}}
+                            <!--{{grantDTO.title}}-->
+                            {{grantDTO.status}}
                         </a>
                     </td>
                     <!--<td [ngClass]="isAdmin()?'col-2':'col-3'" ngbPopover="{{grantDTO.description}}"-->

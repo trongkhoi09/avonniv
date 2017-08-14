@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {NgbActiveModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {ActivatedRoute} from '@angular/router';
 import {OtherPublisherModalService} from './other-publisher-modal.service';
@@ -6,7 +6,11 @@ import {PublisherDTO} from '../../shared';
 
 @Component({
     selector: 'jhi-other-publisher-modal',
-    templateUrl: './other-publisher.component.html'
+    templateUrl: './other-publisher.component.html',
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: [
+        'other-publisher.scss'
+    ]
 })
 export class JhiOtherPublisherModalComponent implements OnInit {
     otherPublisher: PublisherDTO;

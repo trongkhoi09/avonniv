@@ -27,7 +27,7 @@ export class OtherPublisherModalService {
     }
 
     otherPublisherModalRef(component: Component, otherPublisher: PublisherDTO): NgbModalRef {
-        const modalRef = this.modalService.open(component, {backdrop: 'static'});
+        const modalRef = this.modalService.open(component, {backdrop: 'static', windowClass: 'other-publisher'});
         modalRef.componentInstance.otherPublisher = otherPublisher;
         modalRef.result.then((result) => {
             this.router.navigate([{outlets: {popup: null}}], {replaceUrl: true});

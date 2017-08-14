@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {GrantService} from '../../shared/grant/grant.service';
 import {ITEMS_PER_PAGE} from '../../shared/constants/pagination.constants';
 import {Principal, GrantDTO} from '../../shared';
+
 @Component({
     selector: 'jhi-list-grant',
     templateUrl: './list-grant.component.html',
@@ -15,7 +16,7 @@ import {Principal, GrantDTO} from '../../shared';
 export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
 
     @Input() data: any = {
-        navigate : '/grants',
+        navigate: '/grants',
         search: ''
     };
 
@@ -121,5 +122,22 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
 
     private onError(error) {
         this.alertService.error(error.error, error.message, null);
+    }
+
+    sliceDescription(grantDTO) {
+        const description = grantDTO.description;
+        let index = 200;
+        if (description != null && description.length > index) {
+            while (description[index] !== ' ') {
+                index--;
+            }
+            return description.substring(0, index);
+        }
+        return description;
+    }
+    isSliceDescription(grantDTO) {
+        const description = grantDTO.description;
+        const index = 200;
+        return (description != null && description.length > index);
     }
 }

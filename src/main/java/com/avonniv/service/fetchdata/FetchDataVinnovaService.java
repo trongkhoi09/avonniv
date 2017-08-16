@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-
 @Service
 public class FetchDataVinnovaService {
 
@@ -121,7 +120,7 @@ public class FetchDataVinnovaService {
                                 Util.setStatus(grantDTO, now);
                                 for (int k = 0; k < listURL.size(); k++) {
                                     DataFetch dataFetch = listURL.get(k);
-                                    if (dataFetch.getTitle().equals(grantDTO.getTitle())) {
+                                    if (dataFetch.getTitle().trim().equals(grantDTO.getTitle().trim())) {
                                         grantDTO.setFinanceDescription(dataFetch.getFinanceDescription());
                                         grantDTO.setExternalUrl(dataFetch.getExternalUrl());
                                         listURL.remove(k);

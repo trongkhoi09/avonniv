@@ -49,9 +49,9 @@ public class Util {
             grantDTO.setStatus(GrantDTO.Status.close.getValue());
         } else if (grantDTO.getOpenDate() != null) {
             if (grantDTO.getOpenDate().getEpochSecond() > now.getEpochSecond()) {
-                grantDTO.setStatus(GrantDTO.Status.open.getValue());
-            } else {
                 grantDTO.setStatus(GrantDTO.Status.coming.getValue());
+            } else {
+                grantDTO.setStatus(GrantDTO.Status.open.getValue());
             }
         }
     }

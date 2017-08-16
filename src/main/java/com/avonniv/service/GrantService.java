@@ -6,6 +6,7 @@ import com.avonniv.domain.GrantProgram;
 import com.avonniv.repository.GrantProgramRepository;
 import com.avonniv.repository.GrantRepository;
 import com.avonniv.service.dto.GrantDTO;
+import com.avonniv.service.fetchdata.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -81,6 +82,7 @@ public class GrantService {
                 grantCall.setProjectStartDate(grantDTO.getProjectStartDate());
                 grantCall.setFinanceDescription(grantDTO.getFinanceDescription());
                 grantCall.setExternalUrl(grantDTO.getExternalUrl());
+                Util.setStatus(grantDTO, Instant.now());
                 grantCall.setStatus(grantDTO.getStatus());
 
                 GrantProgram grantProgram = grantProgramRepository.findOne(grantDTO.getGrantProgramDTO().getId());
@@ -127,8 +129,8 @@ public class GrantService {
         return grantRepository.countAllByStatusAndGrantProgram_Publisher_CrawledIsTrue(GrantDTO.Status.open.getValue());
     }
 
-    //    @Scheduled(cron = "0 0 1 * * ?")
-    @Scheduled(fixedDelay = 10000)
+    @Scheduled(cron = "0 0 0 * * ?")
+//    @Scheduled(fixedDelay = 10000)
     public void updateStatusForGrant() {
         Instant instant = Instant.now();
         updateStatusForList(

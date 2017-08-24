@@ -44,7 +44,27 @@ public class Util {
         }
     }
 
+    public static String convertStringMonthToNumber(String date) {
+        String dateString = date;
+        dateString = dateString.toLowerCase().replaceAll("januari", "01");
+        dateString = dateString.replaceAll("februari", "02");
+        dateString = dateString.replaceAll("mars", "03");
+        dateString = dateString.replaceAll("april", "04");
+        dateString = dateString.replaceAll("maj", "05");
+        dateString = dateString.replaceAll("juni", "06");
+        dateString = dateString.replaceAll("juli", "07");
+        dateString = dateString.replaceAll("augusti", "08");
+        dateString = dateString.replaceAll("september", "09");
+        dateString = dateString.replaceAll("oktober", "10");
+        dateString = dateString.replaceAll("november", "11");
+        dateString = dateString.replaceAll("december", "12");
+        return dateString;
+    }
+
     public static void setStatus(GrantDTO grantDTO, Instant now) {
+        if (grantDTO.getStatus() == GrantDTO.Status.un_publish.getValue()) {
+            return;
+        }
         if (grantDTO.getCloseDate() != null && grantDTO.getCloseDate().getEpochSecond() < now.getEpochSecond()) {
             grantDTO.setStatus(GrantDTO.Status.close.getValue());
         } else if (grantDTO.getOpenDate() != null) {

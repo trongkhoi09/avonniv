@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.Normalizer;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -102,32 +103,46 @@ public class FetchDataVinnovaService {
                             JSONObject object = AnsokningsomgangLista.getJSONObject(j);
                             String externalIdGrant = name + "_" + Util.readStringJSONObject(object, "Diarienummer");
                             Optional<Grant> grantOptional = grantService.getByExternalId(externalIdGrant);
-                            if (!grantOptional.isPresent()) {
-                                GrantDTO grantDTO = new GrantDTO(
-                                    null, null, null, 0,
-                                    grantProgramDTO,
-                                    Util.readStringJSONObject(object, "Titel"),
-                                    null,
-                                    Util.readStringJSONObject(object, "Beskrivning"),
-                                    readDateJSONObject(object, "Oppningsdatum"),
-                                    readDateJSONObject(object, "Stangningsdatum"),
-                                    readDateJSONObject(object, "UppskattatBeslutsdatum"),
-                                    readDateJSONObject(object, "TidigastProjektstart"),
-                                    externalIdGrant,
-                                    null,
-                                    null
-                                );
-                                Util.setStatus(grantDTO, now);
-                                for (int k = 0; k < listURL.size(); k++) {
-                                    DataFetch dataFetch = listURL.get(k);
-                                    if (dataFetch.getTitle().trim().equals(grantDTO.getTitle().trim())) {
-                                        grantDTO.setFinanceDescription(dataFetch.getFinanceDescription());
-                                        grantDTO.setExternalUrl(dataFetch.getExternalUrl());
-                                        listURL.remove(k);
-                                        break;
-                                    }
+                            GrantDTO grantDTO = grantOptional.map(GrantDTO::new).orElseGet(GrantDTO::new);
+                            grantDTO.setExternalId(externalIdGrant);
+                            grantDTO.setGrantProgramDTO(grantProgramDTO);
+                            grantDTO.setTitle(Util.readStringJSONObject(object, "Titel"));
+                            grantDTO.setDescription(Util.readStringJSONObject(object, "Beskrivning"));
+                            grantDTO.setOpenDate(readDateJSONObject(object, "Oppningsdatum"));
+                            grantDTO.setCloseDate(readDateJSONObject(object, "Stangningsdatum"));
+                            grantDTO.setAnnouncedDate(readDateJSONObject(object, "UppskattatBeslutsdatum"));
+                            grantDTO.setProjectStartDate(readDateJSONObject(object, "TidigastProjektstart"));
+
+                            String month = Util.readStringJSONObject(object, "AnnonseringslägePeriod");
+                            String year = Util.readStringJSONObject(object, "AnnonseringslägeÅr");
+                            if (year != null && !year.equals("null")) {
+                                grantDTO.setStatus(GrantDTO.Status.coming.getValue());
+                                if (grantDTO.getOpenDate() == null) {
+                                    grantDTO.setOpenDate(getDateByYearAndMonth(year, month));
                                 }
+                            }
+                            String publik = Util.readStringJSONObject(object, "Publik");
+                            if (publik != null && publik.equals("0")) {
+                                grantDTO.setStatus(GrantDTO.Status.un_publish.getValue());
+                            } else {
+                                if (grantDTO.getStatus() == GrantDTO.Status.un_publish.getValue()) {
+                                    grantDTO.setStatus(GrantDTO.Status.undefined.getValue());
+                                }
+                                Util.setStatus(grantDTO, now);
+                            }
+                            for (int k = 0; k < listURL.size(); k++) {
+                                DataFetch dataFetch = listURL.get(k);
+                                if (dataFetch.getTitle().trim().equals(grantDTO.getTitle().trim())) {
+                                    grantDTO.setFinanceDescription(dataFetch.getFinanceDescription());
+                                    grantDTO.setExternalUrl(dataFetch.getExternalUrl());
+                                    listURL.remove(k);
+                                    break;
+                                }
+                            }
+                            if (!grantOptional.isPresent()) {
                                 grantService.createGrantCall(grantDTO);
+                            } else {
+                                grantService.update(grantDTO);
                             }
                         }
                     }
@@ -142,6 +157,17 @@ public class FetchDataVinnovaService {
             e.printStackTrace();
         }
 
+    }
+
+    private Instant getDateByYearAndMonth(String year, String month) {
+        try {
+            if (month == null || month.equals("null")) {
+                month = "January";
+            }
+            return new SimpleDateFormat("yyyy MM dd").parse(Util.convertStringMonthToNumber(year + " " + month + " 01")).toInstant();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     private List<DataFetch> getURLGrant(String url) {

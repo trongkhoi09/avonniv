@@ -161,18 +161,7 @@ public class FetchDataTillvaxtVerketService {
     private Instant getDateFromString(String closeDateString, boolean planned) {
         try {
             String dateString = closeDateString.replaceAll(planned ? "Utlysningen planeras öppna den:" : "Sista ansökningsdag:", "").trim();
-            dateString = dateString.replaceAll("januari", "01");
-            dateString = dateString.replaceAll("februari", "02");
-            dateString = dateString.replaceAll("mars", "03");
-            dateString = dateString.replaceAll("april", "04");
-            dateString = dateString.replaceAll("maj", "05");
-            dateString = dateString.replaceAll("juni", "06");
-            dateString = dateString.replaceAll("juli", "07");
-            dateString = dateString.replaceAll("augusti", "08");
-            dateString = dateString.replaceAll("september", "09");
-            dateString = dateString.replaceAll("oktober", "10");
-            dateString = dateString.replaceAll("november", "11");
-            dateString = dateString.replaceAll("december", "12");
+            dateString = Util.convertStringMonthToNumber(dateString);
             if (dateString.length() == 9) {
                 dateString = "0" + dateString;
             }

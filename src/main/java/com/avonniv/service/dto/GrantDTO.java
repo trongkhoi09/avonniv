@@ -148,7 +148,7 @@ public class GrantDTO extends AbstractEntityDTO {
     }
 
     public enum Status {
-        open(1), close(-1), coming(2), undefined(0);
+        open(1), close(-1), coming(2), undefined(0), un_publish(3);
 
         private final int value;
 

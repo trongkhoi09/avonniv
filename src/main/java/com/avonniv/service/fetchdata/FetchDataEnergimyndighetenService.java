@@ -48,7 +48,7 @@ public class FetchDataEnergimyndighetenService {
     public void autoFetchDataFromFormas() {
         try {
             String name = "Energimyndigheten";
-            Optional<Publisher> publisherOptional = publisherService.getPublisherByName(name);
+            Optional<Publisher> publisherOptional = publisherService.getById(13L);
             PublisherDTO publisherDTO;
             if (publisherOptional.isPresent()) {
                 publisherDTO = new PublisherDTO(publisherOptional.get());

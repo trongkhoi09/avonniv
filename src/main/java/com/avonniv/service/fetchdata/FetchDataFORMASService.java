@@ -46,7 +46,7 @@ public class FetchDataFORMASService {
     public void autoFetchDataFromFormas() {
         try {
             String name = "Formas";
-            Optional<Publisher> publisherOptional = publisherService.getPublisherByName(name);
+            Optional<Publisher> publisherOptional = publisherService.getById(8L);
             PublisherDTO publisherDTO = publisherOptional.map(PublisherDTO::new).orElse(null);
             String externalUrl = "http://formas.se/sv/Finansiering/Utlysningar/";
             String externalIdGrantProgram = name + "_" + externalUrl;

@@ -43,7 +43,7 @@ public class FetchDataTillvaxtVerketService {
     public void autoFetchDataFromFormas() {
         try {
             String name = "Tillväxtverket";
-            Optional<Publisher> publisherOptional = publisherService.getPublisherByName(name);
+            Optional<Publisher> publisherOptional = publisherService.getById(7L);
             PublisherDTO publisherDTO = publisherOptional.map(PublisherDTO::new).orElse(null);
             fetDataFromURL(name, publisherDTO, "https://tillvaxtverket.se/vara-tjanster/utlysningar", false);
             fetDataFromURL(name, publisherDTO, "https://tillvaxtverket.se/vara-tjanster/utlysningar/planerade-utlysningar", true);

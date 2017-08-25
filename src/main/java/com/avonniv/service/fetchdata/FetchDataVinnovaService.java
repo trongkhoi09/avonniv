@@ -17,6 +17,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,7 @@ import java.util.regex.Pattern;
 
 @Service
 public class FetchDataVinnovaService {
+    private final Logger log = LoggerFactory.getLogger(FetchDataVinnovaService.class);
 
     private final PublisherService publisherService;
 
@@ -59,7 +62,7 @@ public class FetchDataVinnovaService {
         try {
             Instant now = Instant.now();
             String name = "Vinnova";
-            Optional<Publisher> publisherOptional = publisherService.getPublisherByName(name);
+            Optional<Publisher> publisherOptional = publisherService.getById(1L);
             Optional<CrawlHistory> crawlHistoryOptional = crawHistoryService.findByName(name);
             //1483228800L = Sunday, January 1, 2017 12:00:00 AM
             Instant lastDateCrawl = Instant.ofEpochSecond(1483228800L);
@@ -185,7 +188,11 @@ public class FetchDataVinnovaService {
                 DataFetch dataFetch = new DataFetch();
                 dataFetch.setExternalUrl("https://www.vinnova.se" + (element.select(".medium-15 .element-link--arrow-after").attr("href")));
                 getDataFromURL(dataFetch);
-                listURL.add(dataFetch);
+                if (dataFetch.getTitle() != null) {
+                    listURL.add(dataFetch);
+                } else {
+                    log.error("Title null",dataFetch.getExternalUrl());
+                }
             }
             return listURL;
         } catch (Exception e) {

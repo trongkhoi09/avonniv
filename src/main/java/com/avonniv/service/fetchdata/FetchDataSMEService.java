@@ -66,7 +66,7 @@ public class FetchDataSMEService {
         try {
             Instant now = Instant.now();
             String name = "SME instrument";
-            Optional<Publisher> publisherOptional = publisherService.getPublisherByName(name);
+            Optional<Publisher> publisherOptional = publisherService.getById(9L);
             PublisherDTO publisherDTO = publisherOptional.map(PublisherDTO::new).orElse(null);
             List<URLFetch> listURLFetch = getListURLFetch();
             for (URLFetch urlFetch : listURLFetch) {

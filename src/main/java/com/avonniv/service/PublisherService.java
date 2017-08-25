@@ -62,6 +62,7 @@ public class PublisherService {
         return publisherRepository.findAll().stream().map(PublisherDTO::new).collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public Optional<Publisher> getById(Long id) {
         return Optional.of(publisherRepository.findOne(id));
     }

@@ -64,6 +64,10 @@ public class PublisherService {
 
     @Transactional(readOnly = true)
     public Optional<Publisher> getById(Long id) {
+        Publisher publisher = publisherRepository.findOne(id);
+        if (publisher == null) {
+            return Optional.empty();
+        }
         return Optional.of(publisherRepository.findOne(id));
     }
 

@@ -51,6 +51,7 @@ public class GrantService {
         GrantProgram grantProgram = grantProgramRepository.findOne(grantDTO.getGrantProgramDTO().getId());
         newGrant.setGrantProgram(grantProgram);
         newGrant.setStatus(grantDTO.getStatus());
+        newGrant.setDataFromUrl(grantDTO.getDataFromUrl());
 
         grantRepository.save(newGrant);
         log.debug("Created Information for Grant: {}", newGrant);
@@ -84,6 +85,7 @@ public class GrantService {
                 grantCall.setExternalUrl(grantDTO.getExternalUrl());
                 Util.setStatus(grantDTO, Instant.now());
                 grantCall.setStatus(grantDTO.getStatus());
+                grantCall.setDataFromUrl(grantDTO.getDataFromUrl());
 
                 GrantProgram grantProgram = grantProgramRepository.findOne(grantDTO.getGrantProgramDTO().getId());
                 grantCall.setGrantProgram(grantProgram);

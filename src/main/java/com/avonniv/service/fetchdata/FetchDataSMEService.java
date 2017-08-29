@@ -71,7 +71,8 @@ public class FetchDataSMEService {
             List<URLFetch> listURLFetch = getListURLFetch();
             for (URLFetch urlFetch : listURLFetch) {
                 String json = Util.readUrl(getURLTopicAPI(urlFetch.getFrameworkProgramme()));
-                List<CallData> listCallData = getListCallData(getURLCallAPI(urlFetch.getFrameworkProgramme()));
+                String URLCallAPI = getURLCallAPI(urlFetch.getFrameworkProgramme());
+                List<CallData> listCallData = getListCallData(URLCallAPI);
                 JSONObject object = new JSONObject(json);
                 if (object.has("topicData")) {
                     object = object.getJSONObject("topicData");
@@ -118,7 +119,8 @@ public class FetchDataSMEService {
                                         null,
                                         externalIdGrant,
                                         getURLTopic(urlFetch.getFrameworkProgramme(), topicFileName),
-                                        null
+                                        null,
+                                        URLCallAPI
                                     );
                                     Util.setStatus(grantDTO, now);
 

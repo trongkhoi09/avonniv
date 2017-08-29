@@ -80,11 +80,11 @@ public class FetchDataFORMASService {
                         JSONArray jsonArray = jsonObject.getJSONArray("item");
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObjectItem = jsonArray.getJSONObject(i);
-                            saveGrant(name, grantProgramDTO, jsonObjectItem, urlFetch.getStatus());
+                            saveGrant(name, grantProgramDTO, jsonObjectItem, urlFetch);
                         }
                     } catch (JSONException e) {
                         JSONObject jsonObjectItem = jsonObject.getJSONObject("item");
-                        saveGrant(name, grantProgramDTO, jsonObjectItem, urlFetch.getStatus());
+                        saveGrant(name, grantProgramDTO, jsonObjectItem, urlFetch);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -95,7 +95,8 @@ public class FetchDataFORMASService {
         }
     }
 
-    private void saveGrant(String name, GrantProgramDTO grantProgramDTO, JSONObject jsonObjectItem, int status) throws ParseException, JSONException {
+    private void saveGrant(String name, GrantProgramDTO grantProgramDTO, JSONObject jsonObjectItem, URLFetch urlFetch) throws ParseException, JSONException {
+        int status = urlFetch.getStatus();
         String link = Util.readStringJSONObject(jsonObjectItem, "link");
         String externalIdGrant = name + "_" + link;
         Optional<Grant> grantOptional = grantService.getByExternalId(externalIdGrant);
@@ -113,7 +114,8 @@ public class FetchDataFORMASService {
                 null,
                 externalIdGrant,
                 link,
-                null
+                null,
+                urlFetch.getLink()
             );
 
             String description = Util.readStringJSONObject(jsonObjectItem, "description");

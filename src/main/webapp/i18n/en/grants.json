@@ -24,11 +24,12 @@
         "status": "Status",
         "openDate": "Open Date",
         "closeDate": "Close Date",
-        "announcedDate": "Anounced Date",
+        "announcedDate": "Announced Date",
         "projectStartDate": "Project Start Date",
         "externalId": "External Id",
         "externalUrl": "External Url",
         "financeDescription": "Finance Description",
+        "dataFromUrl": "Data From Url",
         "updated": "An grant is updated"
     },
     "grantProgramEdit": {

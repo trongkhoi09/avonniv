@@ -26,6 +26,8 @@ public class GrantDTO extends AbstractEntityDTO {
 
     private String externalUrl;
 
+    private String dataFromUrl;
+
     private String financeDescription;
 
     public GrantDTO() {
@@ -35,13 +37,13 @@ public class GrantDTO extends AbstractEntityDTO {
         this(grant.getId(), grant.getCreatedDate(), grant.getLastModifiedDate(), grant.getStatus(),
             new GrantProgramDTO(grant.getGrantProgram()), grant.getTitle(), grant.getExcerpt(), grant.getDescription(),
             grant.getOpenDate(), grant.getCloseDate(), grant.getAnnouncedDate(), grant.getProjectStartDate(),
-            grant.getExternalId(), grant.getExternalUrl(), grant.getFinanceDescription());
+            grant.getExternalId(), grant.getExternalUrl(), grant.getFinanceDescription(), grant.getDataFromUrl());
     }
 
     public GrantDTO(Long id, Instant createdDate, Instant lastModifiedDate, int status,
                     GrantProgramDTO grantProgramDTO, String title, String excerpt, String description,
                     Instant openDate, Instant closeDate, Instant announcedDate, Instant projectStartDate,
-                    String externalId, String externalUrl, String financeDescription) {
+                    String externalId, String externalUrl, String financeDescription, String dataFromUrl) {
         this.id = id;
         this.createdDate = createdDate;
         this.lastModifiedDate = lastModifiedDate;
@@ -57,6 +59,7 @@ public class GrantDTO extends AbstractEntityDTO {
         this.externalId = externalId;
         this.externalUrl = externalUrl;
         this.financeDescription = financeDescription;
+        this.dataFromUrl = dataFromUrl;
     }
 
     public GrantProgramDTO getGrantProgramDTO() {
@@ -145,6 +148,14 @@ public class GrantDTO extends AbstractEntityDTO {
 
     public void setFinanceDescription(String financeDescription) {
         this.financeDescription = financeDescription;
+    }
+
+    public String getDataFromUrl() {
+        return dataFromUrl;
+    }
+
+    public void setDataFromUrl(String dataFromUrl) {
+        this.dataFromUrl = dataFromUrl;
     }
 
     public enum Status {

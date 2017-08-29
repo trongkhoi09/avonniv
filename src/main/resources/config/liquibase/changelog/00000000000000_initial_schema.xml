@@ -344,6 +344,7 @@
             <column name="close_date" type="timestamp"/>
             <column name="announced_date" type="timestamp"/>
             <column name="project_start_date" type="timestamp"/>
+            <column name="data_from_url" type="varchar(255)"/>
             <column name="status" type="INT"/>
             <column name="created_date" type="timestamp" defaultValueDate="${now}">
                 <constraints nullable="false"/>

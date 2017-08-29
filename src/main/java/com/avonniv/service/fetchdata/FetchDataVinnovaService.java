@@ -115,7 +115,7 @@ public class FetchDataVinnovaService {
                             grantDTO.setCloseDate(readDateJSONObject(object, "Stangningsdatum"));
                             grantDTO.setAnnouncedDate(readDateJSONObject(object, "UppskattatBeslutsdatum"));
                             grantDTO.setProjectStartDate(readDateJSONObject(object, "TidigastProjektstart"));
-
+                            grantDTO.setDataFromUrl(url);
                             String month = Util.readStringJSONObject(object, "AnnonseringslägePeriod");
                             String year = Util.readStringJSONObject(object, "AnnonseringslägeÅr");
                             if (year != null && !year.equals("null")) {

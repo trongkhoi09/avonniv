@@ -5,6 +5,16 @@
             <jhi-alert></jhi-alert>
             <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
                 <div class="form-group">
+                    <label jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" name="id"
+                           [(ngModel)]="grant.id" readonly>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="grantEdit.dataFromUrl">Data from Url</label>
+                    <input type="text" class="form-control" name="dataFromUrl"
+                           [(ngModel)]="grant.dataFromUrl" readonly>
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="grantEdit.title">Title</label>
                     <input type="text" class="form-control" name="title" #titleInput="ngModel"
                            [(ngModel)]="grant.title" required minlength="1" maxlength="255">

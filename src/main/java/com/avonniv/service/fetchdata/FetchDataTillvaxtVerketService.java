@@ -85,7 +85,7 @@ public class FetchDataTillvaxtVerketService {
             Elements elements = doc.select(".sv-responsive .lp-main .lp-content .lp-list-page-list .lp-list-page-list-item strong a");
             if (elements.size() != 0) {
                 for (Element element : elements) {
-                    saveGrant(name, element.attr("href"), grantProgramDTO, planned);
+                    saveGrant(name, element.attr("href"), grantProgramDTO, planned, url);
                 }
             }
             Elements elementsNext = doc.select(".sv-responsive .lp-main .lp-content .lp-list-page-list .lp-list-page-list-pagination .lp-next a");
@@ -96,7 +96,7 @@ public class FetchDataTillvaxtVerketService {
         }
     }
 
-    private void saveGrant(String name, String url, GrantProgramDTO grantProgramDTO, boolean planned) {
+    private void saveGrant(String name, String url, GrantProgramDTO grantProgramDTO, boolean planned, String dataFromUrl) {
         try {
             String externalIdGrant = name + "_" + url;
             Optional<Grant> grantOptional = grantService.getByExternalId(externalIdGrant);
@@ -115,7 +115,8 @@ public class FetchDataTillvaxtVerketService {
                     null,
                     externalIdGrant,
                     url,
-                    null
+                    null,
+                    dataFromUrl
                 );
 
                 Document doc = Jsoup.connect(url)

@@ -29,6 +29,8 @@ import java.util.Optional;
 @Service
 public class FetchDataEnergimyndighetenService {
 
+    private final String URL_FETCH_DATA = "http://www.energimyndigheten.se/rss-utlysningar-fran-energimyndigheten/";
+
     private final PublisherService publisherService;
 
     private final GrantService grantService;
@@ -90,7 +92,7 @@ public class FetchDataEnergimyndighetenService {
             }
             GrantProgramDTO grantProgramDTO = new GrantProgramDTO(grantProgram);
             try {
-                String json = Util.readUrl("http://www.energimyndigheten.se/rss-utlysningar-fran-energimyndigheten/");
+                String json = Util.readUrl(URL_FETCH_DATA);
                 JSONObject xmlJSONObj = XML.toJSONObject(json);
                 String jsonPrettyPrintString = xmlJSONObj.toString(4);
                 JSONObject jsonObject = new JSONObject(jsonPrettyPrintString).getJSONObject("rss").getJSONObject("channel");
@@ -130,7 +132,8 @@ public class FetchDataEnergimyndighetenService {
                 null,
                 externalIdGrant,
                 link,
-                null
+                null,
+                URL_FETCH_DATA
             );
             getDataFromURL(link, now, grantDTO);
             grantService.createGrantCall(grantDTO);

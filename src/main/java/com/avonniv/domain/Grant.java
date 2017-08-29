@@ -33,6 +33,9 @@ public class Grant extends AbstractEntity {
     @Column(name = "external_url")
     private String externalUrl;
 
+    @Column(name = "data_from_url")
+    private String dataFromUrl;
+
     @Column(name = "finance_description")
     private String financeDescription;
 
@@ -137,5 +140,13 @@ public class Grant extends AbstractEntity {
 
     public void setFinanceDescription(String financeDescription) {
         this.financeDescription = financeDescription;
+    }
+
+    public String getDataFromUrl() {
+        return dataFromUrl;
+    }
+
+    public void setDataFromUrl(String dataFromUrl) {
+        this.dataFromUrl = dataFromUrl;
     }
 }

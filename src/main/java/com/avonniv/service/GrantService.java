@@ -131,12 +131,11 @@ public class GrantService {
         return grantRepository.countAllByStatusAndGrantProgram_Publisher_CrawledIsTrue(GrantDTO.Status.open.getValue());
     }
 
-    @Scheduled(cron = "0 0 0 * * ?")
-//    @Scheduled(fixedDelay = 10000)
+    @Scheduled(fixedDelay = 3600000)
     public void updateStatusForGrant() {
         Instant instant = Instant.now();
         updateStatusForList(
-            grantRepository.findAllByStatusInAndCloseDateBefore(Arrays.asList(GrantDTO.Status.coming.getValue(), GrantDTO.Status.undefined.getValue()), instant),
+            grantRepository.findAllByCloseDateBefore(instant),
             GrantDTO.Status.close.getValue()
         );
         updateStatusForList(

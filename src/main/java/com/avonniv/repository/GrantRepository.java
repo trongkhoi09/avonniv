@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface GrantRepository extends JpaRepository<Grant, Long> {
     List<Grant> findAllByStatus(int status);
 
-    List<Grant> findAllByStatusInAndCloseDateBefore(List<Integer> listStatus, Instant dateBefore);
+    List<Grant> findAllByCloseDateBefore(Instant dateBefore);
 
     List<Grant> findAllByStatusInAndOpenDateBefore(List<Integer> listStatus, Instant dateBefore);
 

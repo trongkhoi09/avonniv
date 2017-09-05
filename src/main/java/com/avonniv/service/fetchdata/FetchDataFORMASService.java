@@ -22,6 +22,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.TimeZone;
 
 
 @Service
@@ -143,7 +144,10 @@ public class FetchDataFORMASService {
     private Instant getDateFromString(String data) {
         if (data.length() > 10) {
             try {
-                return new SimpleDateFormat("yyyy-MM-dd").parse(data.substring(data.length() - 10, data.length())).toInstant();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                data = data.substring(data.length() - 10, data.length());
+                return sdf.parse(data).toInstant();
             } catch (ParseException ignored) {
             }
         }

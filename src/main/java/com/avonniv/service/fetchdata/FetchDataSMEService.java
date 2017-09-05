@@ -21,6 +21,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.TimeZone;
 
 
 @Service
@@ -272,7 +273,9 @@ public class FetchDataSMEService {
     }
 
     private static Instant getInstantByString(String dateString) throws ParseException, JSONException {
-        return new SimpleDateFormat("dd MMM yyyy").parse(dateString).toInstant();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyy");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return sdf.parse(dateString).toInstant();
     }
 
     class URLFetch {

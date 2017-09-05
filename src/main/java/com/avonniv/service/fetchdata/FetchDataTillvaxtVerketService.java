@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Optional;
+import java.util.TimeZone;
 
 
 @Service
@@ -153,7 +154,10 @@ public class FetchDataTillvaxtVerketService {
     private Instant getDateFromURL(String url) {
         try {
             String[] strings = url.split("/");
-            return new SimpleDateFormat("yyyy-MM-dd").parse(strings[strings.length - 1].substring(0, 10)).toInstant();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+            String dateString = strings[strings.length - 1].substring(0, 10);
+            return sdf.parse(dateString).toInstant();
         } catch (Exception e) {
             return null;
         }

@@ -60,6 +60,7 @@ public class GrantDTO extends AbstractEntityDTO {
         this.externalUrl = externalUrl;
         this.financeDescription = financeDescription;
         this.dataFromUrl = dataFromUrl;
+        this.setCloseDate(closeDate);
     }
 
     public GrantProgramDTO getGrantProgramDTO() {
@@ -107,6 +108,12 @@ public class GrantDTO extends AbstractEntityDTO {
     }
 
     public void setCloseDate(Instant closeDate) {
+        if (closeDate != null) {
+            long longValue = closeDate.getEpochSecond();
+            if (longValue % 86400 == 0) {
+                closeDate = closeDate.plusSeconds(86400 - 1);
+            }
+        }
         this.closeDate = closeDate;
     }
 

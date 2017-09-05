@@ -24,6 +24,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Optional;
+import java.util.TimeZone;
 
 
 @Service
@@ -173,7 +174,9 @@ public class FetchDataEnergimyndighetenService {
             if (data.length() == 10) {
                 data += " 00:00";
             }
-            return new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(data).toInstant();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+            return sdf.parse(data).toInstant();
         } catch (ParseException ignored) {
         }
         return null;

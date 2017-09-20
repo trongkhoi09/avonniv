@@ -65,6 +65,11 @@
                     "maxlength": "Ditt lösenord kan inte vara längre än 50 tecken",
                     "strength": "Lösenordsstyrka:"
                 },
+                "oldpassword": {
+                    "required": "Du måste fylla i ett gamla lösenord",
+                    "minlength": "Ditt gamla lösenord måste vara 5 tecken",
+                    "maxlength": "Ditt gamla lösenord kan inte vara längre än 50 tecken"
+                },
                 "confirmpassword": {
                     "required": "Du måste bekräfta ditt lösenord",
                     "minlength": "Ditt konfirmationslösenord måste vara 5 tecken långt",
@@ -125,6 +130,7 @@
         "NotNull": "Fält {{fieldName}} kan inte vara tomt!",
         "Size": "Fält {{fieldName}} uppfyller inte min/max-storlekskravet!",
         "userexists": "Användarnamnet är upptaget!",
+        "areaexists": "Område är redan registrerad!",
         "emailexists": "E-postadressen är redan registrerad!",
         "idexists": "En ny {{entityName}} kan inte redan ha ett ID"
     },

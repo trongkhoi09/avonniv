@@ -7,6 +7,7 @@ import com.avonniv.repository.GrantProgramRepository;
 import com.avonniv.repository.GrantRepository;
 import com.avonniv.service.dto.GrantDTO;
 import com.avonniv.service.fetchdata.Util;
+import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -128,7 +129,7 @@ public class GrantService {
     }
 
     public int getCount() {
-        return grantRepository.countAllByStatusAndGrantProgram_Publisher_CrawledIsTrue(GrantDTO.Status.open.getValue());
+        return grantRepository.countAllByStatusInAndGrantProgram_Publisher_CrawledIsTrue(Arrays.asList(GrantDTO.Status.open.getValue(), GrantDTO.Status.coming.getValue()));
     }
 
     @Scheduled(fixedDelay = 3600000)

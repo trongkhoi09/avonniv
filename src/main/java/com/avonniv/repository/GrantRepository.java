@@ -35,4 +35,6 @@ public interface GrantRepository extends JpaRepository<Grant, Long> {
     Integer countAllByOpenDateBeforeAndCloseDateAfter(Instant dateBefore, Instant dateAfter);
 
     Integer countAllByStatusAndGrantProgram_Publisher_CrawledIsTrue(Integer status);
+
+    Integer countAllByStatusInAndGrantProgram_Publisher_CrawledIsTrue(List<Integer> status);
 }

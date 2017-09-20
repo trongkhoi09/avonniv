@@ -1,5 +1,45 @@
 {
     "grants": {
-        "title": "Grants"
+        "title": "Grants",
+        "publisher": "Publisher",
+        "area": "Area",
+        "otherPublisher": "Other publisher",
+        "empty": "There is no grant matching with your conditions",
+        "action": {
+            "editGrant": "Grant",
+            "editGrantProgram": "Grant Program"
+        }
+    },
+    "grant": {
+        "edit": "Edit a Grant"
+    },
+    "grantProgram": {
+        "edit": "Edit a Grant Program"
+    },
+    "grantEdit": {
+        "editLabel": "Edit a Grant",
+        "title": "Title",
+        "excerpt": "Excerpt",
+        "description": "Description",
+        "status": "Status",
+        "openDate": "Open Date",
+        "closeDate": "Close Date",
+        "announcedDate": "Announced Date",
+        "projectStartDate": "Project Start Date",
+        "externalId": "External Id",
+        "externalUrl": "External Url",
+        "financeDescription": "Finance Description",
+        "dataFromUrl": "Data From Url",
+        "updated": "An grant is updated"
+    },
+    "grantProgramEdit": {
+        "editLabel": "Edit a Grant Program",
+        "name": "Name",
+        "description": "Description",
+        "area": "Area",
+        "releaseDate": "Release Date",
+        "externalId": "External Id",
+        "externalUrl": "External Url",
+        "updated": "An grant program is updated"
     }
 }

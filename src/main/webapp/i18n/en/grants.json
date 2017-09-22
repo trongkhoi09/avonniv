@@ -1,45 +1,45 @@
 {
     "grants": {
         "title": "Grants",
-        "publisher": "Publisher",
+        "publisher": "Grantmakers",
         "area": "Area",
-        "otherPublisher": "Other publisher",
-        "empty": "There is no grant matching with your conditions",
+        "otherPublisher": "Other grantmakers",
+        "empty": "There is no grant matching your request.",
         "action": {
             "editGrant": "Grant",
-            "editGrantProgram": "Grant Program"
+            "editGrantProgram": "Grant program"
         }
     },
     "grant": {
-        "edit": "Edit a Grant"
+        "edit": "Edit a grant"
     },
     "grantProgram": {
-        "edit": "Edit a Grant Program"
+        "edit": "Edit a grant program"
     },
     "grantEdit": {
-        "editLabel": "Edit a Grant",
+        "editLabel": "Edit a grant",
         "title": "Title",
         "excerpt": "Excerpt",
         "description": "Description",
         "status": "Status",
-        "openDate": "Open Date",
-        "closeDate": "Close Date",
-        "announcedDate": "Announced Date",
-        "projectStartDate": "Project Start Date",
-        "externalId": "External Id",
-        "externalUrl": "External Url",
-        "financeDescription": "Finance Description",
-        "dataFromUrl": "Data From Url",
-        "updated": "An grant is updated"
+        "openDate": "Opening date",
+        "closeDate": "Closing date",
+        "announcedDate": "Announcement date",
+        "projectStartDate": "Project start date",
+        "externalId": "External ID",
+        "externalUrl": "External URL",
+        "financeDescription": "Funding description",
+        "dataFromUrl": "Data from URL",
+        "updated": "A grant is updated"
     },
     "grantProgramEdit": {
-        "editLabel": "Edit a Grant Program",
+        "editLabel": "Edit a grant program",
         "name": "Name",
         "description": "Description",
         "area": "Area",
         "releaseDate": "Release Date",
-        "externalId": "External Id",
-        "externalUrl": "External Url",
-        "updated": "An grant program is updated"
+        "externalId": "External ID",
+        "externalUrl": "External URL",
+        "updated": "A grant program is updated"
     }
 }

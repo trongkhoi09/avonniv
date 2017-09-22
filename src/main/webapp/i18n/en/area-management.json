@@ -3,7 +3,7 @@
         "home": {
             "title": "Areas",
             "createLabel": "Create a new area",
-            "createOrEditLabel": "Create or edit a area"
+            "createOrEditLabel": "Create or edit an area"
         },
         "created": "A new area is created with identifier {{ param }}",
         "updated": "An area is updated with identifier {{ param }}",

@@ -3,7 +3,7 @@
         "title": "Real-time user activities",
         "table": {
             "userlogin": "User",
-            "ipaddress": "IP Address",
+            "ipaddress": "IP-address",
             "userAgent": "User agent",
             "page": "Current page",
             "time": "Time"

@@ -57,17 +57,17 @@
                 },
                 "register": {
                     "noaccount": "You don't have an account yet?",
-                    "link": "Register a new account"
+                    "link": "Register a new account!"
                 }
             },
             "error": {
-                "dontmatch": "The password and its confirmation do not match!"
+                "dontmatch": "Password and confirmation do not match!"
             },
             "validate": {
                 "newpassword": {
-                    "required": "Your password is required.",
-                    "minlength": "Your password is required to be at least 4 characters.",
-                    "maxlength": "Your password cannot be longer than 50 characters.",
+                    "required": "Password is required.",
+                    "minlength": "Password is required to be at least 4 characters.",
+                    "maxlength": "Password cannot be longer than 50 characters.",
                     "strength": "Password strength:"
                 },
                 "oldpassword": {
@@ -76,9 +76,9 @@
                     "maxlength": "Your old password cannot be longer than 50 characters."
                 },
                 "confirmpassword": {
-                    "required": "Your confirmation password is required.",
-                    "minlength": "Your confirmation password is required to be at least 4 characters.",
-                    "maxlength": "Your confirmation password cannot be longer than 50 characters."
+                    "required": "Confirmation of password is required.",
+                    "minlength": "Confirmation of password is required to be at least 4 characters.",
+                    "maxlength": "Confirmation of password cannot be longer than 50 characters."
                 },
                 "email": {
                     "required": "Your email is required.",
@@ -113,7 +113,7 @@
             "value": "Value"
         },
         "delete": {
-            "title": "Confirm delete operation"
+            "title": "Confirm delete"
         },
         "validation": {
             "required": "This field is required.",
@@ -134,7 +134,7 @@
         "url.not.found": "Not found",
         "NotNull": "Field {{ fieldName }} cannot be empty!",
         "Size": "Field {{ fieldName }} does not meet min/max size requirements!",
-        "userexists": "Login name already used!",
+        "userexists": "Username is already in use!",
         "areaexists": "Area is already in use!",
         "emailexists": "Email is already in use!",
         "idexists": "A new {{ entityName }} cannot already have an ID"

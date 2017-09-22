@@ -1,45 +1,45 @@
 {
     "grants": {
-        "title": "Grants",
-        "publisher": "Publisher",
-        "area": "Area",
-        "otherPublisher": "Other publisher",
-        "empty": "There is no grant matching with your conditions",
+        "title": "Utlysningar",
+        "publisher": "Utlysare",
+        "area": "Område",
+        "otherPublisher": "Andra utlysare",
+        "empty": "Det finns ingen utlysning som matchar ditt val.",
         "action": {
-            "editGrant": "Grant",
-            "editGrantProgram": "Grant Program"
+            "editGrant": "Utlysning",
+            "editGrantProgram": "Utlysningsprogram"
         }
     },
     "grant": {
-        "edit": "Edit a Grant"
+        "edit": "Ändra en utlysning"
     },
     "grantProgram": {
-        "edit": "Edit a Grant Program"
+        "edit": "Ändra ett utlysningsprogram"
     },
     "grantEdit": {
-        "editLabel": "Edit a Grant",
-        "title": "Title",
-        "excerpt": "Excerpt",
-        "description": "Description",
+        "editLabel": "Ändra en utlysning",
+        "title": "Titel",
+        "excerpt": "Utdrag",
+        "description": "Beskrivning",
         "status": "Status",
-        "openDate": "Open Date",
-        "closeDate": "Close Date",
-        "announcedDate": "Announced Date",
-        "projectStartDate": "Project Start Date",
-        "externalId": "External Id",
-        "externalUrl": "External Url",
-        "financeDescription": "Finance Description",
-        "dataFromUrl": "Data From Url",
-        "updated": "An grant is updated"
+        "openDate": "Öppningsdatum",
+        "closeDate": "Stängningsdatum",
+        "announcedDate": "Aviseringsdatum",
+        "projectStartDate": "Startdatum för projekt",
+        "externalId": "Extern ID",
+        "externalUrl": "Extern URL",
+        "financeDescription": "Finansiering",
+        "dataFromUrl": "Data från URL",
+        "updated": "En utlysning har uppdaterats"
     },
     "grantProgramEdit": {
-        "editLabel": "Edit a Grant Program",
-        "name": "Name",
-        "description": "Description",
-        "area": "Area",
-        "releaseDate": "Release Date",
-        "externalId": "External Id",
-        "externalUrl": "External Url",
-        "updated": "An grant program is updated"
+        "editLabel": "Ändra ett utlysningsprogram",
+        "name": "Namn",
+        "description": "Beskrivning",
+        "area": "Område",
+        "releaseDate": "Släppdatum",
+        "externalId": "Extern ID",
+        "externalUrl": "Extern URL",
+        "updated": "Ett utlysningsprogram har uppdaterats"
     }
 }

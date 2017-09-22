@@ -2,7 +2,7 @@
   "generator-jhipster": {
     "promptValues": {
       "packageName": "com.avonniv",
-      "nativeLanguage": "en"
+      "nativeLanguage": "sv"
     },
     "jhipsterVersion": "4.5.2",
     "baseName": "Avonniv",
@@ -28,7 +28,7 @@
     "testFrameworks": [],
     "jhiPrefix": "jhi",
     "enableTranslation": true,
-    "nativeLanguage": "en",
+    "nativeLanguage": "sv",
     "languages": [
       "en",
       "sv"

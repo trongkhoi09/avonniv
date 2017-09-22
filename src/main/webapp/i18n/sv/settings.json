@@ -7,7 +7,7 @@
             "lastname": "Efternamn",
             "lastname.placeholder": "Ditt efternamn",
             "language": "Språk",
-            "button": "Save"
+            "button": "Spara"
         },
         "messages": {
             "error": {
@@ -18,13 +18,13 @@
             "validate": {
                 "firstname": {
                     "required": "Ditt förnamn krävs.",
-                    "minlength": "Ditt förnamn måste vara minst 1 tecken",
-                    "maxlength": "Ditt förnamn kan inte vara längre än 50 tecken"
+                    "minlength": "Ditt förnamn måste vara minst 1 tecken.",
+                    "maxlength": "Ditt förnamn kan inte vara längre än 50 tecken."
                 },
                 "lastname": {
                     "required": "Ditt efternamn krävs.",
-                    "minlength": "Ditt efternamn måste vara längre än 1 tecken",
-                    "maxlength": "Ditt efternamn kan inte vara längre än 50 tecken"
+                    "minlength": "Ditt efternamn måste vara längre än 1 tecken.",
+                    "maxlength": "Ditt efternamn kan inte vara längre än 50 tecken."
                 }
             }
         }

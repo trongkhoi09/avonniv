@@ -2,12 +2,12 @@
     "userManagement": {
         "home": {
             "title": "Användare",
-            "createLabel": "Skapa en ny användare",
+            "createLabel": "Skapa ny användare",
             "createOrEditLabel": "Skapa eller ändra en användare"
         },
         "created": "En ny användare är skapad med ID {{ param }}",
         "updated": "En användare är uppdaterad med ID {{ param }}",
-        "deleted": "En användare är bortagen med ID {{ param }}",
+        "deleted": "En användare är borttagen med ID {{ param }}",
         "delete": {
             "question": "Är du säker på att du vill ta bort användare {{ login }}?"
         },

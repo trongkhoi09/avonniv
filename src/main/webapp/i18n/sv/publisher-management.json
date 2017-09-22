@@ -1,29 +1,29 @@
 {
     "publisherManagement": {
         "home": {
-            "title": "Publishers",
-            "createLabel": "Create a new publisher",
-            "createOrEditLabel": "Create or edit a publisher"
+            "title": "Utlysare",
+            "createLabel": "Skapa ny utlysare",
+            "createOrEditLabel": "Skapa eller ändra en utlysare"
         },
-        "empty": "There is no publisher",
-        "created": "A new publisher is created with identifier {{ param }}",
-        "updated": "An publisher is updated with identifier {{ param }}",
-        "deleted": "An publisher is deleted with identifier {{ param }}",
+        "empty": "Det finns ingen utlysare",
+        "created": "En ny utlysare är skapad med ID {{ param }}",
+        "updated": "En utlysare är uppdaterad med ID {{ param }}",
+        "deleted": "En ny utlysare är borttagen med ID {{ param }}",
         "delete": {
-            "question": "Are you sure you want to delete publisher {{ name }}?"
+            "question": "Är du säker på att du vill ta bort utlysare? {{ name }}?"
         },
         "detail": {
-            "title": "Publisher"
+            "title": "Utlysare"
         },
-        "name": "Name",
+        "name": "Namn",
         "url": "URL",
-        "email": "Email",
+        "email": "Mailadress",
         "crawled": "Crawled",
         "notCrawled": "Not Crawled",
-        "phone": "Phone",
-        "address": "Address",
-        "description": "Description",
-        "createdDate": "Created date",
-        "lastModifiedDate": "Modified date"
+        "phone": "Telefon",
+        "address": "Adress",
+        "description": "Beskrivning",
+        "createdDate": "Skapad datum",
+        "lastModifiedDate": "Ändrad datum"
     }
 }

@@ -7,8 +7,8 @@
         },
         "empty": "There is no publisher",
         "created": "A new publisher is created with identifier {{ param }}",
-        "updated": "An publisher is updated with identifier {{ param }}",
-        "deleted": "An publisher is deleted with identifier {{ param }}",
+        "updated": "A publisher is updated with identifier {{ param }}",
+        "deleted": "A publisher is deleted with identifier {{ param }}",
         "delete": {
             "question": "Are you sure you want to delete publisher {{ name }}?"
         },

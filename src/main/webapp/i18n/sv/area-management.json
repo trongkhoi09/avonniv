@@ -1,29 +1,29 @@
 {
     "areaManagement": {
         "home": {
-            "title": "Areas",
-            "createLabel": "Create a new area",
-            "createOrEditLabel": "Create or edit a area"
+            "title": "Område",
+            "createLabel": "Skapa nytt område",
+            "createOrEditLabel": "Skapa eller ändra ett område"
         },
-        "created": "A new area is created with identifier {{ param }}",
-        "updated": "An area is updated with identifier {{ param }}",
-        "deleted": "An area is deleted with identifier {{ param }}",
+        "created": "Ett nytt område har skapats med ID {{ param }}",
+        "updated": "Ett område har skapats med ID {{ param }}",
+        "deleted": "Ett område har tagits bort med ID {{ param }}",
         "delete": {
-            "question": "Are you sure you want to delete area {{ name }}?"
+            "question": "Är du säker att du vill ta bort område? {{ name }}?"
         },
         "detail": {
-            "title": "Area"
+            "title": "Område"
         },
-        "empty": "There is no area",
-        "name": "Name",
+        "empty": "Det finns inget område.",
+        "name": "Namn",
         "url": "URL",
-        "email": "Email",
+        "email": "Mailadress",
         "crawled": "Crawled",
         "notCrawled": "Not Crawled",
-        "phone": "Phone",
-        "address": "Address",
-        "description": "Description",
-        "createdDate": "Created date",
-        "lastModifiedDate": "Modified date"
+        "phone": "Telefon",
+        "address": "Adress",
+        "description": "Beskrivning",
+        "createdDate": "Skapat datum",
+        "lastModifiedDate": "Ändrat datum"
     }
 }

@@ -1,15 +1,15 @@
 {
     "metrics": {
-        "title": "Application Metrics",
+        "title": "Application metrics",
         "refresh.button": "Refresh",
         "updating": "Updating...",
         "jvm": {
             "title": "JVM Metrics",
             "memory": {
                 "title": "Memory",
-                "total": "Total Memory",
-                "heap": "Heap Memory",
-                "nonheap": "Non-Heap Memory"
+                "total": "Total memory",
+                "heap": "Heap memory",
+                "nonheap": "Non-heap memory"
             },
             "threads": {
                 "title": "Threads",

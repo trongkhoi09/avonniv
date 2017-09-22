@@ -15,9 +15,9 @@
                 "title": "Trådar",
                 "all": "Alla",
                 "runnable": "Körbara",
-                "timedwaiting": "Timed waiting",
-                "waiting": "Waiting",
-                "blocked": "Blocked",
+                "timedwaiting": "Väntar",
+                "waiting": "Väntar",
+                "blocked": "Blockerad",
                 "dump": {
                     "title": "Threads dump",
                     "id": "Id: ",

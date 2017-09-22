@@ -2,29 +2,29 @@
     "settings": {
         "title": "User settings for [<b>{{username}}</b>]",
         "form": {
-            "firstname": "First Name",
-            "firstname.placeholder": "Your first name",
-            "lastname": "Last Name",
-            "lastname.placeholder": "Your last name",
+            "firstname": "First name",
+            "firstname.placeholder": "First name",
+            "lastname": "Last name",
+            "lastname.placeholder": "Last name",
             "language": "Language",
             "button": "Save"
         },
         "messages": {
             "error": {
                 "fail": "<strong>An error has occurred!</strong> Settings could not be saved.",
-                "emailexists": "<strong>Email is already in use!</strong> Please choose another one."
+                "emailexists": "<strong>Email is already in use!</strong> Please choose another email."
             },
             "success": "<strong>Settings saved!</strong>",
             "validate": {
                 "firstname": {
-                    "required": "Your first name is required.",
-                    "minlength": "Your first name is required to be at least 1 character",
-                    "maxlength": "Your first name cannot be longer than 50 characters"
+                    "required": "First name is required.",
+                    "minlength": "First name is required to be at least 1 character.",
+                    "maxlength": "First name cannot be longer than 50 characters."
                 },
                 "lastname": {
-                    "required": "Your last name is required.",
-                    "minlength": "Your last name is required to be at least 1 character",
-                    "maxlength": "Your last name cannot be longer than 50 characters"
+                    "required": "Last name is required.",
+                    "minlength": "Last name is required to be at least 1 character.",
+                    "maxlength": "Last name cannot be longer than 50 characters."
                 }
             }
         }

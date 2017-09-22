@@ -8,8 +8,8 @@
             "button": "Logga ut"
         },
         "messages": {
-            "success": "<strong>Sessionen utloggad!</strong>",
-            "error": "<strong>Det blev fel!</strong> Sessionen kunde inte loggas ut."
+            "success": "<strong>Utloggad!</strong>",
+            "error": "<strong>Det blev fel!</strong> Du kunde inte loggas ut."
         }
     }
 }

@@ -12,11 +12,11 @@
         },
         "indicator": {
             "diskSpace": "Diskutrymme",
-            "mail": "E-post",
+            "mail": "Mailadress",
             "mongo": "MongoDB"
         },
         "table": {
-            "service": "Service namn",
+            "service": "Servicenamn",
             "status": "Status"
         },
         "status": {

@@ -1,6 +1,9 @@
 {
     "global": {
         "title": "Avonniv",
+        "description": "Duis lectus ante, fringilla eu volutpat quis, vestibulum eu risus. <br> Morbi sit amet elit vestibulum tortor molestie aliquet quis sit amet leo. ",
+        "shortDescription": " Morbi sit amet elit vestibulum tortor molestie aliquet quis sit amet leo. ",
+        "countGrants": " Example <span class=\"badge badge-primary\">{{count}}</span> Phasellus egestas pulvinar nibh, ac feugiat elit fringilla et ",
         "browsehappy": "Du använder en <strong>gammal webbläsare</strong>. <a href=\"http://browsehappy.com/?locale=en\">Uppgradera din webbläsare</a> för bästa upplevelse.",
         "menu": {
             "home": "Hem",
@@ -134,5 +137,5 @@
         "emailexists": "Mailadressen är redan registrerad!",
         "idexists": "En ny {{entityName}} kan inte redan ha ett ID."
     },
-    "footer": "Detta är din footer"
+    "footer": "Phasellus tristique dui at diam ultrices sollicitudin. Sed id pharetra nibh. Sed imperdiet est eu quam dictum, sodales semper enim luctus. "
 }

@@ -1,8 +1,15 @@
 {
     "grants": {
         "title": "Utlysningar",
+        "openGrants": "Open grants",
+        "comingGrants": "Forthcoming grants",
         "publisher": "Utlysare",
         "area": "Område",
+        "titleData": "Title",
+        "description": "Description",
+        "financeDescription": "Finance description",
+        "openDate": "Open date",
+        "closeDate": "Close date",
         "otherPublisher": "Andra utlysare",
         "empty": "Det finns ingen utlysning som matchar ditt val.",
         "action": {

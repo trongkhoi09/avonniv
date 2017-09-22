@@ -1,19 +1,20 @@
 {
     "home": {
-        "title": "Välkommen till Avonniv!",
-        "subtitle": "Det här är din hemsida",
-        "logged": {
-            "message": "Du är inloggad som \"{{username}}\"."
+        "title": "Welcome to Avonniv!",
+        "publicGrants": {
+            "title": "Public Grants",
+            "button": "View public grants",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et velit ac mi convallis consequat."
         },
-        "question": "Om du har några frågor om JHipster:",
-        "link": {
-            "homepage": "JHipsters hemsida",
-            "stackoverflow": "JHipster på Stack Overflow",
-            "bugtracker": "JHipster bughanterare",
-            "chat": "JHipster public chat room",
-            "follow": "kontakta @java_hipster på Twitter"
+        "privateGrants": {
+            "title": "Private Grants",
+            "button": "Coming soon",
+            "description": "Suspendisse finibus, odio et egestas vehicula, justo orci fermentum eros, tristique porttitor dolor ipsum sed quam."
         },
-        "like": "Om du gillar JHipster, glöm inte att ge oss en stjärna på",
-        "github": "GitHub"
+        "aboutUs": {
+            "title": "About us",
+            "description": "Quisque ultrices hendrerit risus. Sed ut tortor eu nulla consectetur ullamcorper. Praesent in urna dignissim, varius massa vel, fermentum turpis.In pulvinar nibh libero, nec ultrices nisl varius eu. Integer sollicitudin ipsum eget orci ornare blandit."
+        },
+        "contact": "Kontaktoppgifter: mail@mail.com"
     }
 }

@@ -61,12 +61,16 @@
                     <div class="col-md-6 text-center">
                         <a><span (click)="grantFilter.openGrant=!grantFilter.openGrant; onFiltering();"><i
                             [ngClass]="grantFilter.openGrant?'fa fa-check-square-o':'fa fa-square-o'"
-                            aria-hidden="true"></i> Open grants </span></a>
+                            aria-hidden="true"></i>
+                            <span jhiTranslate="grants.openGrants">Open grants</span>
+                        </span></a>
                     </div>
                     <div class="col-md-6 text-center">
                         <a><span (click)="grantFilter.comingGrant=!grantFilter.comingGrant; onFiltering();"><i
                             [ngClass]="grantFilter.comingGrant?'fa fa-check-square-o':'fa fa-square-o'"
-                            aria-hidden="true"></i> Forthcoming grants</span></a>
+                            aria-hidden="true"></i>
+                            <span jhiTranslate="grants.comingGrants">Forthcoming grants</span>
+                        </span></a>
                     </div>
                 </div>
             </div>

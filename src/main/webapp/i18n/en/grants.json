@@ -1,8 +1,15 @@
 {
     "grants": {
         "title": "Grants",
+        "openGrants": "Open grants",
+        "comingGrants": "Forthcoming grants",
         "publisher": "Grantmakers",
         "area": "Area",
+        "titleData": "Title",
+        "description": "Description",
+        "financeDescription": "Finance description",
+        "openDate": "Open date",
+        "closeDate": "Close date",
         "otherPublisher": "Other grantmakers",
         "empty": "There is no grant matching your request.",
         "action": {

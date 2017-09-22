@@ -1,6 +1,7 @@
 {
     "global": {
         "title": "Avonniv",
+        "search": "Sök...",
         "description": "Duis lectus ante, fringilla eu volutpat quis, vestibulum eu risus. <br> Morbi sit amet elit vestibulum tortor molestie aliquet quis sit amet leo. ",
         "shortDescription": " Morbi sit amet elit vestibulum tortor molestie aliquet quis sit amet leo. ",
         "countGrants": " Example <span class=\"badge badge-primary\">{{count}}</span> Phasellus egestas pulvinar nibh, ac feugiat elit fringilla et ",
@@ -24,6 +25,8 @@
             "admin": {
                 "main": "Administration",
                 "userManagement": "Hantera användare",
+                "publisherManagement": "Hantera Utlysare",
+                "areaManagement": "Hantera område",
                 "tracker": "Användarspårning",
                 "metrics": "Mätningar",
                 "health": "Status",
@@ -39,6 +42,9 @@
         "form": {
             "username": "Användarnamn",
             "username.placeholder": "Ditt användarnamn",
+            "password": "Lösenord",
+            "oldpassword": "Gammalt lösenord",
+            "oldpassword.placeholder": "Gammalt lösenord",
             "newpassword": "Nytt lösenord",
             "newpassword.placeholder": "Nytt lösenord",
             "confirmpassword": "Bekräfta nytt lösenord",

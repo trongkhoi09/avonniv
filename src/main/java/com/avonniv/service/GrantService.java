@@ -103,12 +103,10 @@ public class GrantService {
     @Transactional(readOnly = true)
     public Page<GrantDTO> getAll(GrantFilter grantFilter, Pageable pageable) {
         if (grantFilter.getSearch() != null && !grantFilter.getSearch().trim().isEmpty()) {
-            return grantRepository.findAllByGrantProgramNameLikeAndStatusIn(pageable, "%" + grantFilter.getSearch().trim() + "%", Collections.singletonList(GrantDTO.Status.open.getValue())).map(GrantDTO::new);
+            return grantRepository.findAllByTitleLikeAndStatusIn(pageable, "%" + grantFilter.getSearch().trim() + "%", Arrays.asList(GrantDTO.Status.open.getValue(), GrantDTO.Status.coming.getValue())).map(GrantDTO::new);
         }
-        Instant instant = Instant.now();
         List<String> listPublisher = new ArrayList<>();
         listPublisher.addAll(grantFilter.getPublisherDTOs());
-//        List<Integer> listType = new ArrayList<>();
         if (grantFilter.isOpenGrant()) {
             if (grantFilter.isComingGrant()) {
                 return grantRepository.findAllByGrantProgram_Publisher_NameInAndStatusIn(pageable, listPublisher, Arrays.asList(GrantDTO.Status.open.getValue(), GrantDTO.Status.coming.getValue())).map(GrantDTO::new);
@@ -122,10 +120,6 @@ public class GrantService {
                 return new PageImpl<>(new ArrayList<>(), pageable, 0L);
             }
         }
-//        if (grantFilter.isOpenGrant()) {
-//            listType.add(GrantProgramDTO.TYPE.PUBLIC.getValue());
-//        }
-//        return grantRepository.findAllByGrantProgram_Publisher_NameInAndCloseDateAfterAndGrantProgramTypeIn(pageable, listPublisher, Instant.now(), listType).map(GrantDTO::new);
     }
 
     public int getCount() {
@@ -147,8 +141,6 @@ public class GrantService {
             grantRepository.findAllByStatusInAndOpenDateBefore(Arrays.asList(GrantDTO.Status.coming.getValue(), GrantDTO.Status.undefined.getValue()), instant),
             GrantDTO.Status.open.getValue()
         );
-//        List<Grant> list = grantRepository.findAllByStatus(GrantDTO.Status.undefined.getValue());
-//        System.out.println(list.size());
     }
 
     private void updateStatusForList(List<Grant> list, int status) {

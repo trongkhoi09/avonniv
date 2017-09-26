@@ -18,6 +18,7 @@ import { VERSION, DEBUG_INFO_ENABLED } from '../../app.constants';
 })
 export class NavbarComponent implements OnInit {
 
+    public static url: any;
     inProduction: boolean;
     isNavbarCollapsed: boolean;
     languages: any[];
@@ -39,6 +40,9 @@ export class NavbarComponent implements OnInit {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
         this.languageService.addLocation('home');
+        this.router.events.subscribe((val: any) => {
+            NavbarComponent.url = val.url;
+        });
     }
 
     ngOnInit() {
@@ -53,7 +57,8 @@ export class NavbarComponent implements OnInit {
     }
 
     searchWord() {
-        this.router.navigate(['../search', this.search]);
+        this.router.navigate(['../search', this.search],
+            {replaceUrl: (NavbarComponent.url.indexOf('/search/') !== -1)});
     }
 
     changeLanguage(languageKey: string) {

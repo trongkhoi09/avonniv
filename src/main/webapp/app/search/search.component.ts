@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
     selector: 'jhi-search',
@@ -13,7 +14,8 @@ export class SearchComponent implements OnInit {
         search: ''
     };
 
-    constructor(private route: ActivatedRoute) {
+    constructor(private route: ActivatedRoute,
+                private _location: Location) {
     }
 
     ngOnInit() {
@@ -27,4 +29,7 @@ export class SearchComponent implements OnInit {
         });
     }
 
+    goBack() {
+        this._location.back();
+    }
 }

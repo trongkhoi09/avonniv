@@ -57,6 +57,7 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     ngOnInit() {
+        this.page = 0;
         this.grantFilter.search = this.data.search;
         this.grantFilter.comingGrant = this.data.comingGrant;
         this.grantFilter.openGrant = this.data.openGrant;

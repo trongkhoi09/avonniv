@@ -1,5 +1,6 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 import {AlertService} from 'ng-jhipster';
 
@@ -17,7 +18,8 @@ export class GrantEditComponent implements OnInit, OnDestroy {
 
     constructor(private route: ActivatedRoute,
                 private grantservice: GrantService,
-                private alertService: AlertService) {
+                private alertService: AlertService,
+                private datePipe: DatePipe) {
     }
 
     ngOnInit() {
@@ -42,10 +44,7 @@ export class GrantEditComponent implements OnInit, OnDestroy {
 
     parserDate(date) {
         if (date) {
-            const dateParts = date.trim().split('T');
-            if (dateParts.length === 2) {
-                return dateParts[0];
-            }
+            return this.datePipe.transform(new Date(date), 'yyyy-MM-dd');
         }
         return date;
     }
@@ -60,10 +59,8 @@ export class GrantEditComponent implements OnInit, OnDestroy {
 
     formatDate(date) {
         if (date) {
-            const dateParts = date.trim().split('T');
-            if (dateParts.length === 1) {
-                return date + 'T00:00:00Z';
-            }
+            const dateConvert = new Date(date);
+            return new Date(dateConvert.getTime() + dateConvert.getTimezoneOffset() * 60000).toISOString();
         }
         return date;
     }

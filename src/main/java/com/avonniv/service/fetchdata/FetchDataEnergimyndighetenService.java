@@ -120,24 +120,20 @@ public class FetchDataEnergimyndighetenService {
         String link = Util.readStringJSONObject(jsonObjectItem, "link");
         String externalIdGrant = name + "_" + link;
         Optional<Grant> grantOptional = grantService.getByExternalId(externalIdGrant);
+        GrantDTO grantDTO = grantOptional.map(GrantDTO::new).orElseGet(GrantDTO::new);
+
+        grantDTO.setGrantProgramDTO(grantProgramDTO);
+        grantDTO.setTitle(Util.readStringJSONObject(jsonObjectItem, "title"));
+        grantDTO.setDescription(Util.readStringJSONObject(jsonObjectItem, "description"));
+        grantDTO.setExternalId(externalIdGrant);
+        grantDTO.setExternalUrl(link);
+        grantDTO.setDataFromUrl(URL_FETCH_DATA);
+
+        getDataFromURL(link, now, grantDTO);
         if (!grantOptional.isPresent()) {
-            GrantDTO grantDTO = new GrantDTO(
-                null, null, null, 0,
-                grantProgramDTO,
-                Util.readStringJSONObject(jsonObjectItem, "title"),
-                null,
-                Util.readStringJSONObject(jsonObjectItem, "description"),
-                null,
-                null,
-                null,
-                null,
-                externalIdGrant,
-                link,
-                null,
-                URL_FETCH_DATA
-            );
-            getDataFromURL(link, now, grantDTO);
             grantService.createGrantCall(grantDTO);
+        } else {
+            grantService.update(grantDTO);
         }
     }
 

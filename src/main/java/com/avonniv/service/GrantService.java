@@ -63,10 +63,12 @@ public class GrantService {
         return grantRepository.findAll().stream().map(GrantDTO::new).collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public Optional<Grant> getByExternalId(String externalId) {
         return grantRepository.findOneByExternalId(externalId);
     }
 
+    @Transactional(readOnly = true)
     public Optional<Grant> getById(Long id) {
         return Optional.of(grantRepository.findOne(id));
     }

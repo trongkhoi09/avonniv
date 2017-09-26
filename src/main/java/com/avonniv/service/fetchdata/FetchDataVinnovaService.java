@@ -57,7 +57,7 @@ public class FetchDataVinnovaService {
     }
 
     //43200000 millisecond = 12 hour
-    @Scheduled(fixedDelay = 43200000)
+    @Scheduled(fixedDelay = 21600000)
     public void autoFetchDataFromVinnova() {
         try {
             Instant now = Instant.now();

@@ -62,7 +62,7 @@ public class FetchDataSMEService {
     }
 
     //43200000 millisecond = 12 hour
-    @Scheduled(fixedDelay = 43200000, initialDelay = 1000)
+    @Scheduled(fixedDelay = 21600000, initialDelay = 1000)
     public void autoFetchDataFromSME() {
         try {
             Instant now = Instant.now();

@@ -2,19 +2,14 @@
     "home": {
         "title": "Welcome to Avonniv!",
         "publicGrants": {
-            "title": "Public Grants",
-            "button": "View public grants",
+            "title": "Would you like to see a list of opportunities of public funding for your innovative venture?",
+            "button": "Yes, take me there!",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et velit ac mi convallis consequat."
         },
-        "privateGrants": {
-            "title": "Private Grants",
-            "button": "Coming soon",
-            "description": "Suspendisse finibus, odio et egestas vehicula, justo orci fermentum eros, tristique porttitor dolor ipsum sed quam."
-        },
         "aboutUs": {
-            "title": "About us",
-            "description": "Quisque ultrices hendrerit risus. Sed ut tortor eu nulla consectetur ullamcorper. Praesent in urna dignissim, varius massa vel, fermentum turpis.In pulvinar nibh libero, nec ultrices nisl varius eu. Integer sollicitudin ipsum eget orci ornare blandit."
+            "title": "About Avonniv",
+            "description": "Why should it be complicated and time-consuming to find public funding for innovative ventures? It shouldn’t! Avonniv is a non-profit forum that makes it easy for entrepreneurs and startups to discover opportunities of public funding for driving innovation. Access to funding is a crucial part of innovation; public grants should therefore be made visible and accessible to innovators, entrepreneurs and startups - this is what Avonniv does!"
         },
-        "contact": "Kontaktoppgifter: mail@mail.com"
+        "contact": "Contact us: mail@mail.com"
     }
 }

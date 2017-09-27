@@ -2,10 +2,10 @@
     "global": {
         "title": "Avonniv",
         "search": "Search...",
-        "description": "Duis lectus ante, fringilla eu volutpat quis, vestibulum eu risus. <br> Morbi sit amet elit vestibulum tortor molestie aliquet quis sit amet leo. ",
-        "shortDescription": " Morbi sit amet elit vestibulum tortor molestie aliquet quis sit amet leo. ",
-        "countGrants": " Example <span class=\"badge badge-primary\">{{count}}</span> Phasellus egestas pulvinar nibh, ac feugiat elit fringilla et ",
-        "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
+        "description": "Where innovation meets public funding",
+        "shortDescription": "Where innovation meets public funding",
+        "countGrants": "Right now: <span class=\"badge badge-primary\">{{count}}</span> opportunities of public funding!",
+        "browsehappy": "You are using a <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
         "menu": {
             "home": "Home",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
@@ -48,7 +48,7 @@
             "newpassword": "New password",
             "newpassword.placeholder": "New password",
             "confirmpassword": "New password confirmation",
-            "confirmpassword.placeholder": "Confirm the new password",
+            "confirmpassword.placeholder": "Confirm new password",
             "email": "Email",
             "email.placeholder": "Your email"
         },
@@ -60,8 +60,8 @@
                     "suffix": ", you can try the default accounts:<br/>- Administrator (login=\"admin\" and password=\"admin\") <br/>- User (login=\"user\" and password=\"user\")."
                 },
                 "register": {
-                    "noaccount": "You don't have an account yet?",
-                    "link": "Register a new account!"
+                    "noaccount": "Don't have an account yet?",
+                    "link": "Register an account!"
                 }
             },
             "error": {
@@ -143,5 +143,5 @@
         "emailexists": "Email is already in use!",
         "idexists": "A new {{ entityName }} cannot already have an ID"
     },
-    "footer": "Phasellus tristique dui at diam ultrices sollicitudin. Sed id pharetra nibh. Sed imperdiet est eu quam dictum, sodales semper enim luctus. "
+    "footer": "Can you think of any other grantmaker, or any information, that should be available on Avonniv? If so, drop us a line and we´ll get on it asap!"
 }

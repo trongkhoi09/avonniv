@@ -2,9 +2,9 @@
     "global": {
         "title": "Avonniv",
         "search": "Sök...",
-        "description": "Duis lectus ante, fringilla eu volutpat quis, vestibulum eu risus. <br> Morbi sit amet elit vestibulum tortor molestie aliquet quis sit amet leo. ",
-        "shortDescription": " Morbi sit amet elit vestibulum tortor molestie aliquet quis sit amet leo. ",
-        "countGrants": " Example <span class=\"badge badge-primary\">{{count}}</span> Phasellus egestas pulvinar nibh, ac feugiat elit fringilla et ",
+        "description": "Where innovation meets public funding",
+        "shortDescription": "Where innovation meets public funding",
+        "countGrants": "Just nu: <span class=\"badge badge-primary\">{{count}}</span> möjligheter till finansiering!",
         "browsehappy": "Du använder en <strong>gammal webbläsare</strong>. <a href=\"http://browsehappy.com/?locale=en\">Uppgradera din webbläsare</a> för bästa upplevelse.",
         "menu": {
             "home": "Hem",
@@ -57,11 +57,11 @@
                 "authenticated": {
                     "prefix": "Om du vill ",
                     "link": "logga in",
-                    "suffix": " - prova med standard kontot:<br/>- Administratör (användarnamn=\"admin\" och lösenord=\"admin\") <br/>- Användare (login=\"user\" och lösenord=\"user\")."
+                    "suffix": " - prova med standardkontot:<br/>- Administratör (användarnamn=\"admin\" och lösenord=\"admin\") <br/>- Användare (login=\"user\" och lösenord=\"user\")."
                 },
                 "register": {
-                    "noaccount": "Har du inget konto?",
-                    "link": "Registrera ett konto!"
+                    "noaccount": "Har du inget användarkonto?",
+                    "link": "Registrera ett användarkonto!"
                 }
             },
             "error": {
@@ -117,7 +117,7 @@
             "value": "Värde"
         },
         "delete": {
-            "title": "Bekräfta bortagning"
+            "title": "Bekräfta borttagning"
         },
         "validation": {
             "required": "Du måste fylla i detta fält.",
@@ -143,5 +143,5 @@
         "emailexists": "Mailadressen är redan registrerad!",
         "idexists": "En ny {{entityName}} kan inte redan ha ett ID."
     },
-    "footer": "Phasellus tristique dui at diam ultrices sollicitudin. Sed id pharetra nibh. Sed imperdiet est eu quam dictum, sodales semper enim luctus. "
+    "footer": "Kan du komma på någon annan utlysare, eller någon information, som borde vara tillgänglig på Avonniv? Isåfall, kontakta oss så fixar vi det omgående!"
 }

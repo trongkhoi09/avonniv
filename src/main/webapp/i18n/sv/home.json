@@ -1,14 +1,15 @@
 {
     "home": {
-        "title": "Välkommen till Avonniv!",
+        "title": ”Välkommen till Avonniv!",
         "publicGrants": {
-            "title": "Intresserad av att se en lista över möjligheter till offentlig finansiering?",
-            "button": "Till listan!",
+            "title": ”Intresserad av möjligheter till offentlig finansiering?",
+            "button": ”Till listan!”,
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et velit ac mi convallis consequat."
         },
         "aboutUs": {
-            "title": "Om Avonniv",
-            "description": "Varför ska det vara komplicerat och tidskrävande att hitta offentlig finansiering som passar just ditt bolag? Det ska det inte! Avonniv är en non-profit plattform som gör det enkelt för entreprenörer och startups att upptäcka möjligheter till offentlig finansiering för att driva innovation. Tillgång till finansiering är en central del av innovation; offentliga utlysningar bör därför vara synliga och tillgängliga för innovatörer, entreprenörer och startups - därför finns Avonniv!"
+            "title": ”Om Avonniv",
+            "description": ”Varför ska det vara komplicerat och tidskrävande att hitta offentlig finansiering som passar just ditt bolag? Det ska det inte! Avonniv är en non-profit plattform som gör det enkelt för entreprenörer och startups att upptäcka möjligheter till offentlig finansiering för att driva innovation.
+Tillgång till finansiering är en central del av innovation; offentliga utlysningar bör därför vara synliga och tillgängliga för innovatörer, entreprenörer och startups - därför finns Avonniv!”
         },
         "contact": "Kontakta oss: mail@mail.com"
     }

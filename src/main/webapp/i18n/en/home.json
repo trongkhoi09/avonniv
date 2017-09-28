@@ -2,7 +2,7 @@
     "home": {
         "title": "Welcome to Avonniv!",
         "publicGrants": {
-            "title": "Would you like to see a list of opportunities of public funding for your innovative venture?",
+            "title": "Interested in opportunities of public funding?",
             "button": "Yes, take me there!",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et velit ac mi convallis consequat."
         },

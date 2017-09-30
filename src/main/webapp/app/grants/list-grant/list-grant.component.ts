@@ -127,6 +127,9 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
 
     sliceDescription(grantDTO) {
         const description = grantDTO.description;
+        if (!description) {
+            return 'Not available';
+        }
         let index = 200;
         if (description != null && description.length > index) {
             while (description[index] !== ' ') {

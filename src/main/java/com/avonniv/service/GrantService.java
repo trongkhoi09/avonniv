@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -71,6 +72,14 @@ public class GrantService {
     @Transactional(readOnly = true)
     public Optional<Grant> getById(Long id) {
         return Optional.of(grantRepository.findOne(id));
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<List<Grant>> getRecentGrants() {
+        return Optional.of(grantRepository.findAllByStatusInOrderByCreatedDateDesc(
+            new PageRequest(0,3),
+            Arrays.asList(GrantDTO.Status.open.getValue(), GrantDTO.Status.coming.getValue()))
+        );
     }
 
     public Optional<GrantDTO> update(GrantDTO grantDTO) {

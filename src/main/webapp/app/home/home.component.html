@@ -1,13 +1,43 @@
 <div>
     <div class="row">
-        <div class="col-md-8 offset-md-2 text-center">
+        <div class="col-md-6 text-center">
             <div class="jumbotron">
-                <h1 class="display-4" jhiTranslate="home.publicGrants.title">Public Grants</h1>
+                <h2 class="display-4" jhiTranslate="home.publicGrants.title">Public Grants</h2>
                 <p class="lead" jhiTranslate="home.publicGrants.description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et velit ac mi convallis
                     consequat.</p>
                 <p>
                     <button class="btn btn-primary btn-lg" routerLink="grants" [queryParams]="{ openGrant: true, comingGrant: true }" role="button" jhiTranslate="home.publicGrants.button">View public grants</button>
                 </p>
+            </div>
+        </div>
+        <div class="col-md-6 ">
+            <div class="jumbotron">
+                <h2 class="display-4 text-center">Most recent grants</h2>
+                <table class="table table-hover">
+                    <thead>
+                    <tr class="row m-0">
+                        <th class="col-4 text-center"><span  jhiTranslate="grants.publisher">Publisher</span></th>
+                        <th class="col-8 text-center"><span  jhiTranslate="grants.titleData">Title</span></th>
+                    </tr>
+                    </thead>
+                    <div *ngIf="grantDTOs.length==0" class="empty-table-custom text-center">
+                        <h5 class="text-muted" jhiTranslate="grants.empty"></h5>
+                    </div>
+                    <tbody *ngIf="grantDTOs.length!=0">
+                    <tr *ngFor="let grantDTO of grantDTOs; let i = index" class="row m-0">
+                        <td class="col-4">{{grantDTO.grantProgramDTO.publisherDTO.name}}</td>
+                        <td class="col-8">
+                            <a *ngIf="grantDTO.externalUrl" href="{{grantDTO.externalUrl?grantDTO.externalUrl:'javascript:void(0)'}}"
+                               [target]="grantDTO.externalUrl ? '_blank' : ''">
+                                {{grantDTO.title}}
+                            </a>
+                            <span *ngIf="!grantDTO.externalUrl">
+                            {{grantDTO.title}}
+                        </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
         <!--<div class="col-md-6 text-center">-->

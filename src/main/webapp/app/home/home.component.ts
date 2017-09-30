@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { EventManager } from 'ng-jhipster';
+import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {AlertService, EventManager} from 'ng-jhipster';
 
-import { Account, LoginModalService, Principal } from '../shared';
+import {Account, LoginModalService, Principal, GrantDTO, GrantService, ResponseWrapper} from '../shared';
 
 @Component({
     selector: 'jhi-home',
@@ -15,12 +15,13 @@ import { Account, LoginModalService, Principal } from '../shared';
 export class HomeComponent implements OnInit, OnDestroy {
     account: Account;
     modalRef: NgbModalRef;
+    grantDTOs: GrantDTO[] = [];
 
-    constructor(
-        private principal: Principal,
-        private loginModalService: LoginModalService,
-        private eventManager: EventManager
-    ) {
+    constructor(private principal: Principal,
+                private loginModalService: LoginModalService,
+                private grantService: GrantService,
+                private alertService: AlertService,
+                private eventManager: EventManager) {
     }
 
     ngOnInit() {
@@ -29,6 +30,18 @@ export class HomeComponent implements OnInit, OnDestroy {
             this.account = account;
         });
         this.registerAuthenticationSuccess();
+        this.grantService.recentGrants().subscribe(
+            (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
+    }
+
+    private onSuccess(data, headers) {
+        this.grantDTOs = data;
+    }
+
+    private onError(error) {
+        this.alertService.error(error.error, error.message, null);
     }
 
     ngOnDestroy(): void {

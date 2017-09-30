@@ -37,4 +37,9 @@ export class GrantService {
         return this.http.put(this.resourceUrl, grant)
             .map((res: Response) => this.convertResponse(res));
     }
+
+    recentGrants(): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/getRecentGrants`)
+            .map((res: Response) => this.convertResponse(res));
+    }
 }

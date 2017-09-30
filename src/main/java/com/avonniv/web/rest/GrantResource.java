@@ -82,6 +82,14 @@ public class GrantResource {
                 .map(GrantDTO::new));
     }
 
+    @GetMapping("/getRecentGrants")
+    @Timed
+    public ResponseEntity<List<GrantDTO>> getRecentGrants() {
+        return ResponseUtil.wrapOrNotFound(
+            grantService.getRecentGrants()
+                .map(grants -> grants.stream().map(GrantDTO::new).collect(Collectors.toList())));
+    }
+
     @PutMapping("")
     @Timed
     @Secured(AuthoritiesConstants.ADMIN)

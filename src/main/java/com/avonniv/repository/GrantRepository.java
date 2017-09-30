@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface GrantRepository extends JpaRepository<Grant, Long> {
+    List<Grant> findAllByStatusInOrderByCreatedDateDesc(Pageable pageable, List<Integer> listStatus);
+
     List<Grant> findAllByCloseDateBefore(Instant dateBefore);
 
     List<Grant> findAllByStatusInAndOpenDateBefore(List<Integer> listStatus, Instant dateBefore);

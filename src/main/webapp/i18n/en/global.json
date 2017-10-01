@@ -2,6 +2,7 @@
     "global": {
         "title": "Avonniv",
         "search": "Search...",
+        "notAvailable": "Not available",
         "description": "Where innovation meets public funding",
         "shortDescription": "Where innovation meets public funding",
         "countGrants": "Right now: <span class=\"badge badge-primary\">{{count}}</span> opportunities of public funding!",

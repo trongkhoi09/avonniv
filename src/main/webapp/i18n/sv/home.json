@@ -1,6 +1,7 @@
 {
     "home": {
         "title": "Välkommen till Avonniv!",
+        "mostRecent": "Senast tillagda utlysningar",
         "publicGrants": {
             "title": "Intresserad av möjligheter till offentlig finansiering?",
             "button": "Till listan!",

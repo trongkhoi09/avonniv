@@ -2,6 +2,7 @@
     "global": {
         "title": "Avonniv",
         "search": "Sök...",
+        "notAvailable": "Inte tillgänglig",
         "description": "Where innovation meets public funding",
         "shortDescription": "Where innovation meets public funding",
         "countGrants": "Just nu: <span class=\"badge badge-primary\">{{count}}</span> möjligheter till finansiering!",
@@ -65,7 +66,7 @@
                 }
             },
             "error": {
-                "dontmatch" : "Lösenorden stämmer inte med varandra!"
+                "dontmatch": "Lösenorden stämmer inte med varandra!"
             },
             "validate": {
                 "newpassword": {
@@ -93,10 +94,10 @@
             }
         },
         "field": {
-            "id" : "ID"
+            "id": "ID"
         },
         "ribbon": {
-            "dev":"Development"
+            "dev": "Development"
         },
         "item-count": "Visar {{first}} - {{second}} av {{total}} träffar."
     },

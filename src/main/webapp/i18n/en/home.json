@@ -1,6 +1,7 @@
 {
     "home": {
         "title": "Welcome to Avonniv!",
+        "mostRecent": "Most recently added grants",
         "publicGrants": {
             "title": "Interested in opportunities of public funding?",
             "button": "Yes, take me there!",

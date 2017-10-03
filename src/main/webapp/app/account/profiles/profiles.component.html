@@ -9,12 +9,12 @@
             <div class="row">
 
                 <div class="col-md-3">
-                    <h5>Profile</h5>
+                    <h5 jhiTranslate="profiles.title">Profile</h5>
                 </div>
                 <div class="col-md-9">
                     <a *ngIf="collapse.profile" href="javascript:void(0);"
                        (click)="collapse.password = true;collapse.profile = !collapse.profile"
-                       [attr.aria-expanded]="!collapse.profile">
+                       [attr.aria-expanded]="!collapse.profile" jhiTranslate="profiles.changeProfile">
                         Change profile
                     </a>
                 </div>
@@ -135,13 +135,14 @@
                         <div class="row">
                             <div class="col-md-6 text-center">
                                 <button type="submit" [disabled]="settingsForm.form.invalid" class="btn btn-primary"
-                                        jhiTranslate="settings.form.button">Save
+                                        jhiTranslate="entity.action.save">Save
                                 </button>
                             </div>
                             <div class="col-md-6 text-center">
                                 <button *ngIf="!collapse.profile" type="button" class="btn btn-danger"
                                         (click)="collapse.profile = !collapse.profile;errorProfile=null;successProfile=null"
-                                        [attr.aria-expanded]="!collapse.profile" aria-controls="collapseProfile">
+                                        [attr.aria-expanded]="!collapse.profile" aria-controls="collapseProfile"
+                                        jhiTranslate="entity.action.cancel">
                                     Cancel
                                 </button>
                             </div>
@@ -192,7 +193,8 @@
                 <div class="col-md-9">
                     <a *ngIf="collapse.password" href="javascript:void(0);"
                        (click)="collapse.profile = true;collapse.password = !collapse.password"
-                       [attr.aria-expanded]="!collapse.password" aria-controls="collapsePassword">
+                       [attr.aria-expanded]="!collapse.password" aria-controls="collapsePassword"
+                       jhiTranslate="profiles.changePassword">
                         Change password
                     </a>
                 </div>
@@ -292,7 +294,8 @@
                             <div class="col-md-6 text-center">
                                 <button *ngIf="!collapse.password" type="button" class="btn btn-danger"
                                         (click)="collapse.password = !collapse.password;successPassword=null;errorPassword=null;errorOldPassword=null"
-                                        [attr.aria-expanded]="!collapse.password" aria-controls="collapsePassword">
+                                        [attr.aria-expanded]="!collapse.password" aria-controls="collapsePassword"
+                                        jhiTranslate="entity.action.cancel">
                                     Cancel
                                 </button>
                             </div>
@@ -304,7 +307,7 @@
             <p></p>
             <div class="row">
                 <div class="col-md-3">
-                    <h5 jhiTranslate="profiles.form.favorite">Favorite</h5>
+                    <h5 jhiTranslate="profiles.form.preferences">Preferences</h5>
                 </div>
                 <div class="col-md-12">
                     <div class="alert alert-success" *ngIf="success" jhiTranslate="settings.messages.success">
@@ -313,7 +316,7 @@
                 </div>
                 <div class="card-box col-md-12">
                     <div class="row">
-                        <div *ngFor="let publisher of publisherCrawled; let i = index" class="col-md-4 text-center">
+                        <div *ngFor="let publisher of publisherCrawled; let i = index" class="col-md-4">
                             <a><span (click)="publisher.check=!publisher.check;"><i
                                 [ngClass]="publisher.check?'fa fa-check-square-o':'fa fa-square-o'"
                                 aria-hidden="true"></i> {{publisher.name}} </span></a>
@@ -325,16 +328,13 @@
             <p></p>
             <div class="row">
                 <div class="col-md-3">
-                    <h5>Notification</h5>
+                    <h5 jhiTranslate="profiles.notification">Notification</h5>
                 </div>
                 <div class="card-box col-md-12">
                     <div class="row">
                         <div class="col-md-10">
-                            <label for="checkboxNotification">Aenean luctus libero turpis, et porta est venenatis vel.
-                                Fusce vel mi feugiat,
-                                vestibulum odio molestie, malesuada dui. Cras nec urna vestibulum, placerat tortor id,
-                                mattis
-                                elit. Sed sit amet mattis mauris. </label>
+                            <label for="checkboxNotification"
+                                   jhiTranslate="profiles.notification.description">Please notify me through email when a new grant is published that is in line with my preferences.</label>
                         </div>
                         <div class="col-md-2 text-center">
                             <input id="checkboxNotification" type="checkbox"/>

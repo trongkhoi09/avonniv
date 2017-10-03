@@ -1,6 +1,10 @@
 {
     "profiles": {
-        "title": "Grants",
+        "title": "Profile",
+        "changeProfile": "Change profile",
+        "changePassword": "Change password",
+        "notification": "Notification",
+        "notification.description": "Please notify me through email when a new grant is published that is in line with my preferences.",
         "filter": {
             "title": "Filter per date",
             "from": "from",
@@ -13,7 +17,7 @@
             }
         },
         "form": {
-            "favorite": "Favorite"
+            "preferences": "Preferences"
         }
     }
 }

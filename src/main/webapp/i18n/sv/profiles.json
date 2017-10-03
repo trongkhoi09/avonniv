@@ -1,6 +1,10 @@
 {
     "profiles": {
-        "title": "Utlysningar",
+        "title": "Profil",
+        "changeProfile": "Ändra profil",
+        "changePassword": "Ändra lösenord",
+        "notification": "Avisering",
+        "notification.description": "Vänligen meddela mig via mail när en ny utlysning publiceras som överensstämmer med mina preferenser.",
         "filter": {
             "title": "Filtrera på datum",
             "from": "Från",
@@ -13,7 +17,7 @@
             }
         },
         "form": {
-            "favorite": "Favorit"
+            "preferences": "Preferenser"
         }
     }
 }

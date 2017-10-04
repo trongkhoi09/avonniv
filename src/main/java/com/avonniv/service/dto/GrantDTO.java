@@ -108,9 +108,13 @@ public class GrantDTO extends AbstractEntityDTO {
     }
 
     public void setCloseDate(Instant closeDate) {
+        setCloseDate(closeDate, 0);
+    }
+
+    public void setCloseDate(Instant closeDate, int timeZone) {
         if (closeDate != null) {
             long longValue = closeDate.getEpochSecond();
-            if (longValue % 86400 == 0) {
+            if ((longValue + timeZone * 60 * 60) % 86400 == 0) {
                 closeDate = closeDate.plusSeconds(86400 - 1);
             }
         }

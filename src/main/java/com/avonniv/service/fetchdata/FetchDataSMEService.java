@@ -107,44 +107,41 @@ public class FetchDataSMEService {
                                 String topicFileName = Util.readStringJSONObject(jsonCall, "topicFileName");
                                 String externalIdGrant = name + "_" + topicFileName;
                                 Optional<Grant> grantOptional = grantService.getByExternalId(externalIdGrant);
-                                if (!grantOptional.isPresent()) {
-                                    GrantDTO grantDTO = new GrantDTO(
-                                        null, null, null, 0,
-                                        grantProgramDTO,
-                                        Util.readStringJSONObject(jsonCall, "title"),
-                                        null,
-                                        getDescription(topicFileName),
-                                        readDateJSONObject(jsonCall, "plannedOpeningDate"),
-                                        readDateJSONObject(jsonCall, "deadlineDates"),
-                                        null,
-                                        null,
-                                        externalIdGrant,
-                                        getURLTopic(urlFetch.getFrameworkProgramme(), topicFileName),
-                                        null,
-                                        URLCallAPI
-                                    );
-                                    Util.setStatus(grantDTO, now);
+                                GrantDTO grantDTO = grantOptional.map(GrantDTO::new).orElseGet(GrantDTO::new);
 
-                                    for (int j = 0; j < listCallData.size(); j++) {
-                                        boolean check = false;
-                                        CallData callData = listCallData.get(j);
-                                        if (callData.getCallFileName().equals(callFileName)) {
-                                            if (callData.getOpenDate().equals(grantDTO.getOpenDate())) {
-                                                for (Instant instant : callData.getCloseDate()) {
-                                                    if (instant.equals(grantDTO.getCloseDate())) {
-                                                        grantDTO.setFinanceDescription(callData.getAmount());
-                                                        check = true;
-                                                        break;
-                                                    }
+                                grantDTO.setGrantProgramDTO(grantProgramDTO);
+                                grantDTO.setTitle(Util.readStringJSONObject(jsonCall, "title"));
+                                grantDTO.setDescription(getDescription(topicFileName));
+                                grantDTO.setOpenDate(readDateJSONObject(jsonCall, "plannedOpeningDate"));
+                                grantDTO.setCloseDate(readDateJSONObject(jsonCall, "deadlineDates"));
+                                grantDTO.setExternalId(externalIdGrant);
+                                grantDTO.setExternalUrl(getURLTopic(urlFetch.getFrameworkProgramme(), topicFileName));
+                                grantDTO.setDataFromUrl(URLCallAPI);
+                                Util.setStatus(grantDTO, now);
+
+                                for (int j = 0; j < listCallData.size(); j++) {
+                                    boolean check = false;
+                                    CallData callData = listCallData.get(j);
+                                    if (callData.getCallFileName().equals(callFileName)) {
+                                        if (callData.getOpenDate().equals(grantDTO.getOpenDate())) {
+                                            for (Instant instant : callData.getCloseDate()) {
+                                                if (instant.equals(grantDTO.getCloseDate())) {
+                                                    grantDTO.setFinanceDescription(callData.getAmount());
+                                                    check = true;
+                                                    break;
                                                 }
                                             }
                                         }
-                                        if (check) {
-                                            listCallData.remove(j);
-                                            break;
-                                        }
                                     }
+                                    if (check) {
+                                        listCallData.remove(j);
+                                        break;
+                                    }
+                                }
+                                if (!grantOptional.isPresent()) {
                                     grantService.createGrantCall(grantDTO);
+                                } else {
+                                    grantService.update(grantDTO);
                                 }
                             }
                         }

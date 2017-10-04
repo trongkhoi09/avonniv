@@ -71,7 +71,7 @@ public class FetchDataEnergimyndighetenService {
                 publisherDTO.setCrawled(true);
                 publisherService.createPublisher(publisherDTO);
             }
-            String externalUrl = "http://www.energimyndigheten.se/utlysningar/";
+                String externalUrl = "http://www.energimyndigheten.se/utlysningar/";
             String externalIdGrantProgram = name + "_" + externalUrl;
             Optional<GrantProgram> optional = grantProgramService.getByExternalId(externalIdGrantProgram);
             GrantProgram grantProgram;
@@ -155,7 +155,7 @@ public class FetchDataEnergimyndighetenService {
                         break;
                 }
             }
-            grantDTO.setCloseDate(closeDate);
+            grantDTO.setCloseDate(closeDate, 2);
             if (closeDate != null && closeDate.getEpochSecond() < now.getEpochSecond()) {
                 grantDTO.setStatus(GrantDTO.Status.close.getValue());
             } else {
@@ -171,7 +171,7 @@ public class FetchDataEnergimyndighetenService {
                 data += " 00:00";
             }
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+            sdf.setTimeZone(TimeZone.getTimeZone("GMT+2:00"));
             return sdf.parse(data).toInstant();
         } catch (ParseException ignored) {
         }

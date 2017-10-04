@@ -123,7 +123,7 @@ public class FetchDataFORMASService {
             if (description != null) {
                 String[] result = description.split("<br />");
                 if (result.length > 2) {
-                    grantDTO.setCloseDate(getDateFromString(result[0]));
+                    grantDTO.setCloseDate(getDateFromString(result[0]), 2);
                     grantDTO.setDescription(result[2]);
                     String[] announced = result[1].split(",");
                     grantDTO.setAnnouncedDate(getDateFromString(announced[0]));
@@ -145,7 +145,7 @@ public class FetchDataFORMASService {
         if (data.length() > 10) {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                sdf.setTimeZone(TimeZone.getTimeZone("GMT+2:00"));
                 data = data.substring(data.length() - 10, data.length());
                 return sdf.parse(data).toInstant();
             } catch (ParseException ignored) {

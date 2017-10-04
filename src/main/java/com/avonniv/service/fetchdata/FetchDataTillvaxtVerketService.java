@@ -130,7 +130,7 @@ public class FetchDataTillvaxtVerketService {
                     if (planned) {
                         grantDTO.setOpenDate(date);
                     } else {
-                        grantDTO.setCloseDate(date);
+                        grantDTO.setCloseDate(date, 2);
                     }
                 }
                 Elements elementContent = doc.select(".sv-vertical .sv-layout .pagecontent");
@@ -155,7 +155,7 @@ public class FetchDataTillvaxtVerketService {
         try {
             String[] strings = url.split("/");
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+            sdf.setTimeZone(TimeZone.getTimeZone("GMT+2:00"));
             String dateString = strings[strings.length - 1].substring(0, 10);
             return sdf.parse(dateString).toInstant();
         } catch (Exception e) {
@@ -170,7 +170,9 @@ public class FetchDataTillvaxtVerketService {
             if (dateString.length() == 9) {
                 dateString = "0" + dateString;
             }
-            return new SimpleDateFormat("dd MM yyyy").parse(dateString).toInstant();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy");
+            sdf.setTimeZone(TimeZone.getTimeZone("GMT+2:00"));
+            return sdf.parse(dateString).toInstant();
         } catch (Exception e) {
             return null;
         }

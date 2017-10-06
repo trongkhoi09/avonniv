@@ -70,12 +70,12 @@ public class FetchDataVinnovaService {
                 lastDateCrawl = crawlHistoryOptional.get().getLastDateCrawl();
             }
             PublisherDTO publisherDTO = publisherOptional.map(PublisherDTO::new).orElse(null);
+            List<String> listIdCrawled = new ArrayList<>();
             while (true) {
                 String url = getURLString(lastDateCrawl);
                 String json = Util.readUrl(url);
                 JSONArray jsonArray = new JSONArray(json);
                 for (int i = 0; i < jsonArray.length(); ++i) {
-
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     String externalIdGrantProgram = name + "_" + Util.readStringJSONObject(jsonObject, "Diarienummer");
                     Optional<GrantProgram> optional = grantProgramService.getByExternalId(externalIdGrantProgram);
@@ -97,55 +97,65 @@ public class FetchDataVinnovaService {
                         grantProgramDTO.setExternalUrl(getURLString(grantProgramDTO.getName()));
                         grantProgram = grantProgramService.createGrant(grantProgramDTO);
                     }
-
-                    if (jsonObject.has("AnsokningsomgangLista")) {
+                    if (jsonObject.has("AnsokningsomgangDnrLista")) {
                         GrantProgramDTO grantProgramDTO = new GrantProgramDTO(grantProgram);
-                        JSONArray AnsokningsomgangLista = jsonObject.getJSONArray("AnsokningsomgangLista");
+                        JSONArray AnsokningsomgangLista = jsonObject.getJSONArray("AnsokningsomgangDnrLista");
                         List<DataFetch> listURL = getURLGrant(grantProgramDTO.getExternalUrl());
                         for (int j = 0; j < AnsokningsomgangLista.length(); j++) {
-                            JSONObject object = AnsokningsomgangLista.getJSONObject(j);
-                            String externalIdGrant = name + "_" + Util.readStringJSONObject(object, "Diarienummer");
-                            Optional<Grant> grantOptional = grantService.getByExternalId(externalIdGrant);
-                            GrantDTO grantDTO = grantOptional.map(GrantDTO::new).orElseGet(GrantDTO::new);
-                            grantDTO.setExternalId(externalIdGrant);
-                            grantDTO.setGrantProgramDTO(grantProgramDTO);
-                            grantDTO.setTitle(Util.readStringJSONObject(object, "Titel"));
-                            grantDTO.setDescription(Util.readStringJSONObject(object, "Beskrivning"));
-                            grantDTO.setOpenDate(readDateJSONObject(object, "Oppningsdatum"));
-                            grantDTO.setCloseDate(readDateJSONObject(object, "Stangningsdatum"));
-                            grantDTO.setAnnouncedDate(readDateJSONObject(object, "UppskattatBeslutsdatum"));
-                            grantDTO.setProjectStartDate(readDateJSONObject(object, "TidigastProjektstart"));
-                            grantDTO.setDataFromUrl(url);
-                            String month = Util.readStringJSONObject(object, "AnnonseringslägePeriod");
-                            String year = Util.readStringJSONObject(object, "AnnonseringslägeÅr");
-                            if (year != null && !year.equals("null")) {
-                                grantDTO.setStatus(GrantDTO.Status.coming.getValue());
-                                if (grantDTO.getOpenDate() == null) {
-                                    grantDTO.setOpenDate(getDateByYearAndMonth(year, month));
+                            JSONObject diarienummerAnsokningsomgang = AnsokningsomgangLista.getJSONObject(j);
+                            String id = Util.readStringJSONObject(diarienummerAnsokningsomgang, "DiarienummerAnsokningsomgang");
+                            if (!listIdCrawled.contains(id)) {
+                                listIdCrawled.add(id);
+                                String urlGrant = "https://data.vinnova.se/api/ansokningsomgangar/" + id;
+                                String jsonAnsokningsomgangar = Util.readUrl(urlGrant);
+                                JSONArray jsonArrayAnsokningsomgangar = new JSONArray(jsonAnsokningsomgangar);
+                                if (jsonArrayAnsokningsomgangar.length() == 1) {
+                                    JSONObject object = jsonArrayAnsokningsomgangar.getJSONObject(0);
+                                    String externalIdGrant = name + "_" + Util.readStringJSONObject(object, "Diarienummer");
+                                    Optional<Grant> grantOptional = grantService.getByExternalId(externalIdGrant);
+                                    GrantDTO grantDTO = grantOptional.map(GrantDTO::new).orElseGet(GrantDTO::new);
+                                    grantDTO.setExternalId(externalIdGrant);
+                                    grantDTO.setGrantProgramDTO(grantProgramDTO);
+                                    grantDTO.setTitle(Util.readStringJSONObject(object, "Titel"));
+                                    grantDTO.setDescription(Util.readStringJSONObject(object, "Beskrivning"));
+                                    grantDTO.setOpenDate(readDateJSONObject(object, "Oppningsdatum"));
+                                    grantDTO.setCloseDate(readDateJSONObject(object, "Stangningsdatum"));
+                                    grantDTO.setAnnouncedDate(readDateJSONObject(object, "UppskattatBeslutsdatum"));
+                                    grantDTO.setProjectStartDate(readDateJSONObject(object, "TidigastProjektstart"));
+                                    grantDTO.setDataFromUrl(urlGrant);
+                                    String month = Util.readStringJSONObject(object, "AnnonseringslägePeriod");
+                                    String year = Util.readStringJSONObject(object, "AnnonseringslägeÅr");
+                                    if (year != null && !year.equals("null")) {
+                                        grantDTO.setStatus(GrantDTO.Status.coming.getValue());
+                                        if (grantDTO.getOpenDate() == null) {
+                                            grantDTO.setOpenDate(getDateByYearAndMonth(year, month));
+                                        }
+                                    }
+                                    String publik = Util.readStringJSONObject(object, "Publik");
+                                    String webbsida = Util.readStringJSONObject(object, "Webbsida");
+                                    if ((publik != null && publik.equals("0")) || (webbsida != null && webbsida.equals("0"))) {
+                                        grantDTO.setStatus(GrantDTO.Status.un_publish.getValue());
+                                    } else {
+                                        if (grantDTO.getStatus() == GrantDTO.Status.un_publish.getValue()) {
+                                            grantDTO.setStatus(GrantDTO.Status.undefined.getValue());
+                                        }
+                                        Util.setStatus(grantDTO, now);
+                                    }
+                                    for (int k = 0; k < listURL.size(); k++) {
+                                        DataFetch dataFetch = listURL.get(k);
+                                        if (dataFetch.getTitle().trim().equals(grantDTO.getTitle().trim())) {
+                                            grantDTO.setFinanceDescription(dataFetch.getFinanceDescription());
+                                            grantDTO.setExternalUrl(dataFetch.getExternalUrl());
+                                            listURL.remove(k);
+                                            break;
+                                        }
+                                    }
+                                    if (!grantOptional.isPresent()) {
+                                        grantService.createGrantCall(grantDTO);
+                                    } else {
+                                        grantService.update(grantDTO);
+                                    }
                                 }
-                            }
-                            String publik = Util.readStringJSONObject(object, "Publik");
-                            if (publik != null && publik.equals("0")) {
-                                grantDTO.setStatus(GrantDTO.Status.un_publish.getValue());
-                            } else {
-                                if (grantDTO.getStatus() == GrantDTO.Status.un_publish.getValue()) {
-                                    grantDTO.setStatus(GrantDTO.Status.undefined.getValue());
-                                }
-                                Util.setStatus(grantDTO, now);
-                            }
-                            for (int k = 0; k < listURL.size(); k++) {
-                                DataFetch dataFetch = listURL.get(k);
-                                if (dataFetch.getTitle().trim().equals(grantDTO.getTitle().trim())) {
-                                    grantDTO.setFinanceDescription(dataFetch.getFinanceDescription());
-                                    grantDTO.setExternalUrl(dataFetch.getExternalUrl());
-                                    listURL.remove(k);
-                                    break;
-                                }
-                            }
-                            if (!grantOptional.isPresent()) {
-                                grantService.createGrantCall(grantDTO);
-                            } else {
-                                grantService.update(grantDTO);
                             }
                         }
                     }
@@ -191,7 +201,7 @@ public class FetchDataVinnovaService {
                 if (dataFetch.getTitle() != null) {
                     listURL.add(dataFetch);
                 } else {
-                    log.error("Title null",dataFetch.getExternalUrl());
+                    log.error("Title null", dataFetch.getExternalUrl());
                 }
             }
             return listURL;
@@ -227,7 +237,7 @@ public class FetchDataVinnovaService {
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH) + 1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        return "http://data.vinnova.se/api/v1/utlysningar/" + year + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day);
+        return "https://data.vinnova.se/api/utlysningar/" + year + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day);
     }
 
     public String getURLString(String title) {
@@ -258,6 +268,9 @@ public class FetchDataVinnovaService {
         if (object.has(key)) {
             try {
                 String date = object.getString(key);
+                if (date.equals("null")) {
+                    return null;
+                }
                 if (date.toCharArray()[date.length() - 1] != 'Z') {
                     date = date + "Z";
                 }
@@ -267,7 +280,7 @@ public class FetchDataVinnovaService {
                 } else {
                     return instant;
                 }
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         return null;

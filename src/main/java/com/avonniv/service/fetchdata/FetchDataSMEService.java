@@ -112,7 +112,7 @@ public class FetchDataSMEService {
                                 grantDTO.setGrantProgramDTO(grantProgramDTO);
                                 grantDTO.setTitle(Util.readStringJSONObject(jsonCall, "title"));
                                 grantDTO.setDescription(getDescription(topicFileName));
-                                grantDTO.setOpenDate(readDateJSONObject(jsonCall, "plannedOpeningDate"));
+                                    grantDTO.setOpenDate(readDateJSONObject(jsonCall, "plannedOpeningDate"));
                                 grantDTO.setCloseDate(readDateJSONObject(jsonCall, "deadlineDates"));
                                 grantDTO.setExternalId(externalIdGrant);
                                 grantDTO.setExternalUrl(getURLTopic(urlFetch.getFrameworkProgramme(), topicFileName));

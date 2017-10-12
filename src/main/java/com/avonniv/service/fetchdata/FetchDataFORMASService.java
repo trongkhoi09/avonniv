@@ -77,15 +77,17 @@ public class FetchDataFORMASService {
                     JSONObject xmlJSONObj = XML.toJSONObject(json);
                     String jsonPrettyPrintString = xmlJSONObj.toString(4);
                     JSONObject jsonObject = new JSONObject(jsonPrettyPrintString).getJSONObject("rss").getJSONObject("channel");
-                    try {
-                        JSONArray jsonArray = jsonObject.getJSONArray("item");
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jsonObjectItem = jsonArray.getJSONObject(i);
+                    if (jsonObject.has("item")) {
+                        try {
+                            JSONArray jsonArray = jsonObject.getJSONArray("item");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObjectItem = jsonArray.getJSONObject(i);
+                                saveGrant(name, grantProgramDTO, jsonObjectItem, urlFetch);
+                            }
+                        } catch (JSONException e) {
+                            JSONObject jsonObjectItem = jsonObject.getJSONObject("item");
                             saveGrant(name, grantProgramDTO, jsonObjectItem, urlFetch);
                         }
-                    } catch (JSONException e) {
-                        JSONObject jsonObjectItem = jsonObject.getJSONObject("item");
-                        saveGrant(name, grantProgramDTO, jsonObjectItem, urlFetch);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

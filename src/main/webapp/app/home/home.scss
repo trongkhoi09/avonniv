@@ -1,17 +1,118 @@
 /* ==========================================================================
 Main page styles
 ========================================================================== */
-.icon-social {
-    border: 2px solid;
-    width: 25px;
-    height: 25px;
-    border-radius: 25px;
-    margin: 5px;
-    display: inline-block;
-}
-
-.height-100 {
-    height: 100%;
+.home {
+    .most-recent {
+        margin-top: 102px;
+        margin-bottom: 70px;
+        font-family: Montserrat;
+        font-size: 48px;
+        text-align: center;
+        color: #26282f;
+    }
+    .card {
+        border-radius: 10px;
+        background-color: #f4f5f7;
+    }
+    .grant {
+        .card {
+            .card-title {
+                font-family: Montserrat;
+                font-size: 24px;
+                line-height: 1.42;
+                text-align: left;
+                color: #26282f;
+            }
+            .card-text {
+                font-family: Montserrat;
+                font-size: 16px;
+                line-height: 2;
+                text-align: left;
+                color: #545454;
+                .publisher {
+                    font-weight: bold;
+                    color: #276cf2;
+                }
+                a {
+                    color: #276cf2;
+                }
+            }
+        }
+    }
+    .sign-up {
+        .card {
+            .card-title {
+                margin-top: 24px;
+                margin-bottom: 29px;
+                font-family: Montserrat;
+                font-size: 16px;
+                line-height: 1.38;
+                text-align: center;
+                color: #545454;
+            }
+            .card-text {
+                .btn-warning {
+                    padding: 10px 30px 10px 31px;
+                    border-radius: 100px;
+                    font-family: Montserrat;
+                    font-size: 13px;
+                    font-weight: 500;
+                    text-align: center;
+                    color: #ffffff;
+                    margin-bottom: 19px;
+                }
+            }
+        }
+    }
+    .btn-see-all {
+        margin-top: 54px;
+        margin-bottom: 79px;
+        padding: 21px 77px 20px 78px;
+        border-radius: 100px;
+        font-family: Montserrat;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-align: center;
+        color: #ffffff;
+    }
+    .grant-school {
+        .title {
+            margin-top: 92px;
+            margin-bottom: 28px;
+            font-family: Montserrat;
+            font-size: 48px;
+            text-align: center;
+            color: #26282f;
+        }
+        .content {
+            font-family: Montserrat;
+            font-size: 18px;
+            line-height: 1.44;
+            text-align: center;
+            color: #747474;
+        }
+        .icon-group {
+            margin-top: 87px;
+            margin-bottom: 48px;
+            img {
+                width: 102px;
+                height: 102px;
+                object-fit: contain;
+            }
+        }
+        .description {
+            height: 76px;
+            margin-bottom: 92px;
+            overflow: hidden;
+            text-overflow: clip;
+            font-family: Montserrat;
+            font-size: 16px;
+            line-height: 1.5;
+            text-align: center;
+            color: #747474;
+        }
+    }
 }
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */

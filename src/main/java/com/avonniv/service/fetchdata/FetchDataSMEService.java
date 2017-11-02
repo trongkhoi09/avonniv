@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.TimeZone;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -105,39 +106,61 @@ public class FetchDataSMEService {
                                 GrantProgramDTO grantProgramDTO = new GrantProgramDTO(grantProgram);
 
                                 String topicFileName = Util.readStringJSONObject(jsonCall, "topicFileName");
-                                String externalIdGrant = name + "_" + topicFileName;
+                                String subCallId = Util.readStringJSONObject(jsonCall, "subCallId");
+                                String externalIdGrant = name + "_" + topicFileName + "_" + subCallId;
                                 Optional<Grant> grantOptional = grantService.getByExternalId(externalIdGrant);
                                 GrantDTO grantDTO = grantOptional.map(GrantDTO::new).orElseGet(GrantDTO::new);
 
                                 grantDTO.setGrantProgramDTO(grantProgramDTO);
                                 grantDTO.setTitle(Util.readStringJSONObject(jsonCall, "title"));
                                 grantDTO.setDescription(getDescription(topicFileName));
-                                    grantDTO.setOpenDate(readDateJSONObject(jsonCall, "plannedOpeningDate"));
+                                grantDTO.setOpenDate(readDateJSONObject(jsonCall, "plannedOpeningDate"));
                                 grantDTO.setCloseDate(readDateJSONObject(jsonCall, "deadlineDates"));
                                 grantDTO.setExternalId(externalIdGrant);
                                 grantDTO.setExternalUrl(getURLTopic(urlFetch.getFrameworkProgramme(), topicFileName));
                                 grantDTO.setDataFromUrl(URLCallAPI);
                                 Util.setStatus(grantDTO, now);
-
-                                for (int j = 0; j < listCallData.size(); j++) {
-                                    boolean check = false;
-                                    CallData callData = listCallData.get(j);
+                                List<String> topics = new ArrayList<>();
+                                try {
+                                    String identifier = Util.readStringJSONObject(jsonCall, "identifier");
+                                    JSONArray topic = jsonCall.getJSONArray("actions").getJSONObject(0).getJSONArray("types");
+                                    for (int k = 0; k < topic.length(); k++) {
+                                        topics.add(identifier + " - " + topic.getString(k));
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                String amount = null;
+                                List<CallData> listCallDataFor = listCallData.stream().filter(callData -> callData.getCallFileName().equalsIgnoreCase(callFileName)).collect(Collectors.toList());
+                                for (int j = 0; j < listCallDataFor.size(); j++) {
+                                    CallData callData = listCallDataFor.get(j);
                                     if (callData.getCallFileName().equals(callFileName)) {
-                                        if (callData.getOpenDate().equals(grantDTO.getOpenDate())) {
-                                            for (Instant instant : callData.getCloseDate()) {
-                                                if (instant.equals(grantDTO.getCloseDate())) {
-                                                    grantDTO.setFinanceDescription(callData.getAmount());
-                                                    check = true;
-                                                    break;
+                                        boolean checkTopic = false;
+                                        for (String topic : topics) {
+                                            if (callData.getTopics().contains(topic)) {
+                                                checkTopic = true;
+                                                break;
+                                            }
+                                        }
+                                        if (checkTopic) {
+                                            if (callData.getOpenDate().equals(grantDTO.getOpenDate())) {
+                                                Instant deadlineDate = readDateJSONObject(jsonCall, "deadlineDates");
+                                                for (Instant instant : callData.getCloseDate()) {
+                                                    if (instant.equals(deadlineDate)) {
+                                                        grantDTO.setFinanceDescription(callData.getAmount());
+                                                        if (amount == null) {
+                                                            amount = callData.getAmount();
+                                                        } else {
+                                                            amount = (Integer.parseInt(amount) + Integer.parseInt(callData.getAmount())) + "";
+                                                        }
+                                                        break;
+                                                    }
                                                 }
                                             }
                                         }
                                     }
-                                    if (check) {
-                                        listCallData.remove(j);
-                                        break;
-                                    }
                                 }
+                                grantDTO.setFinanceDescription(amount);
                                 if (!grantOptional.isPresent()) {
                                     grantService.createGrantCall(grantDTO);
                                 } else {
@@ -191,7 +214,7 @@ public class FetchDataSMEService {
         if (listDate.isEmpty()) {
             return null;
         }
-        return listDate.get(0);
+        return listDate.get(listDate.size() - 1);
     }
 
     public List<CallData> getListCallData(String url) {
@@ -206,16 +229,17 @@ public class FetchDataSMEService {
                 String callFileName = jsonCall.getJSONObject("CallIdentifier").getString("FileName");
                 JSONArray jsonCallBudgetOverviewArray = jsonCall.getJSONArray("CallBudgetOverview");
                 try {
-                    JSONArray jsonBudgetArray = jsonCallBudgetOverviewArray.getJSONObject(0).getJSONArray("Budget");
-                    for (int j = 0; j < jsonBudgetArray.length(); j++) {
-                        JSONObject jsonBudgetObject = jsonBudgetArray.getJSONObject(j);
+                    JSONObject jsonCallBudgetOverview = jsonCallBudgetOverviewArray.getJSONObject(0);
+                    for (int j = 0; j < jsonCallBudgetOverview.names().length(); j++) {
+                        JSONObject jsonBudgetObject = jsonCallBudgetOverview.getJSONObject(jsonCallBudgetOverview.names().getString(j));
                         CallData callData = getCallData(callFileName, jsonBudgetObject);
                         listCallData.add(callData);
                     }
                 } catch (JSONException e) {
-                    JSONObject jsonBudgetObject = jsonCallBudgetOverviewArray.getJSONObject(0).getJSONObject("Budget");
-                    CallData callData = getCallData(callFileName, jsonBudgetObject);
-                    listCallData.add(callData);
+                    e.printStackTrace();
+//                    JSONObject jsonBudgetObject = jsonCallBudgetOverviewArray.getJSONObject(0).getJSONObject("Budget");
+//                    CallData callData = getCallData(callFileName, jsonBudgetObject);
+//                    listCallData.add(callData);
                 }
 
             }
@@ -231,18 +255,25 @@ public class FetchDataSMEService {
         if (jsonBudgetObject.has("Opening date")) {
             callData.setOpenDate(getInstantByString(jsonBudgetObject.getString("Opening date")));
         }
+        JSONArray topic = jsonBudgetObject.getJSONArray("Topic");
+        List<String> topics = new ArrayList<>();
+        for (int i = 0; i < topic.length(); i++) {
+            topics.add(topic.getString(i));
+        }
+        callData.setTopics(topics);
         callData.setCloseDate(readListDateJSONObject(jsonBudgetObject, "Deadline"));
-        if (jsonBudgetObject.has("Amount")) {
+        if (jsonBudgetObject.has("BudgetYearAmount")) {
             try {
-                try {
-                    JSONArray jsonArray = jsonBudgetObject.getJSONArray("Amount");
-                    if (jsonArray.length() > 0) {
-                        callData.setAmount(jsonArray.getString(0));
-                    }
-                } catch (Exception e) {
-                    callData.setAmount(jsonBudgetObject.getString("Amount"));
+                JSONArray jsonArray = jsonBudgetObject.getJSONArray("BudgetYearAmount");
+                int amount = 0;
+                for (int i = 1; i < jsonArray.length(); i = i + 2) {
+                    amount = amount + Integer.parseInt(jsonArray.getString(i).replaceAll(",", ""));
+                }
+                if (jsonArray.length() % 2 == 0) {
+                    callData.setAmount(amount + "");
                 }
             } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         return callData;
@@ -296,6 +327,7 @@ public class FetchDataSMEService {
     class CallData {
         private String callFileName;
         private Instant openDate;
+        private List<String> topics;
         private List<Instant> closeDate = new ArrayList<>();
         private String amount;
 
@@ -329,6 +361,14 @@ public class FetchDataSMEService {
 
         public void setAmount(String amount) {
             this.amount = amount;
+        }
+
+        public List<String> getTopics() {
+            return topics;
+        }
+
+        public void setTopics(List<String> topics) {
+            this.topics = topics;
         }
     }
 

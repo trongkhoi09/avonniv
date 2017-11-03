@@ -29,8 +29,7 @@ import {
     ProfileService,
     PageRibbonComponent,
     ActiveMenuDirective,
-    ErrorComponent,
-    NavbarSecondComponent
+    ErrorComponent
 } from './layouts';
 
 @NgModule({
@@ -55,8 +54,7 @@ import {
         ErrorComponent,
         PageRibbonComponent,
         ActiveMenuDirective,
-        FooterComponent,
-        NavbarSecondComponent
+        FooterComponent
     ],
     providers: [
         ProfileService,

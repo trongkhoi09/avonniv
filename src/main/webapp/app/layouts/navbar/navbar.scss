@@ -1,99 +1,50 @@
-/* ==========================================================================
-Navbar
-========================================================================== */
-.navbar-version {
-    font-size: 10px;
-    color: #ccc
-}
-
 .jh-navbar-homepage {
-    height: 250px;
-    background-color: #353d47;
-    padding: .2em 1em;
-    -webkit-box-shadow: 0 8px 6px -6px #999;
-    -moz-box-shadow: 0 8px 6px -6px #999;
-    box-shadow: 0 8px 6px -6px #999;
-    .profile-image {
-        margin: -10px 0px;
-        height: 40px;
-        width: 40px;
-        border-radius: 50%;
+    height: 592px;
+    background-image: url("../../../content/images/shutterstock.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    .jh-navbar {
+        padding-left: 8.33%;
+        padding-right: 8.33%;
     }
-    .dropdown-item.active, .dropdown-item.active:focus, .dropdown-item.active:hover {
-        background-color: #5bc0de;
-    }
-    .dropdown-toggle::after {
-        margin-left: 0.15em;
-    }
-    ul.navbar-nav {
-        .nav-item {
-            margin-left: 0.5rem;
-        }
-    }
-    a.nav-link {
-        font-weight: 400;
-    }
-    .jh-navbar-toggler {
-        color: #ccc;
-        font-size: 1.5em;
-        padding: 10px;
-        &:hover {
-            color: #fff;
-        }
-    }
-    .navbar-custom {
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-    }
-    .app-search {
-        position: relative;
-        margin: 15px 5px 15px 10px;
-    }
-
-    .app-search a {
-        position: absolute;
-        top: 3px;
-        right: 20px;
-        color: #c4c4cd;
-    }
-
-    .app-search .form-control,
-    .app-search .form-control:focus {
-        border: none;
-        font-size: 13px;
+    .title {
+        margin-top: 160px;
+        margin-bottom: 32px;
+        font-family: Montserrat;
+        font-size: 43px;
+        line-height: 1.31;
+        text-align: center;
         color: #ffffff;
-        padding-left: 20px;
-        padding-right: 40px;
-        background: rgba(255, 255, 255, 0.1);
-        box-shadow: none;
-        border-radius: 30px;
-        height: 30px;
-        width: 180px;
-    }
-    .nav-item-custom {
-        margin: 11px 2px 15px 5px;
-    }
-    .jh-logo-container {
-        margin: 0 auto;
-        img {
-            margin: 0 auto;
+        b {
+            font-weight: 600;
         }
-        a {
-            color: white;
-            text-decoration: none;
+    }
+    .count-grant {
+        font-family: Montserrat;
+        font-size: 20px;
+        text-align: center;
+        color: #ffffff;
+        .number-grant {
+            font-weight: 600;
+            color: #f8b000;
         }
+    }
+    .btn-take-me-there{
+        margin-top: 35px;
+        padding: 18px 35px 17px 35px;
+        border-radius: 100px;
+        font-family: Montserrat;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-align: center;
+        color: #ffffff;
     }
 }
 
 .jh-navbar {
-    height: 60px;
-    background-color: #353d47;
+    background-color: transparent;
     padding: .2em 1em;
-    -webkit-box-shadow: 0 8px 6px -6px #999;
-    -moz-box-shadow: 0 8px 6px -6px #999;
-    box-shadow: 0 8px 6px -6px #999;
     .profile-image {
         margin: -10px 0px;
         height: 40px;
@@ -101,14 +52,15 @@ Navbar
         border-radius: 50%;
     }
     .dropdown-item.active, .dropdown-item.active:focus, .dropdown-item.active:hover {
-        background-color: #5bc0de;
+        background-color: #353d47;
     }
     .dropdown-toggle::after {
         margin-left: 0.15em;
     }
     ul.navbar-nav {
+        padding: 0.5em;
         .nav-item {
-            margin-left: 0.5rem;
+            margin-left: 15px;
         }
     }
     a.nav-link {
@@ -122,53 +74,51 @@ Navbar
             color: #fff;
         }
     }
-    .navbar-custom {
-        margin-top: 4px;
-    }
+
     .app-search {
+        margin: 23px 0px 0px 0px;
         position: relative;
-        margin: 15px 5px 15px 10px;
     }
 
     .app-search a {
         position: absolute;
         top: 3px;
-        right: 20px;
-        color: #c4c4cd;
+        left: 10px;
+        color: #ffffff;
     }
 
     .app-search .form-control,
     .app-search .form-control:focus {
-        border: none;
         font-size: 13px;
         color: #ffffff;
-        padding-left: 20px;
-        padding-right: 40px;
-        background: rgba(255, 255, 255, 0.1);
+        padding-left: 30px;
+        padding-right: 15px;
+        background: transparent;
         box-shadow: none;
-        border-radius: 30px;
+        border-radius: 18.5px;
+        border: solid 1px #ffffff;
         height: 30px;
-        width: 180px;
+        width: 185px;
     }
+
     .nav-item-custom {
-        margin: 11px 2px 15px 5px;
+        margin-top: 18px;
     }
-    .jh-logo-container {
-        img {
-            height: 40px;
-            width: 32px;
-            margin-top: 0;
-            margin-left: 20px;
-        }
-        a {
-            color: white;
-            text-decoration: none;
-        }
-        .short-payoff{
-            margin-top: 10px;
-            position: absolute;
-            margin-left: 65px;
-        }
+    .btn-login {
+        margin-top: 5px;
+        border-radius: 100px;
+        padding: 6px 23px 6px 23px;
+        font-family: Montserrat;
+        font-size: 13px;
+        font-weight: 500;
+        text-align: center;
+        color: #ffffff;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .jh-navbar-toggler {
+        display: none;
     }
 }
 
@@ -183,18 +133,16 @@ Navbar
     vertical-align: middle;
 }
 
-/* ==========================================================================
-Logo styles
-========================================================================== */
 .navbar-brand {
+    margin-top: 18px;
     &.logo {
         padding: 5px 15px;
         .logo-img {
-            height: 45px;
-            width: 70px;
+            height: 27px;
+            width: 110px;
             display: inline-block;
             vertical-align: middle;
-            background: url("../../../content/images/logo-jhipster.png") no-repeat center center;
+            background: url("../../../content/images/header.png") no-repeat center center;
             background-size: contain;
         }
     }

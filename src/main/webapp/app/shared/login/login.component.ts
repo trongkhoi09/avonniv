@@ -18,7 +18,7 @@ export class JhiLoginModalComponent implements OnInit, AfterViewInit {
     rememberMe: boolean;
     username: string;
     credentials: any;
-    isRegistration: boolean;
+    isRegistration = false;
     confirmPassword: string;
     doNotMatch: string;
     error: string;
@@ -38,7 +38,6 @@ export class JhiLoginModalComponent implements OnInit, AfterViewInit {
                 private router: Router,
                 public activeModal: NgbActiveModal) {
         this.credentials = {};
-        this.isRegistration = false;
     }
 
     ngOnInit() {

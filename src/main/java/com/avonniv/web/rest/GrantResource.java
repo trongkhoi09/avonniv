@@ -87,7 +87,14 @@ public class GrantResource {
     public ResponseEntity<List<GrantDTO>> getRecentGrants() {
         return ResponseUtil.wrapOrNotFound(
             grantService.getRecentGrants()
-                .map(grants -> grants.stream().map(GrantDTO::new).collect(Collectors.toList())));
+                .map(grants -> grants.stream().map(grant -> {
+                    GrantDTO grantDTO = new GrantDTO(grant);
+                    if (grantDTO.getDescription() != null) {
+                        String description = Jsoup.parse(grantDTO.getDescription()).text();
+                        grantDTO.setDescription(description);
+                    }
+                    return grantDTO;
+                }).collect(Collectors.toList())));
     }
 
     @PutMapping("")

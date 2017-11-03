@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import {Injectable} from '@angular/core';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
-import { JhiLoginModalComponent } from './login.component';
+import {JhiLoginModalComponent} from './login.component';
 
 @Injectable()
 export class LoginModalService {
@@ -10,7 +10,7 @@ export class LoginModalService {
         private modalService: NgbModal,
     ) {}
 
-    open(): NgbModalRef {
+    open(isRegistration = false): NgbModalRef {
         if (this.isOpen) {
             return;
         }
@@ -18,6 +18,7 @@ export class LoginModalService {
         const modalRef = this.modalService.open(JhiLoginModalComponent, {
             container: 'nav'
         });
+        modalRef.componentInstance.isRegistration = isRegistration;
         modalRef.result.then((result) => {
             this.isOpen = false;
         }, (reason) => {

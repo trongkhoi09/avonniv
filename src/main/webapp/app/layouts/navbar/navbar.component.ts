@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { JhiLanguageService } from 'ng-jhipster';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {JhiLanguageService} from 'ng-jhipster';
 
-import { ProfileService } from '../profiles/profile.service';
-import { JhiLanguageHelper, Principal, LoginModalService, LoginService } from '../../shared';
+import {ProfileService} from '../profiles/profile.service';
+import {GrantService, JhiLanguageHelper, LoginModalService, LoginService, Principal} from '../../shared';
 import {ProfilesModalService} from '../../account/profiles/profiles-modal.service';
 
-import { VERSION, DEBUG_INFO_ENABLED } from '../../app.constants';
+import {VERSION} from '../../app.constants';
 
 @Component({
     selector: 'jhi-navbar',
@@ -26,22 +26,26 @@ export class NavbarComponent implements OnInit {
     modalRef: NgbModalRef;
     version: string;
     search: string;
+    count: Number;
 
-    constructor(
-        private loginService: LoginService,
-        private languageHelper: JhiLanguageHelper,
-        private languageService: JhiLanguageService,
-        private principal: Principal,
-        private loginModalService: LoginModalService,
-        private profilesModalService: ProfilesModalService,
-        private profileService: ProfileService,
-        private router: Router
-    ) {
+    constructor(private loginService: LoginService,
+                private languageHelper: JhiLanguageHelper,
+                private languageService: JhiLanguageService,
+                private principal: Principal,
+                private loginModalService: LoginModalService,
+                private profilesModalService: ProfilesModalService,
+                private profileService: ProfileService,
+                private grantService: GrantService,
+                private router: Router) {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
         this.languageService.addLocation('home');
         this.router.events.subscribe((val: any) => {
             NavbarComponent.url = val.url;
+        });
+
+        this.grantService.count().subscribe((count) => {
+            this.count = count;
         });
     }
 
@@ -62,7 +66,7 @@ export class NavbarComponent implements OnInit {
     }
 
     changeLanguage(languageKey: string) {
-      this.languageService.changeLanguage(languageKey);
+        this.languageService.changeLanguage(languageKey);
     }
 
     collapseNavbar() {

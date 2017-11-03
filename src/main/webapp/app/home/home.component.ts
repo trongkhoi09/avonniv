@@ -60,7 +60,24 @@ export class HomeComponent implements OnInit, OnDestroy {
         return this.principal.isAuthenticated();
     }
 
-    login() {
-        this.modalRef = this.loginModalService.open();
+    signUp() {
+        this.modalRef = this.loginModalService.open(true);
+    }
+
+    sliceDescription(grantDTO) {
+        const description = grantDTO.description;
+        let index = 200;
+        if (description != null && description.length > index) {
+            while (description[index] !== ' ') {
+                index--;
+            }
+            return description.substring(0, index);
+        }
+        return description;
+    }
+    isSliceDescription(grantDTO) {
+        const description = grantDTO.description;
+        const index = 200;
+        return (description != null && description.length > index);
     }
 }

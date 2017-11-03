@@ -174,6 +174,7 @@ public class FetchDataSMEService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println();
     }
 
     public List<URLFetch> getListURLFetch() {

@@ -10,7 +10,6 @@
     .title {
         margin-top: 160px;
         margin-bottom: 32px;
-        font-family: Montserrat;
         font-size: 43px;
         line-height: 1.31;
         text-align: center;
@@ -20,7 +19,6 @@
         }
     }
     .count-grant {
-        font-family: Montserrat;
         font-size: 20px;
         text-align: center;
         color: #ffffff;
@@ -29,11 +27,10 @@
             color: #f8b000;
         }
     }
-    .btn-take-me-there{
+    .btn-take-me-there {
         margin-top: 35px;
         padding: 18px 35px 17px 35px;
         border-radius: 100px;
-        font-family: Montserrat;
         font-size: 16px;
         font-weight: 600;
         letter-spacing: 2px;
@@ -43,8 +40,67 @@
 }
 
 .jh-navbar {
+    height: 73px;
+    padding-top: 37px;
     background-color: transparent;
-    padding: .2em 1em;
+
+    .nav-link{
+        padding: 2px;
+    }
+    .navbar-title {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .navbar-brand {
+        &.logo {
+            padding-top: 0;
+            padding-bottom: 0;
+            .logo-img {
+                height: 27px;
+                width: 110px;
+                display: inline-block;
+                vertical-align: middle;
+                background: url("../../../content/images/header.png") no-repeat center center;
+                background-size: contain;
+            }
+        }
+    }
+    ul.navbar-nav {
+        .nav-item {
+            margin-left: 20px;
+        }
+    }
+    .btn-login {
+        padding: 6px 24px 6px 24px;
+        border-radius: 100px;
+        font-size: 13px;
+        font-weight: 500;
+        text-align: center;
+        color: #ffffff;
+    }
+    .app-search {
+        position: relative;
+        a {
+            position: absolute;
+            top: 3px;
+            left: 10px;
+            color: #ffffff;
+        }
+        .form-control,
+        .form-control:focus {
+            font-size: 13px;
+            color: #ffffff;
+            padding-left: 30px;
+            padding-right: 15px;
+            background: transparent;
+            box-shadow: none;
+            border-radius: 18.5px;
+            border: solid 1px #ffffff;
+            height: 30px;
+            width: 185px;
+        }
+    }
     .profile-image {
         margin: -10px 0px;
         height: 40px;
@@ -57,12 +113,6 @@
     .dropdown-toggle::after {
         margin-left: 0.15em;
     }
-    ul.navbar-nav {
-        padding: 0.5em;
-        .nav-item {
-            margin-left: 15px;
-        }
-    }
     a.nav-link {
         font-weight: 400;
     }
@@ -73,46 +123,6 @@
         &:hover {
             color: #fff;
         }
-    }
-
-    .app-search {
-        margin: 23px 0px 0px 0px;
-        position: relative;
-    }
-
-    .app-search a {
-        position: absolute;
-        top: 3px;
-        left: 10px;
-        color: #ffffff;
-    }
-
-    .app-search .form-control,
-    .app-search .form-control:focus {
-        font-size: 13px;
-        color: #ffffff;
-        padding-left: 30px;
-        padding-right: 15px;
-        background: transparent;
-        box-shadow: none;
-        border-radius: 18.5px;
-        border: solid 1px #ffffff;
-        height: 30px;
-        width: 185px;
-    }
-
-    .nav-item-custom {
-        margin-top: 18px;
-    }
-    .btn-login {
-        margin-top: 5px;
-        border-radius: 100px;
-        padding: 6px 23px 6px 23px;
-        font-family: Montserrat;
-        font-size: 13px;
-        font-weight: 500;
-        text-align: center;
-        color: #ffffff;
     }
 }
 
@@ -128,22 +138,57 @@
     }
 }
 
-.navbar-title {
-    display: inline-block;
-    vertical-align: middle;
-}
+@media (min-width: 1400px) {
+    .jh-navbar-homepage {
+        height: 710px;
+        .jh-navbar {
+            padding-left: 17.08%;
+            padding-right: 17.08%;
+        }
+        .title {
+            margin-top: 209px;
+            margin-bottom: 38px;
+            font-size: 52px;
+        }
+        .count-grant {
+            font-size: 24px;
+        }
+        .btn-take-me-there {
+            margin-top: 42px;
+            padding: 22px 39px 19px 40px;
+        }
+    }
 
-.navbar-brand {
-    margin-top: 18px;
-    &.logo {
-        padding: 5px 15px;
-        .logo-img {
-            height: 27px;
-            width: 110px;
-            display: inline-block;
-            vertical-align: middle;
-            background: url("../../../content/images/header.png") no-repeat center center;
-            background-size: contain;
+    .jh-navbar {
+        height: 73px;
+        padding-top: 37px;
+        .nav-link{
+            padding: 4px;
+        }
+        .navbar-brand {
+            &.logo {
+                padding-top: 6px;
+                .logo-img {
+                    height: 27px;
+                    width: 110px;
+                }
+            }
+        }
+        ul.navbar-nav {
+            .nav-item {
+                margin-left: 26px;
+            }
+        }
+        .btn-login {
+            padding: 9px 27px 9px 27px;
+        }
+        .app-search .form-control,
+        .app-search .form-control:focus {
+            height: 36px;
+            width: 224px;
+        }
+        .app-search a {
+            top: 5px;
         }
     }
 }

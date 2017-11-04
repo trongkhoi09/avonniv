@@ -1,11 +1,7 @@
-/* ==========================================================================
-Main page styles
-========================================================================== */
 .home {
     .most-recent {
         margin-top: 102px;
         margin-bottom: 70px;
-        font-family: Montserrat;
         font-size: 48px;
         text-align: center;
         color: #26282f;
@@ -17,14 +13,12 @@ Main page styles
     .grant {
         .card {
             .card-title {
-                font-family: Montserrat;
                 font-size: 24px;
                 line-height: 1.42;
                 text-align: left;
                 color: #26282f;
             }
             .card-text {
-                font-family: Montserrat;
                 font-size: 16px;
                 line-height: 2;
                 text-align: left;
@@ -44,7 +38,6 @@ Main page styles
             .card-title {
                 margin-top: 24px;
                 margin-bottom: 29px;
-                font-family: Montserrat;
                 font-size: 16px;
                 line-height: 1.38;
                 text-align: center;
@@ -54,7 +47,6 @@ Main page styles
                 .btn-warning {
                     padding: 10px 30px 10px 31px;
                     border-radius: 100px;
-                    font-family: Montserrat;
                     font-size: 13px;
                     font-weight: 500;
                     text-align: center;
@@ -69,7 +61,6 @@ Main page styles
         margin-bottom: 79px;
         padding: 21px 77px 20px 78px;
         border-radius: 100px;
-        font-family: Montserrat;
         font-size: 16px;
         font-weight: 600;
         letter-spacing: 2px;
@@ -80,13 +71,12 @@ Main page styles
         .title {
             margin-top: 92px;
             margin-bottom: 28px;
-            font-family: Montserrat;
+
             font-size: 48px;
             text-align: center;
             color: #26282f;
         }
         .content {
-            font-family: Montserrat;
             font-size: 18px;
             line-height: 1.44;
             text-align: center;
@@ -106,24 +96,10 @@ Main page styles
             margin-bottom: 92px;
             overflow: hidden;
             text-overflow: clip;
-            font-family: Montserrat;
             font-size: 16px;
             line-height: 1.5;
             text-align: center;
             color: #747474;
         }
-    }
-}
-
-/* wait autoprefixer update to allow simple generation of high pixel density media query */
-@media only screen and (-webkit-min-device-pixel-ratio: 2),
-only screen and (min--moz-device-pixel-ratio: 2),
-only screen and (-o-min-device-pixel-ratio: 2/1),
-only screen and (min-device-pixel-ratio: 2),
-only screen and (min-resolution: 192dpi),
-only screen and (min-resolution: 2dppx) {
-    .hipster {
-        background: url("../../content/images/hipster2x.png") no-repeat center top;
-        background-size: contain;
     }
 }

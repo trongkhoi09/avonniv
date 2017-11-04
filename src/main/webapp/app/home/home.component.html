@@ -38,7 +38,7 @@
                     <button  routerLink="grants" type="button" class="btn btn-primary btn-see-all">SEE ALL</button>
                 </div>
             </div>
-            <div class="row sign-up">
+            <div class="row sign-up" *ngIf="!isAuthenticated()">
                 <div class="col-md-12 card text-center">
                     <div class="card-block">
                         <div class="card-title">

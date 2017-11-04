@@ -19,6 +19,7 @@
         "prefix": "jhi",
         "mobile": false,
         "styles": [
+            "content/scss/font.scss",
             "content/scss/vendor.scss",
             "content/scss/global.scss"
         ],

@@ -44,7 +44,7 @@
     padding-top: 37px;
     background-color: transparent;
 
-    .nav-link{
+    .nav-link {
         padding: 2px;
     }
     .navbar-title {
@@ -113,6 +113,19 @@
     .dropdown-toggle::after {
         margin-left: 0.15em;
     }
+    .user {
+        .dropdown-toggle::after {
+            border-top: 0;
+            border-right: 0;
+            border-left: 0;
+
+        }
+        .dropdown-toggle {
+            color: #fff;
+            font-size: 20px;
+            padding: 0;
+        }
+    }
     a.nav-link {
         font-weight: 400;
     }
@@ -122,6 +135,17 @@
         padding: 10px;
         &:hover {
             color: #fff;
+        }
+    }
+    .language{
+        padding: 4px 0 3px 0;
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 1.92;
+        text-align: center;
+        .active{
+            color: #f8b000;
         }
     }
 }
@@ -162,7 +186,7 @@
     .jh-navbar {
         height: 73px;
         padding-top: 37px;
-        .nav-link{
+        .nav-link {
             padding: 4px;
         }
         .navbar-brand {
@@ -189,6 +213,15 @@
         }
         .app-search a {
             top: 5px;
+        }
+
+        .user {
+            .dropdown-toggle {
+                font-size: 24px;
+            }
+        }
+        .language{
+            padding: 6px 0 7px 0;
         }
     }
 }

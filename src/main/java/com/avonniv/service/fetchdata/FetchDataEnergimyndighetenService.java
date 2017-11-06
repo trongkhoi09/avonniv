@@ -47,7 +47,7 @@ public class FetchDataEnergimyndighetenService {
     }
 
     //21600000 millisecond = 6 hour
-//    @Scheduled(fixedDelay = 21600000, initialDelay = 4000)
+    @Scheduled(fixedDelay = 21600000)
     public void autoFetchDataFromFormas() {
         try {
             String name = "Energimyndigheten";

@@ -63,7 +63,7 @@ public class FetchDataSMEService {
     }
 
     //43200000 millisecond = 12 hour
-    @Scheduled(fixedDelay = 21600000, initialDelay = 1000)
+    @Scheduled(fixedDelay = 21600000)
     public void autoFetchDataFromSME() {
         try {
             Instant now = Instant.now();
@@ -132,8 +132,7 @@ public class FetchDataSMEService {
                                 }
                                 String amount = null;
                                 List<CallData> listCallDataFor = listCallData.stream().filter(callData -> callData.getCallFileName().equalsIgnoreCase(callFileName)).collect(Collectors.toList());
-                                for (int j = 0; j < listCallDataFor.size(); j++) {
-                                    CallData callData = listCallDataFor.get(j);
+                                for (CallData callData : listCallDataFor) {
                                     if (callData.getCallFileName().equals(callFileName)) {
                                         boolean checkTopic = false;
                                         for (String topic : topics) {
@@ -147,7 +146,6 @@ public class FetchDataSMEService {
                                                 Instant deadlineDate = readDateJSONObject(jsonCall, "deadlineDates");
                                                 for (Instant instant : callData.getCloseDate()) {
                                                     if (instant.equals(deadlineDate)) {
-                                                        grantDTO.setFinanceDescription(callData.getAmount());
                                                         if (amount == null) {
                                                             amount = callData.getAmount();
                                                         } else {
@@ -174,7 +172,6 @@ public class FetchDataSMEService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println();
     }
 
     public List<URLFetch> getListURLFetch() {

@@ -40,7 +40,7 @@ public class FetchDataTillvaxtVerketService {
     }
 
     //43200000 millisecond = 12 hour
-//    @Scheduled(fixedDelay = 21600000, initialDelay = 3000)
+    @Scheduled(fixedDelay = 21600000)
     public void autoFetchDataFromFormas() {
         try {
             String name = "Tillväxtverket";

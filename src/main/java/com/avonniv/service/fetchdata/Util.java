@@ -16,8 +16,8 @@ public class Util {
         try {
             URL url = new URL(urlString);
             URLConnection urlConnection = url.openConnection();
-            urlConnection.setConnectTimeout(60000);
-            urlConnection.setReadTimeout(60000);
+            urlConnection.setConnectTimeout(120000);
+            urlConnection.setReadTimeout(120000);
             reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
             StringBuffer buffer = new StringBuffer();
             int read;

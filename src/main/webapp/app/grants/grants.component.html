@@ -1,13 +1,13 @@
 <div class="grants">
     <div class="row">
-        <div class="col-md-2">
+        <div class="filter">
             <div class="card container">
                 <fieldset class="form-group row" *ngIf="publisherCrawled.length>0">
                     <legend class="col-form-legend col-sm-2">
                         <span class="glyphicon glyphicon-folder-open"></span>
                         <b jhiTranslate="grants.publisher">Publisher</b>
                     </legend>
-                    <div class="col-sm-12 publisher">
+                    <div class="col-sm-12 publisher-crawled">
                         <div *ngFor="let publisher of publisherCrawled; let i = index">
                             <a><span (click)="publisher.check=!publisher.check; onFiltering();"><i
                                 [ngClass]="publisher.check?'fa fa-check-square-o':'fa fa-square-o'"
@@ -16,26 +16,22 @@
                     </div>
                 </fieldset>
                 <fieldset class="form-group row">
-                    <legend class="col-form-legend col-sm-2">
-                        <span class="glyphicon glyphicon-folder-open"></span>
-                        <b jhiTranslate="grants.area">Area</b>
-                    </legend>
                     <div class="col-sm-12">
                         <input type="text" class="form-control" [(ngModel)]="area"
+                               placeholder="{{'grants.area'|translate}}"
                                (ngModelChange)="onChangeArea($event)"
                                [ngbTypeahead]="searchArea" [inputFormatter]="inputFormatter"
                                [resultFormatter]="resultFormatter"/>
                         <div *ngFor="let area of grantFilter.areaDTOs; let i = index"
                              class="alert alert-success alert-dismissible fade show custom-tag" role="alert">
                             <strong>{{area.name}}</strong>
-                            <button (click)="removeArea(area)" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <button (click)="removeArea(area)" type="button" class="close" data-dismiss="alert"
+                                    aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                     </div>
                 </fieldset>
-            </div>
-            <div class="card container margin-top-20">
                 <fieldset class="form-group row" *ngIf="publisherNotCrawled.length>0">
                     <legend class="col-form-legend col-sm-2">
                         <span class="glyphicon glyphicon-folder-open"></span>
@@ -44,7 +40,7 @@
                     <div class="col-sm-12 publisher">
                         <div *ngFor="let publisher of publisherNotCrawled; let i = index">
                             <!--<a href="{{publisher.url?publisher.url:'javascript:void(0)'}}"-->
-                               <!--[target]="publisher.url ? '_blank' : ''">{{publisher.name}}-->
+                            <!--[target]="publisher.url ? '_blank' : ''">{{publisher.name}}-->
                             <!--</a>-->
 
                             <a [routerLink]="['/', { outlets: { popup: 'other-publisher/'+ publisher.name} }]"
@@ -55,7 +51,7 @@
                 </fieldset>
             </div>
         </div>
-        <div class="col-md-10">
+        <div class="list-grant">
             <div class="card">
                 <div class="row grant-filter-type">
                     <div class="col-md-6 text-center">

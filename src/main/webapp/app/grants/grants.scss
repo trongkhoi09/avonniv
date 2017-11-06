@@ -1,9 +1,46 @@
 .grants {
-    .publisher {
-        font-size: 16px;
-        span i {
-            width: 16px;
+    position: relative;
+    .filter {
+        background-color: #305290;
+        width: 200px;
+        color: #f9fcff;
+        font-size: 14px;
+        text-align: left;
+        .card {
+            border: 0;
+            background-color: transparent;
         }
+        .form-control {
+            border-radius: 2px;
+            background-color: #284988;
+            border: solid 1px #7e88ab;
+            font-size: 13px;
+            line-height: 1.77;
+            text-align: left;
+            color: #a8b5d1;
+        }
+        .form-control::-webkit-input-placeholder {
+            color: #a8b5d1;
+        }
+        .publisher {
+            a {
+                opacity: 0.6;
+                font-size: 13px;
+                line-height: 2.46;
+                text-align: left;
+                color: #f9fcff;
+            }
+        }
+        .publisher-crawled {
+            font-size: 16px;
+            span i {
+                width: 16px;
+            }
+        }
+    }
+    .list-grant {
+        flex: 1;
+        position: relative;
     }
     .grant-filter-type {
         font-size: 30px;

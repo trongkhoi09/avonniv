@@ -1,27 +1,39 @@
 .footer {
-    padding-top: 33px;
-    padding-bottom: 45px;
+    padding-top: 47px;
+    padding-bottom: 68px;
+    padding-left: 10%;
+    padding-right: 10%;
     background-color: #353d47;
     color: #a1a1a1;
-    .logo {
-        img{
-            width: 90px;
-            height: 22px;
-            object-fit: contain;
+    .col-logo{
+        width: 40%;
+        .logo {
+            img{
+                width: 90px;
+                height: 22px;
+                object-fit: contain;
+            }
         }
+    }
+    .col-contact{
+        margin-left: 5%;
+        width: 39%;
+    }
+    .col-social{
+        margin-left: 5%;
     }
     .title {
         padding-top: 7px;
         height: 22px;
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 500;
         letter-spacing: 2px;
         text-align: left;
         color: #f7f7f7;
     }
     .content {
-        margin-top: 10px;
-        font-size: 11px;
+        margin-top: 15px;
+        font-size: 12px;
         line-height: 1.83;
         text-align: left;
         color: #a1a1a1;
@@ -30,11 +42,11 @@
         }
     }
     .icon-social {
-        margin-top: 17px;
+        margin-top: 22px;
+        font-size: 24px;
         display: inline-block;
         color: #ffffff;
         opacity: 0.5;
-        font-size: 24px;
     }
     .icon-social-facebook {
         margin-right: 31px;
@@ -42,29 +54,18 @@
 }
 
 @media (min-width: 1400px) {
-    padding-top: 47px;
-    padding-bottom: 1px;
     .footer {
-        .logo {
-            img{
-                width: 90px;
-                height: 22px;
-            }
-        }
-        .title {
-            padding-top: 7px;
-            font-size: 12px;
-        }
-        .content {
-            margin-top: 15px;
-            font-size: 12px;
-        }
-        .icon-social {
-            margin-top: 22px;
-            font-size: 24px;
-        }
-        .icon-social-facebook {
-            margin-right: 31px;
-        }
+        padding-left: 16.6666667%;
+        padding-right: 17.1527778%;
+    }
+    .col-logo{
+        width: 36.2156663%;
+    }
+    .col-contact{
+        margin-left: 7.42624619%;
+        width: 36.7243133%;
+    }
+    .col-social{
+        margin-left: 10.481587%;
     }
 }

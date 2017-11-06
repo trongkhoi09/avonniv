@@ -1,16 +1,16 @@
 .jh-navbar-homepage {
-    height: 592px;
+    height: 710px;
     background-image: url("../../../content/images/shutterstock.png");
     background-repeat: no-repeat;
     background-size: cover;
     .jh-navbar {
-        padding-left: 8.333333%;
-        padding-right: 8.333333%;
+        padding-left: 17.0833333%;
+        padding-right: 15.8333333%;
     }
     .title {
-        margin-top: 160px;
-        margin-bottom: 32px;
-        font-size: 43px;
+        margin-top: 209px;
+        margin-bottom: 38px;
+        font-size: 52px;
         line-height: 1.31;
         text-align: center;
         color: #ffffff;
@@ -19,7 +19,7 @@
         }
     }
     .count-grant {
-        font-size: 20px;
+        font-size: 24px;
         text-align: center;
         color: #ffffff;
         .number-grant {
@@ -28,10 +28,10 @@
         }
     }
     .btn-take-me-there {
-        margin-top: 35px;
-        padding: 11px 27px 11px 27px;
+        margin-top: 42px;
+        padding: 22px 39px 19px 40px;
         border-radius: 100px;
-        font-size: 15px;
+        font-size: 16px;
         font-weight: 600;
         letter-spacing: 2px;
         text-align: center;
@@ -52,7 +52,7 @@
             height: 67px;
             width: 200px;
             padding: 20px 56px 18px 24px;
-            background-color: #193c7e;
+            background-color: #193d7e;
         }
         .user {
             .dropdown-toggle {
@@ -63,15 +63,15 @@
             color: #515c7f;
         }
         .app-search {
-             a {
-                 color: #515c7f;
-             }
-             .form-control,
-             .form-control:focus {
-                 color: #515c7f;
-                 border: solid 1px #515c7f;
-             }
-         }
+            a {
+                color: #515c7f;
+            }
+            .form-control,
+            .form-control:focus {
+                color: #515c7f;
+                border: solid 1px #515c7f;
+            }
+        }
         .navbar-brand {
             &.logo {
                 padding-top: 0;
@@ -82,9 +82,15 @@
                 }
             }
         }
-        .language{
-            color: #193c7e;
-            margin-right: 20px;
+
+        ul.navbar-nav {
+            .nav-item {
+                &.language {
+                    padding: 6px 0 7px 0;
+                    color: #193c7e;
+                    margin-right: 20px;
+                }
+            }
         }
     }
 }
@@ -95,7 +101,7 @@
     background-color: transparent;
 
     .nav-link {
-        padding: 2px;
+        padding: 4px;
     }
     .navbar-title {
         display: inline-block;
@@ -104,7 +110,7 @@
 
     .navbar-brand {
         &.logo {
-            padding-top: 0;
+            padding-top: 6px;
             padding-bottom: 0;
             .logo-img {
                 height: 27px;
@@ -118,22 +124,35 @@
     }
     ul.navbar-nav {
         .nav-item {
-            margin-left: 20px;
+            margin-left: 26px;
+            &.language {
+                margin-left: 18px;
+                padding: 6px 0 7px 0;
+                color: #ffffff;
+                font-size: 12px;
+                font-weight: 500;
+                line-height: 1.92;
+                text-align: center;
+                .active {
+                    color: #f8b000;
+                }
+            }
+            .btn-login {
+                border: 0;
+                padding: 10px 28px 10px 28px;
+                border-radius: 100px;
+                font-size: 13px;
+                font-weight: 500;
+                text-align: center;
+                color: #ffffff;
+            }
         }
-    }
-    .btn-login {
-        padding: 6px 24px 6px 24px;
-        border-radius: 100px;
-        font-size: 13px;
-        font-weight: 500;
-        text-align: center;
-        color: #ffffff;
     }
     .app-search {
         position: relative;
         a {
             position: absolute;
-            top: 3px;
+            top: 5px;
             left: 10px;
             color: #ffffff;
         }
@@ -147,8 +166,8 @@
             box-shadow: none;
             border-radius: 18.5px;
             border: solid 1px #ffffff;
-            height: 30px;
-            width: 185px;
+            height: 36px;
+            width: 224px;
         }
     }
     .profile-image {
@@ -172,7 +191,7 @@
         }
         .dropdown-toggle {
             color: #fff;
-            font-size: 20px;
+            font-size: 24px;
             padding: 0;
         }
     }
@@ -185,17 +204,6 @@
         padding: 10px;
         &:hover {
             color: #fff;
-        }
-    }
-    .language{
-        padding: 4px 0 3px 0;
-        color: #ffffff;
-        font-size: 12px;
-        font-weight: 500;
-        line-height: 1.92;
-        text-align: center;
-        .active{
-            color: #f8b000;
         }
     }
 }
@@ -212,66 +220,66 @@
     }
 }
 
-@media (min-width: 1400px) {
-    .jh-navbar-homepage {
-        height: 710px;
-        .jh-navbar {
-            padding-left: 17.08%;
-            padding-right: 17.08%;
-        }
-        .title {
-            margin-top: 209px;
-            margin-bottom: 38px;
-            font-size: 52px;
-        }
-        .count-grant {
-            font-size: 24px;
-        }
-        .btn-take-me-there {
-            margin-top: 42px;
-            padding: 20px 40px 20px 40px;
-        }
-    }
-
-    .jh-navbar {
-        height: 73px;
-        padding-top: 37px;
-        .nav-link {
-            padding: 4px;
-        }
-        .navbar-brand {
-            &.logo {
-                padding-top: 6px;
-                .logo-img {
-                    height: 27px;
-                    width: 110px;
-                }
-            }
-        }
-        ul.navbar-nav {
-            .nav-item {
-                margin-left: 26px;
-            }
-        }
-        .btn-login {
-            padding: 9px 27px 9px 27px;
-        }
-        .app-search .form-control,
-        .app-search .form-control:focus {
-            height: 36px;
-            width: 224px;
-        }
-        .app-search a {
-            top: 5px;
-        }
-
-        .user {
-            .dropdown-toggle {
-                font-size: 24px;
-            }
-        }
-        .language{
-            padding: 6px 0 7px 0;
-        }
-    }
-}
+//@media (min-width: 1400px) {
+//    .jh-navbar-homepage {
+//        height: 710px;
+//        .jh-navbar {
+//            padding-left: 17.08%;
+//            padding-right: 17.08%;
+//        }
+//        .title {
+//            margin-top: 209px;
+//            margin-bottom: 38px;
+//            font-size: 52px;
+//        }
+//        .count-grant {
+//            font-size: 24px;
+//        }
+//        .btn-take-me-there {
+//            margin-top: 42px;
+//            padding: 20px 40px 20px 40px;
+//        }
+//    }
+//
+//    .jh-navbar {
+//        height: 73px;
+//        padding-top: 37px;
+//        .nav-link {
+//            padding: 4px;
+//        }
+//        .navbar-brand {
+//            &.logo {
+//                padding-top: 6px;
+//                .logo-img {
+//                    height: 27px;
+//                    width: 110px;
+//                }
+//            }
+//        }
+//        ul.navbar-nav {
+//            .nav-item {
+//                margin-left: 26px;
+//            }
+//        }
+//        .btn-login {
+//            padding: 9px 27px 9px 27px;
+//        }
+//        .app-search .form-control,
+//        .app-search .form-control:focus {
+//            height: 36px;
+//            width: 224px;
+//        }
+//        .app-search a {
+//            top: 5px;
+//        }
+//
+//        .user {
+//            .dropdown-toggle {
+//                font-size: 24px;
+//            }
+//        }
+//        .language{
+//            padding: 6px 0 7px 0;
+//        }
+//    }
+//}

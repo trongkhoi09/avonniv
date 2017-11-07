@@ -1,29 +1,74 @@
 .grants {
     position: relative;
+    .title {
+        font-size: 14px;
+        font-weight: 500;
+        text-align: left;
+        color: #f9fcff;
+    }
     .filter {
+        padding-top: 21px;
+        padding-left: 18px;
+        padding-right: 14px;
         background-color: #305290;
         width: 200px;
-        color: #f9fcff;
-        font-size: 14px;
-        text-align: left;
-        .card {
-            border: 0;
-            background-color: transparent;
+        .publisher-crawled {
+            margin-bottom: 17px;
+            .title {
+                margin-bottom: 7px;
+            }
+            .check-box {
+                font-size: 13px;
+                line-height: 2.46;
+                text-align: left;
+                color: #f9fcff;
+                div {
+                    margin-top: 5px;
+                }
+                span i {
+                    width: 21px;
+                }
+            }
         }
-        .form-control {
-            border-radius: 2px;
-            background-color: #284988;
-            border: solid 1px #7e88ab;
-            font-size: 13px;
-            line-height: 1.77;
-            text-align: left;
-            color: #a8b5d1;
-        }
-        .form-control::-webkit-input-placeholder {
-            color: #a8b5d1;
+        .area {
+            margin-bottom: 28px;
+            .form-control {
+                width: 168px;
+                height: 32px;
+                padding: 5px 10px 4px 10px;
+                border-radius: 2px;
+                background-color: #284988;
+                border: solid 1px #7e88ab;
+                font-size: 13px;
+                line-height: 1.77;
+                text-align: left;
+                color: #a8b5d1;
+            }
+            .form-control::-webkit-input-placeholder {
+                color: #a8b5d1;
+            }
+            .custom-tag {
+                position: relative;
+                margin: 5px 0 5px 0;
+                padding: 1px 5px 1px 5px;
+                strong {
+                    font-size: 13px;
+                }
+                button {
+                    font-size: 16px;
+                    outline: none;
+                    position: absolute;
+                    top: -7px;
+                    right: -12px;
+                }
+            }
         }
         .publisher {
+            .title {
+                margin-bottom: 7px;
+            }
             a {
+                padding-left: 12px;
                 opacity: 0.6;
                 font-size: 13px;
                 line-height: 2.46;
@@ -31,34 +76,28 @@
                 color: #f9fcff;
             }
         }
-        .publisher-crawled {
-            font-size: 16px;
-            span i {
-                width: 16px;
-            }
-        }
     }
-    .list-grant {
+    .list-data {
+        background-color: #f9fcff;
         flex: 1;
         position: relative;
-    }
-    .grant-filter-type {
-        font-size: 30px;
-        span i {
-            width: 30px;
-            text-align: left;
-        }
-    }
-    .custom-tag {
-        position: relative;
-        margin: 5px 0 5px 0;
-        padding: 5px 5px 5px 5px;
-        button {
-            outline: none;
-            position: absolute;
-            top: -3px;
-            right: -12px;
+        padding: 19px 28px 0px 27px;
+        .grant-filter-type {
             font-size: 16px;
+            font-weight: 500;
+            text-align: left;
+            color: #3b4c67;
+            a {
+                margin-right: 46px;
+            }
+            span i {
+                vertical-align: middle;
+                font-size: 30px;
+                width: 30px;
+            }
+        }
+        jhi-list-grant{
+            width: 100%;
         }
     }
 }

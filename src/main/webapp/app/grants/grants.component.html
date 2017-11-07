@@ -1,76 +1,69 @@
 <div class="grants">
     <div class="row">
         <div class="filter">
-            <div class="card container">
-                <fieldset class="form-group row" *ngIf="publisherCrawled.length>0">
-                    <legend class="col-form-legend col-sm-2">
-                        <span class="glyphicon glyphicon-folder-open"></span>
-                        <b jhiTranslate="grants.publisher">Publisher</b>
-                    </legend>
-                    <div class="col-sm-12 publisher-crawled">
-                        <div *ngFor="let publisher of publisherCrawled; let i = index">
-                            <a><span (click)="publisher.check=!publisher.check; onFiltering();"><i
+            <div class="form-group row publisher-crawled" *ngIf="publisherCrawled.length>0">
+                <div class="col-md-12 title">
+                    <span jhiTranslate="grants.publisher">Publisher</span>
+                </div>
+                <div class="col-md-12 check-box">
+                    <div *ngFor="let publisher of publisherCrawled; let i = index">
+                        <a (click)="publisher.check=!publisher.check; onFiltering();">
+                            <span><i
                                 [ngClass]="publisher.check?'fa fa-check-square-o':'fa fa-square-o'"
-                                aria-hidden="true"></i> {{publisher.name}} </span></a>
-                        </div>
-                    </div>
-                </fieldset>
-                <fieldset class="form-group row">
-                    <div class="col-sm-12">
-                        <input type="text" class="form-control" [(ngModel)]="area"
-                               placeholder="{{'grants.area'|translate}}"
-                               (ngModelChange)="onChangeArea($event)"
-                               [ngbTypeahead]="searchArea" [inputFormatter]="inputFormatter"
-                               [resultFormatter]="resultFormatter"/>
-                        <div *ngFor="let area of grantFilter.areaDTOs; let i = index"
-                             class="alert alert-success alert-dismissible fade show custom-tag" role="alert">
-                            <strong>{{area.name}}</strong>
-                            <button (click)="removeArea(area)" type="button" class="close" data-dismiss="alert"
-                                    aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    </div>
-                </fieldset>
-                <fieldset class="form-group row" *ngIf="publisherNotCrawled.length>0">
-                    <legend class="col-form-legend col-sm-2">
-                        <span class="glyphicon glyphicon-folder-open"></span>
-                        <b jhiTranslate="grants.otherPublisher">Other publisher</b>
-                    </legend>
-                    <div class="col-sm-12 publisher">
-                        <div *ngFor="let publisher of publisherNotCrawled; let i = index">
-                            <!--<a href="{{publisher.url?publisher.url:'javascript:void(0)'}}"-->
-                            <!--[target]="publisher.url ? '_blank' : ''">{{publisher.name}}-->
-                            <!--</a>-->
-
-                            <a [routerLink]="['/', { outlets: { popup: 'other-publisher/'+ publisher.name} }]"
-                               replaceUrl="true">{{publisher.name}}
-                            </a>
-                        </div>
-                    </div>
-                </fieldset>
-            </div>
-        </div>
-        <div class="list-grant">
-            <div class="card">
-                <div class="row grant-filter-type">
-                    <div class="col-md-6 text-center">
-                        <a><span (click)="grantFilter.openGrant=!grantFilter.openGrant; onFiltering();"><i
-                            [ngClass]="grantFilter.openGrant?'fa fa-check-square-o':'fa fa-square-o'"
-                            aria-hidden="true"></i>
-                            <span jhiTranslate="grants.openGrants">Open grants</span>
-                        </span></a>
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <a><span (click)="grantFilter.comingGrant=!grantFilter.comingGrant; onFiltering();"><i
-                            [ngClass]="grantFilter.comingGrant?'fa fa-check-square-o':'fa fa-square-o'"
-                            aria-hidden="true"></i>
-                            <span jhiTranslate="grants.comingGrants">Forthcoming grants</span>
-                        </span></a>
+                                aria-hidden="true"></i> {{publisher.name}} </span>
+                        </a>
                     </div>
                 </div>
             </div>
-            <jhi-list-grant *ngIf='loadPublisherFinished' [data]='data'></jhi-list-grant>
+            <div class="form-group row area">
+                <div class="col-md-12">
+                    <input type="text" class="form-control" [(ngModel)]="area"
+                           placeholder="{{'grants.area'|translate}}"
+                           (ngModelChange)="onChangeArea($event)"
+                           [ngbTypeahead]="searchArea" [inputFormatter]="inputFormatter"
+                           [resultFormatter]="resultFormatter"/>
+                    <div *ngFor="let area of grantFilter.areaDTOs; let i = index"
+                         class="alert alert-success alert-dismissible fade show custom-tag" role="alert">
+                        <strong>{{area.name}}</strong>
+                        <button (click)="removeArea(area)" type="button" class="close" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row publisher" *ngIf="publisherNotCrawled.length>0">
+                <div class="col-md-12 title">
+                    <span jhiTranslate="grants.otherPublisher">Other publisher</span>
+                </div>
+                <div class="col-md-12">
+                    <div *ngFor="let publisher of publisherNotCrawled; let i = index">
+                        <a [routerLink]="['/', { outlets: { popup: 'other-publisher/'+ publisher.name} }]"
+                           replaceUrl="true">{{publisher.name}}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="list-data">
+            <div class="container-fluid">
+                <div class="row grant-filter-type">
+                    <a (click)="grantFilter.openGrant=!grantFilter.openGrant; onFiltering();">
+                        <span><i [ngClass]="grantFilter.openGrant?'fa fa-check-square-o':'fa fa-square-o'"
+                                 aria-hidden="true"></i></span>
+                        <span jhiTranslate="grants.openGrants">Open grants</span>
+                    </a>
+                    <a (click)="grantFilter.comingGrant=!grantFilter.comingGrant; onFiltering();">
+                        <span><i
+                            [ngClass]="grantFilter.comingGrant?'fa fa-check-square-o':'fa fa-square-o'"
+                            aria-hidden="true"></i></span>
+                        <span jhiTranslate="grants.comingGrants">Forthcoming grants</span>
+                    </a>
+                </div>
+                <div class="row">
+                    <jhi-list-grant *ngIf='loadPublisherFinished' [data]='data'></jhi-list-grant>
+                </div>
+            </div>
         </div>
     </div>
 </div>

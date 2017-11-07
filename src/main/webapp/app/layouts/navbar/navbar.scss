@@ -40,6 +40,8 @@
 }
 
 .jh-navbar-custom {
+    position: relative;
+    z-index: 1000;
     height: 67px;
     background-color: #ffffff;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
@@ -49,7 +51,7 @@
     .jh-navbar {
         height: 67px;
         .jh-logo-container {
-            height: 67px;
+            height: 68px;
             width: 200px;
             padding: 20px 56px 18px 24px;
             background-color: #193d7e;

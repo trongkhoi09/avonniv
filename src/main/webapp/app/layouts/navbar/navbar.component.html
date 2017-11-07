@@ -161,15 +161,17 @@
             </ul>
         </div>
     </nav>
-    <div class="row text-center" *ngIf="isHomepage()">
-        <div class="col-md-12 title">
-            <span>Interested in <b>opportunities</b><br>of public funding?</span>
-        </div>
-        <div class="col-md-12 count-grant">
-            <span>Right now <span class="number-grant">{{count}}</span> opportunities of public funding!</span>
-        </div>
-        <div class="col-md-12">
-            <button routerLink="grants" type="button" class="btn btn-primary btn-take-me-there">TAKE ME THERE</button>
+    <div class="container-fluid" *ngIf="isHomepage()">
+        <div class="row text-center">
+            <div class="col-md-12 title">
+                <span>Interested in <b>opportunities</b><br>of public funding?</span>
+            </div>
+            <div class="col-md-12 count-grant">
+                <span>Right now <span class="number-grant">{{count}}</span> opportunities of public funding!</span>
+            </div>
+            <div class="col-md-12">
+                <button routerLink="grants" type="button" class="btn btn-primary btn-take-me-there">TAKE ME THERE</button>
+            </div>
         </div>
     </div>
 </div>

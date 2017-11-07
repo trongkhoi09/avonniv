@@ -1,96 +1,108 @@
 <div class="list-grant">
-    <div class="card margin-top-20">
-        <div class="table-responsive" *ngIf="grantDTOs">
-            <table class="table table-hover">
-                <thead>
-                <tr class="row m-0" jhiSort [(predicate)]="predicate" [(ascending)]="reverse"
-                    [callback]="transition.bind(this)">
-                    <th class="col-1 text-center"><span jhiTranslate="grants.publisher">Publisher</span></th>
-                    <th class="col-2 text-center"><a href="javascript:void(0);" jhiSortBy="title"><span
-                        jhiTranslate="grants.titleData">Title</span><span
-                        class="fa fa-sort"></span></a></th>
-                    <th class="text-center" [ngClass]="isAdmin()?'col-2':'col-3'"><span
-                        jhiTranslate="grants.description">Description</span></th>
-                    <th class="col-2 text-center"><span
-                        jhiTranslate="grants.financeDescription">Finance Description</span></th>
-                    <th class="col-2 text-center"><a href="javascript:void(0);" jhiSortBy="openDate"><span
-                        jhiTranslate="grants.openDate">Open Date</span><span
-                        class="fa fa-sort"></span></a></th>
-                    <th class="col-2 text-center"><a href="javascript:void(0);" jhiSortBy="closeDate"><span
-                        jhiTranslate="grants.closeDate">Close Date</span><span
-                        class="fa fa-sort"></span></a></th>
-                    <th class="col-1" *jhiHasAnyAuthority="'ROLE_ADMIN'"></th>
-                </tr>
-                </thead>
-                <div *ngIf="grantDTOs.length==0" class="empty-table-custom text-center">
-                    <h5 class="text-muted" jhiTranslate="grants.empty"></h5>
-                </div>
-                <tbody *ngIf="grantDTOs.length!=0">
-                <tr *ngFor="let grantDTO of grantDTOs; let i = index" class="row m-0">
-                    <td class="col-1">{{grantDTO.grantProgramDTO.publisherDTO.name}}</td>
-                    <td class="col-2">
-                        <a *ngIf="grantDTO.externalUrl"
-                           href="{{grantDTO.externalUrl?grantDTO.externalUrl:'javascript:void(0)'}}"
-                           [target]="grantDTO.externalUrl ? '_blank' : ''">
+    <div class="table-responsive" *ngIf="grantDTOs">
+        <table class="table table-hover table-striped">
+            <thead>
+            <tr class="row m-0" jhiSort [(predicate)]="predicate" [(ascending)]="reverse"
+                [callback]="transition.bind(this)">
+                <th class="publisher"><span jhiTranslate="grants.publisher">Publisher</span></th>
+                <th class="title"><a href="javascript:void(0);" jhiSortBy="title"><span
+                    jhiTranslate="grants.titleData">Title</span><span
+                    class="fa fa-sort"></span></a></th>
+                <th class="description"><span
+                    jhiTranslate="grants.description">Description</span></th>
+                <th class="finance-description"><span
+                    jhiTranslate="grants.financeDescription">Finance Description</span></th>
+                <th class="date text-center"><a href="javascript:void(0);" jhiSortBy="openDate"><span
+                    jhiTranslate="grants.openDate">Open Date</span><span
+                    class="fa fa-sort"></span></a></th>
+                <th class="date text-center"><a href="javascript:void(0);" jhiSortBy="closeDate"><span
+                    jhiTranslate="grants.closeDate">Close Date</span><span
+                    class="fa fa-sort"></span></a></th>
+                <th class="col-1" *jhiHasAnyAuthority="'ROLE_ADMIN'"></th>
+            </tr>
+            </thead>
+            <div *ngIf="grantDTOs.length==0" class="empty-table-custom text-center">
+                <h5 class="text-muted" jhiTranslate="grants.empty"></h5>
+            </div>
+            <tbody *ngIf="grantDTOs.length!=0">
+            <tr *ngFor="let grantDTO of grantDTOs; let i = index" class="row m-0">
+                <td class="publisher">
+                    <span>{{grantDTO.grantProgramDTO.publisherDTO.name}}</span>
+                </td>
+                <td class="title">
+                    <a *ngIf="grantDTO.externalUrl"
+                       href="{{grantDTO.externalUrl?grantDTO.externalUrl:'javascript:void(0)'}}"
+                       [target]="grantDTO.externalUrl ? '_blank' : ''">
+                        {{grantDTO.title}}
+                    </a>
+                    <span *ngIf="!grantDTO.externalUrl">
                             {{grantDTO.title}}
-                        </a>
-                        <span *ngIf="!grantDTO.externalUrl">
-                            {{grantDTO.title}}
-                        </span>
-                    </td>
-                    <!--<td [ngClass]="isAdmin()?'col-2':'col-3'" ngbPopover="{{grantDTO.description}}"-->
-                    <!--triggers="mouseenter:mouseleave" placement="right" popoverTitle="Description">-->
-                    <!--{{grantDTO.description|slice:0:200}}-->
-                    <!--</td>-->
-                    <td [ngClass]="isAdmin()?'col-2':'col-3'">
-                        {{grantDTO.description?sliceDescription(grantDTO):('global.notAvailable'|translate)}}
-                        <a [routerLink]="['/', { outlets: { popup: 'description-grant/'+ grantDTO.id} }]"
-                           replaceUrl="true"
-                           *ngIf="isSliceDescription(grantDTO)">more...</a>
-                    </td>
-                    <td class="col-2 text-center"
-                        [innerHTML]="grantDTO.financeDescription?grantDTO.financeDescription:('global.notAvailable'|translate)">
+                    </span>
+                </td>
+                <!--<td [ngClass]="isAdmin()?'col-2':'col-3'" ngbPopover="{{grantDTO.description}}"-->
+                <!--triggers="mouseenter:mouseleave" placement="right" popoverTitle="Description">-->
+                <!--{{grantDTO.description|slice:0:200}}-->
+                <!--</td>-->
+                <td class="description">
+                    {{grantDTO.description?sliceDescription(grantDTO):('global.notAvailable'|translate)}}
+                    <a [routerLink]="['/', { outlets: { popup: 'description-grant/'+ grantDTO.id} }]"
+                       replaceUrl="true"
+                       *ngIf="isSliceDescription(grantDTO)">more...</a>
+                </td>
+                <td class="finance-description"
+                    [innerHTML]="grantDTO.financeDescription?grantDTO.financeDescription:('global.notAvailable'|translate)">
 
-                    </td>
-                    <td class="col-2 text-center">
-                        {{grantDTO.openDate? (grantDTO.openDate| date: 'dd MMM yyyy') :('global.notAvailable'|translate)}}
-                    </td>
-                    <td class="col-2 text-center">
-                        {{grantDTO.closeDate? (grantDTO.closeDate| date: 'dd MMM yyyy'):('global.notAvailable'|translate)}}
-                    </td>
-                    <td class="col-1 text-right" *jhiHasAnyAuthority="'ROLE_ADMIN'">
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="button"
-                                    [routerLink]="'/grant-edit/'+ grantDTO.id"
-                                    class="btn btn-primary btn-sm">
-                                <span class="fa fa-pencil"></span>
-                                <span class="hidden-md-down"
-                                      jhiTranslate="grants.action.editGrant">Edit Grant</span>
-                            </button>
-                        </div>
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="button"
-                                    [routerLink]="'/grant-program-edit/'+ grantDTO.grantProgramDTO.id"
-                                    class="btn btn-primary btn-sm">
-                                <span class="fa fa-pencil"></span>
-                                <span class="hidden-md-down" jhiTranslate="grants.action.editGrantProgram">Edit Grant Program</span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+                </td>
+                <td class="date text-center">
+                    {{grantDTO.openDate? (grantDTO.openDate| date: 'MM/dd/yyyy') :('global.notAvailable'|translate)}}
+                </td>
+                <td class="date text-center">
+                    {{grantDTO.closeDate? (grantDTO.closeDate| date: 'MM/dd/yyyy'):('global.notAvailable'|translate)}}
+                </td>
+                <td class="admin-edit text-right" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="button"
+                                [routerLink]="'/grant-edit/'+ grantDTO.id"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down"
+                                  jhiTranslate="grants.action.editGrant">Edit Grant</span>
+                        </button>
+                    </div>
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="button"
+                                [routerLink]="'/grant-program-edit/'+ grantDTO.grantProgramDTO.id"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="grants.action.editGrantProgram">Edit Grant Program</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="margin-top-20" *ngIf="grantDTOs&&grantDTOs.length!=0">
-        <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="totalItems"
-                            [itemsPerPage]="itemsPerPage"></jhi-item-count>
+    <div class="pagination-page" *ngIf="grantDTOs&&grantDTOs.length!=0">
+        <div class="row">
+            <div class="col-md-4 text">
+                <jhi-item-count [page]="page" [total]="totalItems"
+                                [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="col-md-8">
+                <div class="float-right">
+                    <ngb-pagination class="pagination-sm"
+                                    [maxSize]="7"
+                                    [pageSize]="itemsPerPage"
+                                    [collectionSize]="totalItems"
+                                    [(page)]="page"
+                                    [rotate]="true"
+                                    [boundaryLinks]="true"
+                                    (pageChange)="loadPage(page)"
+                    ></ngb-pagination>
+                </div>
+            </div>
         </div>
         <div class="row justify-content-center">
-            <ngb-pagination [maxSize]="7" [pageSize]="itemsPerPage" [collectionSize]="totalItems"
-                            [(page)]="page"
-                            (pageChange)="loadPage(page)"></ngb-pagination>
         </div>
     </div>
 </div>

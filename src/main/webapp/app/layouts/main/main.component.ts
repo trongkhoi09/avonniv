@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, NavigationEnd, RoutesRecognized } from '@angular/router';
 
 import { JhiLanguageService } from 'ng-jhipster';
-import { JhiLanguageHelper, StateStorageService } from '../../shared';
+import { JhiLanguageHelper, StateStorageService, Principal } from '../../shared';
 
 @Component({
     selector: 'jhi-main',

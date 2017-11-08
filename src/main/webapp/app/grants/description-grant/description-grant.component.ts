@@ -6,7 +6,10 @@ import {GrantDTO} from '../../shared';
 
 @Component({
     selector: 'jhi-description-grant-modal',
-    templateUrl: './description-grant.component.html'
+    templateUrl: './description-grant.component.html',
+    styleUrls: [
+        'description-grant.scss'
+    ]
 })
 export class JhiDescriptionGrantModalComponent implements OnInit {
     grantDTO: GrantDTO;

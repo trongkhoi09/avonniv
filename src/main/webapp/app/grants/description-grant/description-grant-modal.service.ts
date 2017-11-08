@@ -27,7 +27,7 @@ export class DescriptionGrantModalService {
     }
 
     descriptionGrantModalRef(component: Component, grantDTO: GrantDTO): NgbModalRef {
-        const modalRef = this.modalService.open(component, {size: 'lg', backdrop: 'static'});
+        const modalRef = this.modalService.open(component, {windowClass: 'description-grant'});
         modalRef.componentInstance.grantDTO = grantDTO;
         modalRef.result.then((result) => {
             this.router.navigate([{outlets: {popup: null}}], {replaceUrl: true});

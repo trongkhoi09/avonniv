@@ -1,0 +1,23 @@
+.description-grant {
+    .modal-dialog {
+        width: 784px;
+        max-width: 784px;
+    }
+
+}
+.modal-body{
+    padding: 46px 48px 35px 39px;
+    .title{
+        font-size: 24px;
+        line-height: 0.92;
+        text-align: left;
+        color: #0d2164;
+        margin-bottom: 32px;
+    }
+    .description{
+        font-size: 14px;
+        line-height: 1.57;
+        text-align: left;
+        color: #515c7f;
+    }
+}

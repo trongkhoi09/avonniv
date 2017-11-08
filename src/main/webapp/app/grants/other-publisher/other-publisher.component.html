@@ -1,19 +1,11 @@
 <div class="modal-body">
-    <div class="row ">
-        <div class="offset-md-11 col-md-1">
-            <button data-dismiss="modal" class="close" type="button"
-                    (click)="activeModal.dismiss('closed')">
-                <span><i class="fa fa-times-circle-o" aria-hidden="true"></i></span>
-            </button>
-        </div>
-    </div>
-    <div class="margin-10">
+    <div class="name">
         <strong>{{otherPublisher.name}}</strong>
     </div>
-    <div class="margin-10">
+    <div class="content">
         {{otherPublisher.description}}
     </div>
-    <div class="text-center margin-10">
+    <div class="text-center">
         <button type="button" class="btn btn-primary" (click)="openNewTab()">
             Details
         </button>

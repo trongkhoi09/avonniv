@@ -1,6 +1,7 @@
 .other-publisher {
     .modal-dialog {
-        margin-top: 0;
+        width: 784px;
+        max-width: 784px;
         margin-bottom: 0;
         height: 100vh;
         display: flex;
@@ -14,5 +15,31 @@
 
     .modal.in .modal-dialog {
         transform: translate(0, 0);
+    }
+    .modal-body{
+        padding: 46px 24px 28px 36px;
+    }
+    .name{
+        font-size: 24px;
+        line-height: 0.92;
+        text-align: left;
+        color: #0d2164;
+        margin-bottom: 32px;
+    }
+    .content{
+        font-size: 14px;
+        line-height: 1.57;
+        text-align: left;
+        color: #515c7f;
+        margin-bottom: 35px;
+    }
+    button{
+        padding:10px 32px 10px 32px;
+        border-radius: 100px;
+        background-color: #276cf2;
+        font-size: 13px;
+        font-weight: 500;
+        text-align: center;
+        color: #ffffff;
     }
 }

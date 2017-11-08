@@ -54,8 +54,7 @@
                         <span jhiTranslate="grants.openGrants">Open grants</span>
                     </a>
                     <a (click)="grantFilter.comingGrant=!grantFilter.comingGrant; onFiltering();">
-                        <span><i
-                            [ngClass]="grantFilter.comingGrant?'fa fa-check-square-o':'fa fa-square-o'"
+                        <span><i [ngClass]="grantFilter.comingGrant?'fa fa-check-square-o':'fa fa-square-o'"
                             aria-hidden="true"></i></span>
                         <span jhiTranslate="grants.comingGrants">Forthcoming grants</span>
                     </a>

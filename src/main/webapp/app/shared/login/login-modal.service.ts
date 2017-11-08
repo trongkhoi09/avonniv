@@ -16,6 +16,7 @@ export class LoginModalService {
         }
         this.isOpen = true;
         const modalRef = this.modalService.open(JhiLoginModalComponent, {
+            windowClass: 'login-modal',
             container: 'nav'
         });
         modalRef.componentInstance.isRegistration = isRegistration;

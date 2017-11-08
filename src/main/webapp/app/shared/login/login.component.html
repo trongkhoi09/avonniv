@@ -1,40 +1,40 @@
-<!--<div class="modal-header">-->
-<!--<h4 class="modal-title" jhiTranslate="login.title">Sign in</h4>-->
-<!--<button aria-label="Close" data-dismiss="modal" class="close" type="button" (click)="activeModal.dismiss('closed')"><span aria-hidden="true">x</span>-->
-<!--</button>-->
-<!--</div>-->
-<div class="modal-body" [ngSwitch]="isRegistration">
-    <div class="row">
-        <div class="col-md-12">
-            <p></p>
-            <p></p>
-        </div>
+<div class="modal-header login justify-content-center">
+    <!--<h4 class="modal-title" jhiTranslate="login.title">Sign in</h4>-->
+    <!--<button aria-label="Close" data-dismiss="modal" class="close" type="button" (click)="activeModal.dismiss('closed')">-->
+    <!--<span aria-hidden="true">x</span>-->
+    <!--</button>-->
+
+    <div class="img-header">
+        <img src="../../../content/images/icon-popup-login.png">
     </div>
-    <div class="row">
-        <div class="col-md-5 offset-md-1" *ngIf="!success">
-            <div class="form-check form-check-inline">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" [(ngModel)]="isRegistration" name="inlineRadioOptions"
-                           [value]="true"><h5 jhiTranslate="register.title">Registration</h5>
-                </label>
+</div>
+<div class="modal-body login" [ngSwitch]="isRegistration">
+    <div class="text-center">
+        <div class="radio-menu">
+            <div class="register text-left" *ngIf="!success">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" [(ngModel)]="isRegistration"
+                               name="inlineRadioOptions"
+                               [value]="true">
+                        <span class="text" jhiTranslate="register.title">Registration</span>
+                    </label>
+                </div>
+            </div>
+            <div class="sign-in  text-left" *ngIf="!success">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" [(ngModel)]="isRegistration"
+                               name="inlineRadioOptions"
+                               [value]="false">
+                        <span class="text" jhiTranslate="login.title">Sign in</span>
+                    </label>
+                </div>
             </div>
         </div>
-        <div class="col-md-5" *ngIf="!success">
-            <div class="form-check form-check-inline">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" [(ngModel)]="isRegistration" name="inlineRadioOptions"
-                           [value]="false"><h5 jhiTranslate="login.title">Registration</h5>
-                </label>
-            </div>
-        </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <p></p>
-        </div>
-    </div>
-    <div *ngSwitchCase="true" class="row">
-        <div class="col-md-10 offset-md-1">
+    <div *ngSwitchCase="true" class="form-register">
+        <div class="">
             <div class="alert alert-success" *ngIf="success" jhiTranslate="register.messages.success">
                 <strong>Registration saved!</strong> Please check your email for confirmation.
             </div>
@@ -51,11 +51,11 @@
                 <strong>Email is already in use!</strong> Please choose another one.
             </div>
 
-            <div class="alert alert-danger" *ngIf="doNotMatch" jhiTranslate="global.messages.error.dontmatch">
-                The password and its confirmation do not match!
-            </div>
+            <!--<div class="alert alert-danger" *ngIf="doNotMatch" jhiTranslate="global.messages.error.dontmatch">-->
+            <!--The password and its confirmation do not match!-->
+            <!--</div>-->
         </div>
-        <div class="col-md-10 offset-md-1">
+        <div class="">
             <form name="form" role="form" (ngSubmit)="register()" #registerForm="ngForm" *ngIf="!success">
                 <div class="form-group">
                     <input type="text" class="form-control" [(ngModel)]="registerAccount.login" id="login" name="login"
@@ -104,10 +104,15 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" id="password" name="password" #password="ngModel"
+                <div class="form-group show-password">
+                    <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="password"
+                           name="password" #password="ngModel"
+                           id="password-field"
                            placeholder="{{'global.form.newpassword.placeholder' | translate}}"
                            [(ngModel)]="registerAccount.password" minlength=4 maxlength=50 required>
+                    <span class="" (click)="showPassword=!showPassword">
+                        <i [ngClass]="showPassword?'fa fa-eye-slash':'fa fa-eye'" aria-hidden="true"></i>
+                    </span>
                     <div *ngIf="password.dirty && password.invalid">
                         <small class="form-text text-danger" *ngIf="password.errors.required"
                                jhiTranslate="global.messages.validate.newpassword.required">
@@ -124,47 +129,49 @@
                     </div>
                     <jhi-password-strength-bar [passwordToCheck]="registerAccount.password"></jhi-password-strength-bar>
                 </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
-                           #confirmPasswordInput="ngModel"
-                           placeholder="{{'global.form.confirmpassword.placeholder' | translate}}"
-                           [(ngModel)]="confirmPassword" minlength=4 maxlength=50 required>
-                    <div *ngIf="confirmPasswordInput.dirty && confirmPasswordInput.invalid">
-                        <small class="form-text text-danger" *ngIf="confirmPasswordInput.errors.required"
-                               jhiTranslate="global.messages.validate.confirmpassword.required">
-                            Your confirmation password is required.
-                        </small>
-                        <small class="form-text text-danger" *ngIf="confirmPasswordInput.errors.minlength"
-                               jhiTranslate="global.messages.validate.confirmpassword.minlength">
-                            Your confirmation password is required to be at least 4 characters.
-                        </small>
-                        <small class="form-text text-danger" *ngIf="confirmPasswordInput.errors.maxlength"
-                               jhiTranslate="global.messages.validate.confirmpassword.maxlength">
-                            Your confirmation password cannot be longer than 50 characters.
-                        </small>
-                    </div>
-                </div>
-                <p></p>
+                <!--<div class="form-group">-->
+                <!--<input type="password" class="form-control" id="confirmPassword" name="confirmPassword"-->
+                <!--#confirmPasswordInput="ngModel"-->
+                <!--placeholder="{{'global.form.confirmpassword.placeholder' | translate}}"-->
+                <!--[(ngModel)]="confirmPassword" minlength=4 maxlength=50 required>-->
+                <!--<div *ngIf="confirmPasswordInput.dirty && confirmPasswordInput.invalid">-->
+                <!--<small class="form-text text-danger" *ngIf="confirmPasswordInput.errors.required"-->
+                <!--jhiTranslate="global.messages.validate.confirmpassword.required">-->
+                <!--Your confirmation password is required.-->
+                <!--</small>-->
+                <!--<small class="form-text text-danger" *ngIf="confirmPasswordInput.errors.minlength"-->
+                <!--jhiTranslate="global.messages.validate.confirmpassword.minlength">-->
+                <!--Your confirmation password is required to be at least 4 characters.-->
+                <!--</small>-->
+                <!--<small class="form-text text-danger" *ngIf="confirmPasswordInput.errors.maxlength"-->
+                <!--jhiTranslate="global.messages.validate.confirmpassword.maxlength">-->
+                <!--Your confirmation password cannot be longer than 50 characters.-->
+                <!--</small>-->
+                <!--</div>-->
+                <!--</div>-->
                 <div class="text-center">
                     <button type="submit" [disabled]="registerForm.form.invalid" class="btn btn-primary btn-block"
                             jhiTranslate="register.form.button">Register
                     </button>
                 </div>
-                <p></p>
             </form>
         </div>
+        <div class="terms text-center">
+            <span>By clicking, I accept the <a>Terms of Service</a></span>
+        </div>
     </div>
-    <div *ngSwitchCase="false" class="row">
-        <div class="col-md-10 offset-md-1">
+    <div *ngSwitchCase="false" class="form-sign-in">
+        <div class="">
             <div class="alert alert-danger" *ngIf="authenticationError"
                  jhiTranslate="login.messages.error.authentication">
                 <strong>Failed to sign in!</strong> Please check your credentials and try again.
             </div>
         </div>
-        <div class="col-md-10 offset-md-1">
+        <div class="">
             <form class="form" role="form" (ngSubmit)="login()" #loginForm="ngForm" *ngIf="!success">
                 <div class="form-group">
-                    <input type="text" class="form-control" [(ngModel)]="username" id="usernameLogin" name="usernameLogin"
+                    <input type="text" class="form-control" [(ngModel)]="username" id="usernameLogin"
+                           name="usernameLogin"
                            #usernameLogin="ngModel" placeholder="{{'global.form.username.placeholder' | translate}}"
                            required minlength="1" maxlength="50" pattern="^[_A-Za-z0-9]*$">
                     <div *ngIf="usernameLogin.dirty && usernameLogin.invalid">
@@ -212,18 +219,17 @@
                                [(ngModel)]="rememberMe" checked>
                         <span jhiTranslate="login.form.rememberme">Remember me</span>
                     </label>
+                    <a (click)="requestResetPassword()" jhiTranslate="login.password.forgot">Forgot password?</a>
                 </div>
-                <p></p>
                 <div class="text-center">
-                    <button type="submit" [disabled]="loginForm.form.invalid" class="btn btn-primary btn-block" jhiTranslate="login.form.button">Sign in</button>
-                </div>
-                <p></p>
-                <div class="text-center">
-                    <a (click)="requestResetPassword()" jhiTranslate="login.password.forgot">Did you
-                        forget your password?</a>
+                    <button type="submit" [disabled]="loginForm.form.invalid" class="btn btn-primary btn-block"
+                            jhiTranslate="login.form.button">Sign in
+                    </button>
                 </div>
             </form>
-            <p></p>
+        </div>
+        <div class="bottom-text text-center">
+            <span (click)="isRegistration=true">Don't have an account? <a>Sign Up</a></span>
         </div>
     </div>
 </div>

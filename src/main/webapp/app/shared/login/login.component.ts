@@ -1,7 +1,7 @@
-import {Component, OnInit, AfterViewInit, Renderer, ElementRef} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, Renderer} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
-import {JhiLanguageService, EventManager} from 'ng-jhipster';
+import {EventManager, JhiLanguageService} from 'ng-jhipster';
 
 import {LoginService} from './login.service';
 import {StateStorageService} from '../auth/state-storage.service';
@@ -10,7 +10,10 @@ import {PasswordResetModalService} from '../../account/password-reset/init/passw
 
 @Component({
     selector: 'jhi-login-modal',
-    templateUrl: './login.component.html'
+    templateUrl: './login.component.html',
+    styleUrls: [
+        'login.scss'
+    ]
 })
 export class JhiLoginModalComponent implements OnInit, AfterViewInit {
     authenticationError: boolean;
@@ -18,9 +21,10 @@ export class JhiLoginModalComponent implements OnInit, AfterViewInit {
     rememberMe: boolean;
     username: string;
     credentials: any;
+    showPassword = false;
     isRegistration = false;
-    confirmPassword: string;
-    doNotMatch: string;
+    // confirmPassword: string;
+    // doNotMatch: string;
     error: string;
     errorEmailExists: string;
     errorUserExists: string;
@@ -100,20 +104,15 @@ export class JhiLoginModalComponent implements OnInit, AfterViewInit {
     }
 
     register() {
-        if (this.registerAccount.password !== this.confirmPassword) {
-            this.doNotMatch = 'ERROR';
-        } else {
-            this.doNotMatch = null;
-            this.error = null;
-            this.errorUserExists = null;
-            this.errorEmailExists = null;
-            this.languageService.getCurrent().then((key) => {
-                this.registerAccount.langKey = key;
-                this.registerService.save(this.registerAccount).subscribe(() => {
-                    this.success = true;
-                }, (response) => this.processError(response));
-            });
-        }
+        this.error = null;
+        this.errorUserExists = null;
+        this.errorEmailExists = null;
+        this.languageService.getCurrent().then((key) => {
+            this.registerAccount.langKey = key;
+            this.registerService.save(this.registerAccount).subscribe(() => {
+                this.success = true;
+            }, (response) => this.processError(response));
+        });
     }
 
     private processError(response) {

@@ -1,0 +1,107 @@
+.modal-header {
+    &.login {
+        background-color: #f7f7f7;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        padding-top: 20px;
+        padding-bottom: 11px;
+        border-bottom: none;
+        img {
+            width: 120px;
+            height: 29px;
+            object-fit: contain;
+        }
+    }
+}
+
+.modal-body {
+    &.login {
+        padding: 0;
+        font-size: 13px;
+        .radio-menu {
+            display: inline-block;
+            .register,
+            .sign-in {
+                display: inline-block;
+                margin: 25px 12px 29px 13px;
+            }
+            .text {
+                padding-left: 1px;
+                font-size: 14px;
+                font-weight: 500;
+                text-align: center;
+                color: #515c7f;
+            }
+        }
+        form {
+            input {
+                padding: 11px 23px 11px 23px;
+                border-radius: 20px;
+                border: solid 1px #aab3c3;
+                font-size: 14px;
+                text-align: left;
+                color: #515c7f;
+            }
+        }
+        .form-group {
+            position: relative;
+            &.show-password {
+                input {
+                    padding-right: 30px;
+                }
+                span {
+                    color: #515c7f;
+                    position: absolute;
+                    font-size: 15px;
+                    top: 8px;
+                    right: 14px;
+                }
+            }
+        }
+        .form-control::-webkit-input-placeholder {
+            color: #515c7f;
+        }
+        button {
+            border-radius: 20px;
+            background-color: #276cf2;
+        }
+        .form-group {
+            small {
+                padding-left: 23px;
+                padding-right: 23px;
+            }
+        }
+        .form-sign-in,
+        .form-register {
+            padding: 0 42px 36px 40px;
+            .bottom-text {
+                margin-top: 10px;
+                font-size: 12px;
+                line-height: 2;
+                text-align: left;
+                color: #515c7f;
+                a {
+                    color: #276cf2;
+                }
+            }
+        }
+        .form-sign-in {
+            .form-check {
+                margin: 3px 10px 18px 10px;
+                font-size: 12px;
+                line-height: 2;
+                text-align: left;
+                color: #515c7f;
+                input {
+                    margin-right: 4px;
+                    margin-top: 6px;
+                    vertical-align: middle;
+                }
+                a {
+                    float: right;
+                    color: #276cf2;
+                }
+            }
+        }
+    }
+}

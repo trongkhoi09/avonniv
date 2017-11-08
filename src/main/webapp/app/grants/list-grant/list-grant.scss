@@ -6,18 +6,24 @@
     }
     .publisher {
         width: 165px;
-        padding-left: 24px;
+        padding-left: 12px;
         padding-right: 12px;
     }
     .title {
-        width: 222px;
+        width: 200px;
         padding-left: 12px;
-        padding-right: 14px;
+        padding-right: 12px;
     }
     .description {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        hyphens: auto;
         flex: 1;
         padding-left: 12px;
-        padding-right: 49px;
+        padding-right: 12px;
     }
     .finance-description {
         width: 124px;

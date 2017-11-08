@@ -18,7 +18,7 @@
                 <th class="date text-center"><a href="javascript:void(0);" jhiSortBy="closeDate"><span
                     jhiTranslate="grants.closeDate">Close Date</span><span
                     class="fa fa-sort"></span></a></th>
-                <th class="col-1" *jhiHasAnyAuthority="'ROLE_ADMIN'"></th>
+                <th class="admin-edit" *jhiHasAnyAuthority="'ROLE_ADMIN'"></th>
             </tr>
             </thead>
             <div *ngIf="grantDTOs.length==0" class="empty-table-custom text-center">

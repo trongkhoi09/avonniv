@@ -19,6 +19,12 @@ body, h1, h2, h3, h4 {
         max-width: 370px;
     }
 }
+.profiles-modal {
+    .modal-dialog {
+        max-width: 569px;
+        width: 569px;
+    }
+}
 .description-grant {
     .modal-dialog {
         width: 784px;
@@ -72,9 +78,6 @@ Generic styles
     width: 60% !important;
 }
 
-.margin-10 {
-    margin: 10px;
-}
 .break {
     white-space: normal;
     word-break:break-all;

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { JhiLanguageService } from 'ng-jhipster';
+import {Component, OnInit} from '@angular/core';
+import {JhiLanguageService} from 'ng-jhipster';
 
-import {Principal, AccountService, JhiLanguageHelper, PublisherService, PublisherDTO, User} from '../../shared';
+import {AccountService, JhiLanguageHelper, Principal, PublisherDTO, PublisherService, User} from '../../shared';
 import {Password} from '../password/password.service';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
@@ -28,20 +28,19 @@ export class ProfilesComponent implements OnInit {
     password: string;
     oldPassword: string;
     confirmPassword: string;
+    notification: false;
     collapse = {
-        password : true,
-        profile : true
+        password: true,
+        profile: true
     };
 
-    constructor(
-        private accountService: AccountService,
-        private passwordService: Password,
-        private activeModal: NgbActiveModal,
-        private principal: Principal,
-        private publisherService: PublisherService,
-        private languageService: JhiLanguageService,
-        private languageHelper: JhiLanguageHelper
-    ) {
+    constructor(private accountService: AccountService,
+                private passwordService: Password,
+                private activeModal: NgbActiveModal,
+                private principal: Principal,
+                private publisherService: PublisherService,
+                private languageService: JhiLanguageService,
+                private languageHelper: JhiLanguageHelper) {
     }
 
     ngOnInit() {

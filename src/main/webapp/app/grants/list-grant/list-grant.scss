@@ -30,8 +30,8 @@
         padding-left: 12px;
         padding-right: 12px;
     }
-    .admin-edit{
-        width: 130px;
+    .admin-edit {
+        width: 50px;
         padding: 12px 0 12px 0;
     }
     .date {
@@ -98,30 +98,32 @@
 }
 
 @media (min-width: 1400px) {
-    .publisher {
-        width: 165px;
-        padding-left: 24px;
-        padding-right: 12px;
-    }
-    .title {
-        width: 222px;
-        padding-left: 12px;
-        padding-right: 14px;
-    }
-    .description {
-        padding-left: 12px;
-        padding-right: 49px;
-    }
-    .finance-description {
-        width: 124px;
-        padding-left: 12px;
-        padding-right: 12px;
-    }
-    .admin-edit{
-        width: 130px;
-        padding: 12px 0 12px 0;
-    }
-    .date {
-        width: 160px;
+    .list-grant {
+        .publisher {
+            width: 165px;
+            padding-left: 24px;
+            padding-right: 12px;
+        }
+        .title {
+            width: 222px;
+            padding-left: 12px;
+            padding-right: 14px;
+        }
+        .description {
+            padding-left: 12px;
+            padding-right: 49px;
+        }
+        .finance-description {
+            width: 124px;
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+        .admin-edit {
+            width: 130px;
+            padding: 12px 0 12px 0;
+        }
+        .date {
+            width: 160px;
+        }
     }
 }

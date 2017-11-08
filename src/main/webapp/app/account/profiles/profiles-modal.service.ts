@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import {Injectable} from '@angular/core';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
-import { ProfilesComponent } from './profiles.component';
+import {ProfilesComponent} from './profiles.component';
 
 @Injectable()
 export class ProfilesModalService {
     private isOpen = false;
-    constructor(
-        private modalService: NgbModal,
-    ) {}
+
+    constructor(private modalService: NgbModal) {
+    }
 
     open(): NgbModalRef {
         if (this.isOpen) {
@@ -16,7 +16,7 @@ export class ProfilesModalService {
         }
         this.isOpen = true;
         const modalRef = this.modalService.open(ProfilesComponent, {
-            size: 'lg',
+            windowClass: 'profiles-modal',
             container: 'nav'
         });
         modalRef.result.then((result) => {

@@ -42,7 +42,7 @@
             padding: 31px 32px 0px 32px;
             label {
                 margin-bottom: 0px;
-                width: 75px;
+                width: 80px;
                 font-size: 14px;
                 text-align: left;
                 color: #515c7f;
@@ -56,6 +56,49 @@
                 margin-bottom: 37px;
             }
         }
+        .edit-profile {
+            padding: 22px 32px 18px 32px;
+            label {
+                margin-bottom: 0px;
+                width: 80px;
+                font-size: 14px;
+                text-align: left;
+                color: #515c7f;
+            }
+            .form-group {
+                position: relative;
+                label {
+                    position: absolute;
+                    top: 9px;
+                }
+                .form-control {
+                    width: 288px;
+                    margin-left: 80px;
+                    height: 36px;
+                    border-radius: 3px;
+                    background-color: #ffffff;
+                    border: solid 1px #aab3c3;
+                    font-size: 14px;
+                    text-align: left;
+                    color: #515c7f;
+                    padding: 11px 18px 7px 18px;
+                }
+                .language{
+                    margin-left: 80px;
+                    .form-check{
+                        width: 106px;
+                    }
+                }
+                div {
+                    margin-bottom: 22px;
+                }
+            }
+            .button-row {
+                position: absolute;
+                top: 13px;
+                right: 18px;
+            }
+        }
         .profile {
             padding: 24px 39px 6px 39px;
             background-color: #f7f7f7;
@@ -66,12 +109,12 @@
         .preferences {
             padding: 24px 39px 27px 39px;
             background-color: #f7f7f7;
-            .title{
+            .title {
                 padding-bottom: 4px;
             }
             .row {
                 padding-left: 36px;
-                .col-md-4{
+                .col-md-4 {
                     padding-top: 4px;
                     padding-bottom: 4px;
                 }
@@ -93,7 +136,7 @@
         }
         .notification {
             padding: 20px 39px 31px 39px;
-            .title{
+            .title {
                 padding-bottom: 8px;
             }
             a {

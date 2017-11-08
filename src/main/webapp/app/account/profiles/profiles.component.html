@@ -16,19 +16,18 @@
                 <strong>Settings saved!</strong>
             </div>
         </div>
-        <div class="col-md-12" id="collapseProfile" [ngbCollapse]="collapse.profile">
+        <div class="edit-profile" id="collapseProfile" [ngbCollapse]="collapse.profile">
             <form name="form" role="form" (ngSubmit)="save()" #settingsForm="ngForm" *ngIf="settingsAccount"
                   novalidate>
-                <div class="form-group row">
-                    <div class="col-md-2">
-                        <label class="form-control-label" jhiTranslate="settings.form.firstname">First
-                            Name</label>
-                    </div>
-                    <div class="col-md-10">
+                <div class="form-group">
+                    <div class="">
+                        <label jhiTranslate="settings.form.firstname">First Name</label>
                         <input type="text" class="form-control" id="firstName" name="firstName"
                                placeholder="{{'settings.form.firstname.placeholder' | translate}}"
                                [(ngModel)]="settingsAccount.firstName" minlength=1 maxlength=50
                                #firstNameInput="ngModel" required>
+                    </div>
+                    <div class="error-form">
                         <div *ngIf="firstNameInput.dirty && firstNameInput.invalid">
                             <small class="form-text text-danger"
                                    *ngIf="firstNameInput.errors.required"
@@ -48,16 +47,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-md-2">
-                        <label class="form-control-label" for="lastName" jhiTranslate="settings.form.lastname">Last
+                <div class="form-group">
+                    <div class="">
+                        <label class="" for="lastName" jhiTranslate="settings.form.lastname">Last
                             Name</label>
-                    </div>
-                    <div class="col-md-10">
                         <input type="text" class="form-control" id="lastName" name="lastName"
                                placeholder="{{'settings.form.lastname.placeholder' | translate}}"
                                [(ngModel)]="settingsAccount.lastName" minlength=1 maxlength=50
                                #lastNameInput="ngModel" required>
+                    </div>
+                    <div class="error-form">
                         <div *ngIf="lastNameInput.dirty && lastNameInput.invalid">
                             <small class="form-text text-danger"
                                    *ngIf="lastNameInput.errors.required"
@@ -77,16 +76,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-md-2">
-                        <label class="form-control-label" for="email"
+                <div class="form-group">
+                    <div class="">
+                        <label class="" for="email"
                                jhiTranslate="global.form.email">Email</label>
-                    </div>
-                    <div class="col-md-10">
                         <input type="email" class="form-control" id="email" name="email"
                                placeholder="{{'global.form.email.placeholder' | translate}}"
                                [(ngModel)]="settingsAccount.email" minlength="5" maxlength="100"
                                #emailInput="ngModel" required>
+                    </div>
+                    <div class="error-form">
                         <div *ngIf="emailInput.dirty && emailInput.invalid">
                             <small class="form-text text-danger"
                                    *ngIf="emailInput.errors.required"
@@ -111,20 +110,39 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group row" *ngIf="languages && languages.length > 0">
-                    <div class="col-md-2">
-                        <label for="langKey" jhiTranslate="settings.form.language">Language</label>
-                    </div>
-                    <div class="col-md-10">
-                        <select class="form-control" id="langKey" name="langKey"
-                                [(ngModel)]="settingsAccount.langKey">
-                            <option *ngFor="let language of languages" [value]="language">{{language |
-                                findLanguageFromKey}}
-                            </option>
-                        </select>
+                <div class="form-group " *ngIf="languages && languages.length > 0">
+                    <div class="">
+                        <label jhiTranslate="settings.form.language">Language</label>
+                        <!--<select class="form-control" id="langKey" name="langKey"-->
+                                <!--[(ngModel)]="settingsAccount.langKey">-->
+                            <!--<option *ngFor="let language of languages" [value]="language">{{language |-->
+                                <!--findLanguageFromKey}}-->
+                            <!--</option>-->
+                        <!--</select>-->
+
+                        <div class="language">
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio"
+                                           [checked]="'en' === settingsAccount.langKey"
+                                           (click)="settingsAccount.langKey = 'en'"
+                                           name="inlineRadioOptions">
+                                    <span class="text">English</span>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio"
+                                           [checked]="'sv' === settingsAccount.langKey"
+                                           (click)="settingsAccount.langKey = 'sv'"
+                                           name="inlineRadioOptions">
+                                    <span class="text">Svenska</span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row button-row">
                     <div class="col-md-6 text-center">
                         <button type="submit" [disabled]="settingsForm.form.invalid" class="btn btn-primary"
                                 jhiTranslate="entity.action.save">Save
@@ -287,7 +305,7 @@
             <div *ngFor="let publisher of publisherCrawled; let i = index" class="col-md-4">
                 <a (click)="publisher.check=!publisher.check;">
                     <i [ngClass]="publisher.check?'fa fa-check-square-o':'fa fa-square-o'"
-                        aria-hidden="true"></i>
+                       aria-hidden="true"></i>
                     <span>{{publisher.name}}</span>
                 </a>
             </div>

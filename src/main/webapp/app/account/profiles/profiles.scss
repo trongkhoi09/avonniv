@@ -56,6 +56,33 @@
                 margin-bottom: 37px;
             }
         }
+
+        .btn-save {
+            margin-left: 12px;
+            width: 90px;
+            height: 36px;
+            border-radius: 100px;
+            background-color: #276cf2;
+
+            font-size: 13px;
+            font-weight: 500;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .btn-cancel {
+            width: 90px;
+            height: 36px;
+            border-radius: 100px;
+            background-color: #ffffff;
+            border: solid 1px #aab3c3;
+
+            font-size: 13px;
+            font-weight: 500;
+            text-align: center;
+            color: #515c7f;
+        }
+
         .edit-profile {
             padding: 22px 32px 18px 32px;
             label {
@@ -64,6 +91,9 @@
                 font-size: 14px;
                 text-align: left;
                 color: #515c7f;
+            }
+            .error-form {
+                margin-left: 98px;
             }
             .form-group {
                 position: relative;
@@ -83,9 +113,9 @@
                     color: #515c7f;
                     padding: 11px 18px 7px 18px;
                 }
-                .language{
+                .language {
                     margin-left: 80px;
-                    .form-check{
+                    .form-check {
                         width: 106px;
                     }
                 }
@@ -99,11 +129,54 @@
                 right: 18px;
             }
         }
+        .edit-password {
+            padding: 22px 32px 18px 32px;
+            label {
+                margin-bottom: 0px;
+                width: 146px;
+                font-size: 14px;
+                text-align: left;
+                color: #515c7f;
+            }
+            .password-strength-bar,
+            .error-form {
+                margin-left: 158px;
+            }
+            .password-strength-bar{
+                margin-top: 5px;
+            }
+            .form-group {
+                position: relative;
+                margin-bottom: 20px;
+                label {
+                    position: absolute;
+                    top: 9px;
+                }
+                .form-control {
+                    width: 288px;
+                    margin-left: 158px;
+                    height: 36px;
+                    border-radius: 3px;
+                    background-color: #ffffff;
+                    border: solid 1px #aab3c3;
+                    font-size: 14px;
+                    text-align: left;
+                    color: #515c7f;
+                    padding: 11px 18px 7px 18px;
+                }
+            }
+            .button-row {
+                position: absolute;
+                top: 13px;
+                right: 18px;
+            }
+        }
         .profile {
             padding: 24px 39px 6px 39px;
             background-color: #f7f7f7;
         }
         .password {
+            position: relative;
             padding: 24px 39px 27px 39px;
         }
         .preferences {

@@ -6,18 +6,16 @@
         <div class="title">
             <span jhiTranslate="profiles.title">Profile</span>
             <a *ngIf="collapse.profile" href="javascript:void(0);"
-               (click)="collapse.password = true;collapse.profile = !collapse.profile"
+               (click)="refreshData(passwordForm);collapse.password = true;collapse.profile = !collapse.profile"
                [attr.aria-expanded]="!collapse.profile">
                 <i class="fa fa-pencil" aria-hidden="true"></i>
             </a>
         </div>
-        <div class="">
+        <div class="edit-profile" id="collapseProfile" [ngbCollapse]="collapse.profile">
             <div class="alert alert-success" *ngIf="successProfile" jhiTranslate="settings.messages.success">
                 <strong>Settings saved!</strong>
             </div>
-        </div>
-        <div class="edit-profile" id="collapseProfile" [ngbCollapse]="collapse.profile">
-            <form name="form" role="form" (ngSubmit)="save()" #settingsForm="ngForm" *ngIf="settingsAccount"
+            <form name="settingsForm" role="form" (ngSubmit)="save()" #settingsForm="ngForm" *ngIf="settingsAccount"
                   novalidate>
                 <div class="form-group">
                     <div class="">
@@ -26,9 +24,8 @@
                                placeholder="{{'settings.form.firstname.placeholder' | translate}}"
                                [(ngModel)]="settingsAccount.firstName" minlength=1 maxlength=50
                                #firstNameInput="ngModel" required>
-                    </div>
-                    <div class="error-form">
-                        <div *ngIf="firstNameInput.dirty && firstNameInput.invalid">
+
+                        <div class="error-form" *ngIf="firstNameInput.dirty && firstNameInput.invalid">
                             <small class="form-text text-danger"
                                    *ngIf="firstNameInput.errors.required"
                                    jhiTranslate="settings.messages.validate.firstname.required">
@@ -55,9 +52,7 @@
                                placeholder="{{'settings.form.lastname.placeholder' | translate}}"
                                [(ngModel)]="settingsAccount.lastName" minlength=1 maxlength=50
                                #lastNameInput="ngModel" required>
-                    </div>
-                    <div class="error-form">
-                        <div *ngIf="lastNameInput.dirty && lastNameInput.invalid">
+                        <div class="error-form" *ngIf="lastNameInput.dirty && lastNameInput.invalid">
                             <small class="form-text text-danger"
                                    *ngIf="lastNameInput.errors.required"
                                    jhiTranslate="settings.messages.validate.lastname.required">
@@ -84,9 +79,7 @@
                                placeholder="{{'global.form.email.placeholder' | translate}}"
                                [(ngModel)]="settingsAccount.email" minlength="5" maxlength="100"
                                #emailInput="ngModel" required>
-                    </div>
-                    <div class="error-form">
-                        <div *ngIf="emailInput.dirty && emailInput.invalid">
+                        <div class="error-form" *ngIf="emailInput.dirty && emailInput.invalid">
                             <small class="form-text text-danger"
                                    *ngIf="emailInput.errors.required"
                                    jhiTranslate="global.messages.validate.email.required">
@@ -114,10 +107,10 @@
                     <div class="">
                         <label jhiTranslate="settings.form.language">Language</label>
                         <!--<select class="form-control" id="langKey" name="langKey"-->
-                                <!--[(ngModel)]="settingsAccount.langKey">-->
-                            <!--<option *ngFor="let language of languages" [value]="language">{{language |-->
-                                <!--findLanguageFromKey}}-->
-                            <!--</option>-->
+                        <!--[(ngModel)]="settingsAccount.langKey">-->
+                        <!--<option *ngFor="let language of languages" [value]="language">{{language |-->
+                        <!--findLanguageFromKey}}-->
+                        <!--</option>-->
                         <!--</select>-->
 
                         <div class="language">
@@ -142,20 +135,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="row button-row">
-                    <div class="col-md-6 text-center">
-                        <button type="submit" [disabled]="settingsForm.form.invalid" class="btn btn-primary"
-                                jhiTranslate="entity.action.save">Save
-                        </button>
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <button *ngIf="!collapse.profile" type="button" class="btn btn-danger"
-                                (click)="collapse.profile = !collapse.profile;errorProfile=null;successProfile=null"
-                                [attr.aria-expanded]="!collapse.profile" aria-controls="collapseProfile"
-                                jhiTranslate="entity.action.cancel">
-                            Cancel
-                        </button>
-                    </div>
+                <div class="button-row">
+                    <button *ngIf="!collapse.profile" type="button" class="btn btn-cancel"
+                            (click)="collapse.profile = !collapse.profile;refreshData(passwordForm);"
+                            [attr.aria-expanded]="!collapse.profile" aria-controls="collapseProfile"
+                            jhiTranslate="entity.action.cancel">
+                        Cancel
+                    </button>
+                    <button type="submit" [disabled]="settingsForm.form.invalid" class="btn btn-save"
+                            jhiTranslate="entity.action.save">Save
+                    </button>
                 </div>
             </form>
         </div>
@@ -182,12 +171,12 @@
         <div class="title">
             <span jhiTranslate="global.form.password">Password</span>
             <a *ngIf="collapse.password" href="javascript:void(0);"
-               (click)="collapse.profile = true;collapse.password = !collapse.password"
+               (click)="refreshData(passwordForm);collapse.profile = true;collapse.password = !collapse.password"
                [attr.aria-expanded]="!collapse.password" aria-controls="collapsePassword">
                 <i class="fa fa-pencil" aria-hidden="true"></i>
             </a>
         </div>
-        <div class="col-md-12">
+        <div class="edit-password" id="collapsePassword" [ngbCollapse]="collapse.password">
             <div class="alert alert-success" *ngIf="successPassword" jhiTranslate="password.messages.success">
                 <strong>Password changed!</strong>
             </div>
@@ -201,15 +190,14 @@
             <div class="alert alert-danger" *ngIf="doNotMatch" jhiTranslate="global.messages.error.dontmatch">
                 The password and its confirmation do not match!
             </div>
-        </div>
-        <div class="col-md-12" id="collapsePassword" [ngbCollapse]="collapse.password">
-            <form name="form" role="form" (ngSubmit)="changePassword()" #passwordForm="ngForm">
+            <form name="form" role="form" (ngSubmit)="changePassword(passwordForm)" #passwordForm="ngForm">
                 <div class="form-group">
+                    <label jhiTranslate="global.form.oldpassword">Old password</label>
                     <input type="password" class="form-control" id="oldPassword" name="oldPassword"
                            #oldPasswordInput="ngModel"
                            placeholder="{{'global.form.oldpassword.placeholder' | translate}}"
                            [(ngModel)]="oldPassword" minlength=4 maxlength=50 required>
-                    <div *ngIf="oldPasswordInput.dirty && oldPasswordInput.invalid">
+                    <div class="error-form" *ngIf="oldPasswordInput.dirty && oldPasswordInput.invalid">
                         <small class="form-text text-danger"
                                *ngIf="oldPasswordInput.errors.required"
                                jhiTranslate="global.messages.validate.oldpassword.required">
@@ -228,11 +216,12 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label jhiTranslate="global.form.newpassword">New password</label>
                     <input type="password" class="form-control" id="password" name="password"
                            #passwordInput="ngModel"
                            placeholder="{{'global.form.newpassword.placeholder' | translate}}"
                            [(ngModel)]="password" minlength=4 maxlength=50 required>
-                    <div *ngIf="passwordInput.dirty && passwordInput.invalid">
+                    <div class="error-form" *ngIf="passwordInput.dirty && passwordInput.invalid">
                         <small class="form-text text-danger"
                                *ngIf="passwordInput.errors.required"
                                jhiTranslate="global.messages.validate.newpassword.required">
@@ -249,14 +238,17 @@
                             Your password cannot be longer than 50 characters.
                         </small>
                     </div>
-                    <jhi-password-strength-bar [passwordToCheck]="password"></jhi-password-strength-bar>
+                    <div class="password-strength-bar">
+                        <jhi-password-strength-bar [passwordToCheck]="password"></jhi-password-strength-bar>
+                    </div>
                 </div>
                 <div class="form-group">
+                    <label jhiTranslate="global.form.confirmpassword">Confirm Password</label>
                     <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
                            #confirmPasswordInput="ngModel"
                            placeholder="{{'global.form.confirmpassword.placeholder' | translate}}"
                            [(ngModel)]="confirmPassword" minlength=4 maxlength=50 required>
-                    <div *ngIf="confirmPasswordInput.dirty && confirmPasswordInput.invalid">
+                    <div class="error-form" *ngIf="confirmPasswordInput.dirty && confirmPasswordInput.invalid">
                         <small class="form-text text-danger"
                                *ngIf="confirmPasswordInput.errors.required"
                                jhiTranslate="global.messages.validate.confirmpassword.required">
@@ -274,20 +266,16 @@
                         </small>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 text-center">
-                        <button type="submit" [disabled]="passwordForm.form.invalid" class="btn btn-primary"
-                                jhiTranslate="password.form.button">Save
-                        </button>
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <button *ngIf="!collapse.password" type="button" class="btn btn-danger"
-                                (click)="collapse.password = !collapse.password;successPassword=null;errorPassword=null;errorOldPassword=null"
-                                [attr.aria-expanded]="!collapse.password" aria-controls="collapsePassword"
-                                jhiTranslate="entity.action.cancel">
-                            Cancel
-                        </button>
-                    </div>
+                <div class="button-row">
+                    <button *ngIf="!collapse.password" type="button" class="btn btn-cancel"
+                            (click)="collapse.password = !collapse.password;refreshData(passwordForm);passwordForm.reset()"
+                            [attr.aria-expanded]="!collapse.password" aria-controls="collapsePassword"
+                            jhiTranslate="entity.action.cancel">
+                        Cancel
+                    </button>
+                    <button type="submit" [disabled]="passwordForm.form.invalid" class="btn btn-save"
+                            jhiTranslate="password.form.button">Save
+                    </button>
                 </div>
             </form>
         </div>

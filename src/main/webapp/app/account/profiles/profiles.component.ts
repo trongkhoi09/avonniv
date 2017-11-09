@@ -57,6 +57,16 @@ export class ProfilesComponent implements OnInit {
         });
     }
 
+    refreshData(passwordForm) {
+        this.settingsAccount = this.copyAccount(this.account);
+        passwordForm.reset();
+        this.errorOldPassword = null;
+        this.errorPassword = null;
+        this.errorProfile = null;
+        this.successProfile = null;
+        this.successPassword = null;
+    }
+
     save() {
         this.accountService.save(this.settingsAccount).subscribe(() => {
             this.errorProfile = null;
@@ -93,7 +103,7 @@ export class ProfilesComponent implements OnInit {
         };
     }
 
-    changePassword() {
+    changePassword(passwordForm) {
         if (this.password !== this.confirmPassword) {
             this.errorPassword = null;
             this.errorOldPassword = null;
@@ -102,13 +112,10 @@ export class ProfilesComponent implements OnInit {
         } else {
             this.doNotMatch = null;
             this.passwordService.saveNewPassword(this.password, this.oldPassword).subscribe(() => {
-                this.password = null;
-                this.oldPassword = null;
-                this.confirmPassword = null;
+                passwordForm.reset();
                 this.errorOldPassword = null;
                 this.errorPassword = null;
                 this.successPassword = 'OK';
-                this.collapse.password = true;
             }, (res) => {
                 if (res.status === 304) {
                     this.errorOldPassword = 'ERROR';

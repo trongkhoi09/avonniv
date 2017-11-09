@@ -1,6 +1,7 @@
 {
     "profiles": {
         "title": "Profile",
+        "myaccount": "My account",
         "changeProfile": "Change profile",
         "changePassword": "Change password",
         "notification": "Notification",

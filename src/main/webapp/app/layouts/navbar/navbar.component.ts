@@ -81,6 +81,10 @@ export class NavbarComponent implements OnInit {
         return this.principal.isHomepage();
     }
 
+    isGrantpage() {
+        return this.principal.isGrantpage();
+    }
+
     login() {
         this.modalRef = this.loginModalService.open();
     }

@@ -5,12 +5,14 @@ import {Location} from '@angular/common';
 @Component({
     selector: 'jhi-search',
     templateUrl: './search.component.html',
-    styles: []
+    styleUrls: [
+        'search.scss'
+    ]
 })
 export class SearchComponent implements OnInit {
     routeSub: any;
     data: any = {
-        navigate : '/search',
+        navigate: '/search',
         search: ''
     };
 
@@ -22,7 +24,7 @@ export class SearchComponent implements OnInit {
         this.routeSub = this.route.params.subscribe((params) => {
             if (params['search']) {
                 this.data = {
-                    navigate : '/search',
+                    navigate: '/search',
                     search: params['search']
                 };
             }

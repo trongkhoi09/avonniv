@@ -1,6 +1,7 @@
 {
     "profiles": {
         "title": "Profil",
+        "myaccount": "Mitt konto",
         "changeProfile": "Ändra profil",
         "changePassword": "Ändra lösenord",
         "notification": "Avisering",

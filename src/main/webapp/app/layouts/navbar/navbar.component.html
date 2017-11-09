@@ -1,5 +1,6 @@
 <div [ngClass]="{'jh-navbar-homepage': isHomepage(), 'jh-navbar-custom': !isHomepage()}">
-    <nav class="navbar navbar-inverse navbar-toggleable-md jh-navbar">
+    <nav class="navbar navbar-inverse navbar-toggleable-md jh-navbar"
+         [ngClass]="{'navbar-normal': (!isGrantpage() && !isHomepage())}">
         <!--[ngClass]="{'jh-navbar-homepage': isHomepage(), 'jh-navbar': !isHomepage()}">-->
         <div class="jh-logo-container float-left">
             <a class="jh-navbar-toggler d-lg-none float-right" href="javascript:void(0);" data-toggle="collapse"
@@ -170,7 +171,8 @@
                 <span>Right now <span class="number-grant">{{count}}</span> opportunities of public funding!</span>
             </div>
             <div class="col-md-12">
-                <button routerLink="grants" type="button" class="btn btn-primary btn-take-me-there">TAKE ME THERE</button>
+                <button routerLink="grants" type="button" class="btn btn-primary btn-take-me-there">TAKE ME THERE
+                </button>
             </div>
         </div>
     </div>

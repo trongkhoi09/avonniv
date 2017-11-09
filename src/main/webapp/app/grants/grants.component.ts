@@ -34,6 +34,7 @@ export class GrantsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.principal.setGrantpage(true);
         this.routeSub = this.route.queryParams.subscribe((params) => {
             this.grantFilter.openGrant = !('false' === params['openGrant']);
             this.grantFilter.comingGrant = !('false' === params['comingGrant']);
@@ -46,6 +47,7 @@ export class GrantsComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.principal.setGrantpage(false);
         this.routeSub.unsubscribe();
     }
     onFiltering() {

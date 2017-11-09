@@ -56,6 +56,11 @@
             padding: 20px 56px 18px 24px;
             background-color: #193d7e;
         }
+        &.navbar-normal{
+            .jh-logo-container{
+                background-color: transparent;
+            }
+        }
         .user {
             .dropdown-toggle {
                 color: #515c7f;
@@ -121,6 +126,23 @@
                 vertical-align: middle;
                 background: url("../../../content/images/header.png") no-repeat center center;
                 background-size: contain;
+            }
+        }
+    }
+    &.navbar-normal{
+        .jh-logo-container{
+            background-color: transparent;
+        }
+        .navbar-brand {
+            &.logo {
+                .logo-img {
+                    height: 27px;
+                    width: 110px;
+                    display: inline-block;
+                    vertical-align: middle;
+                    background: url("../../../content/images/icon-popup-login.png") no-repeat center center;
+                    background-size: contain;
+                }
             }
         }
     }

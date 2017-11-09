@@ -1,7 +1,9 @@
-<div>
-    <a class="h3" (click)="goBack()">
-        <span><i class="fa fa-arrow-left" aria-hidden="true"></i></span>
+<div class="row search">
+    <a class="back" (click)="goBack()">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        <span jhiTranslate="search.subtitle">Search result</span>
     </a>
-    <span class="h1" jhiTranslate="search.subtitle">Search result</span>
-    <jhi-list-grant [data]='data'></jhi-list-grant>
+    <div class="jhi-list-grant">
+        <jhi-list-grant [data]='data'></jhi-list-grant>
+    </div>
 </div>

@@ -8,6 +8,7 @@ import { JhiTrackerService } from '../tracker/tracker.service'; // Barrel doesn'
 export class Principal {
     private userIdentity: any;
     private homepage = false;
+    private grantpage = false;
     private authenticated = false;
     private authenticationState = new Subject<any>();
 
@@ -88,6 +89,14 @@ export class Principal {
 
     isAuthenticated(): boolean {
         return this.authenticated;
+    }
+
+    isGrantpage(): boolean {
+        return this.grantpage;
+    }
+
+    setGrantpage(value: boolean) {
+        this.grantpage = value;
     }
 
     setHomepage(homepage: boolean) {

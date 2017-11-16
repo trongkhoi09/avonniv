@@ -133,7 +133,7 @@
             padding: 22px 32px 18px 32px;
             label {
                 margin-bottom: 0px;
-                width: 146px;
+                width: 135px;
                 font-size: 14px;
                 text-align: left;
                 color: #515c7f;
@@ -142,19 +142,30 @@
             .error-form {
                 margin-left: 158px;
             }
-            .password-strength-bar{
+            .password-strength-bar {
                 margin-top: 5px;
             }
             .form-group {
                 position: relative;
                 margin-bottom: 20px;
+                .label-profile {
+                    position: absolute;
+                    vertical-align: middle;
+                    width: 135px;
+                    height: 42px;
+                    top: -3px;
+                    label {
+                        top: 50%;
+                        transform: translateY(-50%);
+                    }
+                }
                 label {
                     position: absolute;
                     top: 9px;
                 }
                 .form-control {
                     width: 288px;
-                    margin-left: 158px;
+                    margin-left: 135px;
                     height: 36px;
                     border-radius: 3px;
                     background-color: #ffffff;

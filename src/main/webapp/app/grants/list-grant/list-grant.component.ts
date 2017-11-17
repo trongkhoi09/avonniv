@@ -1,10 +1,10 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
-import {AlertService, ParseLinks, PaginationUtil} from 'ng-jhipster';
+import {AlertService, ParseLinks} from 'ng-jhipster';
 import {ResponseWrapper} from '../../shared/model/response-wrapper.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GrantService} from '../../shared/grant/grant.service';
 import {ITEMS_PER_PAGE} from '../../shared/constants/pagination.constants';
-import {Principal, GrantDTO} from '../../shared';
+import {GrantDTO, Principal} from '../../shared';
 
 @Component({
     selector: 'jhi-list-grant',
@@ -24,11 +24,13 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
     links: any;
     totalItems: any;
     itemsPerPage: any;
-    page: any;
+    page: number;
     previousPage: any;
     predicate: any;
     reverse: any;
     grantDTOs: GrantDTO[];
+    listPage = [];
+    maxSize = 7;
 
     grantFilter = {
         page: 0,
@@ -48,22 +50,23 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
                 private activatedRoute: ActivatedRoute,
                 private router: Router) {
         this.itemsPerPage = ITEMS_PER_PAGE;
-        this.routeData = this.activatedRoute.data.subscribe((data) => {
-            this.page = data['pagingParams'].page;
-            this.previousPage = data['pagingParams'].page;
-            this.reverse = data['pagingParams'].ascending;
-            this.predicate = data['pagingParams'].predicate;
-        });
     }
 
     ngOnInit() {
         this.page = 0;
+        this.listPage = [];
         this.grantFilter.search = this.data.search;
         this.grantFilter.comingGrant = this.data.comingGrant;
         this.grantFilter.openGrant = this.data.openGrant;
         this.grantFilter.areaDTOs = this.data.areaDTOs ? this.data.areaDTOs : [];
         this.grantFilter.publisherDTOs = this.data.publisherDTOs ? this.data.publisherDTOs : [];
-        this.loadAll();
+        this.routeData = this.activatedRoute.data.subscribe((data) => {
+            this.page = data['pagingParams'].page;
+            this.previousPage = data['pagingParams'].page;
+            this.reverse = data['pagingParams'].ascending;
+            this.predicate = data['pagingParams'].predicate;
+            this.loadAll();
+        });
     }
 
     ngOnDestroy() {
@@ -98,6 +101,7 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
 
     loadPage(page: number) {
         if (page !== this.previousPage) {
+            this.page = page;
             this.previousPage = page;
             this.transition();
         }
@@ -119,6 +123,47 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = headers.get('X-Total-Count');
         this.grantDTOs = data;
+        this.listPage = [];
+        const totalPage = Math.ceil(parseInt(this.totalItems, 10) / parseInt(this.itemsPerPage, 10));
+        if (totalPage > 0) {
+            if (this.page === 0) {
+                this.page = 1;
+            }
+            for (let i = this.page - 3; i <= this.page + 3; i++) {
+                if (i > 0 && i <= totalPage) {
+                    this.listPage.push(i);
+                }
+            }
+            let count = 0;
+            while (true) {
+                if (this.listPage.length === 7 || this.listPage.length === totalPage) {
+                    break;
+                }
+                if (this.listPage[0] > 1) {
+                    this.listPage.unshift(this.listPage[0] - 1);
+                }
+                if (this.listPage[this.listPage.length - 1] < totalPage && this.listPage.length < 7) {
+                    this.listPage.push(this.listPage[this.listPage.length - 1] + 1);
+                }
+                count++;
+                if (count > 50) {
+                    break;
+                }
+            }
+            if (this.listPage[0] > 2) {
+                this.listPage.unshift('...');
+                this.listPage.unshift(1);
+            } else if (this.listPage[0] > 1) {
+                this.listPage.unshift(1);
+            }
+            if (this.listPage[this.listPage.length - 1] < totalPage - 1) {
+                this.listPage.push('...');
+                this.listPage.push(totalPage);
+            } else if (this.listPage[this.listPage.length - 1] < totalPage) {
+                this.listPage.push(totalPage);
+            }
+        }
+
     }
 
     private onError(error) {
@@ -136,6 +181,7 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
         }
         return description;
     }
+
     isSliceDescription(grantDTO) {
         const description = grantDTO.description;
         const index = 200;

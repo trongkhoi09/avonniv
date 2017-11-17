@@ -90,15 +90,33 @@
             </div>
             <div class="col-md-8">
                 <div class="float-right">
-                    <ngb-pagination class="pagination-sm"
-                                    [maxSize]="7"
-                                    [pageSize]="itemsPerPage"
-                                    [collectionSize]="totalItems"
-                                    [(page)]="page"
-                                    [rotate]="true"
-                                    [boundaryLinks]="true"
-                                    (pageChange)="loadPage(page)"
-                    ></ngb-pagination>
+                    <!--<ngb-pagination class="pagination-sm"-->
+                                    <!--[maxSize]="maxSize"-->
+                                    <!--[pageSize]="itemsPerPage"-->
+                                    <!--[collectionSize]="totalItems"-->
+                                    <!--[(page)]="page"-->
+                                    <!--[rotate]="true"-->
+                                    <!--[boundaryLinks]="true"-->
+                                    <!--(pageChange)="loadPage(page)"-->
+                    <!--&gt;</ngb-pagination>-->
+                    <nav>
+                        <ul class="pagination pagination-sm">
+                            <li class="page-item icon" [ngClass]="page <= 1 ? 'disable' : '' ">
+                                <a class="page-link" (click)="page > 1 && loadPage(page-1)">
+                                    <i class="fa fa-caret-left" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li *ngFor="let itemPage of listPage; let i = index" class="page-item"
+                                [ngClass]="page === itemPage ? 'active' : '' ">
+                                <a class="page-link" (click)="itemPage!=='...' && loadPage(itemPage)">{{itemPage}}</a>
+                            </li>
+                            <li class="page-item icon" [ngClass]="page*itemsPerPage >= totalItems ? 'disable' : ''">
+                                <a class="page-link" (click)="page*itemsPerPage < totalItems && loadPage(page+1)">
+                                    <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>

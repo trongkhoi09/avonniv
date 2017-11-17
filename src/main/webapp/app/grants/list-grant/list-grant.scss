@@ -95,6 +95,30 @@
             padding-top: 5px;
         }
     }
+    .pagination{
+        .page-link{
+            border: solid 1px #ccd5e1;
+            background-color: transparent;
+        }
+        .page-link:focus, .page-link:hover {
+            background-color: #eaf3ff;
+        }
+        .page-item{
+            background-color: #ffffff;
+            &.icon{
+                .page-link{
+                    color: #7588a8;
+                }
+            }
+            &.active{
+                .page-link, .page-link:focus, .page-link:hover {
+                    background-color: #7588a8;
+                    color: #ffffff;
+                    border-color: #6f7a8c;
+                }
+            }
+        }
+    }
 }
 
 @media (min-width: 1400px) {

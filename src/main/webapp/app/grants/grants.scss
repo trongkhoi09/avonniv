@@ -100,7 +100,41 @@
         flex: 1;
         position: relative;
         padding: 19px 28px 0px 27px;
+        .custom-number-item {
+            .dropdown-custom {
+                display: inline-block;
+                span {
+                    font-size: 14px;
+                    text-align: left;
+                    color: #515c7f;
+                }
+            }
+            .btn-custom {
+                margin-right: 14px;
+                margin-left: 12px;
+                width: 85px;
+                height: 36px;
+                border-radius: 3px;
+                background-color: #ffffff;
+                border: solid 1px #aab3c3;
+
+                font-size: 14px;
+                text-align: left;
+                color: #515c7f;
+                &.dropdown-toggle::after {
+                    margin-left: 32px;
+                    border-top: 0.3em solid;
+                    border-right: 0.3em solid transparent;
+                    border-bottom: 0;
+                    border-left: 0.3em solid transparent;
+                }
+            }
+            .dropdown-menu {
+                min-width: 85px;
+            }
+        }
         .grant-filter-type {
+            padding-top: 6px;
             font-size: 16px;
             font-weight: 500;
             text-align: left;

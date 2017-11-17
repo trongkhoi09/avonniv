@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {AlertService, ParseLinks} from 'ng-jhipster';
 import {ResponseWrapper} from '../../shared/model/response-wrapper.model';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -19,6 +19,7 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
         navigate: '/grants',
         search: ''
     };
+    @Output() fnCallBack = new EventEmitter();
 
     routeData: any;
     links: any;
@@ -55,6 +56,9 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
     ngOnInit() {
         this.page = 0;
         this.listPage = [];
+        if (this.data.itemsPerPage) {
+            this.itemsPerPage = this.data.itemsPerPage;
+        }
         this.grantFilter.search = this.data.search;
         this.grantFilter.comingGrant = this.data.comingGrant;
         this.grantFilter.openGrant = this.data.openGrant;
@@ -122,6 +126,7 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
     private onSuccess(data, headers) {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = headers.get('X-Total-Count');
+        this.fnCallBack.emit(this.totalItems);
         this.grantDTOs = data;
         this.listPage = [];
         const totalPage = Math.ceil(parseInt(this.totalItems, 10) / parseInt(this.itemsPerPage, 10));

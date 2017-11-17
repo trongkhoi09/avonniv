@@ -47,20 +47,39 @@
         </div>
         <div class="list-data">
             <div class="container-fluid">
-                <div class="row grant-filter-type">
-                    <a [ngClass]="grantFilter.openGrant?'':'unchecked'"
-                       (click)="grantFilter.openGrant=!grantFilter.openGrant; onFiltering();">
-                        <span><i class="fa fa-check" aria-hidden="true"></i></span>
-                        <span jhiTranslate="grants.openGrants">Open grants</span>
-                    </a>
-                    <a [ngClass]="grantFilter.comingGrant?'':'unchecked'"
-                       (click)="grantFilter.comingGrant=!grantFilter.comingGrant; onFiltering();">
-                        <span><i class="fa fa-check" aria-hidden="true"></i></span>
-                        <span jhiTranslate="grants.comingGrants">Forthcoming grants</span>
-                    </a>
+                <div class="row">
+                    <div class="col-md-6 grant-filter-type">
+                        <a [ngClass]="grantFilter.openGrant?'':'unchecked'"
+                           (click)="grantFilter.openGrant=!grantFilter.openGrant; onFiltering();">
+                            <span><i class="fa fa-check" aria-hidden="true"></i></span>
+                            <span jhiTranslate="grants.openGrants">Open grants</span>
+                        </a>
+                        <a [ngClass]="grantFilter.comingGrant?'':'unchecked'"
+                           (click)="grantFilter.comingGrant=!grantFilter.comingGrant; onFiltering();">
+                            <span><i class="fa fa-check" aria-hidden="true"></i></span>
+                            <span jhiTranslate="grants.comingGrants">Forthcoming grants</span>
+                        </a>
+                    </div>
+                    <div class="col text-right custom-number-item">
+                        <span>Show</span>
+                        <div ngbDropdown class="dropdown-custom">
+                            <button class="btn btn-outline-primary btn-custom" id="dropdownBasic" ngbDropdownToggle>
+                                {{grantFilter.itemsPerPage}}
+                            </button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic">
+                                <button class="dropdown-item" (click)="onChangeItemsPerPage(10)">10</button>
+                                <button class="dropdown-item" (click)="onChangeItemsPerPage(20)">20</button>
+                                <button class="dropdown-item" (click)="onChangeItemsPerPage(30)">30</button>
+                                <button class="dropdown-item" (click)="onChangeItemsPerPage(40)">40</button>
+                                <button class="dropdown-item" (click)="onChangeItemsPerPage(50)">50</button>
+                            </div>
+                        </div>
+                        <span>of {{numberItem}} items</span>
+                    </div>
                 </div>
                 <div class="row">
-                    <jhi-list-grant *ngIf='loadPublisherFinished' [data]='data'></jhi-list-grant>
+                    <jhi-list-grant *ngIf='loadPublisherFinished' [data]='data'
+                                    (fnCallBack)='handleUpdated($event)'></jhi-list-grant>
                 </div>
             </div>
         </div>

@@ -1,7 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Principal, AreaDTO, PublisherDTO, PublisherService, AreaService} from '../shared';
+import {AreaDTO, AreaService, Principal, PublisherDTO, PublisherService} from '../shared';
 import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute} from '@angular/router';
+import {ITEMS_PER_PAGE} from '../shared/constants/pagination.constants';
+
 @Component({
     selector: 'jhi-grants',
     templateUrl: './grants.component.html',
@@ -12,6 +14,7 @@ import {ActivatedRoute} from '@angular/router';
 export class GrantsComponent implements OnInit, OnDestroy {
     routeSub: any;
     currentAccount: any;
+    numberItem = 0;
     loadPublisherFinished = false;
     area: AreaDTO;
     publisherCrawled: PublisherDTO[] = [];
@@ -23,7 +26,8 @@ export class GrantsComponent implements OnInit, OnDestroy {
         openGrant: true,
         comingGrant: true,
         areaDTOs: [],
-        publisherDTOs: []
+        publisherDTOs: [],
+        itemsPerPage: ITEMS_PER_PAGE
     };
     data = this.grantFilter;
 
@@ -50,6 +54,11 @@ export class GrantsComponent implements OnInit, OnDestroy {
         this.principal.setGrantpage(false);
         this.routeSub.unsubscribe();
     }
+
+    handleUpdated(number) {
+        this.numberItem = number;
+    }
+
     onFiltering() {
         const publisherDTOs = [];
         for (let i = 0; i < this.publisherCrawled.length; i++) {
@@ -67,6 +76,11 @@ export class GrantsComponent implements OnInit, OnDestroy {
         this.data = Object.assign({}, data);
     }
 
+    onChangeItemsPerPage(number: number) {
+        this.grantFilter.itemsPerPage = number;
+        this.onFiltering();
+    }
+
     inputFormatter = (x: { name: string }) => x.name;
 
     resultFormatter = (result: AreaDTO) => result.name.toUpperCase();
@@ -76,7 +90,7 @@ export class GrantsComponent implements OnInit, OnDestroy {
             .debounceTime(200)
             .map((term) => term === '' ? []
                 : this.areaDTOs.filter((v) => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1
-                && this.grantFilter.areaDTOs.indexOf(v) === -1).slice(0, 10));
+                    && this.grantFilter.areaDTOs.indexOf(v) === -1).slice(0, 10));
 
     loadArea() {
         this.areaService.getAll().subscribe((areaDTOs) => this.areaDTOs = areaDTOs);

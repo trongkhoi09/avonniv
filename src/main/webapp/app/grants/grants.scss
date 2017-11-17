@@ -25,8 +25,26 @@
                 div {
                     margin-top: 5px;
                 }
-                span i {
-                    width: 21px;
+                a {
+                    i {
+                        vertical-align: middle;
+                        margin-right: 9px;
+                        font-size: 8px;
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 2px;
+                        padding-left: 1px;
+                        padding-top: 1px;
+                        border: solid 1px #e1e8f5;
+                    }
+                    span {
+                        vertical-align: middle;
+                    }
+                }
+                .unchecked {
+                    i {
+                        color: transparent;
+                    }
                 }
             }
         }
@@ -91,12 +109,22 @@
                 margin-right: 46px;
             }
             span i {
-                vertical-align: middle;
-                font-size: 30px;
-                width: 30px;
+                font-size: 20px;
+                width: 24px;
+                height: 24px;
+                padding: 1px;
+                background-color: #ffffff;
+                border: solid 1px #ccd5e1;
+                border-radius: 2px;
+                color: #3b4c67;
+            }
+            .unchecked {
+                span i {
+                    color: transparent;
+                }
             }
         }
-        jhi-list-grant{
+        jhi-list-grant {
             width: 100%;
         }
     }

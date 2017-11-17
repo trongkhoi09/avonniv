@@ -3,6 +3,7 @@
         max-width: 370px;
     }
 }
+
 .modal-header {
     &.login {
         background-color: #f7f7f7;
@@ -23,9 +24,6 @@
     &.login {
         padding: 0;
         font-size: 13px;
-        .form-check{
-            margin-bottom: 0;
-        }
         .radio-menu {
             display: inline-block;
             .register,
@@ -95,19 +93,37 @@
         }
         .form-sign-in {
             .form-check {
-                margin: 3px 10px 18px 10px;
+                margin: 7px 10px 23px 10px;
                 font-size: 12px;
                 line-height: 2;
                 text-align: left;
                 color: #515c7f;
-                input {
-                    margin-right: 4px;
-                    margin-top: 6px;
-                    vertical-align: middle;
-                }
-                a {
+                .request-reset-password {
                     float: right;
                     color: #276cf2;
+                    span {
+                        vertical-align: middle;
+                    }
+                }
+                .check-remember-me {
+                    i {
+                        vertical-align: middle;
+                        font-size: 12px;
+                        padding: 1px;
+                        margin-right: 8px;
+                        width: 16px;
+                        height: 16px;
+                        border-radius: 1px;
+                        border: solid 1px #aab3c3;
+                    }
+                    span {
+                        vertical-align: middle;
+                    }
+                }
+                .unchecked {
+                    i {
+                        color: transparent;
+                    }
                 }
             }
         }

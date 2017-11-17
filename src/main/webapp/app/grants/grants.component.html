@@ -7,10 +7,10 @@
                 </div>
                 <div class="col-md-12 check-box">
                     <div *ngFor="let publisher of publisherCrawled; let i = index">
-                        <a (click)="publisher.check=!publisher.check; onFiltering();">
-                            <span><i
-                                [ngClass]="publisher.check?'fa fa-check-square-o':'fa fa-square-o'"
-                                aria-hidden="true"></i> {{publisher.name}} </span>
+                        <a [ngClass]="publisher.check?'':'unchecked'"
+                           (click)="publisher.check=!publisher.check; onFiltering();">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            <span>{{publisher.name}}</span>
                         </a>
                     </div>
                 </div>
@@ -48,14 +48,14 @@
         <div class="list-data">
             <div class="container-fluid">
                 <div class="row grant-filter-type">
-                    <a (click)="grantFilter.openGrant=!grantFilter.openGrant; onFiltering();">
-                        <span><i [ngClass]="grantFilter.openGrant?'fa fa-check-square-o':'fa fa-square-o'"
-                                 aria-hidden="true"></i></span>
+                    <a [ngClass]="grantFilter.openGrant?'':'unchecked'"
+                       (click)="grantFilter.openGrant=!grantFilter.openGrant; onFiltering();">
+                        <span><i class="fa fa-check" aria-hidden="true"></i></span>
                         <span jhiTranslate="grants.openGrants">Open grants</span>
                     </a>
-                    <a (click)="grantFilter.comingGrant=!grantFilter.comingGrant; onFiltering();">
-                        <span><i [ngClass]="grantFilter.comingGrant?'fa fa-check-square-o':'fa fa-square-o'"
-                            aria-hidden="true"></i></span>
+                    <a [ngClass]="grantFilter.comingGrant?'':'unchecked'"
+                       (click)="grantFilter.comingGrant=!grantFilter.comingGrant; onFiltering();">
+                        <span><i class="fa fa-check" aria-hidden="true"></i></span>
                         <span jhiTranslate="grants.comingGrants">Forthcoming grants</span>
                     </a>
                 </div>

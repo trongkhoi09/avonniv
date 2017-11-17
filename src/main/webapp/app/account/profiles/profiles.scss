@@ -197,24 +197,48 @@
                 padding-bottom: 4px;
             }
             .row {
-                padding-left: 36px;
+                padding-left: 51px;
                 .col-md-4 {
-                    padding-top: 4px;
-                    padding-bottom: 4px;
+                    padding: 4px 0 4px 0;
                 }
             }
+            //a {
+            //    i {
+            //        vertical-align: middle;
+            //        padding-bottom: 2px;
+            //        font-size: 16px;
+            //        width: 18px;
+            //    }
+            //    span {
+            //        font-size: 12px;
+            //        line-height: 2;
+            //        text-align: left;
+            //        color: #515c7f;
+            //    }
+            //}
+
             a {
                 i {
                     vertical-align: middle;
-                    padding-bottom: 2px;
-                    font-size: 16px;
-                    width: 18px;
+                    margin-right: 8px;
+                    font-size: 12px;
+                    padding: 1px;
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 1px;
+                    border: solid 1px #aab3c3;
                 }
                 span {
+                    vertical-align: middle;
                     font-size: 12px;
                     line-height: 2;
                     text-align: left;
                     color: #515c7f;
+                }
+            }
+            .unchecked {
+                i {
+                    color: transparent;
                 }
             }
         }
@@ -227,7 +251,12 @@
                 position: relative;
                 i {
                     position: absolute;
-                    font-size: 16px;
+                    font-size: 12px;
+                    padding: 1px;
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 1px;
+                    border: solid 1px #aab3c3;
                     top: 2px;
                 }
                 div {
@@ -236,6 +265,11 @@
                     line-height: 1.43;
                     text-align: left;
                     color: #515c7f;
+                }
+            }
+            .unchecked {
+                i {
+                    color: transparent;
                 }
             }
         }

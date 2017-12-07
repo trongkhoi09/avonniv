@@ -6,7 +6,7 @@
                     <span jhiTranslate="grants.publisher">Publisher</span>
                 </div>
                 <div class="col-md-12 check-box">
-                    <div *ngFor="let publisher of publisherCrawled; let i = index">
+                    <div *ngFor="let publisher of (publisherCrawled|orderBy:name:true); let i = index">
                         <a [ngClass]="publisher.check?'':'unchecked'"
                            (click)="publisher.check=!publisher.check; onFiltering();">
                             <i class="fa fa-check" aria-hidden="true"></i>

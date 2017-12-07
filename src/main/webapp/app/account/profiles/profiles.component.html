@@ -292,9 +292,9 @@
             </div>
         </div>
         <div class="row">
-            <div *ngFor="let publisher of publisherCrawled; let i = index" class="col-md-4">
+            <div *ngFor="let publisher of (publisherCrawled|orderBy:name:true); let i = index" class="col-md-4">
                 <a [ngClass]="publisher.check?'':'unchecked'"
-                   (click)="publisher.check=!publisher.check">
+                   (click)="updateCheckPublisher(i)">
                     <i class="fa fa-check" aria-hidden="true"></i>
                     <span>{{publisher.name}}</span>
                 </a>
@@ -305,7 +305,7 @@
         <div class="title">
             <span jhiTranslate="profiles.notification">Notification</span>
         </div>
-        <a [ngClass]="notification?'':'unchecked'" (click)="notification=!notification">
+        <a [ngClass]="account.notification?'':'unchecked'" (click)="updateNotification()">
             <i class="fa fa-check" aria-hidden="true"></i>
             <div>
                 <span jhiTranslate="profiles.notification.description">Please notify me through

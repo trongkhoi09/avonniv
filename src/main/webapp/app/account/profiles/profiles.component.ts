@@ -1,7 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {JhiLanguageService} from 'ng-jhipster';
 
-import {AccountService, JhiLanguageHelper, Principal, PublisherDTO, PublisherService, User} from '../../shared';
+import {
+    AccountService,
+    JhiLanguageHelper,
+    PreferencesService,
+    Principal,
+    PublisherDTO,
+    PublisherService,
+    User
+} from '../../shared';
 import {Password} from '../password/password.service';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
@@ -17,6 +25,7 @@ export class ProfilesComponent implements OnInit {
     errorOldPassword: string;
     successPassword: string;
     errorProfile: string;
+    errorNotification: string;
     successProfile: string;
     error: string;
     success: string;
@@ -28,7 +37,6 @@ export class ProfilesComponent implements OnInit {
     password: string;
     oldPassword: string;
     confirmPassword: string;
-    notification: false;
     collapse = {
         password: true,
         profile: true
@@ -39,6 +47,7 @@ export class ProfilesComponent implements OnInit {
                 private activeModal: NgbActiveModal,
                 private principal: Principal,
                 private publisherService: PublisherService,
+                private preferencesService: PreferencesService,
                 private languageService: JhiLanguageService,
                 private languageHelper: JhiLanguageHelper) {
     }
@@ -53,7 +62,18 @@ export class ProfilesComponent implements OnInit {
         });
 
         this.publisherService.getAllByCrawled(true).subscribe((publisherCrawled) => {
-            this.publisherCrawled = publisherCrawled;
+            this.preferencesService.getAll().subscribe((preferencesDTOs) => {
+                console.log(publisherCrawled);
+                console.log(preferencesDTOs);
+                for (let i = 0; i < publisherCrawled.length; i++) {
+                    for (let j = 0; j < preferencesDTOs.length; j++) {
+                        if (publisherCrawled[i].id === preferencesDTOs[j].publisherDTO.id) {
+                            publisherCrawled[i].check = preferencesDTOs[j].notification;
+                        }
+                    }
+                }
+                this.publisherCrawled = publisherCrawled;
+            });
         });
     }
 
@@ -93,6 +113,7 @@ export class ProfilesComponent implements OnInit {
 
     copyAccount(account) {
         return {
+            notification: account.notification,
             activated: account.activated,
             email: account.email,
             firstName: account.firstName,
@@ -101,6 +122,26 @@ export class ProfilesComponent implements OnInit {
             login: account.login,
             imageUrl: account.imageUrl
         };
+    }
+
+    updateNotification() {
+        const notification = this.account.notification;
+        this.accountService.updateNotification(!notification).subscribe(() => {
+            this.account.notification = !notification;
+            this.errorNotification = null;
+        }, () => {
+            this.errorNotification = 'ERROR';
+        });
+    }
+
+    updateCheckPublisher(index) {
+        const publisher = this.publisherCrawled[index];
+        this.preferencesService.update(publisher.id, !publisher.check).subscribe(() => {
+            this.publisherCrawled[index].check = !publisher.check;
+            this.errorNotification = null;
+        }, () => {
+            this.errorNotification = 'ERROR';
+        });
     }
 
     changePassword(passwordForm) {

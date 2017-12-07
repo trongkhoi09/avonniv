@@ -53,6 +53,8 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    private boolean notification;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -62,7 +64,7 @@ public class UserDTO {
             user.getEmail(), user.getActivated(), user.getImageUrl(), user.getLangKey(),
             user.getCreatedBy(), user.getCreatedDate(), user.getLastModifiedBy(), user.getLastModifiedDate(),
             user.getAuthorities().stream().map(Authority::getName)
-                .collect(Collectors.toSet()));
+                .collect(Collectors.toSet()), user.isNotification());
     }
 
     public UserDTO(Long id, String login, String firstName, String lastName,
@@ -83,6 +85,27 @@ public class UserDTO {
         this.lastModifiedBy = lastModifiedBy;
         this.lastModifiedDate = lastModifiedDate;
         this.authorities = authorities;
+    }
+
+    public UserDTO(Long id, String login, String firstName, String lastName,
+        String email, boolean activated, String imageUrl, String langKey,
+        String createdBy, Instant createdDate, String lastModifiedBy, Instant lastModifiedDate,
+        Set<String> authorities, boolean notification) {
+
+        this.id = id;
+        this.login = login;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.activated = activated;
+        this.imageUrl = imageUrl;
+        this.langKey = langKey;
+        this.createdBy = createdBy;
+        this.createdDate = createdDate;
+        this.lastModifiedBy = lastModifiedBy;
+        this.lastModifiedDate = lastModifiedDate;
+        this.authorities = authorities;
+        this.notification = notification;
     }
 
     public Long getId() {
@@ -147,6 +170,14 @@ public class UserDTO {
 
     public Set<String> getAuthorities() {
         return authorities;
+    }
+
+    public boolean isNotification() {
+        return notification;
+    }
+
+    public void setNotification(boolean notification) {
+        this.notification = notification;
     }
 
     @Override

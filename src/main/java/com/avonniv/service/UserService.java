@@ -159,6 +159,13 @@ public class UserService {
         });
     }
 
+    public void updateUser(boolean notification) {
+        userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(user -> {
+            user.setNotification(notification);
+            log.debug("Changed Information for User: {}", user);
+        });
+    }
+
     /**
      * Update all information for a specific user, and return the modified user.
      *

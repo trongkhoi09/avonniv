@@ -1,7 +1,5 @@
 package com.avonniv.config;
 
-import com.avonniv.domain.Grant;
-import com.avonniv.domain.GrantProgram;
 import io.github.jhipster.config.JHipsterProperties;
 import org.ehcache.config.builders.CacheConfigurationBuilder;
 import org.ehcache.config.builders.ResourcePoolsBuilder;
@@ -45,11 +43,12 @@ public class CacheConfiguration {
             cm.createCache(com.avonniv.domain.Area.class.getName(), jcacheConfiguration);
             cm.createCache(com.avonniv.domain.CallDescription.class.getName(), jcacheConfiguration);
             cm.createCache(com.avonniv.domain.FileInfo.class.getName(), jcacheConfiguration);
-            cm.createCache(GrantProgram.class.getName(), jcacheConfiguration);
-            cm.createCache(GrantProgram.class.getName() + ".areas", jcacheConfiguration);
-            cm.createCache(Grant.class.getName(), jcacheConfiguration);
+            cm.createCache(com.avonniv.domain.GrantProgram.class.getName(), jcacheConfiguration);
+            cm.createCache(com.avonniv.domain.GrantProgram.class.getName() + ".areas", jcacheConfiguration);
+            cm.createCache(com.avonniv.domain.Grant.class.getName(), jcacheConfiguration);
             cm.createCache(com.avonniv.domain.Publisher.class.getName(), jcacheConfiguration);
             cm.createCache(com.avonniv.domain.CrawlHistory.class.getName(), jcacheConfiguration);
+            cm.createCache(com.avonniv.domain.Preferences.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

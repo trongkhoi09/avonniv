@@ -9,6 +9,7 @@ import {
     AuthServerProvider,
     AccountService,
     UserService,
+    PreferencesService,
     PublisherService,
     StateStorageService,
     LoginService,
@@ -45,6 +46,7 @@ import {
         PublisherService,
         DatePipe,
         GrantService,
+        PreferencesService,
         GrantProgramService,
         AreaService
     ],

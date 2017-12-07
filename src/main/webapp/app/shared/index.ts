@@ -21,6 +21,8 @@ export * from './tracker/tracker.service';
 export * from './login/login.component';
 export * from './login/login.service';
 export * from './login/login-modal.service';
+export * from './preferences/preferences.model';
+export * from './preferences/preferences.service';
 export * from './publisher/publisher.model';
 export * from './publisher/publisher.service';
 export * from './user/account.model';

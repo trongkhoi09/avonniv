@@ -35,9 +35,12 @@
         padding: 12px 0 12px 0;
     }
     .date {
-        width: 160px;
+        width: 166px;
     }
     .table {
+        .icon-sort{
+            margin-left: 5px;
+        }
         tr {
             position: relative;
             border-radius: 3px;
@@ -145,9 +148,6 @@
         .admin-edit {
             width: 130px;
             padding: 12px 0 12px 0;
-        }
-        .date {
-            width: 160px;
         }
     }
 }

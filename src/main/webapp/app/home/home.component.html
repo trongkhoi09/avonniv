@@ -12,11 +12,16 @@
                     <div class="card">
                         <div class="card-block">
                             <div class="card-title">
-                                <span>{{grantDTO.title}}</span>
+                                <a *ngIf="grantDTO.externalUrl"
+                                   href="{{grantDTO.externalUrl?grantDTO.externalUrl:'javascript:void(0)'}}"
+                                   [target]="grantDTO.externalUrl ? '_blank' : ''">
+                                    {{grantDTO.title}}
+                                </a>
+                                <span *ngIf="!grantDTO.externalUrl">{{grantDTO.title}}</span>
                             </div>
                             <div class="card-text">
                                 <div class="publisher">
-                                    <a>{{grantDTO.grantProgramDTO.publisherDTO.name}}</a>
+                                    <span>{{grantDTO.grantProgramDTO.publisherDTO.name}}</span>
                                 </div>
                                 <div>
                                     <span>{{grantDTO.openDate? (grantDTO.openDate| date: 'dd MMM yyyy'):('global.notAvailable'|translate)}}</span>

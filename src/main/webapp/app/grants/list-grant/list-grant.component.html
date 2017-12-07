@@ -67,7 +67,7 @@
                        *ngIf="isSliceDescription(grantDTO)">more...</a>
                 </td>
                 <td class="finance-description"
-                    [innerHTML]="grantDTO.financeDescription?grantDTO.financeDescription:('global.notAvailable'|translate)">
+                    [innerHTML]="grantDTO.financeDescription?getFinanceDescription(grantDTO):('global.notAvailable'|translate)">
 
                 </td>
                 <td class="date text-center">

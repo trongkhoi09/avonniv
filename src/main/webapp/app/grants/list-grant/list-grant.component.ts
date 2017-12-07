@@ -192,4 +192,16 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
         const index = 200;
         return (description != null && description.length > index);
     }
+
+    getFinanceDescription(grantDTO) {
+        if (grantDTO.grantProgramDTO.publisherDTO.id !== 9) {
+            return grantDTO.financeDescription;
+        } else {
+            if (isNaN(grantDTO.financeDescription)) {
+                return grantDTO.financeDescription;
+            } else {
+                return Number(Number(grantDTO.financeDescription).toFixed(1)).toLocaleString() + ' EUR';
+            }
+        }
+    }
 }

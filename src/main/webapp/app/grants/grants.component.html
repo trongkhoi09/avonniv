@@ -15,23 +15,23 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group row area">
-                <div class="col-md-12">
-                    <input type="text" class="form-control" [(ngModel)]="area"
-                           placeholder="{{'grants.area'|translate}}"
-                           (ngModelChange)="onChangeArea($event)"
-                           [ngbTypeahead]="searchArea" [inputFormatter]="inputFormatter"
-                           [resultFormatter]="resultFormatter"/>
-                    <div *ngFor="let area of grantFilter.areaDTOs; let i = index"
-                         class="alert alert-success alert-dismissible fade show custom-tag" role="alert">
-                        <strong>{{area.name}}</strong>
-                        <button (click)="removeArea(area)" type="button" class="close" data-dismiss="alert"
-                                aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <!--<div class="form-group row area">-->
+                <!--<div class="col-md-12">-->
+                    <!--<input type="text" class="form-control" [(ngModel)]="area"-->
+                           <!--placeholder="{{'grants.area'|translate}}"-->
+                           <!--(ngModelChange)="onChangeArea($event)"-->
+                           <!--[ngbTypeahead]="searchArea" [inputFormatter]="inputFormatter"-->
+                           <!--[resultFormatter]="resultFormatter"/>-->
+                    <!--<div *ngFor="let area of grantFilter.areaDTOs; let i = index"-->
+                         <!--class="alert alert-success alert-dismissible fade show custom-tag" role="alert">-->
+                        <!--<strong>{{area.name}}</strong>-->
+                        <!--<button (click)="removeArea(area)" type="button" class="close" data-dismiss="alert"-->
+                                <!--aria-label="Close">-->
+                            <!--<span aria-hidden="true">&times;</span>-->
+                        <!--</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
             <div class="form-group row publisher" *ngIf="publisherNotCrawled.length>0">
                 <div class="col-md-12 title">
                     <span jhiTranslate="grants.otherPublisher">Other publisher</span>

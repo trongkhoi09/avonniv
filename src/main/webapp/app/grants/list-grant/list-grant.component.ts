@@ -168,7 +168,7 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
                 this.listPage.push(totalPage);
             }
         }
-
+        window.scrollTo(0, 0);
     }
 
     private onError(error) {

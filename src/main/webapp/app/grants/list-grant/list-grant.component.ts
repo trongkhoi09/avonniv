@@ -43,6 +43,7 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
         areaDTOs: [],
         publisherDTOs: []
     };
+    oldGrantFilter = {};
 
     constructor(private alertService: AlertService,
                 private parseLinks: ParseLinks,
@@ -89,10 +90,12 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
         this.grantFilter.page = this.page - 1;
         this.grantFilter.size = this.itemsPerPage;
         this.grantFilter.sort = this.sort();
-        this.grantService.query(this.grantFilter).subscribe(
-            (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
-            (res: ResponseWrapper) => this.onError(res.json)
-        );
+        if (JSON.stringify(this.grantFilter) !== JSON.stringify(this.oldGrantFilter)) {
+            this.grantService.query(this.grantFilter).subscribe(
+                (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
+                (res: ResponseWrapper) => this.onError(res.json)
+            );
+        }
     }
 
     sort() {
@@ -124,6 +127,7 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     private onSuccess(data, headers) {
+        this.oldGrantFilter = Object.assign({}, this.grantFilter);
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = headers.get('X-Total-Count');
         this.fnCallBack.emit(this.totalItems);

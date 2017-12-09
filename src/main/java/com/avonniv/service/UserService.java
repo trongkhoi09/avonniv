@@ -101,6 +101,7 @@ public class UserService {
         newUser.setLangKey(langKey);
         // new user is not active
         newUser.setActivated(false);
+        newUser.setNotification(true);
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         authorities.add(authority);
@@ -134,6 +135,7 @@ public class UserService {
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(Instant.now());
         user.setActivated(true);
+        user.setNotification(true);
         userRepository.save(user);
         log.debug("Created Information for User: {}", user);
         return user;

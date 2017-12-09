@@ -4,7 +4,12 @@
             <thead>
             <tr class="row m-0" jhiSort [(predicate)]="predicate" [(ascending)]="reverse"
                 [callback]="transition.bind(this)">
-                <th class="publisher"><span jhiTranslate="grants.publisher">Publisher</span></th>
+                <th class="publisher">
+                    <a href="javascript:void(0);" jhiSortBy="publisher">
+                        <span jhiTranslate="grants.publisher">Publisher</span>
+                        <span class="fa fa-sort"></span>
+                    </a>
+                </th>
                 <th class="title">
                     <a href="javascript:void(0);" jhiSortBy="title">
                         <span jhiTranslate="grants.titleData">Title</span>

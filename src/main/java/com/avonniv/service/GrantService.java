@@ -7,19 +7,24 @@ import com.avonniv.repository.GrantProgramRepository;
 import com.avonniv.repository.GrantRepository;
 import com.avonniv.service.dto.GrantDTO;
 import com.avonniv.service.fetchdata.Util;
-import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -77,7 +82,7 @@ public class GrantService {
     @Transactional(readOnly = true)
     public Optional<List<Grant>> getRecentGrants() {
         return Optional.of(grantRepository.findAllByStatusInOrderByCreatedDateDesc(
-            new PageRequest(0,3),
+            new PageRequest(0, 3),
             Arrays.asList(GrantDTO.Status.open.getValue(), GrantDTO.Status.coming.getValue()))
         );
     }
@@ -118,6 +123,47 @@ public class GrantService {
         }
         List<String> listPublisher = new ArrayList<>();
         listPublisher.addAll(grantFilter.getPublisherDTOs());
+        Sort.Order publisherOrder = pageable.getSort().getOrderFor("publisher");
+        if (publisherOrder != null) {
+            Iterator<Sort.Order> iterator = pageable.getSort().iterator();
+            List<Sort.Order> result = new ArrayList<>();
+            while (iterator.hasNext()) {
+                Sort.Order order = iterator.next();
+                if (!order.getProperty().equals("publisher")) {
+                    result.add(order);
+                }
+            }
+            pageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), new Sort(result));
+            if (publisherOrder.isAscending()) {
+                if (grantFilter.isOpenGrant()) {
+                    if (grantFilter.isComingGrant()) {
+                        return grantRepository.findAllByGrantProgram_Publisher_NameInAndStatusInOrderByGrantProgram_Publisher_NameAsc(pageable, listPublisher, Arrays.asList(GrantDTO.Status.open.getValue(), GrantDTO.Status.coming.getValue())).map(GrantDTO::new);
+                    } else {
+                        return grantRepository.findAllByGrantProgram_Publisher_NameInAndStatusInOrderByGrantProgram_Publisher_NameAsc(pageable, listPublisher, Collections.singletonList(GrantDTO.Status.open.getValue())).map(GrantDTO::new);
+                    }
+                } else {
+                    if (grantFilter.isComingGrant()) {
+                        return grantRepository.findAllByGrantProgram_Publisher_NameInAndStatusInOrderByGrantProgram_Publisher_NameAsc(pageable, listPublisher, Collections.singletonList(GrantDTO.Status.coming.getValue())).map(GrantDTO::new);
+                    } else {
+                        return new PageImpl<>(new ArrayList<>(), pageable, 0L);
+                    }
+                }
+            } else {
+                if (grantFilter.isOpenGrant()) {
+                    if (grantFilter.isComingGrant()) {
+                        return grantRepository.findAllByGrantProgram_Publisher_NameInAndStatusInOrderByGrantProgram_Publisher_NameDesc(pageable, listPublisher, Arrays.asList(GrantDTO.Status.open.getValue(), GrantDTO.Status.coming.getValue())).map(GrantDTO::new);
+                    } else {
+                        return grantRepository.findAllByGrantProgram_Publisher_NameInAndStatusInOrderByGrantProgram_Publisher_NameDesc(pageable, listPublisher, Collections.singletonList(GrantDTO.Status.open.getValue())).map(GrantDTO::new);
+                    }
+                } else {
+                    if (grantFilter.isComingGrant()) {
+                        return grantRepository.findAllByGrantProgram_Publisher_NameInAndStatusInOrderByGrantProgram_Publisher_NameDesc(pageable, listPublisher, Collections.singletonList(GrantDTO.Status.coming.getValue())).map(GrantDTO::new);
+                    } else {
+                        return new PageImpl<>(new ArrayList<>(), pageable, 0L);
+                    }
+                }
+            }
+        }
         if (grantFilter.isOpenGrant()) {
             if (grantFilter.isComingGrant()) {
                 return grantRepository.findAllByGrantProgram_Publisher_NameInAndStatusIn(pageable, listPublisher, Arrays.asList(GrantDTO.Status.open.getValue(), GrantDTO.Status.coming.getValue())).map(GrantDTO::new);

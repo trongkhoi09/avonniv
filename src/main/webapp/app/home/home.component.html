@@ -23,9 +23,9 @@
                                 <div class="publisher">
                                     <span>{{grantDTO.grantProgramDTO.publisherDTO.name}}</span>
                                 </div>
-                                <div>
-                                    <span>{{grantDTO.openDate? (grantDTO.openDate| date: 'dd MMM yyyy'):('global.notAvailable'|translate)}}</span>
-                                </div>
+                                <!--<div>-->
+                                    <!--<span>{{grantDTO.openDate? (grantDTO.openDate| date: 'dd MMM yyyy'):('global.notAvailable'|translate)}}</span>-->
+                                <!--</div>-->
                                 <div>
                                     <span>{{grantDTO.description?sliceDescription(grantDTO):('global.notAvailable'|translate)}}
                                     <a [routerLink]="['/', { outlets: { popup: 'description-grant/'+ grantDTO.id} }]"

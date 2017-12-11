@@ -2,6 +2,7 @@ package com.avonniv.service;
 
 import com.avonniv.domain.User;
 
+import com.avonniv.service.dto.GrantDTO;
 import io.github.jhipster.config.JHipsterProperties;
 
 import org.apache.commons.lang3.CharEncoding;
@@ -16,6 +17,7 @@ import org.thymeleaf.context.Context;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 
 import javax.mail.internet.MimeMessage;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -30,6 +32,8 @@ public class MailService {
     private final Logger log = LoggerFactory.getLogger(MailService.class);
 
     private static final String USER = "user";
+
+    private static final String GRANTS = "grants";
 
     private static final String BASE_URL = "baseUrl";
 
@@ -102,5 +106,17 @@ public class MailService {
     public void sendPasswordResetMail(User user) {
         log.debug("Sending password reset email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "passwordResetEmail", "email.reset.title");
+    }
+
+    @Async
+    public void sendNotificationGrantMail(User user, List<GrantDTO> grantDTOS) {
+        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Context context = new Context(locale);
+        context.setVariable(USER, user);
+        context.setVariable(GRANTS, grantDTOS);
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        String content = templateEngine.process("notificationGrantEmail", context);
+        String subject = messageSource.getMessage("email.notification.grant.title", null, locale);
+        sendEmail(user.getEmail(), subject, content, false, true);
     }
 }

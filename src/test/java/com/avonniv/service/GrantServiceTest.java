@@ -2,12 +2,12 @@ package com.avonniv.service;
 
 import com.avonniv.AvonnivApp;
 import com.avonniv.domain.Area;
-import com.avonniv.domain.GrantProgram;
 import com.avonniv.domain.Grant;
+import com.avonniv.domain.GrantProgram;
 import com.avonniv.domain.Publisher;
 import com.avonniv.repository.AreaRepository;
-import com.avonniv.repository.GrantRepository;
 import com.avonniv.repository.GrantProgramRepository;
+import com.avonniv.repository.GrantRepository;
 import com.avonniv.repository.PublisherRepository;
 import com.avonniv.service.dto.GrantDTO;
 import com.avonniv.service.dto.GrantProgramDTO;
@@ -42,13 +42,22 @@ public class GrantServiceTest {
     @Autowired
     private GrantProgramRepository grantProgramRepository;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private PreferencesService preferencesService;
+
+    @Autowired
+    private MailService mailService;
+
     private GrantService grantService;
 
     private GrantProgramDTO grantProgramDTO;
 
     @Before
     public void setUp() throws Exception {
-        grantService = new GrantService(grantRepository, grantProgramRepository);
+        grantService = new GrantService(grantRepository, userService, mailService, preferencesService, grantProgramRepository);
         Set<Area> areas = new HashSet<>();
         for (int i = 0; i < 4; i++) {
             Area area = new Area();

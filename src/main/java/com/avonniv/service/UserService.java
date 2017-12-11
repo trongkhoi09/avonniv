@@ -246,6 +246,11 @@ public class UserService {
         return userRepository.findOneWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin()).orElse(null);
     }
 
+    @Transactional(readOnly = true)
+    public List<User> getAllUserNotification() {
+        return userRepository.findAllByActivatedIsTrueAndNotificationIsTrue();
+    }
+
 
     /**
      * Not activated users should be automatically deleted after 3 days.

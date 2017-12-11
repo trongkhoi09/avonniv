@@ -24,6 +24,10 @@ public interface GrantRepository extends JpaRepository<Grant, Long> {
 
     Page<Grant> findAllByGrantProgram_Publisher_NameInAndStatusIn(Pageable pageable, List<String> listPublisherId, List<Integer> status);
 
+    List<Grant> findAllByGrantProgram_Publisher_NameInAndStatusInAndCreatedDateAfter(List<String> listPublisherId, List<Integer> status, Instant dateAfter);
+
+    List<Grant> findAllByStatusInAndCreatedDateAfterOrderByCreatedDateDesc(Pageable pageable, List<Integer> status, Instant dateBefore);
+
     Page<Grant> findAllByGrantProgram_Publisher_NameInAndStatusInOrderByGrantProgram_Publisher_NameDesc(Pageable pageable, List<String> listPublisherId, List<Integer> status);
 
     Page<Grant> findAllByGrantProgram_Publisher_NameInAndStatusInOrderByGrantProgram_Publisher_NameAsc(Pageable pageable, List<String> listPublisherId, List<Integer> status);

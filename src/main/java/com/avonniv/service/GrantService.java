@@ -3,9 +3,11 @@ package com.avonniv.service;
 import com.avonniv.domain.Grant;
 import com.avonniv.domain.GrantFilter;
 import com.avonniv.domain.GrantProgram;
+import com.avonniv.domain.User;
 import com.avonniv.repository.GrantProgramRepository;
 import com.avonniv.repository.GrantRepository;
 import com.avonniv.service.dto.GrantDTO;
+import com.avonniv.service.dto.PreferencesDTO;
 import com.avonniv.service.fetchdata.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -35,12 +38,24 @@ public class GrantService {
 
     private final GrantRepository grantRepository;
 
+    private final UserService userService;
+
+    private final PreferencesService preferencesService;
+
     private final GrantProgramRepository grantProgramRepository;
 
+    private final MailService mailService;
+
     public GrantService(GrantRepository grantRepository,
+                        UserService userService,
+                        MailService mailService,
+                        PreferencesService preferencesService,
                         GrantProgramRepository grantProgramRepository) {
         this.grantRepository = grantRepository;
         this.grantProgramRepository = grantProgramRepository;
+        this.mailService = mailService;
+        this.userService = userService;
+        this.preferencesService = preferencesService;
     }
 
     public Grant createGrantCall(GrantDTO grantDTO) {
@@ -207,6 +222,39 @@ public class GrantService {
         for (GrantDTO grant : grantsOpen) {
             grant.setStatus(status);
             update(grant);
+        }
+    }
+
+    @Scheduled(cron = "0 0 15 * * WED")
+    public void notificationEmail() {
+        List<User> users = userService.getAllUserNotification();
+        List<User> usersPublisherEmpty = new ArrayList<>();
+        for (User user : users) {
+            List<String> listPublisher = new ArrayList<>();
+            List<PreferencesDTO> preferencesDTOS = preferencesService.getAll(user.getLogin());
+            for (PreferencesDTO preferencesDTO : preferencesDTOS) {
+                if (preferencesDTO.isNotification()) {
+                    listPublisher.add(preferencesDTO.getPublisherDTO().getName());
+                }
+            }
+            if (listPublisher.isEmpty()) {
+                usersPublisherEmpty.add(user);
+            } else {
+                List<GrantDTO> grantDTOS = grantRepository.findAllByGrantProgram_Publisher_NameInAndStatusInAndCreatedDateAfter(listPublisher, Arrays.asList(GrantDTO.Status.open.getValue(), GrantDTO.Status.coming.getValue()), Instant.now().minus(7, ChronoUnit.DAYS))
+                    .stream().map(GrantDTO::new).collect(Collectors.toList());
+                if (!grantDTOS.isEmpty()) {
+                    mailService.sendNotificationGrantMail(user, grantDTOS);
+                }
+            }
+        }
+        if (!usersPublisherEmpty.isEmpty()) {
+            List<GrantDTO> grantDTOS = grantRepository.findAllByStatusInAndCreatedDateAfterOrderByCreatedDateDesc(new PageRequest(0, 10), Arrays.asList(GrantDTO.Status.open.getValue(), GrantDTO.Status.coming.getValue()), Instant.now().minus(7, ChronoUnit.DAYS))
+                .stream().map(GrantDTO::new).collect(Collectors.toList());
+            if (!grantDTOS.isEmpty()) {
+                for (User user : usersPublisherEmpty) {
+                    mailService.sendNotificationGrantMail(user, grantDTOS);
+                }
+            }
         }
     }
 }

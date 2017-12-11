@@ -16,6 +16,7 @@ export class PasswordResetModalService {
         }
         this.isOpen = true;
         const modalRef = this.modalService.open(PasswordResetInitComponent, {
+            windowClass: 'password-reset-init-modal',
             container: 'nav'
         });
         modalRef.result.then((result) => {

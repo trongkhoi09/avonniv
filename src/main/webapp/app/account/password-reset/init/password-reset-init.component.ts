@@ -1,10 +1,13 @@
-import { Component, OnInit, AfterViewInit, Renderer, ElementRef } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, Renderer} from '@angular/core';
 
-import { PasswordResetInit } from './password-reset-init.service';
+import {PasswordResetInit} from './password-reset-init.service';
 
 @Component({
     selector: 'jhi-password-reset-init',
-    templateUrl: './password-reset-init.component.html'
+    templateUrl: './password-reset-init.component.html',
+    styleUrls: [
+        'password-reset-init.scss'
+    ]
 })
 export class PasswordResetInitComponent implements OnInit, AfterViewInit {
     error: string;
@@ -12,11 +15,9 @@ export class PasswordResetInitComponent implements OnInit, AfterViewInit {
     resetAccount: any;
     success: string;
 
-    constructor(
-        private passwordResetInit: PasswordResetInit,
-        private elementRef: ElementRef,
-        private renderer: Renderer
-    ) {
+    constructor(private passwordResetInit: PasswordResetInit,
+                private elementRef: ElementRef,
+                private renderer: Renderer) {
     }
 
     ngOnInit() {

@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AreaDTO, AreaService, Principal, PublisherDTO, PublisherService} from '../shared';
+import {AreaDTO, AreaService, PreferencesService, Principal, PublisherDTO, PublisherService} from '../shared';
 import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute} from '@angular/router';
 import {ITEMS_PER_PAGE} from '../shared/constants/pagination.constants';
@@ -30,10 +30,12 @@ export class GrantsComponent implements OnInit, OnDestroy {
         itemsPerPage: ITEMS_PER_PAGE
     };
     data = this.grantFilter;
+    checkAuthenticated = false;
 
     constructor(private areaService: AreaService,
                 private route: ActivatedRoute,
                 private publisherService: PublisherService,
+                private preferencesService: PreferencesService,
                 private principal: Principal) {
     }
 
@@ -45,9 +47,13 @@ export class GrantsComponent implements OnInit, OnDestroy {
         });
         this.principal.identity().then((account) => {
             this.currentAccount = account;
+            if (account) {
+                this.loadPublisher(true);
+            } else {
+                this.loadPublisher(false);
+            }
         });
         this.loadArea();
-        this.loadPublisher();
     }
 
     ngOnDestroy(): void {
@@ -57,6 +63,22 @@ export class GrantsComponent implements OnInit, OnDestroy {
 
     handleUpdated(number) {
         this.numberItem = number;
+    }
+
+    isAuthenticated() {
+        return this.principal.isAuthenticated();
+    }
+
+    handlePublisherUpdated() {
+        if (this.isAuthenticated()) {
+            if (!this.checkAuthenticated) {
+                this.loadPublisher(true);
+            }
+            this.checkAuthenticated = true;
+        } else {
+            this.checkAuthenticated = false;
+        }
+        return false;
     }
 
     onFiltering() {
@@ -96,14 +118,30 @@ export class GrantsComponent implements OnInit, OnDestroy {
         this.areaService.getAll().subscribe((areaDTOs) => this.areaDTOs = areaDTOs);
     }
 
-    loadPublisher() {
+    loadPublisher(login) {
         this.publisherService.getAllByCrawled(true).subscribe((publisherCrawled) => {
-            this.publisherCrawled = publisherCrawled;
-            for (let i = 0; i < publisherCrawled.length; i++) {
-                publisherCrawled[i].check = true;
+            if (login) {
+                this.preferencesService.getAll().subscribe((preferencesDTOs) => {
+                    for (let i = 0; i < publisherCrawled.length; i++) {
+                        publisherCrawled[i].check = false;
+                        for (let j = 0; j < preferencesDTOs.length; j++) {
+                            if (publisherCrawled[i].id === preferencesDTOs[j].publisherDTO.id) {
+                                publisherCrawled[i].check = preferencesDTOs[j].notification;
+                            }
+                        }
+                    }
+                    this.publisherCrawled = publisherCrawled;
+                    this.loadPublisherFinished = true;
+                    this.onFiltering();
+                });
+            } else {
+                this.publisherCrawled = publisherCrawled;
+                for (let i = 0; i < publisherCrawled.length; i++) {
+                    publisherCrawled[i].check = true;
+                }
+                this.loadPublisherFinished = true;
+                this.onFiltering();
             }
-            this.loadPublisherFinished = true;
-            this.onFiltering();
         });
         this.publisherService.getAllByCrawled(false).subscribe((publisherNotCrawled) => this.publisherNotCrawled = publisherNotCrawled);
     }

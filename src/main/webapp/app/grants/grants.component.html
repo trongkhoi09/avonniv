@@ -1,4 +1,5 @@
 <div class="grants">
+    <span *ngIf="isAuthenticated()&&handlePublisherUpdated()"></span>
     <div class="row">
         <div class="filter">
             <div class="form-group row publisher-crawled" *ngIf="publisherCrawled.length>0">

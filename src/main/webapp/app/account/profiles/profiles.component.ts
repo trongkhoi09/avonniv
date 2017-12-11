@@ -63,8 +63,6 @@ export class ProfilesComponent implements OnInit {
 
         this.publisherService.getAllByCrawled(true).subscribe((publisherCrawled) => {
             this.preferencesService.getAll().subscribe((preferencesDTOs) => {
-                console.log(publisherCrawled);
-                console.log(preferencesDTOs);
                 for (let i = 0; i < publisherCrawled.length; i++) {
                     for (let j = 0; j < preferencesDTOs.length; j++) {
                         if (publisherCrawled[i].id === preferencesDTOs[j].publisherDTO.id) {

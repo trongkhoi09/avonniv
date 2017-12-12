@@ -1,0 +1,7 @@
+{
+    "navbar": {
+        "description": "Interested in <b>opportunities</b><br>of public funding?",
+        "countGrants": "Right now <span class=\"number-grant\">{{count}}</span> opportunities of public funding!",
+        "button": "TAKE ME THERE"
+    }
+}

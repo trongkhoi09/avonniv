@@ -105,7 +105,7 @@
                 </div>
                 <div class="form-group " *ngIf="languages && languages.length > 0">
                     <div class="">
-                        <label jhiTranslate="settings.form.language">Language</label>
+                        <label jhiTranslate="settings.form.language.label">Language</label>
                         <!--<select class="form-control" id="langKey" name="langKey"-->
                         <!--[(ngModel)]="settingsAccount.langKey">-->
                         <!--<option *ngFor="let language of languages" [value]="language">{{language |-->
@@ -120,7 +120,7 @@
                                            [checked]="'en' === settingsAccount.langKey"
                                            (click)="settingsAccount.langKey = 'en'"
                                            name="inlineRadioOptions">
-                                    <span class="text">English</span>
+                                    <span class="text" jhiTranslate="settings.form.language.english">English</span>
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
@@ -129,7 +129,7 @@
                                            [checked]="'sv' === settingsAccount.langKey"
                                            (click)="settingsAccount.langKey = 'sv'"
                                            name="inlineRadioOptions">
-                                    <span class="text">Svenska</span>
+                                    <span class="text" jhiTranslate="settings.form.language.svenska">Svenska</span>
                                 </label>
                             </div>
                         </div>

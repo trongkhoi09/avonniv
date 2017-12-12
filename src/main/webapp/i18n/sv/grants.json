@@ -15,7 +15,9 @@
         "action": {
             "editGrant": "Utlysning",
             "editGrantProgram": "Utlysningsprogram"
-        }
+        },
+        "show": "Show",
+        "ofItem": "av {{numberItem}} objekt"
     },
     "grant": {
         "edit": "Ändra en utlysning"

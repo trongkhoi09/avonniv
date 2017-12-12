@@ -12,8 +12,12 @@
                 "authentication": "<strong>Inloggningen misslyckades!</strong> Kontrollera ditt användarnamn och lösenord och prova igen."
             }
         },
-        "password" : {
+        "password": {
             "forgot": "Har du glömt ditt lösenord?"
+        },
+        "register": {
+            "noAccount": "Har du inget användarkonto? ",
+            "link": "Bli Medlem"
         }
     }
 }

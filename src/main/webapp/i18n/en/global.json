@@ -3,9 +3,6 @@
         "title": "Avonniv",
         "search": "Search...",
         "notAvailable": "Not available",
-        "description": "Where innovation meets public funding",
-        "shortDescription": "Where innovation meets public funding",
-        "countGrants": "Right now: <span class=\"badge badge-primary\">{{count}}</span> opportunities of public funding!",
         "browsehappy": "You are using a <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
         "menu": {
             "home": "Home",
@@ -97,9 +94,13 @@
             "id": "ID"
         },
         "ribbon": {
-            "dev":"Development"
+            "dev": "Development"
         },
-        "item-count": "Showing {{first}} - {{second}} of {{total}} items."
+        "item-count": "Showing {{first}} - {{second}} of {{total}} items.",
+        "language": {
+            "sweden": "SWE",
+            "english": "EN"
+        }
     },
     "entity": {
         "action": {
@@ -111,7 +112,8 @@
             "edit": "Edit",
             "open": "Open",
             "save": "Save",
-            "view": "View"
+            "view": "View",
+            "more": "more..."
         },
         "detail": {
             "field": "Field",
@@ -143,6 +145,5 @@
         "areaexists": "Area is already in use!",
         "emailexists": "Email is already in use!",
         "idexists": "A new {{ entityName }} cannot already have an ID"
-    },
-    "footer": "Can you think of any other grantmaker, or any information, that should be available on Avonniv? If so, drop us a line and we´ll get on it asap!"
+    }
 }

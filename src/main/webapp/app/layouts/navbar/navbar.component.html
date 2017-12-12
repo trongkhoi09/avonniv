@@ -154,9 +154,9 @@
                 </li>
                 <li ngbDropdown class="nav-item pointer language">
                     <div>
-                        <a [jhiActiveMenu]="'sv'" (click)="changeLanguage('sv');collapseNavbar();">SWE</a>
+                        <a [jhiActiveMenu]="'sv'" (click)="changeLanguage('sv');collapseNavbar();" jhiTranslate="global.language.sweden">SWE</a>
                         <span>/</span>
-                        <a [jhiActiveMenu]="'en'" (click)="changeLanguage('en');collapseNavbar();">EN</a>
+                        <a [jhiActiveMenu]="'en'" (click)="changeLanguage('en');collapseNavbar();" jhiTranslate="global.language.english">EN</a>
                     </div>
                 </li>
             </ul>
@@ -165,13 +165,13 @@
     <div class="container-fluid" *ngIf="isHomepage()">
         <div class="row text-center">
             <div class="col-md-12 title">
-                <span>Interested in <b>opportunities</b><br>of public funding?</span>
+                <span jhiTranslate="navbar.description">Interested in <b>opportunities</b><br>of public funding?</span>
             </div>
             <div class="col-md-12 count-grant">
-                <span>Right now <span class="number-grant">{{count}}</span> opportunities of public funding!</span>
+                <span jhiTranslate="navbar.countGrants" translateValues="{count: '{{ count }}'}">Right now <span class="number-grant">{{count}}</span> opportunities of public funding!</span>
             </div>
             <div class="col-md-12">
-                <button routerLink="grants" type="button" class="btn btn-primary btn-take-me-there">TAKE ME THERE
+                <button routerLink="grants" type="button" class="btn btn-primary btn-take-me-there" jhiTranslate="navbar.button" >TAKE ME THERE
                 </button>
             </div>
         </div>

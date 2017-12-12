@@ -62,7 +62,7 @@
                         </a>
                     </div>
                     <div class="col text-right custom-number-item">
-                        <span>Show</span>
+                        <span jhiTranslate="grants.show">Show</span>
                         <div ngbDropdown class="dropdown-custom">
                             <button class="btn btn-outline-primary btn-custom" id="dropdownBasic" ngbDropdownToggle>
                                 {{grantFilter.itemsPerPage}}
@@ -75,7 +75,7 @@
                                 <button class="dropdown-item" (click)="onChangeItemsPerPage(50)">50</button>
                             </div>
                         </div>
-                        <span>of {{numberItem}} items</span>
+                        <span jhiTranslate="grants.ofItem" translateValues="{'numberItem':'{{numberItem}}'}">of {{numberItem}} items</span>
                     </div>
                 </div>
                 <div class="row">

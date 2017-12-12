@@ -3,9 +3,6 @@
         "title": "Avonniv",
         "search": "Sök...",
         "notAvailable": "Inte tillgänglig",
-        "description": "Where innovation meets public funding",
-        "shortDescription": "Where innovation meets public funding",
-        "countGrants": "Just nu: <span class=\"badge badge-primary\">{{count}}</span> möjligheter till finansiering!",
         "browsehappy": "Du använder en <strong>gammal webbläsare</strong>. <a href=\"http://browsehappy.com/?locale=en\">Uppgradera din webbläsare</a> för bästa upplevelse.",
         "menu": {
             "home": "Hem",
@@ -99,7 +96,11 @@
         "ribbon": {
             "dev": "Development"
         },
-        "item-count": "Visar {{first}} - {{second}} av {{total}} träffar."
+        "item-count": "Visar {{first}} - {{second}} av {{total}} träffar.",
+        "language": {
+            "sweden": "SWE",
+            "english": "EN"
+        }
     },
     "entity": {
         "action": {
@@ -111,7 +112,8 @@
             "edit": "Ändra",
             "open": "Öppna",
             "save": "Spara",
-            "view": "Titta"
+            "view": "Titta",
+            "more": "mer..."
         },
         "detail": {
             "field": "Fält",
@@ -143,6 +145,5 @@
         "areaexists": "Området är redan registrerat!",
         "emailexists": "Mailadressen är redan registrerad!",
         "idexists": "En ny {{entityName}} kan inte redan ha ett ID."
-    },
-    "footer": "Kan du komma på någon annan utlysare, eller någon information, som borde vara tillgänglig på Avonniv? Isåfall, kontakta oss så fixar vi det omgående!"
+    }
 }

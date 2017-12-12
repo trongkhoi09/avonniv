@@ -6,7 +6,11 @@
             "firstname.placeholder": "First name",
             "lastname": "Last name",
             "lastname.placeholder": "Last name",
-            "language": "Language",
+            "language": {
+                "label": "Language",
+                "english": "English",
+                "svenska": "Swedish"
+            },
             "button": "Save"
         },
         "messages": {

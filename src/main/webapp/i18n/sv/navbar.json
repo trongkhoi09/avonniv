@@ -1,0 +1,7 @@
+{
+    "navbar": {
+        "description": "Intresserad av möjligheter till <b>offentlig</b><br> finansiering?",
+        "countGrants": "Just nu <span class=\"number-grant\">{{count}}</span> möjligheter till finansiering!",
+        "button": "TILL LISTAN"
+    }
+}

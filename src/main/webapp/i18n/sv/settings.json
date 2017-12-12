@@ -6,7 +6,11 @@
             "firstname.placeholder": "Ditt förnamn",
             "lastname": "Efternamn",
             "lastname.placeholder": "Ditt efternamn",
-            "language": "Språk",
+            "language": {
+                "label": "Språk",
+                "english": "Engelsk",
+                "svenska": "Svenska"
+            },
             "button": "Spara"
         },
         "messages": {

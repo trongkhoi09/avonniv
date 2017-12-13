@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, Renderer, ElementRef } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import { PasswordResetFinish } from './password-reset-finish.service';
 import { LoginModalService } from '../../../shared';
@@ -26,6 +26,7 @@ export class PasswordResetFinishComponent implements OnInit, AfterViewInit {
         private passwordResetFinish: PasswordResetFinish,
         private loginModalService: LoginModalService,
         private route: ActivatedRoute,
+        private router: Router,
         private elementRef: ElementRef, private renderer: Renderer
     ) {
     }
@@ -52,6 +53,8 @@ export class PasswordResetFinishComponent implements OnInit, AfterViewInit {
         } else {
             this.passwordResetFinish.save({key: this.key, newPassword: this.resetAccount.password}).subscribe(() => {
                 this.success = 'OK';
+                this.router.navigate(['']);
+                this.login();
             }, () => {
                 this.success = null;
                 this.error = 'ERROR';

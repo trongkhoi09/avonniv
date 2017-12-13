@@ -5,6 +5,8 @@ import com.avonniv.domain.Publisher;
 import com.avonniv.domain.User;
 import com.avonniv.repository.PreferencesRepository;
 import com.avonniv.service.dto.PreferencesDTO;
+import com.avonniv.service.dto.PublisherDTO;
+import com.avonniv.service.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -58,9 +60,24 @@ public class PreferencesService {
     }
 
     public List<PreferencesDTO> getAll(String userLogin) {
-        return preferencesRepository.findAllByUserLogin(userLogin).stream()
+        UserDTO userDTO = userService.getUserWithAuthoritiesByLogin(userLogin).map(UserDTO::new).orElse(null);
+        List<PublisherDTO> publisherDTOS = publisherService.getAllPublisher(true);
+        List<PreferencesDTO> preferencesDTOS = preferencesRepository.findAllByUserLogin(userLogin).stream()
             .map(PreferencesDTO::new)
             .collect(Collectors.toList());
+        for (PublisherDTO publisherDTO : publisherDTOS) {
+            boolean checkExist = false;
+            for (PreferencesDTO preferencesDTO : preferencesDTOS) {
+                if (preferencesDTO.getPublisherDTO().getName().equals(publisherDTO.getName())) {
+                    checkExist = true;
+                    break;
+                }
+            }
+            if (!checkExist) {
+                preferencesDTOS.add(new PreferencesDTO(publisherDTO, userDTO, true));
+            }
+        }
+        return preferencesDTOS;
     }
 
     public PreferencesDTO updatePreferences(String userLogin, Long publisherId, boolean notification) {

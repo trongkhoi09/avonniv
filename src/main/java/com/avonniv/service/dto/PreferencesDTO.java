@@ -21,6 +21,13 @@ public class PreferencesDTO extends AbstractEntityDTO {
             preferences.isNotification());
     }
 
+    public PreferencesDTO(PublisherDTO publisherDTO, UserDTO userDTO,
+                          boolean notification) {
+        this.publisherDTO = publisherDTO;
+        this.userDTO = userDTO;
+        this.notification = notification;
+    }
+
     public PreferencesDTO(Long id, Instant createdDate,
                           Instant lastModifiedDate, int status,
                           PublisherDTO publisherDTO, UserDTO userDTO,

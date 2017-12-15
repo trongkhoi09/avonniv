@@ -43,9 +43,6 @@ export class NavbarComponent implements OnInit {
         this.router.events.subscribe((val: any) => {
             NavbarComponent.url = val.url;
         });
-        this.principal.identity().then((account) => {
-
-        });
         this.grantService.count().subscribe((count) => {
             this.count = count;
         });

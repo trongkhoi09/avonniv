@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
+import {Principal} from '../shared';
 
 @Component({
     selector: 'jhi-search',
@@ -17,7 +18,10 @@ export class SearchComponent implements OnInit {
     };
 
     constructor(private route: ActivatedRoute,
+                private principal: Principal,
                 private _location: Location) {
+        this.principal.identity().then((account) => {
+        });
     }
 
     ngOnInit() {

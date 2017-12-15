@@ -63,7 +63,8 @@
                 }
             },
             "error": {
-                "dontmatch": "Lösenorden stämmer inte med varandra!"
+                "dontmatch": "Lösenorden stämmer inte med varandra!",
+                "sessionTimeout": "Din session har varit timeout! Klicka på OK för att ladda om din sida igen."
             },
             "validate": {
                 "newpassword": {

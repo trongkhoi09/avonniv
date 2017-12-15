@@ -37,6 +37,32 @@ export class AuthServerProvider {
             const expiredAt = new Date();
             expiredAt.setSeconds(expiredAt.getSeconds() + response.expires_in);
             response.expires_at = expiredAt.getTime();
+            response.remember_me = credentials.rememberMe;
+            this.$localStorage.store('authenticationToken', response);
+            return response;
+        }
+    }
+
+    loginByRefreshToken(refresh_token): Observable<any> {
+        const data = 'refresh_token=' +  encodeURIComponent(refresh_token) +
+            '&grant_type=refresh_token&scope=read%20write&' +
+            'client_secret=my-secret-token-to-change-in-production&client_id=Avonnivapp';
+        const headers = new Headers ({
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json',
+            'Authorization': 'Basic ' + this.base64.encode('Avonnivapp' + ':' + 'my-secret-token-to-change-in-production')
+        });
+
+        return this.http.post('oauth/token', data, {
+            headers
+        }).map(authSuccess.bind(this));
+
+        function authSuccess(resp) {
+            const response = resp.json();
+            const expiredAt = new Date();
+            expiredAt.setSeconds(expiredAt.getSeconds() + response.expires_in);
+            response.expires_at = expiredAt.getTime();
+            response.remember_me = true;
             this.$localStorage.store('authenticationToken', response);
             return response;
         }

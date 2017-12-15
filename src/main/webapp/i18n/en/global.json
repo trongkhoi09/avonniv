@@ -63,7 +63,8 @@
                 }
             },
             "error": {
-                "dontmatch": "Password and confirmation do not match!"
+                "dontmatch": "Password and confirmation do not match!",
+                "sessionTimeout": "Your session has been timeout! Click OK to reload your page."
             },
             "validate": {
                 "newpassword": {

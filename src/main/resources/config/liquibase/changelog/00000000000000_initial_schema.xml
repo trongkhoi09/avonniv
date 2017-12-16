@@ -444,5 +444,12 @@
                                  referencedTableName="jhi_user"
                                  referencedColumnNames="id"/>
     </changeSet>
+    <changeSet id="3" author="sylt">
+        <update tableName="oauth_client_details">
+            <column name="access_token_validity" type="INT" value="3600"/>
+            <column name="refresh_token_validity" type="INT" value="604800"/>
+            <where>client_id = 'Avonnivapp'</where>
+        </update>
+    </changeSet>
 
 </databaseChangeLog>

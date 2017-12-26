@@ -57,7 +57,6 @@ public class GrantService {
         this.mailService = mailService;
         this.userService = userService;
         this.preferencesService = preferencesService;
-        notificationEmail();
     }
 
     public Grant createGrantCall(GrantDTO grantDTO) {
@@ -227,7 +226,7 @@ public class GrantService {
         }
     }
 
-//    @Scheduled(cron = "0 0 14 * * WED", zone = "CET")
+    @Scheduled(cron = "0 0 14 * * WED", zone = "CET")
     public void notificationEmail() {
         List<User> users = userService.getAllUserNotification();
         List<User> usersPublisherEmpty = new ArrayList<>();

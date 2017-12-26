@@ -9,6 +9,7 @@ import org.apache.commons.lang3.CharEncoding;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -29,7 +30,17 @@ import java.util.Locale;
 @Service
 public class MailService {
 
+    private static final String THYMELEAF_LOGO_IMAGE = "mails/content/header.png";
+    private static final String THYMELEAF_FACEBOOK_LOGO_IMAGE = "mails/content/facebook-logo.png";
+    private static final String THYMELEAF_LINKEDIN_LOGO_IMAGE = "mails/content/linkedin-logo.png";
+
+    private static final String PNG_MIME = "image/png";
+
     private final Logger log = LoggerFactory.getLogger(MailService.class);
+
+    private static final String LOGO = "thymeleaf-logo";
+    private static final String FACEBOOK_LOGO = "thymeleaf-facebook-logo";
+    private static final String LINKEDIN_LOGO = "thymeleaf-linkedin-logo";
 
     private static final String USER = "user";
 
@@ -62,11 +73,16 @@ public class MailService {
         // Prepare message using a Spring helper
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
-            MimeMessageHelper message = new MimeMessageHelper(mimeMessage, isMultipart, CharEncoding.UTF_8);
+            MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, CharEncoding.UTF_8);
             message.setTo(to);
             message.setFrom(jHipsterProperties.getMail().getFrom());
             message.setSubject(subject);
             message.setText(content, isHtml);
+
+            message.addInline(LOGO, new ClassPathResource(THYMELEAF_LOGO_IMAGE), PNG_MIME);
+            message.addInline(FACEBOOK_LOGO, new ClassPathResource(THYMELEAF_FACEBOOK_LOGO_IMAGE), PNG_MIME);
+            message.addInline(LINKEDIN_LOGO, new ClassPathResource(THYMELEAF_LINKEDIN_LOGO_IMAGE), PNG_MIME);
+
             javaMailSender.send(mimeMessage);
             log.debug("Sent email to User '{}'", to);
         } catch (Exception e) {

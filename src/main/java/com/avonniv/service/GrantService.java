@@ -9,6 +9,7 @@ import com.avonniv.repository.GrantRepository;
 import com.avonniv.service.dto.GrantDTO;
 import com.avonniv.service.dto.PreferencesDTO;
 import com.avonniv.service.fetchdata.Util;
+import org.jsoup.Jsoup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -56,6 +57,7 @@ public class GrantService {
         this.mailService = mailService;
         this.userService = userService;
         this.preferencesService = preferencesService;
+        notificationEmail();
     }
 
     public Grant createGrantCall(GrantDTO grantDTO) {
@@ -225,7 +227,7 @@ public class GrantService {
         }
     }
 
-    @Scheduled(cron = "0 0 14 * * WED", zone = "CET")
+//    @Scheduled(cron = "0 0 14 * * WED", zone = "CET")
     public void notificationEmail() {
         List<User> users = userService.getAllUserNotification();
         List<User> usersPublisherEmpty = new ArrayList<>();
@@ -241,7 +243,14 @@ public class GrantService {
                 usersPublisherEmpty.add(user);
             } else {
                 List<GrantDTO> grantDTOS = grantRepository.findAllByGrantProgram_Publisher_NameInAndStatusInAndCreatedDateAfter(listPublisher, Arrays.asList(GrantDTO.Status.open.getValue(), GrantDTO.Status.coming.getValue()), Instant.now().minus(7, ChronoUnit.DAYS))
-                    .stream().map(GrantDTO::new).collect(Collectors.toList());
+                    .stream().map(grant -> {
+                        GrantDTO grantDTO = new GrantDTO(grant);
+                        if (grantDTO.getDescription() != null) {
+                            String description = Jsoup.parse(grantDTO.getDescription()).text();
+                            grantDTO.setDescription(description);
+                        }
+                        return grantDTO;
+                    }).collect(Collectors.toList());
                 if (!grantDTOS.isEmpty()) {
                     mailService.sendNotificationGrantMail(user, grantDTOS);
                 }
@@ -249,7 +258,14 @@ public class GrantService {
         }
         if (!usersPublisherEmpty.isEmpty()) {
             List<GrantDTO> grantDTOS = grantRepository.findAllByStatusInAndCreatedDateAfterOrderByCreatedDateDesc(new PageRequest(0, 10), Arrays.asList(GrantDTO.Status.open.getValue(), GrantDTO.Status.coming.getValue()), Instant.now().minus(7, ChronoUnit.DAYS))
-                .stream().map(GrantDTO::new).collect(Collectors.toList());
+                .stream().map(grant -> {
+                    GrantDTO grantDTO = new GrantDTO(grant);
+                    if (grantDTO.getDescription() != null) {
+                        String description = Jsoup.parse(grantDTO.getDescription()).text();
+                        grantDTO.setDescription(description);
+                    }
+                    return grantDTO;
+                }).collect(Collectors.toList());
             if (!grantDTOS.isEmpty()) {
                 for (User user : usersPublisherEmpty) {
                     mailService.sendNotificationGrantMail(user, grantDTOS);

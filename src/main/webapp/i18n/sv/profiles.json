@@ -5,7 +5,7 @@
         "changeProfile": "Ändra profil",
         "changePassword": "Ändra lösenord",
         "notification": "Avisering",
-        "notification.description": "Vänligen meddela mig via mail när en ny utlysning publiceras som överensstämmer med mina preferenser.",
+        "notification.description": "Meddela mig via mail, en gång i veckan, om alla nya utlysningar som publicerats på Avonniv som överensstämmer med mina preferenser.",
         "filter": {
             "title": "Filtrera på datum",
             "from": "Från",

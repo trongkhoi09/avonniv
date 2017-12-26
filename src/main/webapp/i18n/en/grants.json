@@ -10,7 +10,7 @@
         "financeDescription": "Funding",
         "openDate": "Opening date",
         "closeDate": "Closing date",
-        "otherPublisher": "More grantmakers",
+        "otherPublisher": "Unlisted grantmakers",
         "empty": "There is no grant matching your request.",
         "action": {
             "editGrant": "Grant",

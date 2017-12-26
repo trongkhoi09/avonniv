@@ -10,7 +10,7 @@
         "financeDescription": "Finansiering",
         "openDate": "Öppningsdatum",
         "closeDate": "Stängningsdatum",
-        "otherPublisher": "Övriga utlysare",
+        "otherPublisher": "Olistade utlysare",
         "empty": "Det finns ingen utlysning som matchar ditt val.",
         "action": {
             "editGrant": "Utlysning",

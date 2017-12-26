@@ -8,12 +8,12 @@
             "validate": {
                 "login": {
                     "required": "Du måste fylla i ett användarnamn.",
-                    "minlength": "Ditt användarnamn måste vara minst ett tecken.",
+                    "minlength": "Ditt användarnamn måste vara minst 1 tecken.",
                     "maxlength": "Ditt användarnamn kan inte vara längre än 50 tecken.",
                     "pattern": "Ditt användarnamn kan endast innehålla små bokstäver och siffror."
                 }
             },
-            "success": "<strong>Användarnamn sparat!</strong> Kontrollera din e-post för bekräftelse.",
+            "success": "<strong>Användarnamn sparat!</strong> Kontrollera din mail för bekräftelse.",
             "error": {
                 "fail": "<strong>Registreringen misslyckades!</strong> Prova igen senare.",
                 "userexists": "<strong>Användarnamnet finns redan!</strong> Prova ett annat användarnamn.",

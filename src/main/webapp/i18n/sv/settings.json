@@ -8,14 +8,14 @@
             "lastname.placeholder": "Ditt efternamn",
             "language": {
                 "label": "Språk",
-                "english": "Engelsk",
+                "english": "Engelska",
                 "svenska": "Svenska"
             },
             "button": "Spara"
         },
         "messages": {
             "error": {
-                "fail": "<strong>Det blev fel!</strong> Inställningar kunde inte sparas.",
+                "fail": "<strong>Det blev fel!</strong> Inställningarna kunde inte sparas.",
                 "emailexists": "<strong>Mailadressen används redan!</strong> Vänligen använd en annan."
             },
             "success": "<strong>Inställningar sparade!</strong>",

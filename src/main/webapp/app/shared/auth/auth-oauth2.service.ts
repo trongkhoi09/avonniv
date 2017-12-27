@@ -3,12 +3,13 @@ import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { LocalStorageService } from 'ng2-webstorage';
 
-import { Base64 } from 'ng-jhipster';
+import {Base64, EventManager} from 'ng-jhipster';
 
 @Injectable()
 export class AuthServerProvider {
 
     constructor(
+        private eventManager: EventManager,
         private http: Http,
         private base64: Base64,
         private $localStorage: LocalStorageService
@@ -64,6 +65,10 @@ export class AuthServerProvider {
             response.expires_at = expiredAt.getTime();
             response.remember_me = true;
             this.$localStorage.store('authenticationToken', response);
+            this.eventManager.broadcast({
+                name: 'authenticationSuccess',
+                content: 'Sending Authentication Success'
+            });
             return response;
         }
     }

@@ -80,6 +80,14 @@ export class NavbarComponent implements OnInit {
         return this.principal.isHomepage();
     }
 
+    setShowFilter() {
+        this.principal.setShowFilter();
+    }
+
+    isShowFilter() {
+        return this.principal.isShowFilter();
+    }
+
     isGrantpage() {
         return this.principal.isGrantpage();
     }

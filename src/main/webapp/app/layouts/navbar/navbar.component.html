@@ -8,6 +8,9 @@
                aria-label="Toggle navigation" (click)="toggleNavbar()">
                 <i class="fa fa-bars"></i>
             </a>
+            <a class="icon-filter float-left" *ngIf="isGrantpage()" (click)="setShowFilter()" [ngClass]="{'active': isShowFilter()}">
+                <i class="fa fa-filter" aria-hidden="true"></i>
+            </a>
             <a class="navbar-brand logo float-left" routerLink="/" (click)="collapseNavbar()">
                 <span class="logo-img"></span>
             </a>
@@ -27,9 +30,9 @@
         <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed"
              [ngSwitch]="isAuthenticated()">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
+                <li class="nav-item app-search">
                     <form role="search" (keydown.enter)="searchWord()"
-                          class="navbar-left app-search pull-left hidden-xs">
+                          class="navbar-left pull-left hidden-xs">
                         <input type="text" name="search" [(ngModel)]="search"
                                class="form-control">
                         <!--placeholder="{{'global.search' | translate}}"-->

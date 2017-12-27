@@ -10,6 +10,7 @@ export class Principal {
     private homepage = false;
     private grantpage = false;
     private authenticated = false;
+    private showFilter = false;
     private authenticationState = new Subject<any>();
 
     constructor(
@@ -97,6 +98,14 @@ export class Principal {
 
     setGrantpage(value: boolean) {
         this.grantpage = value;
+    }
+
+    isShowFilter(): boolean {
+        return this.showFilter;
+    }
+
+    setShowFilter() {
+        this.showFilter = !this.showFilter;
     }
 
     setHomepage(homepage: boolean) {

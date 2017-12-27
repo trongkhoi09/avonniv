@@ -1,8 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AreaDTO, AreaService, PreferencesService, Principal, PublisherDTO, PublisherService} from '../shared';
+import {
+    AreaDTO, AreaService, ITEMS_PER_PAGE, PreferencesService, Principal, PublisherDTO,
+    PublisherService
+} from '../shared';
 import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute} from '@angular/router';
-import {ITEMS_PER_PAGE} from '../shared/constants/pagination.constants';
+import {EventManager} from 'ng-jhipster';
+import {Subscription} from 'rxjs/Rx';
 
 @Component({
     selector: 'jhi-grants',
@@ -30,9 +34,10 @@ export class GrantsComponent implements OnInit, OnDestroy {
         itemsPerPage: ITEMS_PER_PAGE
     };
     data = this.grantFilter;
-    checkAuthenticated = false;
+    authenticationSuccess: Subscription;
 
     constructor(private areaService: AreaService,
+                private eventManager: EventManager,
                 private route: ActivatedRoute,
                 private publisherService: PublisherService,
                 private preferencesService: PreferencesService,
@@ -54,31 +59,21 @@ export class GrantsComponent implements OnInit, OnDestroy {
             }
         });
         this.loadArea();
+        this.authenticationSuccess = this.eventManager.subscribe('authenticationSuccess', (message) => {
+            this.loadPublisher(true);
+        });
     }
 
     ngOnDestroy(): void {
         this.principal.setGrantpage(false);
         this.routeSub.unsubscribe();
+        if (this.authenticationSuccess !== undefined && this.authenticationSuccess !== null) {
+            this.eventManager.destroy(this.authenticationSuccess);
+        }
     }
 
     handleUpdated(number) {
         this.numberItem = number;
-    }
-
-    isAuthenticated() {
-        return this.principal.isAuthenticated();
-    }
-
-    handlePublisherUpdated() {
-        if (this.isAuthenticated()) {
-            if (!this.checkAuthenticated) {
-                this.loadPublisher(true);
-            }
-            this.checkAuthenticated = true;
-        } else {
-            this.checkAuthenticated = false;
-        }
-        return false;
     }
 
     onFiltering() {
@@ -162,5 +157,13 @@ export class GrantsComponent implements OnInit, OnDestroy {
             this.grantFilter.areaDTOs.splice(index, 1);
             this.onFiltering();
         }
+    }
+
+    isShowFilter() {
+        return this.principal.isShowFilter();
+    }
+
+    setShowFilter() {
+        this.principal.setShowFilter();
     }
 }

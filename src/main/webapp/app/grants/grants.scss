@@ -94,6 +94,10 @@
                 color: #f9fcff;
             }
         }
+
+        .close-btn {
+            display: none;
+        }
     }
     .list-data {
         background-color: #f9fcff;
@@ -161,5 +165,36 @@
         jhi-list-grant {
             width: 100%;
         }
+    }
+
+    @media screen and (max-width: 576px) {
+        .filter {
+            height: 100%;
+            width: 0;
+            position: absolute;
+            z-index: 1;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding: 21px 0 0 0;
+            &.active{
+                padding-top: 21px;
+                padding-left: 18px;
+                padding-right: 14px;
+                width: 200px;
+            }
+            .close-btn {
+                display: block;
+                position: absolute;
+                top: 0;
+                right: 15px;
+                font-size: 36px;
+                padding: 0 10px 0 10px;
+                color: rgba(110, 124, 148, 0.51);
+                &:hover, &:focus{
+                    text-decoration: none;
+                }
+            }
+        }
+
     }
 }

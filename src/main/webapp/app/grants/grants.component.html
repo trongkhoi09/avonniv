@@ -1,7 +1,6 @@
 <div class="grants">
-    <span *ngIf="isAuthenticated()&&handlePublisherUpdated()"></span>
     <div class="row">
-        <div class="filter">
+        <div class="filter" [ngClass]="{'active': isShowFilter()}">
             <div class="form-group row publisher-crawled" *ngIf="publisherCrawled.length>0">
                 <div class="col-md-12 title">
                     <span jhiTranslate="grants.publisher">Publisher</span>
@@ -45,6 +44,8 @@
                     </div>
                 </div>
             </div>
+
+            <a href="javascript:void(0)" class="close-btn" (click)="setShowFilter()">&times;</a>
         </div>
         <div class="list-data">
             <div class="container-fluid">

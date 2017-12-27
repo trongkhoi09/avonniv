@@ -47,7 +47,7 @@
     }
     .jh-navbar {
         height: 67px;
-        .icon-filter{
+        .icon-filter {
             display: none;
         }
         .jh-logo-container {
@@ -56,8 +56,8 @@
             padding: 20px 56px 18px 24px;
             background-color: #193d7e;
         }
-        &.navbar-normal{
-            .jh-logo-container{
+        &.navbar-normal {
+            .jh-logo-container {
                 background-color: transparent;
             }
         }
@@ -103,6 +103,7 @@
 }
 
 .jh-navbar {
+    width: 100%;
     height: 73px;
     padding-top: 37px;
     background-color: transparent;
@@ -129,8 +130,8 @@
             }
         }
     }
-    &.navbar-normal{
-        .jh-logo-container{
+    &.navbar-normal {
+        .jh-logo-container {
             background-color: transparent;
         }
         .navbar-brand {
@@ -231,7 +232,7 @@
             color: #fff;
         }
     }
-    .navbar-collapse{
+    .navbar-collapse {
         display: flex;
     }
 }
@@ -257,11 +258,11 @@
     }
     .jh-navbar-homepage {
         .jh-navbar {
-            padding-left: 12%;
-            padding-right: 12%;
+            padding-left: 10%;
+            padding-right: 10%;
         }
     }
-    .jh-navbar{
+    .jh-navbar {
         ul.navbar-nav {
             flex-direction: row;
             .nav-item {
@@ -277,25 +278,59 @@
                 width: 190px;
             }
         }
-        .text-admin{
+        .text-admin {
             display: none;
         }
     }
 }
 
 @media screen and (max-width: 576px) {
-    .jh-navbar{
+    .jh-navbar-homepage {
+        .jh-navbar {
+            padding-left: 6%;
+            padding-right: 6%;
+        }
+        .title {
+            margin-top: 76px;
+            margin-bottom: 24px;
+            font-size: 42px;
+        }
+        .btn-take-me-there {
+            margin-top: 42px;
+            margin-bottom: 59px;
+        }
+    }
+
+    .jh-navbar {
+        display: inline-block;
         .app-search {
             display: none;
+        }
+        .navbar-brand.logo {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        ul.navbar-nav {
+            .nav-item {
+                margin-left: 10px;
+                &.language {
+                    margin-left: 9px;
+                    padding: 3px 0 0 0;
+                }
+                .btn-login {
+                    padding: 6px 14px 6px 14px;
+                }
+            }
         }
     }
     .jh-navbar-custom {
         .jh-navbar {
-            .icon-filter{
+            .icon-filter {
                 display: block;
                 font-size: 24px;
                 margin-right: 10px;
-                &.active{
+                &.active {
                     color: red;
                 }
             }
@@ -319,6 +354,7 @@
         }
     }
 }
+
 //@media (min-width: 1400px) {
 //    .jh-navbar-homepage {
 //        height: 710px;

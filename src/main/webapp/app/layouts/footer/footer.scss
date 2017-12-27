@@ -89,26 +89,28 @@
 }
 @media screen and (max-width: 575px) {
     .footer {
-        padding-left: 12%;
-        padding-right: 12%;
+        padding-left: 45px;
+        padding-right: 52px;
+        padding-top: 35px;
+        padding-bottom: 58px;
         .col-logo {
             width: 100%;
         }
         .col-contact {
-            margin-top: 35px;
+            margin-top: 59px;
             margin-left: 0;
             width: 100%;
         }
         .col-social {
-            margin-top: 35px;
+            margin-top: 50px;
             width: 100%;
             margin-left: 0;
 
             .icon-social {
-                margin-top: 15px;
+                margin-top: 24px;
             }
             .icon-social-facebook {
-                margin-right: 20px;
+                margin-right: 31px;
             }
         }
         .copyright{

@@ -12,6 +12,7 @@
         background-color: #f4f5f7;
     }
     .grant {
+        margin-bottom: 30px;
         .card {
             height: 100%;
             .card-title {
@@ -63,7 +64,7 @@
         }
     }
     .btn-see-all {
-        margin-top: 54px;
+        margin-top: 24px;
         margin-bottom: 79px;
         padding: 20px 77px 20px 78px;
         border-radius: 100px;
@@ -86,9 +87,10 @@
             line-height: 1.44;
             text-align: center;
             color: #747474;
+            margin-bottom: 40px;
         }
         .icon-group {
-            margin-top: 87px;
+            margin-top: 37px;
             margin-bottom: 48px;
             img {
                 width: 102px;
@@ -109,6 +111,30 @@
     }
 }
 
+
+@media screen and (max-width: 991px) {
+    .home {
+        .grant-school {
+            .description {
+                margin-bottom: 50px;
+                padding: 0 10% 0 10%;
+            }
+        }
+    }
+}
+@media screen and (max-width: 575px) {
+    .home {
+        .grant-school {
+            .description {
+                margin-bottom: 50px;
+                padding: 0 10% 0 10%;
+            }
+            .title {
+                font-size: 38px;
+            }
+        }
+    }
+}
 //
 //@media (min-width: 1400px) {
 //    .home {

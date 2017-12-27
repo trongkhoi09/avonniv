@@ -1,5 +1,5 @@
 <div [ngClass]="{'jh-navbar-homepage': isHomepage(), 'jh-navbar-custom': !isHomepage()}">
-    <nav class="navbar navbar-inverse navbar-toggleable-md jh-navbar"
+    <nav class="navbar navbar-inverse navbar-toggleable-sm jh-navbar"
          [ngClass]="{'navbar-normal': (!isGrantpage() && !isHomepage())}">
         <!--[ngClass]="{'jh-navbar-homepage': isHomepage(), 'jh-navbar': !isHomepage()}">-->
         <div class="jh-logo-container float-left">
@@ -48,7 +48,7 @@
                     <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
                         <span>
                             <i class="fa fa-user-plus" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.admin.main">Administration</span>
+                            <span class="text-admin" jhiTranslate="global.menu.admin.main">Administration</span>
                             <b class="caret"></b>
                         </span>
                     </a>

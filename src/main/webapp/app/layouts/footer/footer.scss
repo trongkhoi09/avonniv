@@ -21,6 +21,16 @@
     }
     .col-social{
         margin-left: 5%;
+        .icon-social {
+            margin-top: 22px;
+            font-size: 24px;
+            display: inline-block;
+            color: #ffffff;
+            opacity: 0.5;
+        }
+        .icon-social-facebook {
+            margin-right: 31px;
+        }
     }
     .title {
         padding-top: 7px;
@@ -41,31 +51,68 @@
             color: #00a9ff;
         }
     }
-    .icon-social {
-        margin-top: 22px;
-        font-size: 24px;
-        display: inline-block;
-        color: #ffffff;
-        opacity: 0.5;
-    }
-    .icon-social-facebook {
-        margin-right: 31px;
-    }
 }
 
 @media (min-width: 1400px) {
     .footer {
         padding-left: 16.6666667%;
         padding-right: 17.1527778%;
+        .col-logo{
+            width: 36.2156663%;
+        }
+        .col-contact{
+            margin-left: 7.42624619%;
+            width: 36.7243133%;
+        }
+        .col-social{
+            margin-left: 10.481587%;
+        }
     }
-    .col-logo{
-        width: 36.2156663%;
+}
+
+@media screen and (max-width: 991px) {
+    .footer {
+        .col-logo {
+            width: 30%;
+        }
+        .col-contact {
+            margin-left: 5%;
+            width: 30%;
+        }
+        .col-social {
+            margin-left: 5%;
+            .icon-social-facebook {
+                margin-right: 25px;
+            }
+        }
     }
-    .col-contact{
-        margin-left: 7.42624619%;
-        width: 36.7243133%;
-    }
-    .col-social{
-        margin-left: 10.481587%;
+}
+@media screen and (max-width: 575px) {
+    .footer {
+        padding-left: 12%;
+        padding-right: 12%;
+        .col-logo {
+            width: 100%;
+        }
+        .col-contact {
+            margin-top: 35px;
+            margin-left: 0;
+            width: 100%;
+        }
+        .col-social {
+            margin-top: 35px;
+            width: 100%;
+            margin-left: 0;
+
+            .icon-social {
+                margin-top: 15px;
+            }
+            .icon-social-facebook {
+                margin-right: 20px;
+            }
+        }
+        .copyright{
+            margin-top: 35px;
+        }
     }
 }

@@ -1,15 +1,15 @@
 .jh-navbar-homepage {
-    height: 710px;
     background-image: url("../../../content/images/shutterstock.png");
     background-repeat: no-repeat;
     background-size: cover;
     .jh-navbar {
-        padding-left: 17.0833333%;
-        padding-right: 15.8333333%;
+        padding-left: 8%;
+        padding-right: 8%;
     }
     .title {
         margin-top: 209px;
         margin-bottom: 38px;
+        padding: 0 24px 0 24px;
         font-size: 52px;
         line-height: 1.31;
         text-align: center;
@@ -25,6 +25,7 @@
     }
     .btn-take-me-there {
         margin-top: 42px;
+        margin-bottom: 113px;
         padding: 22px 39px 19px 40px;
         border-radius: 100px;
         font-size: 16px;
@@ -187,7 +188,7 @@
             border-radius: 18.5px;
             border: solid 1px #ffffff;
             height: 36px;
-            width: 224px;
+            width: 220px;
         }
     }
     .profile-image {
@@ -219,11 +220,24 @@
         font-weight: 400;
     }
     .jh-navbar-toggler {
+        display: none;
         color: #ccc;
         font-size: 1.5em;
         padding: 10px;
         &:hover {
             color: #fff;
+        }
+    }
+    .navbar-collapse{
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .jh-navbar-homepage {
+        .jh-navbar {
+            padding-left: 17.0833333%;
+            padding-right: 15.8333333%;
         }
     }
 }
@@ -236,10 +250,35 @@
 
 @media screen and (max-width: 992px) {
     .jh-logo-container {
-        width: 100%;
+        //width: 100%;
+    }
+    .jh-navbar-homepage {
+        .jh-navbar {
+            padding-left: 12%;
+            padding-right: 12%;
+        }
+    }
+    .jh-navbar{
+        ul.navbar-nav {
+            flex-direction: row;
+            .nav-item {
+                margin-left: 10px;
+                &.language {
+                    margin-left: 8px;
+                }
+            }
+        }
+        .app-search {
+            .form-control,
+            .form-control:focus {
+                width: 190px;
+            }
+        }
+        .text-admin{
+            display: none;
+        }
     }
 }
-
 //@media (min-width: 1400px) {
 //    .jh-navbar-homepage {
 //        height: 710px;

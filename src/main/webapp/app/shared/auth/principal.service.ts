@@ -104,8 +104,8 @@ export class Principal {
         return this.showFilter;
     }
 
-    setShowFilter() {
-        this.showFilter = !this.showFilter;
+    setShowFilter(showFilter = !this.showFilter) {
+        this.showFilter = showFilter;
     }
 
     setHomepage(homepage: boolean) {

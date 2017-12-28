@@ -275,3 +275,113 @@
         }
     }
 }
+
+@media screen and (max-width: 480px) {
+    .modal-header {
+        &.profiles {
+            padding: 20px 17px 20px 17px;
+        }
+    }
+
+    .modal-body {
+        &.profiles {
+            padding: 0;
+            font-size: 13px;
+            .profile {
+                padding: 16px 19px 6px 19px;
+            }
+            .view-profile {
+                padding: 25px 0px 0px 12px;
+                div {
+                    margin-bottom: 37px;
+                }
+            }
+            .password {
+                padding: 30px 19px 19px 19px;
+                .title {
+                    padding-bottom: 8px;
+                }
+            }
+
+            .preferences {
+                padding: 22px 19px 38px 19px;
+                .title {
+                    padding-bottom: 18px;
+                }
+                .row {
+                    padding-left: 35px;
+                }
+            }
+            .notification {
+                padding: 24px 19px 20px 19px;
+            }
+
+            .btn-save {
+                margin-left: 4px;
+            }
+            .edit-profile {
+                padding: 25px 15px 0px 12px;
+                label {
+                    margin-bottom: 6px;
+                }
+                .error-form {
+                    margin-left: 18px;
+                }
+                .form-group {
+                    position: relative;
+                    label {
+                        position: relative;
+                        top: 0px;
+                    }
+                    .form-control {
+                        width: 100%;
+                        margin-left: 0px;
+                    }
+                    .language {
+                        margin-left: 0px;
+                        div {
+                            margin-bottom: 0px;
+                        }
+                    }
+                }
+            }
+            .edit-password {
+                padding: 14px 15px 0px 12px;
+                label {
+                    margin-bottom: 0px;
+                    width: auto;
+                }
+                .button-row {
+                    position: absolute;
+                    top: 21px;
+                    right: 18px;
+                }
+                .error-form {
+                    margin-left: 18px;
+                }
+                .password-strength-bar {
+                    margin-top: 5px;
+                    margin-left: 5px;
+                    font-size: 7px;
+                }
+                .form-group {
+                    margin-bottom: 20px;
+                    .label-profile {
+                        position: relative;
+                        width: auto;
+                        height: auto;
+                        top: 0px;
+                    }
+                    label {
+                        position: relative;
+                        top: 0px;
+                    }
+                    .form-control {
+                        width: 100%;
+                        margin-left: 0px;
+                    }
+                }
+            }
+        }
+    }
+}

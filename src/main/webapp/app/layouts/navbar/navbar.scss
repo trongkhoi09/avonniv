@@ -5,6 +5,13 @@
     .jh-navbar {
         padding-left: 8%;
         padding-right: 8%;
+        ul.navbar-nav {
+            .nav-item {
+                &.icon-search {
+                    color: #ffffff;
+                }
+            }
+        }
     }
     .title {
         margin-top: 209px;
@@ -150,6 +157,14 @@
     ul.navbar-nav {
         .nav-item {
             margin-left: 26px;
+            &.icon-search {
+                padding-top: 6px;
+                color: #515c7f;
+                display: none;
+            }
+            .icon-login {
+                display: none;
+            }
             &.language {
                 margin-left: 18px;
                 padding: 6px 0 7px 0;
@@ -289,6 +304,20 @@
         .jh-navbar {
             padding-left: 6%;
             padding-right: 6%;
+            ul.navbar-nav {
+                padding-top: 0px;
+                .nav-item {
+                    &.icon-search {
+                        padding-top: 6px;
+                    }
+                    .icon-login {
+                        color: #ffffff;
+                    }
+                    &.language {
+                        padding: 6px 0 0 0;
+                    }
+                }
+            }
         }
         .title {
             margin-top: 76px;
@@ -303,24 +332,56 @@
 
     .jh-navbar {
         display: inline-block;
-        .app-search {
-            display: none;
+        .navbar-nav .dropdown-menu {
+            position: absolute;
+            float: none;
         }
+        .app-search {
+            position: relative;
+            display: none;
+            a {
+                position: absolute;
+                top: 5px;
+                left: 10px;
+                color: #ffffff;
+            }
+            .form-control,
+            .form-control:focus {
+                width: 215px;
+            }
+        }
+
         .navbar-brand.logo {
             padding-top: 0;
             padding-bottom: 0;
         }
 
         ul.navbar-nav {
+            padding-top: 19px;
             .nav-item {
                 margin-left: 10px;
+                .icon-login {
+                    display: block;
+                    font-size: 20px;
+                    color: #515c7f;
+                }
+                &.active {
+                    display: block;
+                }
                 &.language {
-                    margin-left: 9px;
-                    padding: 3px 0 0 0;
+                    margin-left: 4px;
+                    padding: 6px 0 0 0;
                 }
                 .btn-login {
+                    display: none;
                     padding: 6px 14px 6px 14px;
                 }
+            }
+        }
+
+        .navbar-brand {
+            &.hide-logo {
+                display: none;
             }
         }
     }
@@ -336,6 +397,7 @@
             }
             .navbar-brand {
                 &.logo {
+                    margin-right: 0px;
                     .logo-img {
                         height: 27px;
                         width: 110px;
@@ -347,9 +409,24 @@
                 }
             }
             .jh-logo-container {
+                width: auto;
                 height: 68px;
                 padding: 20px 0px 18px 15px;
                 background-color: transparent;
+            }
+            &.navbar-normal {
+                .app-search {
+                    .form-control,
+                    .form-control:focus {
+                        width: 174px;
+                    }
+                }
+            }
+            .app-search {
+                .form-control,
+                .form-control:focus {
+                    width: 145px;
+                }
             }
         }
     }

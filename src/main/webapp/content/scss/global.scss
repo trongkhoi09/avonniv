@@ -154,6 +154,32 @@ Custom alerts for notification
     }
 }
 
+@media screen and (max-width: 480px) {
+    .login-modal {
+        .modal-dialog {
+            max-width: none;
+        }
+    }
+    .password-reset-init-modal {
+        .modal-dialog {
+            max-width: none;
+        }
+    }
+    .profiles-modal {
+        .modal-dialog {
+            max-width: none;
+            width: auto;
+        }
+    }
+    .description-grant {
+        .modal-dialog {
+            max-width: none;
+            width: auto;
+        }
+
+    }
+}
+
 /* ==========================================================================
 entity tables helpers
 ========================================================================== */

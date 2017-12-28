@@ -20,6 +20,7 @@ export class NavbarComponent implements OnInit {
 
     public static url: any;
     inProduction: boolean;
+    isSearch = false;
     isNavbarCollapsed: boolean;
     languages: any[];
     swaggerEnabled: boolean;
@@ -93,6 +94,7 @@ export class NavbarComponent implements OnInit {
     }
 
     login() {
+        this.principal.setShowFilter(false);
         this.modalRef = this.loginModalService.open();
     }
 

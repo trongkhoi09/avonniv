@@ -96,6 +96,7 @@
     .pagination-page {
         .text {
             padding-top: 5px;
+            padding-bottom: 5px;
         }
     }
     .pagination{
@@ -118,6 +119,52 @@
                     background-color: #7588a8;
                     color: #ffffff;
                     border-color: #6f7a8c;
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 576px) {
+        padding-top: 26px;
+        padding-bottom: 13px;
+        thead, .description, .finance-description, .date{
+            display: none;
+        }
+        .publisher {
+            width: 100%;
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+        .title {
+            width: 100%;
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+        .pagination-page {
+            .text {
+                padding-top: 5px;
+            }
+        }
+        .pagination{
+            .page-link{
+                border: solid 1px #ccd5e1;
+                background-color: transparent;
+            }
+            .page-link:focus, .page-link:hover {
+                background-color: #eaf3ff;
+            }
+            .page-item{
+                background-color: #ffffff;
+                &.icon{
+                    .page-link{
+                        color: #7588a8;
+                    }
+                }
+                &.active{
+                    .page-link, .page-link:focus, .page-link:hover {
+                        background-color: #7588a8;
+                        color: #ffffff;
+                        border-color: #6f7a8c;
+                    }
                 }
             }
         }

@@ -11,30 +11,64 @@
     //.modal.in .modal-dialog {
     //    transform: translate(0, 0);
     //}
-    .modal-body{
+    .modal-body {
         padding: 46px 24px 28px 36px;
     }
-    .name{
+    .name {
         font-size: 24px;
         line-height: 0.92;
         text-align: left;
         color: #0d2164;
         margin-bottom: 32px;
     }
-    .content{
+    .content {
         font-size: 14px;
         line-height: 1.57;
         text-align: left;
         color: #515c7f;
         margin-bottom: 35px;
     }
-    button{
-        padding:10px 32px 10px 32px;
+    button {
+        padding: 10px 32px 10px 32px;
         border-radius: 100px;
         background-color: #276cf2;
         font-size: 13px;
         font-weight: 500;
         text-align: center;
         color: #ffffff;
+    }
+
+    .close-btn {
+        display: none;
+    }
+
+    @media screen and (max-width: 480px) {
+        .other-publisher .modal-dialog {
+            max-width: none;
+            width: auto;
+        }
+
+        .modal-body {
+            padding: 42px 18px 28px 27px;
+            .name {
+                margin-bottom: 27px;
+            }
+            .content {
+                margin-bottom: 25px;
+            }
+
+            .close-btn {
+                display: block;
+                position: absolute;
+                top: 0;
+                right: 0px;
+                font-size: 24px;
+                padding: 0 10px 0 10px;
+                color: #a1a1a1;
+                &:hover, &:focus {
+                    text-decoration: none;
+                }
+            }
+        }
     }
 }

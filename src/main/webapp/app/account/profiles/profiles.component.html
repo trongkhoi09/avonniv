@@ -306,7 +306,7 @@
             </div>
         </div>
         <div class="row">
-            <div *ngFor="let publisher of (publisherCrawled|orderBy:name:true); let i = index" class="col-md-4">
+            <div *ngFor="let publisher of (publisherCrawled|orderBy:name:true); let i = index" class="col-6 col-md-4">
                 <a [ngClass]="publisher.check?'':'unchecked'"
                    (click)="updateCheckPublisher(i)">
                     <i class="fa fa-check" aria-hidden="true"></i>

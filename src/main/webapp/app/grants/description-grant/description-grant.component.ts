@@ -19,6 +19,10 @@ export class JhiDescriptionGrantModalComponent implements OnInit {
 
     ngOnInit() {
     }
+
+    clear() {
+        this.activeModal.dismiss('cancel');
+    }
 }
 
 @Component({

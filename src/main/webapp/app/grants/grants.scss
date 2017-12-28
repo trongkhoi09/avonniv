@@ -144,6 +144,8 @@
             text-align: left;
             color: #3b4c67;
             a {
+                margin-bottom: 6px;
+                display: inline-block;
                 margin-right: 46px;
             }
             span i {
@@ -172,7 +174,7 @@
             height: 100%;
             width: 0;
             position: absolute;
-            z-index: 1;
+            z-index: 1001;
             overflow-x: hidden;
             transition: 0.5s;
             padding: 21px 0 0 0;
@@ -186,15 +188,28 @@
                 display: block;
                 position: absolute;
                 top: 0;
-                right: 15px;
-                font-size: 36px;
+                right: 0px;
+                font-size: 24px;
                 padding: 0 10px 0 10px;
-                color: rgba(110, 124, 148, 0.51);
-                &:hover, &:focus{
+                color: #a1a1a1;
+                &:hover, &:focus {
                     text-decoration: none;
                 }
             }
         }
-
+        .list-data {
+            padding: 19px 0px 0px 0px;
+            .custom-number-item {
+                display: none;
+            }
+            .grant-filter-type {
+                a {
+                    margin-right: 15px;
+                }
+            }
+            jhi-list-grant {
+                width: 100%;
+            }
+        }
     }
 }

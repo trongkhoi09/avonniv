@@ -29,7 +29,7 @@
         <!--</div>-->
         <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed"
              [ngSwitch]="isAuthenticated()">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto " [ngClass]="isSearch?'width-full':'' ">
                 <li class="nav-item icon-search" [ngClass]="isSearch?'':'active' " (click)="isSearch=true">
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </li>

@@ -252,7 +252,7 @@
     }
 }
 
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 480px) {
     .jh-navbar-homepage {
         .jh-navbar {
             padding-left: 17.0833333%;
@@ -299,7 +299,7 @@
     }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 480px) {
     .jh-navbar-homepage {
         .jh-navbar {
             padding-left: 6%;
@@ -308,13 +308,13 @@
                 padding-top: 0px;
                 .nav-item {
                     &.icon-search {
-                        padding-top: 3px;
+                        padding-top: 6px;
                     }
                     .icon-login {
                         color: #ffffff;
                     }
                     &.language {
-                        padding: 3px 0 0 0;
+                        padding: 6px 0 0 0;
                     }
                 }
             }
@@ -332,13 +332,13 @@
 
     .jh-navbar {
         display: inline-block;
-        .navbar-nav .dropdown-menu {
-            position: absolute;
-            float: none;
-        }
         .app-search {
             position: relative;
             display: none;
+            flex: 1;
+            form{
+                width: 100%;
+            }
             a {
                 position: absolute;
                 top: 5px;
@@ -347,7 +347,7 @@
             }
             .form-control,
             .form-control:focus {
-                width: 215px;
+                width: 100%;
             }
         }
 
@@ -357,12 +357,19 @@
         }
 
         ul.navbar-nav {
+            &.width-full{
+                width: 100%;
+            }
             padding-top: 19px;
+            .dropdown-menu {
+                position: absolute;
+                float: none;
+            }
             .nav-item {
                 margin-left: 10px;
                 .icon-login {
                     display: block;
-                    font-size: 20px;
+                    font-size: 24px;
                     color: #515c7f;
                 }
                 &.active {
@@ -390,10 +397,18 @@
     }
     .jh-navbar-custom {
         .jh-navbar {
+            &.navbar-normal{
+                .navbar-brand {
+                    &.logo {
+                        margin-right: 0px;
+                        margin-left: 0px;
+                    }
+                }
+            }
             .icon-filter {
                 display: block;
                 font-size: 24px;
-                margin-right: 10px;
+                color: #515c7f;
                 &.active {
                     color: red;
                 }
@@ -401,6 +416,7 @@
             .navbar-brand {
                 &.logo {
                     margin-right: 0px;
+                    margin-left: 10px;
                     .logo-img {
                         height: 27px;
                         width: 110px;
@@ -417,84 +433,6 @@
                 padding: 20px 0px 18px 15px;
                 background-color: transparent;
             }
-            &.navbar-normal {
-                .app-search {
-                    .form-control,
-                    .form-control:focus {
-                        width: 174px;
-                    }
-                }
-            }
-            .app-search {
-                .form-control,
-                .form-control:focus {
-                    width: 145px;
-                }
-            }
         }
     }
 }
-
-//@media (min-width: 1400px) {
-//    .jh-navbar-homepage {
-//        height: 710px;
-//        .jh-navbar {
-//            padding-left: 17.08%;
-//            padding-right: 17.08%;
-//        }
-//        .title {
-//            margin-top: 209px;
-//            margin-bottom: 38px;
-//            font-size: 52px;
-//        }
-//        .count-grant {
-//            font-size: 24px;
-//        }
-//        .btn-take-me-there {
-//            margin-top: 42px;
-//            padding: 20px 40px 20px 40px;
-//        }
-//    }
-//
-//    .jh-navbar {
-//        height: 73px;
-//        padding-top: 37px;
-//        .nav-link {
-//            padding: 4px;
-//        }
-//        .navbar-brand {
-//            &.logo {
-//                padding-top: 6px;
-//                .logo-img {
-//                    height: 27px;
-//                    width: 110px;
-//                }
-//            }
-//        }
-//        ul.navbar-nav {
-//            .nav-item {
-//                margin-left: 26px;
-//            }
-//        }
-//        .btn-login {
-//            padding: 9px 27px 9px 27px;
-//        }
-//        .app-search .form-control,
-//        .app-search .form-control:focus {
-//            height: 36px;
-//            width: 224px;
-//        }
-//        .app-search a {
-//            top: 5px;
-//        }
-//
-//        .user {
-//            .dropdown-toggle {
-//                font-size: 24px;
-//            }
-//        }
-//        .language{
-//            padding: 6px 0 7px 0;
-//        }
-//    }
-//}

@@ -47,6 +47,15 @@ export class NavbarComponent implements OnInit {
         this.grantService.count().subscribe((count) => {
             this.count = count;
         });
+        document.addEventListener('click', this.offClickHandler.bind(this));
+    }
+
+    offClickHandler(event: any) {
+        if (this.isSearch &&
+            event.target !== document.getElementById('search-nav-item') &&
+            event.target !== document.getElementById('icon-show-search')) {
+            this.isSearch = false;
+        }
     }
 
     ngOnInit() {
@@ -61,8 +70,10 @@ export class NavbarComponent implements OnInit {
     }
 
     searchWord() {
-        this.router.navigate(['../search', this.search],
-            {replaceUrl: (NavbarComponent.url.indexOf('/search/') !== -1)});
+        if (this.search !== undefined && this.search !== '') {
+            this.router.navigate(['../search', this.search],
+                {replaceUrl: (NavbarComponent.url.indexOf('/search/') !== -1)});
+        }
     }
 
     changeLanguage(languageKey: string) {
@@ -114,5 +125,9 @@ export class NavbarComponent implements OnInit {
 
     getImageUrl() {
         return this.isAuthenticated() ? this.principal.getImageUrl() : null;
+    }
+
+    setSearchTrue() {
+        this.isSearch = true;
     }
 }

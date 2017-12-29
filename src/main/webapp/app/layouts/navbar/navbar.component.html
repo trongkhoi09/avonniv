@@ -30,14 +30,13 @@
         <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed"
              [ngSwitch]="isAuthenticated()">
             <ul class="navbar-nav ml-auto " [ngClass]="isSearch?'width-full':'' ">
-                <li class="nav-item icon-search" [ngClass]="isSearch?'':'active' " (click)="isSearch=true">
-                    <i class="fa fa-search" aria-hidden="true"></i>
+                <li class="nav-item icon-search" [ngClass]="isSearch?'':'active' ">
+                    <i id="icon-show-search" class="fa fa-search" aria-hidden="true"  (click)="setSearchTrue()"></i>
                 </li>
                 <li class="nav-item app-search" [ngClass]="isSearch?'active':'' ">
                     <form role="search" (keydown.enter)="searchWord()"
                           class="navbar-left pull-left hidden-xs">
-                        <input type="text" name="search" [(ngModel)]="search"
-                               class="form-control">
+                        <input id="search-nav-item" type="text" name="search" [(ngModel)]="search" class="form-control">
                         <!--placeholder="{{'global.search' | translate}}"-->
                         <a href="javascript:void(0);" (click)="searchWord()"><i class="fa fa-search"></i></a>
                     </form>

@@ -114,7 +114,8 @@
             "open": "Öppna",
             "save": "Spara",
             "view": "Titta",
-            "more": "mer..."
+            "more": "mer...",
+            "moreInfo": "Mer info"
         },
         "detail": {
             "field": "Fält",

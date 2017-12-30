@@ -114,7 +114,8 @@
             "open": "Open",
             "save": "Save",
             "view": "View",
-            "more": "more..."
+            "more": "more...",
+            "moreInfo": "More info"
         },
         "detail": {
             "field": "Field",

@@ -18,6 +18,9 @@
             text-align: left;
             color: #0d2164;
         }
+        .close-btn {
+            display: none;
+        }
     }
 }
 
@@ -280,6 +283,18 @@
     .modal-header {
         &.profiles {
             padding: 20px 17px 20px 17px;
+            .close-btn {
+                display: block;
+                position: absolute;
+                top: 0;
+                right: 0px;
+                font-size: 24px;
+                padding: 0 10px 0 10px;
+                color: #a1a1a1;
+                &:hover, &:focus {
+                    text-decoration: none;
+                }
+            }
         }
     }
 

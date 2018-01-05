@@ -203,6 +203,13 @@
                 display: none;
             }
             .grant-filter-type {
+                font-size: 11px;
+                span i {
+                    font-size: 12px;
+                    width: 16px;
+                    height: 16px;
+
+                }
                 a {
                     margin-right: 15px;
                 }

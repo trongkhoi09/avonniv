@@ -169,6 +169,28 @@
         }
     }
 
+    @media screen and (max-width: 768px) {
+
+        .list-data {
+            padding: 19px 0px 0px 0px;
+            .custom-number-item {
+                display: none;
+            }
+            .grant-filter-type {
+                font-size: 11px;
+                span i {
+                    font-size: 12px;
+                    width: 16px;
+                    height: 16px;
+
+                }
+                a {
+                    margin-right: 15px;
+                }
+            }
+        }
+    }
+
     @media screen and (max-width: 480px) {
         .filter {
             height: 100%;
@@ -217,6 +239,17 @@
             jhi-list-grant {
                 width: 100%;
             }
+        }
+    }
+
+    @media screen and (max-width: 320px) {
+        .list-data {
+
+            .grant-filter-type {
+                font-size: 10px;
+
+            }
+
         }
     }
 }

@@ -83,6 +83,11 @@ public class FetchDataTillvaxtVerketService {
                 grantService.getAllByGrantProgramIdAndStatus(grantProgram.getId(), GrantDTO.Status.coming.getValue(), listIgnore),
                 GrantDTO.Status.close.getValue()
             );
+        }else {
+            grantService.updateStatusForList(
+                grantService.getAllByGrantProgramIdAndStatus(grantProgram.getId(), GrantDTO.Status.open.getValue(), listIgnore),
+                GrantDTO.Status.close.getValue()
+            );
         }
     }
 
@@ -96,7 +101,7 @@ public class FetchDataTillvaxtVerketService {
             if (elements.size() != 0) {
                 for (Element element : elements) {
                     Long id = saveGrant(name, element.attr("href"), grantProgramDTO, planned, url);
-                    if (id != null && planned) {
+                    if (id != null) {
                         list.add(id);
                     }
                 }

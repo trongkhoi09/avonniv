@@ -14,6 +14,8 @@ public interface GrantRepository extends JpaRepository<Grant, Long> {
 
     List<Grant> findAllByCloseDateBefore(Instant dateBefore);
 
+    List<Grant> findAllByGrantProgramIdAndStatusAndIdIsNotIn(Long id, int status,  List<Long> listIgnore);
+
     List<Grant> findAllByStatusInAndOpenDateBefore(List<Integer> listStatus, Instant dateBefore);
 
     List<Grant> findAllByStatusInAndOpenDateAfter(List<Integer> listStatus, Instant dateAfter);

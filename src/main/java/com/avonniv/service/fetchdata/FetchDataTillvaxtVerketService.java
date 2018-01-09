@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.TimeZone;
 
@@ -74,10 +76,17 @@ public class FetchDataTillvaxtVerketService {
             grantProgram = grantProgramService.createGrant(grantProgramDTO);
         }
         GrantProgramDTO grantProgramDTO = new GrantProgramDTO(grantProgram);
-        getData(name, externalUrl, grantProgramDTO, planned);
+        List<Long> listIgnore = new ArrayList<>();
+        getData(name, externalUrl, grantProgramDTO, planned, listIgnore);
+        if (planned) {
+            grantService.updateStatusForList(
+                grantService.getAllByGrantProgramIdAndStatus(grantProgram.getId(), GrantDTO.Status.coming.getValue(), listIgnore),
+                GrantDTO.Status.close.getValue()
+            );
+        }
     }
 
-    private void getData(String name, String url, GrantProgramDTO grantProgramDTO, boolean planned) {
+    private void getData(String name, String url, GrantProgramDTO grantProgramDTO, boolean planned, List<Long> list) {
         try {
             Document doc = Jsoup.connect(url)
                 .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36")
@@ -86,69 +95,75 @@ public class FetchDataTillvaxtVerketService {
             Elements elements = doc.select(".sv-responsive .lp-main .lp-content .lp-list-page-list .lp-list-page-list-item strong a");
             if (elements.size() != 0) {
                 for (Element element : elements) {
-                    saveGrant(name, element.attr("href"), grantProgramDTO, planned, url);
+                    Long id = saveGrant(name, element.attr("href"), grantProgramDTO, planned, url);
+                    if (id != null && planned) {
+                        list.add(id);
+                    }
                 }
             }
             Elements elementsNext = doc.select(".sv-responsive .lp-main .lp-content .lp-list-page-list .lp-list-page-list-pagination .lp-next a");
             if (elementsNext.size() == 1) {
-                getData(name, "https://tillvaxtverket.se" + elementsNext.first().attr("href"), grantProgramDTO, planned);
+                getData(name, "https://tillvaxtverket.se" + elementsNext.first().attr("href"), grantProgramDTO, planned, list);
             }
         } catch (Exception e) {
         }
     }
 
-    private void saveGrant(String name, String url, GrantProgramDTO grantProgramDTO, boolean planned, String dataFromUrl) {
+    private Long saveGrant(String name, String url, GrantProgramDTO grantProgramDTO, boolean planned, String dataFromUrl) {
         try {
             String externalIdGrant = name + "_" + url;
             Optional<Grant> grantOptional = grantService.getByExternalId(externalIdGrant);
-            if (!grantOptional.isPresent()) {
-//                Instant openDate = getDateFromURL(url);
-                GrantDTO grantDTO = new GrantDTO(
-                    null, null, null,
-                    planned ? GrantDTO.Status.coming.getValue() : GrantDTO.Status.open.getValue(),
-                    grantProgramDTO,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    externalIdGrant,
-                    url,
-                    null,
-                    dataFromUrl
-                );
+            GrantDTO grantDTO = grantOptional.map(GrantDTO::new).orElseGet(() -> new GrantDTO(
+                null, null, null,
+                planned ? GrantDTO.Status.coming.getValue() : GrantDTO.Status.open.getValue(),
+                grantProgramDTO,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                externalIdGrant,
+                url,
+                null,
+                dataFromUrl
+            ));
 
-                Document doc = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36")
-                    .timeout(30000)
-                    .get();
-                Elements elements = doc.select(".sv-vertical .sv-layout .lp-application-metadata span");
-                if (elements.size() == 1) {
-                    Instant date = getDateFromString(elements.first().text(), planned);
-                    if (planned) {
-                        grantDTO.setOpenDate(date);
-                    } else {
-                        grantDTO.setCloseDate(date, 2);
-                    }
+            Document doc = Jsoup.connect(url)
+                .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36")
+                .timeout(30000)
+                .get();
+            Elements elements = doc.select(".sv-vertical .sv-layout .lp-application-metadata span");
+            if (elements.size() == 1) {
+                Instant date = getDateFromString(elements.first().text(), planned);
+                if (planned) {
+                    grantDTO.setOpenDate(date);
+                } else {
+                    grantDTO.setCloseDate(date, 2);
                 }
-                Elements elementContent = doc.select(".sv-vertical .sv-layout .pagecontent");
-                if (elementContent.size() == 1) {
-                    Element element = elementContent.first();
-                    grantDTO.setTitle(element.select(".sv-text-portlet-content h1").first().text());
-                    Elements elementDes = element.select(".sv-text-portlet-content");
-                    if (elementDes.size() > 2) {
-                        grantDTO.setDescription(elementDes.get(1).text());
-                    }
+            }
+            Elements elementContent = doc.select(".sv-vertical .sv-layout .pagecontent");
+            if (elementContent.size() == 1) {
+                Element element = elementContent.first();
+                grantDTO.setTitle(element.select(".sv-text-portlet-content h1").first().text());
+                Elements elementDes = element.select(".sv-text-portlet-content");
+                if (elementDes.size() > 2) {
+                    grantDTO.setDescription(elementDes.get(1).text());
+                }
 //                    for (int i = 1; i < elementDes.size(); i++) {
 //                        description = description + elementDes.get(i).text();
 //                    }
-                }
-                grantService.createGrantCall(grantDTO);
+            }
+            if (grantOptional.isPresent()) {
+                grantService.update(grantDTO);
+                return grantDTO.getId();
+            } else {
+                return grantService.createGrantCall(grantDTO).getId();
             }
         } catch (Exception e) {
         }
+        return null;
     }
 
     private Instant getDateFromURL(String url) {

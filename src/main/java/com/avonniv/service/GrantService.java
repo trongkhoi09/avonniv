@@ -90,6 +90,12 @@ public class GrantService {
         return grantRepository.findOneByExternalId(externalId);
     }
 
+
+    @Transactional(readOnly = true)
+    public List<Grant> getAllByGrantProgramIdAndStatus(Long grantProgramId, int status,  List<Long> listIgnore) {
+        return grantRepository.findAllByGrantProgramIdAndStatusAndIdIsNotIn(grantProgramId, status, listIgnore);
+    }
+
     @Transactional(readOnly = true)
     public Optional<Grant> getById(Long id) {
         return Optional.of(grantRepository.findOne(id));
@@ -216,7 +222,7 @@ public class GrantService {
         );
     }
 
-    private void updateStatusForList(List<Grant> list, int status) {
+    public void updateStatusForList(List<Grant> list, int status) {
         List<GrantDTO> grantsOpen = list.stream()
             .map(GrantDTO::new)
             .collect(Collectors.toList());

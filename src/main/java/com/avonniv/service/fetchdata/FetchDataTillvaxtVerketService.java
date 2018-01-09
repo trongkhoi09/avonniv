@@ -134,9 +134,6 @@ public class FetchDataTillvaxtVerketService {
                 null,
                 dataFromUrl
             ));
-            if(46==grantDTO.getId()){
-                System.out.println();
-            }
             grantDTO.setStatus(planned ? GrantDTO.Status.coming.getValue() : GrantDTO.Status.open.getValue());
             grantDTO.setGrantProgramDTO(grantProgramDTO);
             Document doc = Jsoup.connect(url)

@@ -134,7 +134,11 @@ public class FetchDataTillvaxtVerketService {
                 null,
                 dataFromUrl
             ));
-
+            if(46==grantDTO.getId()){
+                System.out.println();
+            }
+            grantDTO.setStatus(planned ? GrantDTO.Status.coming.getValue() : GrantDTO.Status.open.getValue());
+            grantDTO.setGrantProgramDTO(grantProgramDTO);
             Document doc = Jsoup.connect(url)
                 .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36")
                 .timeout(30000)

@@ -81,12 +81,12 @@ public class FetchDataTillvaxtVerketService {
         if (planned) {
             grantService.updateStatusForList(
                 grantService.getAllByGrantProgramIdAndStatus(grantProgram.getId(), GrantDTO.Status.coming.getValue(), listIgnore),
-                GrantDTO.Status.close.getValue()
+                GrantDTO.Status.un_publish.getValue()
             );
         }else {
             grantService.updateStatusForList(
                 grantService.getAllByGrantProgramIdAndStatus(grantProgram.getId(), GrantDTO.Status.open.getValue(), listIgnore),
-                GrantDTO.Status.close.getValue()
+                GrantDTO.Status.un_publish.getValue()
             );
         }
     }

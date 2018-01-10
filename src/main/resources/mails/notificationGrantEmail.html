@@ -6,8 +6,10 @@
     <link rel="shortcut icon" href="${baseUrl}/favicon.ico"/>
 </head>
 <body>
-    <div style="background-color: #193c7e;">
-        <img style="height: 32px;margin: 10px 0 10px 100px;" src="content/header.png" data-th-src="|cid:thymeleaf-logo|" />
+    <div style="background-color: #193c7e;" >
+        <a href="http://avonniv.courzecorner.com/#/grants">
+            <img style="height: 32px;margin: 10px 0 10px 100px;" src="content/header.png" data-th-src="|cid:thymeleaf-logo|" />
+        </a>
     </div>
     <div th:if="${not #lists.isEmpty(grants)}">
         <table style="margin: 52px 20px 52px 20px; border-spacing: 0;">

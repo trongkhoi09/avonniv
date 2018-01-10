@@ -42,11 +42,14 @@
         display: none;
     }
 
-    @media screen and (max-width: 480px) {
-        .other-publisher .modal-dialog {
-            max-width: none;
-            width: auto;
+    @media screen and (max-width: 768px) {
+        .modal-dialog {
+            width: 90%;
+            margin: 5%;
         }
+    }
+
+    @media screen and (max-width: 480px) {
 
         .modal-body {
             padding: 42px 18px 28px 27px;

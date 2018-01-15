@@ -1,4 +1,3 @@
-
 /* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
@@ -6,30 +5,35 @@ body, h1, h2, h3, h4 {
     font-weight: 300;
 }
 
-.btn-warning{
+.btn-warning {
     background-color: #f8b000;
 }
+
 .empty-table-custom {
     h1, h2, h3, h4, h5 {
         padding: 150px;
     }
 }
+
 .login-modal {
     .modal-dialog {
         max-width: 370px;
     }
 }
+
 .password-reset-init-modal {
     .modal-dialog {
         max-width: 370px;
     }
 }
+
 .profiles-modal {
     .modal-dialog {
         max-width: 569px;
         width: 569px;
     }
 }
+
 .description-grant {
     .modal-dialog {
         width: 784px;
@@ -37,10 +41,12 @@ body, h1, h2, h3, h4 {
     }
 
 }
+
 .number-grant {
     font-weight: 600;
     color: #f8b000;
 }
+
 /* ==========================================================================
 Browser Upgrade Prompt
 ========================================================================== */
@@ -56,12 +62,12 @@ Generic styles
 ========================================================================== */
 
 /* Error highlight on input fields */
-.ng-valid[required], .ng-valid.required  {
-  border-left: 5px solid green;
+.ng-valid[required], .ng-valid.required {
+    border-left: 5px solid green;
 }
 
-.ng-invalid:not(form)  {
-  border-left: 5px solid red;
+.ng-invalid:not(form) {
+    border-left: 5px solid red;
 }
 
 /* other generic styles */
@@ -89,7 +95,7 @@ Generic styles
 
 .break {
     white-space: normal;
-    word-break:break-all;
+    word-break: break-all;
 }
 
 .readonly {
@@ -98,14 +104,14 @@ Generic styles
 }
 
 .footer {
-    border-top: 1px solid rgba(0,0,0,.125);
+    border-top: 1px solid rgba(0, 0, 0, .125);
 }
 
 /* ==========================================================================
 make sure browsers use the pointer cursor for anchors, even with no href
 ========================================================================== */
 a:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .hand {
@@ -118,7 +124,7 @@ Custom alerts for notification
 .alerts {
     .alert {
         text-overflow: ellipsis;
-        pre{
+        pre {
             background: none;
             border: none;
             font: inherit;
@@ -144,6 +150,19 @@ Custom alerts for notification
         }
         &.bottom {
             bottom: 55px;
+        }
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .login-modal,
+    .password-reset-init-modal,
+    .profiles-modal,
+    .description-grant,
+    .other-publisher {
+        .modal-dialog {
+            max-width: 90%;
+            width: 90%;
         }
     }
 }
@@ -178,6 +197,12 @@ Custom alerts for notification
         }
 
     }
+    .other-publisher {
+        .modal-dialog {
+            max-width: none;
+            width: auto;
+        }
+    }
 }
 
 /* ==========================================================================
@@ -197,6 +222,7 @@ entity tables helpers
         }
     }
 }
+
 @include no-padding("left");
 @include no-padding("right");
 @include no-padding("top");
@@ -205,17 +231,19 @@ entity tables helpers
 
 /* bootstrap 3 input-group 100% width
    http://stackoverflow.com/questions/23436430/bootstrap-3-input-group-100-width */
-.width-min { width: 1% !important; }
+.width-min {
+    width: 1% !important;
+}
 
 /* Makes toolbar not wrap on smaller screens
    http://www.sketchingwithcss.com/samplechapter/cheatsheet.html#right */
 .flex-btn-group-container {
-   display: -webkit-flex;
-   display: flex;
-   -webkit-flex-direction: row;
-   flex-direction: row;
-   -webkit-justify-content: flex-end;
-   justify-content: flex-end;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
 }
 
 /* ==========================================================================
@@ -248,14 +276,13 @@ ui bootstrap tweaks
 }
 
 .datetime-picker-dropdown > li.date-picker-menu div > table .btn-default,
-.uib-datepicker-popup  > li > div.uib-datepicker > table .btn-default {
+.uib-datepicker-popup > li > div.uib-datepicker > table .btn-default {
     border: 0;
 }
 
 .datetime-picker-dropdown > li.date-picker-menu div > table:focus,
-.uib-datepicker-popup  > li > div.uib-datepicker > table:focus {
+.uib-datepicker-popup > li > div.uib-datepicker > table:focus {
     outline: none;
 }
-
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */

@@ -94,6 +94,7 @@ public class FetchDataVinnovaService {
                             null,
                             readDateJSONObject(jsonObject, "Publiceringsdatum")
                         );
+
                         grantProgramDTO.setExternalUrl(getURLString(grantProgramDTO.getName()));
                         grantProgram = grantProgramService.createGrant(grantProgramDTO);
                     }
@@ -150,6 +151,8 @@ public class FetchDataVinnovaService {
                                             break;
                                         }
                                     }
+                                    if (grantDTO.getExternalUrl() == null)
+                                        grantDTO.setExternalUrl("https://www.vinnova.se/sok-finansiering/hitta-finansiering/");
                                     if (!grantOptional.isPresent()) {
                                         grantService.createGrantCall(grantDTO);
                                     } else {

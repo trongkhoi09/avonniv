@@ -407,10 +407,16 @@
             }
             .icon-filter {
                 display: block;
-                font-size: 24px;
-                color: #515c7f;
+                .filter-image{
+                    width: 20px;
+                    height: 25px;
+                    margin-bottom: -9px;
+                    content: url("../../../content/images/filter_contours.png");
+                }
                 &.active {
-                    color: red;
+                    .filter-image{
+                        content: url("../../../content/images/filter_full.png");
+                    }
                 }
             }
             .navbar-brand {

@@ -24,7 +24,15 @@ export class LoginService {
                     // After the login the language will be changed to
                     // the language selected by the user during his registration
                     if (account !== null) {
-                        this.languageService.changeLanguage(account.langKey);
+                        if (window.innerWidth < 768) {
+                            if (window.navigator.language.indexOf('sv') !== -1) {
+                                this.languageService.changeLanguage('sv');
+                            } else {
+                                this.languageService.changeLanguage('en');
+                            }
+                        }else {
+                            this.languageService.changeLanguage(account.langKey);
+                        }
                     }
                     this.trackerService.sendActivity();
                     resolve(data);
@@ -47,7 +55,15 @@ export class LoginService {
                     // After the login the language will be changed to
                     // the language selected by the user during his registration
                     if (account !== null) {
-                        this.languageService.changeLanguage(account.langKey);
+                        if (window.innerWidth < 768) {
+                            if (window.navigator.language.indexOf('sv') !== -1) {
+                                this.languageService.changeLanguage('sv');
+                            } else {
+                                this.languageService.changeLanguage('en');
+                            }
+                        }else {
+                            this.languageService.changeLanguage(account.langKey);
+                        }
                     }
                     this.trackerService.sendActivity();
                     resolve(data);

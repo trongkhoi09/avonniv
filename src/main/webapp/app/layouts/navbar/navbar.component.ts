@@ -48,6 +48,13 @@ export class NavbarComponent implements OnInit {
             this.count = count;
         });
         document.addEventListener('click', this.offClickHandler.bind(this));
+        if (window.innerWidth < 768) {
+            if (window.navigator.language.indexOf('sv') !== -1) {
+                this.languageService.changeLanguage('sv');
+            } else {
+                this.languageService.changeLanguage('en');
+            }
+        }
     }
 
     offClickHandler(event: any) {

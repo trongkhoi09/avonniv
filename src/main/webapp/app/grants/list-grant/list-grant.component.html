@@ -41,14 +41,14 @@
                 <h5 class="text-muted" jhiTranslate="grants.empty"></h5>
             </div>
             <tbody *ngIf="grantDTOs.length!=0">
-            <tr *ngFor="let grantDTO of grantDTOs; let i = index" class="row m-0" (click)="showDescription(grantDTO.id)">
+            <tr *ngFor="let grantDTO of grantDTOs; let i = index" class="row m-0"
+                (click)="showDescription(grantDTO.id)">
                 <td class="publisher">
                     <span>{{grantDTO.grantProgramDTO.publisherDTO.name}}</span>
                 </td>
                 <td class="title">
-                    <a *ngIf="grantDTO.externalUrl"
-                       href="{{grantDTO.externalUrl?grantDTO.externalUrl:'javascript:void(0)'}}"
-                       [target]="grantDTO.externalUrl ? '_blank' : ''">
+                    <a *ngIf="grantDTO.externalUrl" (click)="gotoExternalUrl(grantDTO.externalUrl)"
+                       href="javascript:void(0)">
                         {{grantDTO.title}}
                     </a>
                     <span *ngIf="!grantDTO.externalUrl">

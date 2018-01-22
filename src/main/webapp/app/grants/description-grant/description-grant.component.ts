@@ -20,6 +20,11 @@ export class JhiDescriptionGrantModalComponent implements OnInit {
     ngOnInit() {
     }
 
+    openNewTab() {
+        window.open(this.grantDTO.externalUrl, '_blank');
+        this.activeModal.dismiss('cancel');
+    }
+
     clear() {
         this.activeModal.dismiss('cancel');
     }

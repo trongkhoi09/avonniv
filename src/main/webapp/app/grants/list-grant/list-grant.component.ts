@@ -112,6 +112,12 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
         }
     }
 
+    gotoExternalUrl(externalUrl) {
+        if (window.innerWidth >= 992) {
+            window.open(externalUrl, '_blank');
+        }
+    }
+
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.page = page;

@@ -106,6 +106,12 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
         return result;
     }
 
+    showDescription(id) {
+        if (window.innerWidth < 992) {
+            this.router.navigate(['/', {outlets: {popup: 'description-grant/' + id}}]);
+        }
+    }
+
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.page = page;

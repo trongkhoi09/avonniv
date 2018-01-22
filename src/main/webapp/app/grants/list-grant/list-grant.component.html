@@ -41,7 +41,7 @@
                 <h5 class="text-muted" jhiTranslate="grants.empty"></h5>
             </div>
             <tbody *ngIf="grantDTOs.length!=0">
-            <tr *ngFor="let grantDTO of grantDTOs; let i = index" class="row m-0">
+            <tr *ngFor="let grantDTO of grantDTOs; let i = index" class="row m-0" (click)="showDescription(grantDTO.id)">
                 <td class="publisher">
                     <span>{{grantDTO.grantProgramDTO.publisherDTO.name}}</span>
                 </td>

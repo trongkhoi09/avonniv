@@ -134,5 +134,7 @@ public class MailService {
         String content = templateEngine.process("notificationGrantEmail", context);
         String subject = messageSource.getMessage("email.notification.grant.title", null, locale);
         sendEmail(user.getEmail(), subject, content, false, true);
+//        sendEmail("nguyenhoanghieu1996@gmail.com", subject, content, false, true);
+//        sendEmail("oscar.p.ridell@gmail.com", subject, content, false, true);
     }
 }

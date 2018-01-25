@@ -5,55 +5,54 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="shortcut icon" href="${baseUrl}/favicon.ico"/>
 </head>
-<body>
-    <div style="background-color: #193c7e;" >
+<body style="text-align: center;margin: 0;padding: 0;">
+<div style="max-width: 600px;margin: 0 auto;text-align: left;">
+    <div style="background-color: #193c7e;">
         <a href="http://avonniv.courzecorner.com/#/grants">
-            <img style="height: 32px;margin: 10px 0 10px 100px;" src="content/header.png" data-th-src="|cid:thymeleaf-logo|" />
+            <img style="height: 32px;margin: 10px 0 10px 10%;" src="content/header.png"
+                 data-th-src="|cid:thymeleaf-logo|"/>
         </a>
     </div>
-    <div th:if="${not #lists.isEmpty(grants)}">
-        <table style="margin: 52px 20px 52px 20px; border-spacing: 0;">
-            <thead style="background-color: #eaf3fe; color: #6e7c94; border-radius: 5px;">
-                <tr>
-                    <th style="width: 18%;text-align: left; color: #78869d; padding: 10px 10px 10px 10px;"  th:text="#{email.notification.grant.table.publisher}">Publisher</th>
-                    <th style="width: 32%;text-align: left; color: #78869d; padding: 10px 10px 10px 10px;"
-                        th:text="#{email.notification.grant.table.title}">Title</th>
-                    <th style="width: 50%;text-align: left; color: #78869d; padding: 10px 10px 10px 10px;"
-                        th:text="#{email.notification.grant.table.description}">Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="grant,iter : ${grants}" th:style="'background-color: '+ ${iter.index%2==0?'#f9fcff':'#ffffff'}"
-                    style="padding: 10px 10px 10px 10px">
-                    <td th:text="${grant.grantProgramDTO.publisherDTO.name}"
-                        style="width: 18%; color: #17b0ff; padding: 10px 10px 10px 10px;vertical-align: top;"></td>
-                    <td th:text="${grant.title}"
-                        style="width: 32%; color: #6c798f; padding: 10px 10px 10px 10px;vertical-align: top;"></td>
-                    <td style="width: 50%; color: #6c798f; padding: 10px 10px 10px 10px;vertical-align: top;">
-                        <span th:if="${grant.description==null}"
-                              th:text="#{email.notification.grant.notAvailable}"></span>
-                        <span th:if="${grant.description!=null and #strings.length(grant.description) lt 201}"
-                              th:text="${grant.description}"></span>
-                        <span th:if="${grant.description!=null and #strings.length(grant.description) gt 200}"
-                              th:text="${#strings.substring(grant.description,0,200) + '...'}"></span>
-                        <span th:if="${grant.description!=null and #strings.length(grant.description) gt 200}"
-                              style="color: #f8c143">More</span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div th:if="${not #lists.isEmpty(grants)}"
+         style="margin: 0; border: 1px solid #cccccc;line-height: 150%;">
+        <div th:each="grant,iter : ${grants}"
+             th:style="'padding: 16px 20px;background-color: '+ ${iter.index%2==0?'#f9fcff':'#ffffff'}">
+            <div th:text="${grant.title}"
+                 style="font-weight: bold;font-size: 15px;line-height: 18px; color: #0070bf;padding: 0;margin: 0">
+            </div>
+            <div style="color:#404040;font-size: 14px;line-height: 130%;padding: 0;margin:5px 0;">
+                <span th:if="${grant.description==null}"
+                      th:text="#{email.notification.grant.notAvailable}"></span>
+                <span th:if="${grant.description!=null and #strings.length(grant.description) lt 201}"
+                      th:text="${grant.description}"></span>
+                <span th:if="${grant.description!=null and #strings.length(grant.description) gt 200}"
+                      th:text="${#strings.substring(grant.description,0,200) + '...'}"></span>
+                <span th:if="${grant.description!=null and #strings.length(grant.description) gt 200}"
+                      style="color: #f8c143">More</span>
+            </div>
+            <div
+                style="font-size: 14px;line-height: 16px;margin: 0;color: #404040; padding: 0">
+                <span style="font-weight: bold;" th:text="#{email.notification.grant.table.publisher}">Publisher</span>:
+                <span th:text="${grant.grantProgramDTO.publisherDTO.name}"></span>
+            </div>
+        </div>
     </div>
     <div style="background-color: #373d42">
         <div style="color: #c7d0db; text-align: center; padding-top: 20px; padding-bottom: 15px;">
-            <span th:text="#{avonniv.follow}">Follow @Avonniv</span> | <span th:text="#{avonniv.visit}">Visit avonniv.com</span> | <span th:text="#{avonniv.unsubscribe}">Unsubscribe</span>
+            <span th:text="#{avonniv.follow}">Follow @Avonniv</span> | <span
+            th:text="#{avonniv.visit}">Visit avonniv.com</span> | <span
+            th:text="#{avonniv.unsubscribe}">Unsubscribe</span>
         </div>
         <div style="text-align: center;">
-            <img style="height: 32px;margin: 10px 20px 10px 20px;" src="content/facebook-logo.png" data-th-src="|cid:thymeleaf-facebook-logo|" />
-            <img style="height: 32px;margin: 10px 20px 10px 20px;" src="content/linkedin-logo.png" data-th-src="|cid:thymeleaf-linkedin-logo|" />
+            <img style="height: 32px;margin: 10px 20px 10px 20px;" src="content/facebook-logo.png"
+                 data-th-src="|cid:thymeleaf-facebook-logo|"/>
+            <img style="height: 32px;margin: 10px 20px 10px 20px;" src="content/linkedin-logo.png"
+                 data-th-src="|cid:thymeleaf-linkedin-logo|"/>
         </div>
         <div style="color: #c7d0db; text-align: center; padding-top: 10px; padding-bottom: 35px;">
             <span th:text="#{avonniv.copyright}">Copyright © 2017 Avonniv. All rights reserved.</span>
         </div>
     </div>
+</div>
 </body>
 </html>

@@ -162,7 +162,11 @@ public class FetchDataSMEService {
                                 if (!grantOptional.isPresent()) {
                                     grantService.createGrantCall(grantDTO);
                                 } else {
-                                    grantService.update(grantDTO);
+                                    try {
+                                        grantService.update(grantDTO);
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
                                 }
                             }
                         }

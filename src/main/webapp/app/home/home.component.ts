@@ -3,6 +3,7 @@ import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {AlertService, EventManager} from 'ng-jhipster';
 
 import {Account, LoginModalService, Principal, GrantDTO, GrantService, ResponseWrapper} from '../shared';
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'jhi-home',
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit, OnDestroy {
                 private loginModalService: LoginModalService,
                 private grantService: GrantService,
                 private alertService: AlertService,
-                private eventManager: EventManager) {
+                private eventManager: EventManager,
+                private router: Router) {
     }
 
     ngOnInit() {
@@ -79,5 +81,17 @@ export class HomeComponent implements OnInit, OnDestroy {
         const description = grantDTO.description;
         const index = 200;
         return (description != null && description.length > index);
+    }
+
+    showDescription(id) {
+        if (window.innerWidth < 992) {
+            this.router.navigate(['/', {outlets: {popup: 'description-grant/' + id}}]);
+        }
+    }
+
+    gotoExternalUrl(externalUrl) {
+        if (window.innerWidth >= 992) {
+            window.open(externalUrl, '_blank');
+        }
     }
 }

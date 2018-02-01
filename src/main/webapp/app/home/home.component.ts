@@ -1,8 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {AlertService, EventManager} from 'ng-jhipster';
 
 import {Account, LoginModalService, Principal, GrantDTO, GrantService, ResponseWrapper} from '../shared';
+import {NgbdContentModalComponent} from './grant-school/grant-school.component';
 
 @Component({
     selector: 'jhi-home',
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit, OnDestroy {
                 private loginModalService: LoginModalService,
                 private grantService: GrantService,
                 private alertService: AlertService,
-                private eventManager: EventManager) {
+                private eventManager: EventManager,
+                private modalService: NgbModal) {
     }
 
     ngOnInit() {
@@ -79,5 +81,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         const description = grantDTO.description;
         const index = 200;
         return (description != null && description.length > index);
+    }
+
+    open(grantSchhoolDescription) {
+        const modalRef = this.modalService.open(NgbdContentModalComponent);
+        modalRef.componentInstance.descrGrantSchool = grantSchhoolDescription;
     }
 }

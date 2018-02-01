@@ -31,6 +31,8 @@ import {
     ActiveMenuDirective,
     ErrorComponent
 } from './layouts';
+import {NgbdContentModalComponent} from './home/grant-school/grant-school.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
@@ -46,7 +48,8 @@ import {
         AvonnivGrantsModule,
         AvonnivGrantEditModule,
         AvonnivGrantProgramEditModule,
-        FormsModule
+        FormsModule,
+        NgbModule.forRoot()
     ],
     declarations: [
         JhiMainComponent,
@@ -54,7 +57,11 @@ import {
         ErrorComponent,
         PageRibbonComponent,
         ActiveMenuDirective,
-        FooterComponent
+        FooterComponent,
+        NgbdContentModalComponent
+    ],
+    entryComponents: [
+        NgbdContentModalComponent
     ],
     providers: [
         ProfileService,

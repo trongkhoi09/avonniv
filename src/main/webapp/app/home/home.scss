@@ -75,6 +75,7 @@
         color: #ffffff;
     }
     .grant-school {
+        margin-bottom: 92px;
         .title {
             margin-top: 32px;
             margin-bottom: 28px;
@@ -99,19 +100,34 @@
             }
         }
         .description {
-            margin-bottom: 92px;
             font-size: 16px;
             line-height: 1.5;
-            text-align: center;
             color: #747474;
             font-weight: normal;
             font-style: normal;
             font-stretch: normal;
             letter-spacing: normal;
         }
+        .action-more-grant-school {
+            display: block;
+            cursor: pointer;
+            color: #276cf2;
+        }
     }
 }
 
+@media screen and (min-width: 912px) {
+    .grant-school {
+        .description {
+            overflow: hidden;
+            height: 100px;
+        }
+        .action-more-grant-school {
+            display: block;
+            cursor: pointer;
+        }
+    }
+}
 
 @media screen and (max-width: 991px) {
     .home {
@@ -119,10 +135,16 @@
             .description {
                 margin-bottom: 50px;
                 padding: 0 10% 0 10%;
+                overflow: visible;
+                height: auto;
+            }
+            .action-more-grant-school{
+                display: none;
             }
         }
     }
 }
+
 @media screen and (max-width: 480px) {
     .home {
         .most-recent {
@@ -179,13 +201,13 @@
                 margin-top: 32px;
                 margin-bottom: 28px;
                 font-size: 48px;
-                text-align: center;
+                //text-align: center;
                 color: #26282f;
             }
             .content {
                 font-size: 18px;
                 line-height: 1.44;
-                text-align: center;
+                //text-align: center;
                 color: #747474;
                 margin-bottom: 40px;
             }
@@ -202,7 +224,7 @@
                 margin-bottom: 92px;
                 font-size: 16px;
                 line-height: 1.5;
-                text-align: center;
+                //text-align: center;
                 color: #747474;
                 font-weight: normal;
                 font-style: normal;
@@ -222,6 +244,7 @@
         }
     }
 }
+
 //
 //@media (min-width: 1400px) {
 //    .home {

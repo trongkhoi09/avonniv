@@ -1,8 +1,21 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {NgbActiveModal, NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {AlertService, EventManager} from 'ng-jhipster';
 
 import {Account, LoginModalService, Principal, GrantDTO, GrantService, ResponseWrapper} from '../shared';
+
+@Component({
+    selector: 'jhi-ngbd-content-modal-component',
+    template: `        
+    <div class="modal-body">
+            <span jhiTranslate={{descrGrantSchool}}></span>
+    </div>`
+})
+export class NgbdContentModalComponent {
+    @Input() descrGrantSchool;
+
+    constructor(public activeModal: NgbActiveModal) {}
+}
 
 @Component({
     selector: 'jhi-home',
@@ -21,7 +34,8 @@ export class HomeComponent implements OnInit, OnDestroy {
                 private loginModalService: LoginModalService,
                 private grantService: GrantService,
                 private alertService: AlertService,
-                private eventManager: EventManager) {
+                private eventManager: EventManager,
+                private modalService: NgbModal) {
     }
 
     ngOnInit() {
@@ -79,5 +93,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         const description = grantDTO.description;
         const index = 200;
         return (description != null && description.length > index);
+    }
+
+    open(grantSchhoolDescription) {
+        const modalRef = this.modalService.open(NgbdContentModalComponent);
+        modalRef.componentInstance.descrGrantSchool = grantSchhoolDescription;
     }
 }

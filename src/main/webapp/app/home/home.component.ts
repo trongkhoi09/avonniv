@@ -2,20 +2,21 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {NgbActiveModal, NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {AlertService, EventManager} from 'ng-jhipster';
 
-import {Account, LoginModalService, Principal, GrantDTO, GrantService, ResponseWrapper} from '../shared';
-import {Router} from "@angular/router";
+import {Account, GrantDTO, GrantService, LoginModalService, Principal, ResponseWrapper} from '../shared';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'jhi-description-grant-school-modal-component',
-    template: `        
-    <div class="modal-body">
+    template: `
+        <div class="modal-body">
             <span jhiTranslate="{{descriptionGrantSchool}}"></span>
-    </div>`
+        </div>`
 })
 export class DescriptionGrantSchoolModalComponent {
     @Input() descriptionGrantSchool;
 
-    constructor(public activeModal: NgbActiveModal) {}
+    constructor(public activeModal: NgbActiveModal) {
+    }
 }
 
 @Component({
@@ -91,6 +92,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
         return description;
     }
+
     isSliceDescription(grantDTO) {
         const description = grantDTO.description;
         const index = 200;
@@ -101,6 +103,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         const modalRef = this.modalService.open(DescriptionGrantSchoolModalComponent);
         modalRef.componentInstance.descriptionGrantSchool = descriptionGrantSchool;
     }
+
     showDescription(id) {
         if (window.innerWidth < 992) {
             this.router.navigate(['/', {outlets: {popup: 'description-grant/' + id}}]);

@@ -31,7 +31,7 @@ import {
     ActiveMenuDirective,
     ErrorComponent
 } from './layouts';
-import {NgbdContentModalComponent} from './home';
+import {DescriptionGrantSchoolModalComponent} from './home';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -58,10 +58,10 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
         PageRibbonComponent,
         ActiveMenuDirective,
         FooterComponent,
-        NgbdContentModalComponent
+        DescriptionGrantSchoolModalComponent
     ],
     entryComponents: [
-        NgbdContentModalComponent
+        DescriptionGrantSchoolModalComponent
     ],
     providers: [
         ProfileService,

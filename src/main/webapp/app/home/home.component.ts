@@ -3,16 +3,17 @@ import {NgbActiveModal, NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap'
 import {AlertService, EventManager} from 'ng-jhipster';
 
 import {Account, LoginModalService, Principal, GrantDTO, GrantService, ResponseWrapper} from '../shared';
+import {Router} from "@angular/router";
 
 @Component({
-    selector: 'jhi-ngbd-content-modal-component',
+    selector: 'jhi-description-grant-school-modal-component',
     template: `        
     <div class="modal-body">
-            <span jhiTranslate={{descrGrantSchool}}></span>
+            <span jhiTranslate="{{descriptionGrantSchool}}"></span>
     </div>`
 })
-export class NgbdContentModalComponent {
-    @Input() descrGrantSchool;
+export class DescriptionGrantSchoolModalComponent {
+    @Input() descriptionGrantSchool;
 
     constructor(public activeModal: NgbActiveModal) {}
 }
@@ -35,7 +36,8 @@ export class HomeComponent implements OnInit, OnDestroy {
                 private grantService: GrantService,
                 private alertService: AlertService,
                 private eventManager: EventManager,
-                private modalService: NgbModal) {
+                private modalService: NgbModal,
+                private router: Router) {
     }
 
     ngOnInit() {
@@ -95,8 +97,19 @@ export class HomeComponent implements OnInit, OnDestroy {
         return (description != null && description.length > index);
     }
 
-    open(grantSchhoolDescription) {
-        const modalRef = this.modalService.open(NgbdContentModalComponent);
-        modalRef.componentInstance.descrGrantSchool = grantSchhoolDescription;
+    open(descriptionGrantSchool) {
+        const modalRef = this.modalService.open(DescriptionGrantSchoolModalComponent);
+        modalRef.componentInstance.descriptionGrantSchool = descriptionGrantSchool;
+    }
+    showDescription(id) {
+        if (window.innerWidth < 992) {
+            this.router.navigate(['/', {outlets: {popup: 'description-grant/' + id}}]);
+        }
+    }
+
+    gotoExternalUrl(externalUrl) {
+        if (window.innerWidth >= 992) {
+            window.open(externalUrl, '_blank');
+        }
     }
 }

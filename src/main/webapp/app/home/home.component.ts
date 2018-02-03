@@ -5,19 +5,7 @@ import {AlertService, EventManager} from 'ng-jhipster';
 import {Account, GrantDTO, GrantService, LoginModalService, Principal, ResponseWrapper} from '../shared';
 import {Router} from '@angular/router';
 
-@Component({
-    selector: 'jhi-description-grant-school-modal-component',
-    template: `
-        <div class="modal-body">
-            <span jhiTranslate="{{descriptionGrantSchool}}"></span>
-        </div>`
-})
-export class DescriptionGrantSchoolModalComponent {
-    @Input() descriptionGrantSchool;
-
-    constructor(public activeModal: NgbActiveModal) {
-    }
-}
+import {GrantSchoolDescriptionModalComponent} from './grant-school/grant-school.component';
 
 @Component({
     selector: 'jhi-home',
@@ -99,9 +87,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         return (description != null && description.length > index);
     }
 
-    open(descriptionGrantSchool) {
-        const modalRef = this.modalService.open(DescriptionGrantSchoolModalComponent);
-        modalRef.componentInstance.descriptionGrantSchool = descriptionGrantSchool;
+    open(grantSchoolDescription) {
+        const modalRef = this.modalService.open(GrantSchoolDescriptionModalComponent);
+        modalRef.componentInstance.grantSchoolDescription = grantSchoolDescription;
     }
 
     showDescription(id) {

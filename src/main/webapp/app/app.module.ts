@@ -10,7 +10,7 @@ import {AvonnivHomeModule, GrantSchoolDescriptionModalComponent} from './home';
 import {AvonnivAdminModule} from './admin/admin.module';
 import {AvonnivAccountModule} from './account/account.module';
 import {AvonnivEntityModule} from './entities/entity.module';
-import {AvonnivGrantsModule} from './grants';
+import {AvonnivGrantsModule} from './grants/grants.module';
 import {AvonnivGrantEditModule} from './grant-edit';
 import {AvonnivGrantProgramEditModule} from './grant-program-edit';
 import {AvonnivSearchModule} from './search';

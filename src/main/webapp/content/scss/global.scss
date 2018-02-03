@@ -165,6 +165,9 @@ Custom alerts for notification
             width: 90%;
         }
     }
+    .modal-open{
+        position: fixed;
+    }
 }
 
 @media screen and (min-width: 480px) {

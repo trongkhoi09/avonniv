@@ -370,8 +370,11 @@
                 padding-top: 0px;
                 .nav-item {
                     &.icon-search {
-                        display: block;
+                        display: none;
                         padding-top: 6px;
+                        &.active {
+                            display: block;
+                        }
                     }
                     .icon-login {
                         color: #ffffff;

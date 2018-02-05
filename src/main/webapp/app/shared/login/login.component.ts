@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, Renderer} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
 import {EventManager, JhiLanguageService} from 'ng-jhipster';
@@ -15,7 +15,7 @@ import {PasswordResetModalService} from '../../account/password-reset/init/passw
         'login.scss'
     ]
 })
-export class JhiLoginModalComponent implements OnInit, AfterViewInit {
+export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit {
     authenticationError: boolean;
     password: string;
     rememberMe: boolean;
@@ -45,9 +45,14 @@ export class JhiLoginModalComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
+        this.renderer.setElementClass(document.body, 'position-active', true);
         this.languageService.addLocation('login');
         this.success = false;
         this.registerAccount = {};
+    }
+
+    ngOnDestroy() {
+        this.renderer.setElementClass(document.body, 'position-active', false);
     }
 
     ngAfterViewInit() {

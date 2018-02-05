@@ -51,6 +51,9 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-6 grant-filter-type">
+                        <a class="icon-filter float-left" *ngIf="isGrantpage()" (click)="setShowFilter()" [ngClass]="{'active': isShowFilter()}">
+                            <img class="filter-image" src="../../content/images/filter_contours.png">
+                        </a>
                         <a [ngClass]="grantFilter.openGrant?'':'unchecked'"
                            (click)="grantFilter.openGrant=!grantFilter.openGrant; onFiltering();">
                             <span><i class="fa fa-check" aria-hidden="true"></i></span>

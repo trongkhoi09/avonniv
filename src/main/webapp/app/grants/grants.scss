@@ -143,6 +143,9 @@
             font-weight: 500;
             text-align: left;
             color: #3b4c67;
+            .icon-filter {
+                display: none;
+            }
             a {
                 margin-bottom: 6px;
                 display: inline-block;
@@ -226,6 +229,20 @@
             }
             .grant-filter-type {
                 font-size: 11px;
+                .icon-filter {
+                    display: block;
+                    .filter-image {
+                        width: 20px;
+                        height: 25px;
+                        margin-top: -5px;
+                        content: url("../../content/images/filter_contours.png");
+                    }
+                    &.active {
+                        .filter-image {
+                            content: url("../../content/images/filter_full.png");
+                        }
+                    }
+                }
                 span i {
                     font-size: 12px;
                     width: 16px;

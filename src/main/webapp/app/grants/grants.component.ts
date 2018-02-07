@@ -166,4 +166,9 @@ export class GrantsComponent implements OnInit, OnDestroy {
     setShowFilter() {
         this.principal.setShowFilter();
     }
+
+    isGrantpage() {
+        return this.principal.isGrantpage();
+    }
+
 }

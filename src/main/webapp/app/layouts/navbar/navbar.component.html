@@ -8,9 +8,6 @@
                aria-label="Toggle navigation" (click)="toggleNavbar()">
                 <i class="fa fa-bars"></i>
             </a>
-            <a class="icon-filter float-left" *ngIf="isGrantpage()" (click)="setShowFilter()" [ngClass]="{'active': isShowFilter()}">
-                <img class="filter-image" src="../../../content/images/filter_contours.png">
-            </a>
             <a class="navbar-brand logo float-left" routerLink="/" (click)="collapseNavbar()" [ngClass]="isSearch?'hide-logo':'' " >
                 <span class="logo-img"></span>
             </a>

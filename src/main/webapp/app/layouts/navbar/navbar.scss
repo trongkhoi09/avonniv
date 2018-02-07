@@ -464,6 +464,8 @@
 
     }
     .jh-navbar-custom {
+        position: fixed;
+        width: 100%;
         .jh-navbar {
             &.navbar-normal {
                 .navbar-brand {

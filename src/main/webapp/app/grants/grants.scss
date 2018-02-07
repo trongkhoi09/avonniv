@@ -180,12 +180,11 @@
                 display: none;
             }
             .grant-filter-type {
-                font-size: 11px;
+                font-size: 14px;
                 span i {
-                    font-size: 12px;
-                    width: 16px;
-                    height: 16px;
-
+                    font-size: 14px;
+                    width: 18px;
+                    height: 18px;
                 }
                 a {
                     margin-right: 15px;
@@ -228,7 +227,7 @@
                 display: none;
             }
             .grant-filter-type {
-                font-size: 11px;
+                font-size: 14px;
                 .icon-filter {
                     display: block;
                     .filter-image {
@@ -244,10 +243,9 @@
                     }
                 }
                 span i {
-                    font-size: 12px;
-                    width: 16px;
-                    height: 16px;
-
+                    font-size: 14px;
+                    width: 18px;
+                    height: 18px;
                 }
                 a {
                     margin-right: 10px;
@@ -256,17 +254,6 @@
             jhi-list-grant {
                 width: 100%;
             }
-        }
-    }
-
-    @media screen and (max-width: 320px) {
-        .list-data {
-
-            .grant-filter-type {
-                font-size: 10px;
-
-            }
-
         }
     }
 }

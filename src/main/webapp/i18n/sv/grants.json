@@ -1,8 +1,8 @@
 {
     "grants": {
         "title": "Utlysningar",
-        "openGrants": "Öppna utlysningar",
-        "comingGrants": "Kommande utlysningar",
+        "openGrants": "Öppna",
+        "comingGrants": "Kommande",
         "publisher": "Utlysare",
         "area": "Område",
         "titleData": "Titel",

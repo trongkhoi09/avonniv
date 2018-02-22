@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
         );
+        window.scrollTo(0, 0);
     }
 
     private onSuccess(data, headers) {

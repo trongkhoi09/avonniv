@@ -119,7 +119,6 @@
                     background-color: #7588a8;
                     color: #ffffff;
                     border-color: #6f7a8c;
-                    z-index: 0;
                 }
             }
         }
@@ -142,6 +141,20 @@
             width: 100%;
             padding-left: 12px;
             padding-right: 12px;
+        }
+        .table {
+            &.table-hover tbody tr:hover {
+                z-index: 0;
+            }
+        }
+        .pagination{
+            .page-item{
+                &.active{
+                    .page-link, .page-link:focus, .page-link:hover {
+                        z-index: 0;
+                    }
+                }
+            }
         }
     }
 

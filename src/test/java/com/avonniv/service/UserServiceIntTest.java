@@ -41,28 +41,28 @@ public class UserServiceIntTest {
 
     @Test
     public void assertThatUserMustExistToResetPassword() {
-        Optional<User> maybeUser = userService.requestPasswordReset("john.doe@localhost");
+        Optional<User> maybeUser = userService.requestPasswordReset("john.doe@courzecorner.com");
         assertThat(maybeUser.isPresent()).isFalse();
 
-        maybeUser = userService.requestPasswordReset("admin@localhost");
+        maybeUser = userService.requestPasswordReset("admin@courzecorner.com");
         assertThat(maybeUser.isPresent()).isTrue();
 
-        assertThat(maybeUser.get().getLogin()).isEqualTo("admin@localhost");
+        assertThat(maybeUser.get().getLogin()).isEqualTo("admin@courzecorner.com");
         assertThat(maybeUser.get().getResetDate()).isNotNull();
         assertThat(maybeUser.get().getResetKey()).isNotNull();
     }
 
     @Test
     public void assertThatOnlyActivatedUserCanRequestPasswordReset() {
-        User user = userService.createUser("john.doe@localhost", "johndoe", "John", "Doe", "http://placehold.it/50x50", "en-US");
-        Optional<User> maybeUser = userService.requestPasswordReset("john.doe@localhost");
+        User user = userService.createUser("john.doe@courzecorner.com", "johndoe", "John", "Doe", "http://placehold.it/50x50", "en-US");
+        Optional<User> maybeUser = userService.requestPasswordReset("john.doe@courzecorner.com");
         assertThat(maybeUser.isPresent()).isFalse();
         userRepository.delete(user);
     }
 
     @Test
     public void assertThatResetKeyMustNotBeOlderThan24Hours() {
-        User user = userService.createUser("john.doe@localhost", "johndoe", "John", "Doe", "http://placehold.it/50x50", "en-US");
+        User user = userService.createUser("john.doe@courzecorner.com", "johndoe", "John", "Doe", "http://placehold.it/50x50", "en-US");
 
         Instant daysAgo = Instant.now().minus(25, ChronoUnit.HOURS);
         String resetKey = RandomUtil.generateResetKey();
@@ -81,7 +81,7 @@ public class UserServiceIntTest {
 
     @Test
     public void assertThatResetKeyMustBeValid() {
-        User user = userService.createUser("john.doe@localhost", "johndoe", "John", "Doe", "http://placehold.it/50x50", "en-US");
+        User user = userService.createUser("john.doe@courzecorner.com", "johndoe", "John", "Doe", "http://placehold.it/50x50", "en-US");
 
         Instant daysAgo = Instant.now().minus(25, ChronoUnit.HOURS);
         user.setActivated(true);
@@ -95,7 +95,7 @@ public class UserServiceIntTest {
 
     @Test
     public void assertThatUserCanResetPassword() {
-        User user = userService.createUser("john.doe@localhost", "johndoe", "John", "Doe", "http://placehold.it/50x50", "en-US");
+        User user = userService.createUser("john.doe@courzecorner.com", "johndoe", "John", "Doe", "http://placehold.it/50x50", "en-US");
         String oldPassword = user.getPassword();
         Instant daysAgo = Instant.now().minus(2, ChronoUnit.HOURS);
         String resetKey = RandomUtil.generateResetKey();
@@ -131,12 +131,12 @@ public class UserServiceIntTest {
 
     @Test
     public void testRemoveNotActivatedUsers() {
-        User user = userService.createUser("john.doe@localhost", "johndoe", "John", "Doe", "http://placehold.it/50x50", "en-US");
+        User user = userService.createUser("john.doe@courzecorner.com", "johndoe", "John", "Doe", "http://placehold.it/50x50", "en-US");
         user.setActivated(false);
         user.setCreatedDate(Instant.now().minus(30, ChronoUnit.DAYS));
         userRepository.save(user);
-        assertThat(userRepository.findOneByLogin("johndoe")).isPresent();
+        assertThat(userRepository.findOneByLogin("john.doe@courzecorner.com")).isPresent();
         userService.removeNotActivatedUsers();
-        assertThat(userRepository.findOneByLogin("johndoe")).isNotPresent();
+        assertThat(userRepository.findOneByLogin("john.doe@courzecorner.com")).isNotPresent();
     }
 }

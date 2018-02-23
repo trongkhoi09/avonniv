@@ -102,25 +102,25 @@ public class MailService {
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
         String content = templateEngine.process(templateName, context);
         String subject = messageSource.getMessage(titleKey, null, locale);
-        sendEmail(user.getEmail(), subject, content, false, true);
+        sendEmail(user.getLogin(), subject, content, false, true);
 
     }
 
     @Async
     public void sendActivationEmail(User user) {
-        log.debug("Sending activation email to '{}'", user.getEmail());
+        log.debug("Sending activation email to '{}'", user.getLogin());
         sendEmailFromTemplate(user, "activationEmail", "email.activation.title");
     }
 
     @Async
     public void sendCreationEmail(User user) {
-        log.debug("Sending creation email to '{}'", user.getEmail());
+        log.debug("Sending creation email to '{}'", user.getLogin());
         sendEmailFromTemplate(user, "creationEmail", "email.activation.title");
     }
 
     @Async
     public void sendPasswordResetMail(User user) {
-        log.debug("Sending password reset email to '{}'", user.getEmail());
+        log.debug("Sending password reset email to '{}'", user.getLogin());
         sendEmailFromTemplate(user, "passwordResetEmail", "email.reset.title");
     }
 
@@ -133,7 +133,7 @@ public class MailService {
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
         String content = templateEngine.process("notificationGrantEmail", context);
         String subject = messageSource.getMessage("email.notification.grant.title", null, locale);
-        sendEmail(user.getEmail(), subject, content, false, true);
+        sendEmail(user.getLogin(), subject, content, false, true);
 //        sendEmail("nguyenhoanghieu1996@gmail.com", subject, content, false, true);
 //        sendEmail("oscar.p.ridell@gmail.com", subject, content, false, true);
     }

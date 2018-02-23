@@ -11,8 +11,7 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span><span class="fa fa-sort"></span></th>
-                <th jhiSortBy="login"><span jhiTranslate="userManagement.login">Login</span> <span class="fa fa-sort"></span></th>
-                <th jhiSortBy="email"><span jhiTranslate="userManagement.email">Email</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="login"><span jhiTranslate="userManagement.email">Email</span> <span class="fa fa-sort"></span></th>
                 <th></th>
                 <th jhiSortBy="langKey"> <span jhiTranslate="userManagement.langKey">Lang Key</span> <span class="fa fa-sort"></span></th>
                 <th><span jhiTranslate="userManagement.profiles">Profiles</span></th>
@@ -26,7 +25,6 @@
             <tr *ngFor="let user of users; trackBy: trackIdentity">
                 <td><a [routerLink]="['../user-management', user.login]">{{user.id}}</a></td>
                 <td>{{user.login}}</td>
-                <td>{{user.email}}</td>
                 <td>
                     <span class="badge badge-danger hand" (click)="setActive(user, true)" *ngIf="!user.activated"
                           jhiTranslate="userManagement.deactivated">Deactivated</span>

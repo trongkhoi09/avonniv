@@ -74,8 +74,8 @@ public class UserService {
            });
     }
 
-    public Optional<User> requestPasswordReset(String mail) {
-        return userRepository.findOneByEmail(mail)
+    public Optional<User> requestPasswordReset(String login) {
+        return userRepository.findOneByLogin(login)
             .filter(User::getActivated)
             .map(user -> {
                 user.setResetKey(RandomUtil.generateResetKey());
@@ -84,7 +84,7 @@ public class UserService {
             });
     }
 
-    public User createUser(String login, String password, String firstName, String lastName, String email,
+    public User createUser(String login, String password, String firstName, String lastName,
         String imageUrl, String langKey) {
 
         User newUser = new User();
@@ -96,7 +96,6 @@ public class UserService {
         newUser.setPassword(encryptedPassword);
         newUser.setFirstName(firstName);
         newUser.setLastName(lastName);
-        newUser.setEmail(email);
         newUser.setImageUrl(imageUrl);
         newUser.setLangKey(langKey);
         // new user is not active
@@ -116,7 +115,6 @@ public class UserService {
         user.setLogin(userDTO.getLogin());
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
-        user.setEmail(userDTO.getEmail());
         user.setImageUrl(userDTO.getImageUrl());
         if (userDTO.getLangKey() == null) {
             user.setLangKey("en"); // default language
@@ -146,15 +144,13 @@ public class UserService {
      *
      * @param firstName first name of user
      * @param lastName last name of user
-     * @param email email id of user
      * @param langKey language key
      * @param imageUrl image URL of user
      */
-    public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
+    public void updateUser(String firstName, String lastName, String langKey, String imageUrl) {
         userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(user -> {
             user.setFirstName(firstName);
             user.setLastName(lastName);
-            user.setEmail(email);
             user.setLangKey(langKey);
             user.setImageUrl(imageUrl);
             log.debug("Changed Information for User: {}", user);
@@ -181,7 +177,6 @@ public class UserService {
                 user.setLogin(userDTO.getLogin());
                 user.setFirstName(userDTO.getFirstName());
                 user.setLastName(userDTO.getLastName());
-                user.setEmail(userDTO.getEmail());
                 user.setImageUrl(userDTO.getImageUrl());
                 user.setActivated(userDTO.isActivated());
                 user.setLangKey(userDTO.getLangKey());

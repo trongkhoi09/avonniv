@@ -52,14 +52,11 @@ public class UserResourceIntTest {
 
     private static final Long DEFAULT_ID = 1L;
 
-    private static final String DEFAULT_LOGIN = "johndoe";
+    private static final String DEFAULT_LOGIN = "johndoe@localhost";
     private static final String UPDATED_LOGIN = "jhipster";
 
     private static final String DEFAULT_PASSWORD = "passjohndoe";
     private static final String UPDATED_PASSWORD = "passjhipster";
-
-    private static final String DEFAULT_EMAIL = "johndoe@localhost";
-    private static final String UPDATED_EMAIL = "jhipster@localhost";
 
     private static final String DEFAULT_FIRSTNAME = "john";
     private static final String UPDATED_FIRSTNAME = "jhipsterFirstName";
@@ -123,7 +120,6 @@ public class UserResourceIntTest {
         user.setLogin(DEFAULT_LOGIN);
         user.setPassword(RandomStringUtils.random(60));
         user.setActivated(true);
-        user.setEmail(DEFAULT_EMAIL);
         user.setFirstName(DEFAULT_FIRSTNAME);
         user.setLastName(DEFAULT_LASTNAME);
         user.setImageUrl(DEFAULT_IMAGEURL);
@@ -150,7 +146,6 @@ public class UserResourceIntTest {
             DEFAULT_PASSWORD,
             DEFAULT_FIRSTNAME,
             DEFAULT_LASTNAME,
-            DEFAULT_EMAIL,
             true,
             DEFAULT_IMAGEURL,
             DEFAULT_LANGKEY,
@@ -172,7 +167,6 @@ public class UserResourceIntTest {
         assertThat(testUser.getLogin()).isEqualTo(DEFAULT_LOGIN);
         assertThat(testUser.getFirstName()).isEqualTo(DEFAULT_FIRSTNAME);
         assertThat(testUser.getLastName()).isEqualTo(DEFAULT_LASTNAME);
-        assertThat(testUser.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testUser.getImageUrl()).isEqualTo(DEFAULT_IMAGEURL);
         assertThat(testUser.getLangKey()).isEqualTo(DEFAULT_LANGKEY);
     }
@@ -190,7 +184,6 @@ public class UserResourceIntTest {
             DEFAULT_PASSWORD,
             DEFAULT_FIRSTNAME,
             DEFAULT_LASTNAME,
-            DEFAULT_EMAIL,
             true,
             DEFAULT_IMAGEURL,
             DEFAULT_LANGKEY,
@@ -226,7 +219,6 @@ public class UserResourceIntTest {
             DEFAULT_PASSWORD,
             DEFAULT_FIRSTNAME,
             DEFAULT_LASTNAME,
-            "anothermail@localhost",
             true,
             DEFAULT_IMAGEURL,
             DEFAULT_LANGKEY,
@@ -262,7 +254,6 @@ public class UserResourceIntTest {
             DEFAULT_PASSWORD,
             DEFAULT_FIRSTNAME,
             DEFAULT_LASTNAME,
-            DEFAULT_EMAIL, // this email should already be used
             true,
             DEFAULT_IMAGEURL,
             DEFAULT_LANGKEY,
@@ -297,7 +288,6 @@ public class UserResourceIntTest {
             .andExpect(jsonPath("$.[*].login").value(hasItem(DEFAULT_LOGIN)))
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRSTNAME)))
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LASTNAME)))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].imageUrl").value(hasItem(DEFAULT_IMAGEURL)))
             .andExpect(jsonPath("$.[*].langKey").value(hasItem(DEFAULT_LANGKEY)));
     }
@@ -315,7 +305,6 @@ public class UserResourceIntTest {
             .andExpect(jsonPath("$.login").value(user.getLogin()))
             .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRSTNAME))
             .andExpect(jsonPath("$.lastName").value(DEFAULT_LASTNAME))
-            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
             .andExpect(jsonPath("$.imageUrl").value(DEFAULT_IMAGEURL))
             .andExpect(jsonPath("$.langKey").value(DEFAULT_LANGKEY));
     }
@@ -345,7 +334,6 @@ public class UserResourceIntTest {
             UPDATED_PASSWORD,
             UPDATED_FIRSTNAME,
             UPDATED_LASTNAME,
-            UPDATED_EMAIL,
             updatedUser.getActivated(),
             UPDATED_IMAGEURL,
             UPDATED_LANGKEY,
@@ -366,7 +354,6 @@ public class UserResourceIntTest {
         User testUser = userList.get(userList.size() - 1);
         assertThat(testUser.getFirstName()).isEqualTo(UPDATED_FIRSTNAME);
         assertThat(testUser.getLastName()).isEqualTo(UPDATED_LASTNAME);
-        assertThat(testUser.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testUser.getImageUrl()).isEqualTo(UPDATED_IMAGEURL);
         assertThat(testUser.getLangKey()).isEqualTo(UPDATED_LANGKEY);
     }
@@ -389,7 +376,6 @@ public class UserResourceIntTest {
             UPDATED_PASSWORD,
             UPDATED_FIRSTNAME,
             UPDATED_LASTNAME,
-            UPDATED_EMAIL,
             updatedUser.getActivated(),
             UPDATED_IMAGEURL,
             UPDATED_LANGKEY,
@@ -411,7 +397,6 @@ public class UserResourceIntTest {
         assertThat(testUser.getLogin()).isEqualTo(UPDATED_LOGIN);
         assertThat(testUser.getFirstName()).isEqualTo(UPDATED_FIRSTNAME);
         assertThat(testUser.getLastName()).isEqualTo(UPDATED_LASTNAME);
-        assertThat(testUser.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testUser.getImageUrl()).isEqualTo(UPDATED_IMAGEURL);
         assertThat(testUser.getLangKey()).isEqualTo(UPDATED_LANGKEY);
     }
@@ -423,10 +408,9 @@ public class UserResourceIntTest {
         userRepository.saveAndFlush(user);
 
         User anotherUser = new User();
-        anotherUser.setLogin("jhipster");
+        anotherUser.setLogin("jhipster@localhost");
         anotherUser.setPassword(RandomStringUtils.random(60));
         anotherUser.setActivated(true);
-        anotherUser.setEmail("jhipster@localhost");
         anotherUser.setFirstName("java");
         anotherUser.setLastName("hipster");
         anotherUser.setImageUrl("");
@@ -444,7 +428,6 @@ public class UserResourceIntTest {
             updatedUser.getPassword(),
             updatedUser.getFirstName(),
             updatedUser.getLastName(),
-            "jhipster@localhost",  // this email should already be used by anotherUser
             updatedUser.getActivated(),
             updatedUser.getImageUrl(),
             updatedUser.getLangKey(),
@@ -467,10 +450,9 @@ public class UserResourceIntTest {
         userRepository.saveAndFlush(user);
 
         User anotherUser = new User();
-        anotherUser.setLogin("jhipster");
+        anotherUser.setLogin("jhipster@localhost");
         anotherUser.setPassword(RandomStringUtils.random(60));
         anotherUser.setActivated(true);
-        anotherUser.setEmail("jhipster@localhost");
         anotherUser.setFirstName("java");
         anotherUser.setLastName("hipster");
         anotherUser.setImageUrl("");
@@ -488,7 +470,6 @@ public class UserResourceIntTest {
             updatedUser.getPassword(),
             updatedUser.getFirstName(),
             updatedUser.getLastName(),
-            updatedUser.getEmail(),
             updatedUser.getActivated(),
             updatedUser.getImageUrl(),
             updatedUser.getLangKey(),
@@ -565,7 +546,6 @@ public class UserResourceIntTest {
             DEFAULT_LOGIN,
             DEFAULT_FIRSTNAME,
             DEFAULT_LASTNAME,
-            DEFAULT_EMAIL,
             true,
             DEFAULT_IMAGEURL,
             DEFAULT_LANGKEY,
@@ -579,7 +559,6 @@ public class UserResourceIntTest {
         assertThat(user.getLogin()).isEqualTo(DEFAULT_LOGIN);
         assertThat(user.getFirstName()).isEqualTo(DEFAULT_FIRSTNAME);
         assertThat(user.getLastName()).isEqualTo(DEFAULT_LASTNAME);
-        assertThat(user.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(user.getActivated()).isEqualTo(true);
         assertThat(user.getImageUrl()).isEqualTo(DEFAULT_IMAGEURL);
         assertThat(user.getLangKey()).isEqualTo(DEFAULT_LANGKEY);
@@ -610,7 +589,6 @@ public class UserResourceIntTest {
         assertThat(userDTO.getLogin()).isEqualTo(DEFAULT_LOGIN);
         assertThat(userDTO.getFirstName()).isEqualTo(DEFAULT_FIRSTNAME);
         assertThat(userDTO.getLastName()).isEqualTo(DEFAULT_LASTNAME);
-        assertThat(userDTO.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(userDTO.isActivated()).isEqualTo(true);
         assertThat(userDTO.getImageUrl()).isEqualTo(DEFAULT_IMAGEURL);
         assertThat(userDTO.getLangKey()).isEqualTo(DEFAULT_LANGKEY);

@@ -8,6 +8,7 @@ import com.avonniv.domain.User;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.persistence.Column;
 import javax.validation.constraints.*;
 import java.time.Instant;
 import java.util.Set;
@@ -20,9 +21,11 @@ public class UserDTO {
 
     private Long id;
 
-    @NotBlank
+    @NotNull
     @Pattern(regexp = Constants.LOGIN_REGEX)
-    @Size(min = 1, max = 50)
+    @Email
+    @Size(min = 5, max = 100)
+    @Column(length = 100, nullable = false)
     private String login;
 
     @Size(max = 50)
@@ -30,10 +33,6 @@ public class UserDTO {
 
     @Size(max = 50)
     private String lastName;
-
-    @Email
-    @Size(min = 5, max = 100)
-    private String email;
 
     @Size(max = 256)
     private String imageUrl;
@@ -61,14 +60,14 @@ public class UserDTO {
 
     public UserDTO(User user) {
         this(user.getId(), user.getLogin(), user.getFirstName(), user.getLastName(),
-            user.getEmail(), user.getActivated(), user.getImageUrl(), user.getLangKey(),
+            user.getActivated(), user.getImageUrl(), user.getLangKey(),
             user.getCreatedBy(), user.getCreatedDate(), user.getLastModifiedBy(), user.getLastModifiedDate(),
             user.getAuthorities().stream().map(Authority::getName)
                 .collect(Collectors.toSet()), user.isNotification());
     }
 
     public UserDTO(Long id, String login, String firstName, String lastName,
-        String email, boolean activated, String imageUrl, String langKey,
+                   boolean activated, String imageUrl, String langKey,
         String createdBy, Instant createdDate, String lastModifiedBy, Instant lastModifiedDate,
         Set<String> authorities) {
 
@@ -76,7 +75,6 @@ public class UserDTO {
         this.login = login;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
         this.activated = activated;
         this.imageUrl = imageUrl;
         this.langKey = langKey;
@@ -88,7 +86,7 @@ public class UserDTO {
     }
 
     public UserDTO(Long id, String login, String firstName, String lastName,
-        String email, boolean activated, String imageUrl, String langKey,
+        boolean activated, String imageUrl, String langKey,
         String createdBy, Instant createdDate, String lastModifiedBy, Instant lastModifiedDate,
         Set<String> authorities, boolean notification) {
 
@@ -96,7 +94,6 @@ public class UserDTO {
         this.login = login;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
         this.activated = activated;
         this.imageUrl = imageUrl;
         this.langKey = langKey;
@@ -130,10 +127,6 @@ public class UserDTO {
 
     public String getLastName() {
         return lastName;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public String getImageUrl() {
@@ -186,7 +179,6 @@ public class UserDTO {
             "login='" + login + '\'' +
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
-            ", email='" + email + '\'' +
             ", imageUrl='" + imageUrl + '\'' +
             ", activated=" + activated +
             ", langKey='" + langKey + '\'' +

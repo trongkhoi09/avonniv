@@ -25,9 +25,6 @@
             <column name="password_hash" type="varchar(60)"/>
             <column name="first_name" type="varchar(50)"/>
             <column name="last_name" type="varchar(50)"/>
-            <column name="email" type="varchar(100)">
-                <constraints unique="true" nullable="true"/>
-            </column>
             <column name="image_url" type="varchar(256)"/>
             <column name="activated" type="boolean" valueBoolean="false">
                 <constraints nullable="false"/>
@@ -53,11 +50,6 @@
             <column name="login" type="varchar(50)"/>
         </createIndex>
 
-        <createIndex indexName="idx_user_email"
-                     tableName="jhi_user"
-                     unique="true">
-            <column name="email" type="varchar(100)"/>
-        </createIndex>
         <createTable tableName="jhi_authority">
             <column name="name" type="varchar(50)">
                 <constraints primaryKey="true" nullable="false"/>

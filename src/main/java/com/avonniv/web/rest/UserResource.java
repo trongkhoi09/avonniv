@@ -100,11 +100,7 @@ public class UserResource {
         // Lowercase the user login before comparing with database
         } else if (userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase()).isPresent()) {
             return ResponseEntity.badRequest()
-                .headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "userexists", "Login already in use"))
-                .body(null);
-        } else if (userRepository.findOneByEmail(managedUserVM.getEmail()).isPresent()) {
-            return ResponseEntity.badRequest()
-                .headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "emailexists", "Email already in use"))
+                .headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "emailexists", "Login already in use"))
                 .body(null);
         } else {
             User newUser = userService.createUser(managedUserVM);
@@ -128,13 +124,9 @@ public class UserResource {
     @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody ManagedUserVM managedUserVM) {
         log.debug("REST request to update User : {}", managedUserVM);
-        Optional<User> existingUser = userRepository.findOneByEmail(managedUserVM.getEmail());
+        Optional<User> existingUser = userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase());
         if (existingUser.isPresent() && (!existingUser.get().getId().equals(managedUserVM.getId()))) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "emailexists", "Email already in use")).body(null);
-        }
-        existingUser = userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase());
-        if (existingUser.isPresent() && (!existingUser.get().getId().equals(managedUserVM.getId()))) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "userexists", "Login already in use")).body(null);
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "emailexists", "Email is already in use!")).body(null);
         }
         Optional<UserDTO> updatedUser = userService.updateUser(managedUserVM);
 

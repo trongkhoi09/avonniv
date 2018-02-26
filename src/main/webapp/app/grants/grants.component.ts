@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {
     AreaDTO, AreaService, ITEMS_PER_PAGE, PreferencesService, Principal, PublisherDTO,
     PublisherService
@@ -41,10 +41,12 @@ export class GrantsComponent implements OnInit, OnDestroy {
                 private route: ActivatedRoute,
                 private publisherService: PublisherService,
                 private preferencesService: PreferencesService,
-                private principal: Principal) {
+                private principal: Principal,
+                private ref: Renderer2) {
     }
 
     ngOnInit() {
+        this.setActivateClicking();
         this.principal.setGrantpage(true);
         this.routeSub = this.route.queryParams.subscribe((params) => {
             this.grantFilter.openGrant = !('false' === params['openGrant']);
@@ -165,10 +167,20 @@ export class GrantsComponent implements OnInit, OnDestroy {
 
     setShowFilter() {
         this.principal.setShowFilter();
+        this.setActivateClicking();
     }
 
     isGrantpage() {
         return this.principal.isGrantpage();
+    }
+
+    setActivateClicking() {
+        if (this.principal.isShowFilter()) {
+            console.log('opent');
+            this.ref.addClass(document.getElementById('trans-parent'), 'trans-parent');
+        } else {
+            this.ref.removeClass(document.getElementById('trans-parent'), 'trans-parent');
+        }
     }
 
 }

@@ -19,6 +19,9 @@
                 "userexists": "<strong>Användarnamnet finns redan!</strong> Prova ett annat användarnamn.",
                 "emailexists": "<strong>Mailadressen är används redan!</strong> Prova gärna en annan mailadress."
             }
-        }
+        },
+        "Terms1":"Jag godkänner att Avonniv kan lagra min email.",
+        "Terms2":"Jag godkänner att Avonniv kan skicka mig email om uppdateringar i utlysningar.",
+        "Terms3":"Jag godkänner Avonnivs <a href=''>användarvillkor.</a>"
     }
 }

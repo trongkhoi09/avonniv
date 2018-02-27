@@ -19,6 +19,9 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
     authenticationError: boolean;
     password: string;
     rememberMe: boolean;
+    terms1: boolean;
+    terms2: boolean;
+    terms3: boolean;
     username: string;
     credentials: any;
     showPassword = false;
@@ -67,7 +70,10 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
         this.credentials = {
             username: null,
             password: null,
-            rememberMe: true
+            rememberMe: true,
+            terms1: true,
+            terms2: true,
+            terms3: true
         };
         this.authenticationError = false;
         this.activeModal.dismiss('cancel');

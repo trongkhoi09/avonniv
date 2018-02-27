@@ -105,6 +105,27 @@
                     </div>
                     <jhi-password-strength-bar [passwordToCheck]="registerAccount.password"></jhi-password-strength-bar>
                 </div>
+                <div class="form-check">
+                    <a class="check-terms" [ngClass]="terms1?'':'unchecked'"
+                       (click)="terms1=!terms1">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                        <span jhiTranslate="register.Terms1">I agree to that Avonniv can store my email.</span>
+                    </a>
+                </div>
+                <div class="form-check">
+                    <a class="check-terms" [ngClass]="terms2?'':'unchecked'"
+                       (click)="terms2=!terms2">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                        <span jhiTranslate="register.Terms2">I agree to that Avonniv can send me notification emails about grant updates.</span>
+                    </a>
+                </div>
+                <div class="form-check">
+                    <a class="check-terms" [ngClass]="terms3?'':'unchecked'"
+                       (click)="terms3=!terms3">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                        <span jhiTranslate="register.Terms3">I agree to Avonniv's Terms & Conditions.</span>
+                    </a>
+                </div>
                 <!--<div class="form-group">-->
                 <!--<input type="password" class="form-control" id="confirmPassword" name="confirmPassword"-->
                 <!--#confirmPasswordInput="ngModel"-->
@@ -126,7 +147,7 @@
                 <!--</div>-->
                 <!--</div>-->
                 <div class="text-center">
-                    <button type="submit" [disabled]="registerForm.form.invalid" class="btn btn-primary btn-block"
+                    <button type="submit" [disabled]="registerForm.form.invalid || !terms1 || !terms2 || !terms3" class="btn btn-primary btn-block"
                             jhiTranslate="register.form.button">Register
                     </button>
                 </div>

@@ -90,6 +90,26 @@
                     color: #276cf2;
                 }
             }
+            .check-terms {
+                i {
+                    vertical-align: middle;
+                    font-size: 12px;
+                    padding: 1px;
+                    margin-right: 8px;
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 1px;
+                    border: solid 1px #aab3c3;
+                }
+                span {
+                    vertical-align: middle;
+                }
+            }
+            .unchecked {
+                i {
+                    color: transparent;
+                }
+            }
         }
         .form-sign-in {
             .form-check {

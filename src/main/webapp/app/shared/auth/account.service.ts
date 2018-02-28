@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Rx';
 
 @Injectable()
 export class AccountService {
+
     constructor(private http: Http) {
     }
 
@@ -17,5 +18,9 @@ export class AccountService {
 
     updateNotification(notification: boolean): Observable<Response> {
         return this.http.post('api/account/notification?notification=' + notification, {});
+    }
+
+    delete(): Observable<Response> {
+        return this.http.delete( 'api/delete/');
     }
 }

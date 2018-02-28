@@ -292,4 +292,17 @@
             </div>
         </a>
     </div>
+    <div class="infor-avoniv">
+        <span jhiTranslate="profiles.infor">Please direct questions about use and storage of user data to info@avonniv.com.</span>
+    </div>
+
+    <div class="button-delete">
+        <button type="button"
+                class="btn btn-danger btn-sm"
+                 [disabled]="checkAdmin()" (click)="openModalConfilm()">
+            <span class="fa fa-remove"></span>
+            <span class="hidden-md-down" jhiTranslate="profiles.delete">Delete</span>
+        </button>
+    </div>
+
 </div>

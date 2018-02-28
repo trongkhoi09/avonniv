@@ -11,7 +11,8 @@ import {
     User
 } from '../../shared';
 import {Password} from '../password/password.service';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {ConfilmDeleteModalService} from './confilm-delete-dialog.service';
 
 @Component({
     selector: 'jhi-profiles',
@@ -37,6 +38,7 @@ export class ProfilesComponent implements OnInit {
     password: string;
     oldPassword: string;
     confirmPassword: string;
+    authorities: string[];
     collapse = {
         password: true,
         profile: true
@@ -49,13 +51,15 @@ export class ProfilesComponent implements OnInit {
                 private publisherService: PublisherService,
                 private preferencesService: PreferencesService,
                 private languageService: JhiLanguageService,
-                private languageHelper: JhiLanguageHelper) {
+                private languageHelper: JhiLanguageHelper,
+                private confimDelete: ConfilmDeleteModalService) {
     }
 
     ngOnInit() {
         this.principal.identity().then((account) => {
             this.settingsAccount = this.copyAccount(account);
             this.account = account;
+            this.authorities = account.authorities;
         });
         this.languageHelper.getAll().then((languages) => {
             this.languages = languages;
@@ -118,7 +122,8 @@ export class ProfilesComponent implements OnInit {
             langKey: account.langKey,
             lastName: account.lastName,
             login: account.login,
-            imageUrl: account.imageUrl
+            imageUrl: account.imageUrl,
+            authorities: account.authorities
         };
     }
 
@@ -168,4 +173,19 @@ export class ProfilesComponent implements OnInit {
             });
         }
     }
+
+    openModalConfilm() {
+        this.clear();
+        this.confimDelete.open();
+    }
+
+    checkAdmin() {
+        for (let i = 0; i < this.authorities.length ; i ++) {
+            if (this.authorities[i] === 'ROLE_ADMIN') {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -19,6 +19,9 @@
         },
         "form": {
             "preferences": "Preferenser"
-        }
+        },
+        "infor": "Vänligen ställ frågor om användning och lagring av användardata till info@avonniv.com",
+        "delete": "Ta bort",
+        "confimlDelete": "Är du säker på att du vill radera ditt konto"
     }
 }

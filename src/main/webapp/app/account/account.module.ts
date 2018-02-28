@@ -21,6 +21,8 @@ import {
     PasswordResetModalService,
     accountState
 } from './';
+import {ConfilmDeleteModalService} from './profiles/confilm-delete-dialog.service';
+import {ModalDeleteDialogComponent} from './profiles/confilm-delete-dialog.component';
 @NgModule({
     imports: [
         AvonnivSharedModule,
@@ -34,7 +36,8 @@ import {
         PasswordResetInitComponent,
         PasswordResetFinishComponent,
         SettingsComponent,
-        ProfilesComponent
+        ProfilesComponent,
+        ModalDeleteDialogComponent
     ],
     providers: [
         Register,
@@ -43,10 +46,12 @@ import {
         PasswordResetInit,
         PasswordResetFinish,
         ProfilesModalService,
-        PasswordResetModalService
+        PasswordResetModalService,
+        ConfilmDeleteModalService,
     ],
     entryComponents: [
-        ProfilesComponent
+        ProfilesComponent,
+        ModalDeleteDialogComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

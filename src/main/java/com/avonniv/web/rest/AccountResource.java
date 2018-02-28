@@ -2,6 +2,7 @@ package com.avonniv.web.rest;
 
 import com.avonniv.domain.User;
 import com.avonniv.repository.UserRepository;
+import com.avonniv.security.AuthoritiesConstants;
 import com.avonniv.security.SecurityUtils;
 import com.avonniv.service.MailService;
 import com.avonniv.service.UserService;
@@ -18,12 +19,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -228,5 +225,14 @@ public class AccountResource {
         return !StringUtils.isEmpty(password) &&
             password.length() >= ManagedUserVM.PASSWORD_MIN_LENGTH &&
             password.length() <= ManagedUserVM.PASSWORD_MAX_LENGTH;
+    }
+
+    @DeleteMapping("/delete")
+    @Timed
+    public ResponseEntity<Void> deleteUser() {
+        final String name = SecurityUtils.getCurrentUserLogin();
+        log.debug("REST request to delete user: {}", name);
+        userService.deleteUser(name);
+        return ResponseEntity.ok().headers(HeaderUtil.createAlert("areaManagement.deleted", name)).build();
     }
 }

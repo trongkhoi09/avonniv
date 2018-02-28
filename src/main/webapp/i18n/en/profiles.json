@@ -19,6 +19,9 @@
         },
         "form": {
             "preferences": "Preferences"
-        }
+        },
+        "infor": "Please direct questions about use and storage of user data to info@avonniv.com",
+        "delete":"delete",
+        "confimlDelete": "Are you sure you want to delete your account"
     }
 }

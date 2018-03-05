@@ -29,7 +29,8 @@ public class PublisherService {
     public Publisher createPublisher(PublisherDTO publisherDTO) {
         Publisher newPublisher = new Publisher();
         newPublisher.setName(publisherDTO.getName());
-        newPublisher.setDescription(publisherDTO.getDescription());
+        newPublisher.setDescriptionSWE(publisherDTO.getDescriptionSWE());
+        newPublisher.setDescriptionEN(publisherDTO.getDescriptionEN());
         newPublisher.setAddress(publisherDTO.getAddress());
         newPublisher.setEmail(publisherDTO.getEmail());
         newPublisher.setPhone(publisherDTO.getPhone());
@@ -76,7 +77,8 @@ public class PublisherService {
             .findOne(publisherDTO.getId()))
             .map(publisher -> {
                 publisher.setName(publisherDTO.getName());
-                publisher.setDescription(publisherDTO.getDescription());
+                publisher.setDescriptionSWE(publisherDTO.getDescriptionSWE());
+                publisher.setDescriptionEN(publisherDTO.getDescriptionEN());
                 publisher.setAddress(publisherDTO.getAddress());
                 publisher.setEmail(publisherDTO.getEmail());
                 publisher.setPhone(publisherDTO.getPhone());

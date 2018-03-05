@@ -63,6 +63,7 @@ public class FetchDataEnergimyndighetenService {
                     0,
                     "Energimyndigheten",
                     "Energimyndigheten arbetar för ett hållbart energisystem, som förenar ekologisk hållbarhet, konkurrenskraft och försörjningstrygghet.",
+                    null,
                     "Kungsgatan 43, Eskilstuna",
                     "registrator@energimyndigheten.se",
                     "016-544 20 00",

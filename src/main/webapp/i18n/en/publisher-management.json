@@ -22,7 +22,8 @@
         "notCrawled": "Not Crawled",
         "phone": "Phone",
         "address": "Address",
-        "description": "Description",
+        "descriptionEN": "Description EN",
+        "descriptionSWE": "Description SWE",
         "createdDate": "Created date",
         "lastModifiedDate": "Modified date"
     }

@@ -33,14 +33,29 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="publisherManagement.description">Description</label>
+            <label class="form-control-label" jhiTranslate="publisherManagement.descriptionEN">Description</label>
             <textarea rows="3" class="form-control" name="description"
                       #descriptionInput="ngModel"
-                      [(ngModel)]="publisher.description" maxlength="1000"></textarea>
+                      [(ngModel)]="publisher.descriptionEN" maxlength="1000"></textarea>
 
             <div *ngIf="descriptionInput.dirty && descriptionInput.invalid">
                 <small class="form-text text-danger"
                        *ngIf="descriptionInput.errors.maxlength"
+                       jhiTranslate="entity.validation.maxlength"
+                       translate-value-max="1000">
+                    This field cannot be longer than 1000 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="publisherManagement.descriptionSWE">Description</label>
+            <textarea rows="3" class="form-control" name="descriptionSWE"
+                      #descriptionInputSWE="ngModel"
+                      [(ngModel)]="publisher.descriptionSWE" maxlength="1000"></textarea>
+
+            <div *ngIf="descriptionInputSWE.dirty && descriptionInputSWE.invalid">
+                <small class="form-text text-danger"
+                       *ngIf="descriptionInputSWE.errors.maxlength"
                        jhiTranslate="entity.validation.maxlength"
                        translate-value-max="1000">
                     This field cannot be longer than 1000 characters.

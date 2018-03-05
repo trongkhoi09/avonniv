@@ -7,7 +7,9 @@ import java.time.Instant;
 public class PublisherDTO extends AbstractEntityDTO {
     private String name;
 
-    private String description;
+    private String descriptionEN;
+
+    private String descriptionSWE;
 
     private String address;
 
@@ -24,18 +26,19 @@ public class PublisherDTO extends AbstractEntityDTO {
 
     public PublisherDTO(Publisher publisher) {
         this(publisher.getId(), publisher.getCreatedDate(), publisher.getLastModifiedDate(), publisher.getStatus(),
-            publisher.getName(), publisher.getDescription(), publisher.getAddress(), publisher.getEmail(), publisher.getPhone(), publisher.getUrl(),
+            publisher.getName(), publisher.getDescriptionEN(), publisher.getDescriptionSWE(), publisher.getAddress(), publisher.getEmail(), publisher.getPhone(), publisher.getUrl(),
             publisher.isCrawled());
     }
 
     public PublisherDTO(Long id, Instant createdDate, Instant lastModifiedDate, int status,
-                        String name, String description, String address, String email, String phone, String url) {
+                        String name, String descriptionEN, String descriptionSWE, String address, String email, String phone, String url) {
         this.id = id;
         this.createdDate = createdDate;
         this.lastModifiedDate = lastModifiedDate;
         this.status = status;
         this.name = name;
-        this.description = description;
+        this.descriptionEN = descriptionEN;
+        this.descriptionSWE = descriptionSWE;
         this.address = address;
         this.email = email;
         this.phone = phone;
@@ -44,14 +47,15 @@ public class PublisherDTO extends AbstractEntityDTO {
     }
 
     public PublisherDTO(Long id, Instant createdDate, Instant lastModifiedDate, int status,
-                        String name, String description, String address, String email, String phone, String url,
+                        String name, String descriptionEN, String descriptionSWE, String address, String email, String phone, String url,
                         boolean crawled) {
         this.id = id;
         this.createdDate = createdDate;
         this.lastModifiedDate = lastModifiedDate;
         this.status = status;
         this.name = name;
-        this.description = description;
+        this.descriptionEN = descriptionEN;
+        this.descriptionSWE = descriptionSWE;
         this.address = address;
         this.email = email;
         this.phone = phone;
@@ -67,12 +71,20 @@ public class PublisherDTO extends AbstractEntityDTO {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescriptionEN() {
+        return descriptionEN;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescriptionEN(String descriptionEN) {
+        this.descriptionEN = descriptionEN;
+    }
+
+    public String getDescriptionSWE() {
+        return descriptionSWE;
+    }
+
+    public void setDescriptionSWE(String descriptionSWE) {
+        this.descriptionSWE = descriptionSWE;
     }
 
     public String getAddress() {

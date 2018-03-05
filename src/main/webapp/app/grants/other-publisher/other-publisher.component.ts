@@ -3,6 +3,7 @@ import {NgbActiveModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {ActivatedRoute} from '@angular/router';
 import {OtherPublisherModalService} from './other-publisher-modal.service';
 import {PublisherDTO} from '../../shared';
+import {JhiLanguageService} from 'ng-jhipster';
 
 @Component({
     selector: 'jhi-other-publisher-modal',
@@ -14,11 +15,21 @@ import {PublisherDTO} from '../../shared';
 })
 export class JhiOtherPublisherModalComponent implements OnInit {
     otherPublisher: PublisherDTO;
+    description: string;
 
-    constructor(public activeModal: NgbActiveModal) {
+    constructor(public activeModal: NgbActiveModal,
+                public languageService: JhiLanguageService) {
     }
 
     ngOnInit() {
+        this.languageService.getCurrent().then((current) => {
+            if (current === 'en') {
+                this.description = this.otherPublisher.descriptionEN;
+            } else if (current === 'sv') {
+                this.description = this.otherPublisher.descriptionSWE;
+            }
+        });
+
     }
 
     openNewTab() {

@@ -66,7 +66,8 @@ public class GrantServiceTest {
         }
         Publisher publisher = new Publisher();
         publisher.setName("Publisher_Test_1");
-        publisher.setDescription("Description");
+        publisher.setDescriptionSWE("Description");
+        publisher.setDescriptionEN("beskrivning");
         publisher.setAddress("address");
         publisher.setEmail("email@email.com");
         publisher.setPhone("09876454321");

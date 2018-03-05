@@ -22,7 +22,8 @@
         "notCrawled": "Not Crawled",
         "phone": "Telefon",
         "address": "Adress",
-        "description": "Beskrivning",
+        "descriptionEN": "Beskrivning EN",
+        "descriptionSWE": "Beskrivning SWE",
         "createdDate": "Skapad datum",
         "lastModifiedDate": "Ändrad datum"
     }

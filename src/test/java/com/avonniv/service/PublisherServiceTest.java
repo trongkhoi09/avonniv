@@ -12,8 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -40,6 +38,7 @@ public class PublisherServiceTest {
             0,
             "Publisher_Test_1",
             "Description",
+            "beskrivning",
             "address",
             "email@email.com",
             "09876454321",
@@ -85,7 +84,8 @@ public class PublisherServiceTest {
     public void updatePublisher() throws Exception {
         Publisher publisher = new Publisher();
         publisher.setName("Publisher_Test_1");
-        publisher.setDescription("Description");
+        publisher.setDescriptionSWE("Description");
+        publisher.setDescriptionEN("beskrivning");
         publisher.setAddress("address");
         publisher.setEmail("email@email.com");
         publisher.setPhone("09876454321");
@@ -105,7 +105,8 @@ public class PublisherServiceTest {
     public void deletePublisher() throws Exception {
         Publisher publisher = new Publisher();
         publisher.setName("Publisher_Test_1");
-        publisher.setDescription("Description");
+        publisher.setDescriptionSWE("Description");
+        publisher.setDescriptionEN("beskrivning");
         publisher.setAddress("address");
         publisher.setEmail("email@email.com");
         publisher.setPhone("09876454321");

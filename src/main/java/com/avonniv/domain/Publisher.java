@@ -21,8 +21,9 @@ public class Publisher extends AbstractEntity{
     private String name;
 
     @Lob
-    private String descriptionSWE;
+    private String description;
 
+    @Lob
     private String descriptionEN;
 
     private String address;
@@ -45,11 +46,11 @@ public class Publisher extends AbstractEntity{
     }
 
     public String getDescriptionSWE() {
-        return descriptionSWE;
+        return description;
     }
 
     public void setDescriptionSWE(String descriptionSWE) {
-        this.descriptionSWE = descriptionSWE;
+        this.description = descriptionSWE;
     }
 
     public String getDescriptionEN() {

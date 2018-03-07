@@ -445,9 +445,8 @@
     </changeSet>
 
     <changeSet id="4" author="jhipster">
-        <renameColumn tableName="tbl_publisher" columnDataType="text" oldColumnName="description" newColumnName="descriptionSWE"/>
         <addColumn tableName="tbl_publisher">
-            <column name="descriptionEN" type="text"></column>
+            <column name="descriptionEN" type="text"/>
         </addColumn>
     </changeSet>
 </databaseChangeLog>

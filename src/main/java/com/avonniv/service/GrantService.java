@@ -115,7 +115,7 @@ public class GrantService {
             .map(grantCall -> {
                 grantCall.setTitle(grantDTO.getTitle());
                 grantCall.setExcerpt(grantDTO.getExcerpt());
-                if (grantDTO.getDescription() != null || !grantDTO.getDescription().trim().isEmpty()) {
+                if (grantDTO.getDescription() != null && !grantDTO.getDescription().trim().isEmpty()) {
                     grantCall.setDescription(grantDTO.getDescription());
                 }
                 grantCall.setOpenDate(grantDTO.getOpenDate());

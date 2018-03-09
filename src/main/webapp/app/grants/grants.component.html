@@ -39,7 +39,7 @@
                     </div>
                     <div class="col-md-12">
                         <div *ngFor="let publisher of publisherNotCrawled; let i = index">
-                            <a [routerLink]="['/', { outlets: { popup: 'other-publisher/'+ publisher.name} }]"
+                            <a (click)="opentOtherPublisher(publisher.name)"
                                replaceUrl="true">{{publisher.name}}
                             </a>
                         </div>

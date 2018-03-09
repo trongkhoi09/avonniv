@@ -4,9 +4,11 @@ import {
     PublisherService
 } from '../shared';
 import {Observable} from 'rxjs/Observable';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {EventManager} from 'ng-jhipster';
 import {Subscription} from 'rxjs/Rx';
+
+declare const ga: Function;
 
 @Component({
     selector: 'jhi-grants',
@@ -42,7 +44,8 @@ export class GrantsComponent implements OnInit, OnDestroy {
                 private publisherService: PublisherService,
                 private preferencesService: PreferencesService,
                 private principal: Principal,
-                private ref: Renderer2) {
+                private ref: Renderer2,
+                private router: Router) {
     }
 
     ngOnInit() {
@@ -79,10 +82,14 @@ export class GrantsComponent implements OnInit, OnDestroy {
     }
 
     onFiltering() {
+        let filter = '';
         const publisherDTOs = [];
         for (let i = 0; i < this.publisherCrawled.length; i++) {
             if (this.publisherCrawled[i].check) {
                 publisherDTOs.push(this.publisherCrawled[i].name);
+                filter += this.publisherCrawled[i].name + ': checked; ';
+            } else {
+                filter += this.publisherCrawled[i].name + ': unchecked; ';
             }
         }
         const areaDTOs = [];
@@ -93,11 +100,14 @@ export class GrantsComponent implements OnInit, OnDestroy {
         data.publisherDTOs = publisherDTOs;
         data.areaDTOs = areaDTOs;
         this.data = Object.assign({}, data);
+        ga('send', 'event', 'filter', 'openGrant: ' +  this.grantFilter.openGrant + '; comingGrant: ' + this.grantFilter.comingGrant );
+        ga('send', 'event', 'filter', filter);
     }
 
     onChangeItemsPerPage(number: number) {
         this.grantFilter.itemsPerPage = number;
         this.onFiltering();
+        ga('send', 'event', 'numer filter: ' + number, 'filter number grants');
     }
 
     inputFormatter = (x: { name: string }) => x.name;
@@ -181,6 +191,11 @@ export class GrantsComponent implements OnInit, OnDestroy {
         } else {
             this.ref.removeClass(document.getElementById('trans-parent'), 'trans-parent');
         }
+    }
+
+    opentOtherPublisher(publisherName) {
+        this.router.navigate(['/', { outlets: { popup: 'other-publisher/' + publisherName} } ]);
+        ga('send', 'event', 'other publisher', 'open otherpublisher ' + publisherName);
     }
 
 }

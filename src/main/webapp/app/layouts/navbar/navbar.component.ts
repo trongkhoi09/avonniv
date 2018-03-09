@@ -7,6 +7,8 @@ import {ProfileService} from '../profiles/profile.service';
 import {GrantService, JhiLanguageHelper, LoginModalService, LoginService, Principal} from '../../shared';
 import {ProfilesModalService} from '../../account/profiles/profiles-modal.service';
 
+declare const ga: Function;
+
 import {VERSION} from '../../app.constants';
 
 @Component({
@@ -103,6 +105,7 @@ export class NavbarComponent implements OnInit {
             name: 'changeLanguage',
             content: languageKey
         });
+        ga('send', 'event', 'language', 'change language to ' + languageKey);
     }
 
     collapseNavbar() {
@@ -154,5 +157,10 @@ export class NavbarComponent implements OnInit {
 
     setSearchTrue() {
         this.isSearch = true;
+    }
+
+    gotoGrants() {
+        this.router.navigate(['grants']);
+        ga('send', 'event', 'grants page', 'go to grantspage');
     }
 }

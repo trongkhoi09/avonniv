@@ -4,6 +4,8 @@ import { Router, ActivatedRouteSnapshot, NavigationEnd, RoutesRecognized } from 
 import { JhiLanguageService } from 'ng-jhipster';
 import { JhiLanguageHelper, StateStorageService, Principal } from '../../shared';
 
+declare const ga: Function;
+
 @Component({
     selector: 'jhi-main',
     templateUrl: './main.component.html',
@@ -33,6 +35,8 @@ export class JhiMainComponent implements OnInit {
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
                 this.jhiLanguageHelper.updateTitle(this.getPageTitle(this.router.routerState.snapshot.root));
+                ga('set', 'page', event.urlAfterRedirects);
+                ga('send', 'pageview');
             }
         });
     }

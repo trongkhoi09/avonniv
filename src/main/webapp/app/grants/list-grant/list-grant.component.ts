@@ -7,6 +7,8 @@ import {ITEMS_PER_PAGE} from '../../shared/constants/pagination.constants';
 import {GrantDTO, Principal} from '../../shared';
 import {JhiLanguageService} from 'ng-jhipster';
 
+declare const ga: Function;
+
 @Component({
     selector: 'jhi-list-grant',
     templateUrl: './list-grant.component.html',
@@ -124,15 +126,17 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
         return result;
     }
 
-    showDescription(id) {
+    showDescription(grantDTO) {
         if (window.innerWidth < 992) {
-            this.router.navigate(['/', {outlets: {popup: 'description-grant/' + id}}]);
+            this.router.navigate(['/', {outlets: {popup: 'description-grant/' + grantDTO.id}}]);
+            ga('send', 'event', 'grantlist', 'open dialog ' +  grantDTO.title);
         }
     }
 
     gotoExternalUrl(externalUrl) {
         if (window.innerWidth >= 992) {
             window.open(externalUrl, '_blank');
+            ga('send', 'event', 'grantlist', 'go to ' +  externalUrl);
         }
     }
 

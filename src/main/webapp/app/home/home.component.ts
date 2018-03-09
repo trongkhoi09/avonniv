@@ -7,6 +7,8 @@ import {Router} from '@angular/router';
 
 import {GrantSchoolDescriptionModalComponent} from './grant-school/grant-school.component';
 
+declare const ga: Function;
+
 @Component({
     selector: 'jhi-home',
     templateUrl: './home.component.html',
@@ -91,17 +93,31 @@ export class HomeComponent implements OnInit, OnDestroy {
     open(grantSchoolDescription) {
         const modalRef = this.modalService.open(GrantSchoolDescriptionModalComponent);
         modalRef.componentInstance.grantSchoolDescription = grantSchoolDescription;
+        ga('send', 'event', 'Grant School', 'view ' +  grantSchoolDescription);
+
     }
 
-    showDescription(id) {
+    showDescription(grantDTO) {
         if (window.innerWidth < 992) {
-            this.router.navigate(['/', {outlets: {popup: 'description-grant/' + id}}]);
+            this.router.navigate(['/', {outlets: {popup: 'description-grant/' + grantDTO.id}}]);
+            ga('send', 'event', 'mostRecent', 'open dialog ' + grantDTO.title);
         }
     }
 
     gotoExternalUrl(externalUrl) {
         if (window.innerWidth >= 992) {
             window.open(externalUrl, '_blank');
+            ga('send', 'event', 'mostRecent', 'go to ' +  externalUrl);
         }
+    }
+
+    gotoGrants() {
+        this.router.navigate(['grants']);
+        ga('send', 'event', 'grants page', 'go to grantspage');
+    }
+
+    openMostRecent(grantDTO) {
+        this.router.navigate([ '/', { outlets: { popup: 'description-grant/' + grantDTO.id } }]);
+        ga('send', 'event', 'mostRecent', 'show dialog ' + grantDTO.title );
     }
 }

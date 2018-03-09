@@ -176,7 +176,7 @@
                 <span jhiTranslate="navbar.countGrants" translateValues="{count: '{{ count }}'}">Right now <span class="number-grant">{{count}}</span> opportunities of public funding!</span>
             </div>
             <div class="col-md-12">
-                <button routerLink="grants" type="button" class="btn btn-primary btn-take-me-there" jhiTranslate="navbar.button" >TAKE ME THERE
+                <button (click)="gotoGrants()" type="button" class="btn btn-primary btn-take-me-there" jhiTranslate="navbar.button" >TAKE ME THERE
                 </button>
             </div>
         </div>

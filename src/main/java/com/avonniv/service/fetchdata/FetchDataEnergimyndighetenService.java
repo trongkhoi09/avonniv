@@ -72,7 +72,7 @@ public class FetchDataEnergimyndighetenService {
                 publisherDTO.setCrawled(true);
                 publisherService.createPublisher(publisherDTO);
             }
-                String externalUrl = "http://www.energimyndigheten.se/utlysningar/";
+            String externalUrl = "http://www.energimyndigheten.se/utlysningar/";
             String externalIdGrantProgram = name + "_" + externalUrl;
             Optional<GrantProgram> optional = grantProgramService.getByExternalId(externalIdGrantProgram);
             GrantProgram grantProgram;

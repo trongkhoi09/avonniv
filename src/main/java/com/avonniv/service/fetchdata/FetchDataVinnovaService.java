@@ -229,6 +229,13 @@ public class FetchDataVinnovaService {
             elements = doc.select("#area_main .navigation__container .current a span");
             if (elements.size() != 0) {
                 dataFetch.setTitle(elements.first().text());
+            }else {
+                elements = doc.select("#area_main .navigation__container .current a p");
+                if (elements.size() != 0) {
+                    dataFetch.setTitle(elements.first().text());
+                }else {
+                    System.out.println();
+                }
             }
         } catch (Exception ignored) {
         }

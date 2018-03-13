@@ -38,7 +38,7 @@ export class ProfilesComponent implements OnInit {
     password: string;
     oldPassword: string;
     confirmPassword: string;
-    authorities: string[];
+    authorities: string[] = [];
     collapse = {
         password: true,
         profile: true

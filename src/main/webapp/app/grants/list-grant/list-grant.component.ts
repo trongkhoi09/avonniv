@@ -1,10 +1,11 @@
 import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
-import {AlertService, ParseLinks} from 'ng-jhipster';
+import {AlertService, EventManager, ParseLinks} from 'ng-jhipster';
 import {ResponseWrapper} from '../../shared/model/response-wrapper.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GrantService} from '../../shared/grant/grant.service';
 import {ITEMS_PER_PAGE} from '../../shared/constants/pagination.constants';
 import {GrantDTO, Principal} from '../../shared';
+import {JhiLanguageService} from 'ng-jhipster';
 
 @Component({
     selector: 'jhi-list-grant',
@@ -32,6 +33,7 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
     grantDTOs: GrantDTO[];
     listPage = [];
     maxSize = 7;
+    formatDate = 'MM/dd/yyyy';
 
     grantFilter = {
         page: 0,
@@ -45,16 +47,32 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
     };
     oldGrantFilter = {};
 
-    constructor(private alertService: AlertService,
+    constructor(private eventManager: EventManager,
+                private alertService: AlertService,
                 private parseLinks: ParseLinks,
                 private grantService: GrantService,
                 private principal: Principal,
                 private activatedRoute: ActivatedRoute,
+                private languageService: JhiLanguageService,
                 private router: Router) {
         this.itemsPerPage = ITEMS_PER_PAGE;
     }
 
     ngOnInit() {
+        this.languageService.getCurrent().then((current) => {
+            if (current === 'en') {
+                this.formatDate = 'MM/dd/yyyy';
+            } else if (current === 'sv') {
+                this.formatDate = 'yyyy/MM/dd';
+            }
+        });
+        this.eventManager.subscribe('changeLanguage', (response) => {
+            if (response.content === 'en') {
+                this.formatDate = 'MM/dd/yyyy';
+            } else if (response.content === 'sv') {
+                this.formatDate = 'yyyy/MM/dd';
+            }
+        });
         this.page = 0;
         this.listPage = [];
         if (this.data.itemsPerPage) {

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {JhiLanguageService} from 'ng-jhipster';
+import {EventManager, JhiLanguageService} from 'ng-jhipster';
 
 import {ProfileService} from '../profiles/profile.service';
 import {GrantService, JhiLanguageHelper, LoginModalService, LoginService, Principal} from '../../shared';
@@ -29,7 +29,8 @@ export class NavbarComponent implements OnInit {
     search: string;
     count: Number;
 
-    constructor(private loginService: LoginService,
+    constructor(private eventManager: EventManager,
+                private loginService: LoginService,
                 private languageHelper: JhiLanguageHelper,
                 private languageService: JhiLanguageService,
                 private principal: Principal,
@@ -48,13 +49,6 @@ export class NavbarComponent implements OnInit {
             this.count = count;
         });
         document.addEventListener('click', this.offClickHandler.bind(this));
-        if (window.innerWidth < 768) {
-            if (window.navigator.language.indexOf('sv') !== -1) {
-                this.languageService.changeLanguage('sv');
-            } else {
-                this.languageService.changeLanguage('en');
-            }
-        }
     }
 
     offClickHandler(event: any) {
@@ -65,7 +59,27 @@ export class NavbarComponent implements OnInit {
         }
     }
 
+    changeLanguageInit(languageKey) {
+        if (window.innerWidth < 768) {
+            if (window.navigator.language.indexOf('sv') !== -1) {
+                this.languageService.changeLanguage('sv');
+            } else {
+                this.languageService.changeLanguage('en');
+            }
+        } else if (languageKey) {
+            this.languageService.changeLanguage(languageKey);
+        }
+    }
+
     ngOnInit() {
+        this.principal.identity().then((account) => {
+            if (account) {
+                this.changeLanguageInit(account.langKey);
+            } else {
+                this.changeLanguageInit(null);
+            }
+        });
+
         this.languageHelper.getAll().then((languages) => {
             this.languages = languages;
         });
@@ -85,6 +99,10 @@ export class NavbarComponent implements OnInit {
 
     changeLanguage(languageKey: string) {
         this.languageService.changeLanguage(languageKey);
+        this.eventManager.broadcast({
+            name: 'changeLanguage',
+            content: languageKey
+        });
     }
 
     collapseNavbar() {

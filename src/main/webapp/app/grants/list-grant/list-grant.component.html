@@ -70,10 +70,10 @@
 
                 </td>
                 <td class="date text-center">
-                    {{grantDTO.openDate? (grantDTO.openDate| date: 'MM/dd/yyyy') :('global.notAvailable'|translate)}}
+                    {{grantDTO.openDate? (grantDTO.openDate| date: this.formatDate) :('global.notAvailable'|translate)}}
                 </td>
                 <td class="date text-center">
-                    {{grantDTO.closeDate? (grantDTO.closeDate| date: 'MM/dd/yyyy'):('global.notAvailable'|translate)}}
+                    {{grantDTO.closeDate? (grantDTO.closeDate| date: this.formatDate):('global.notAvailable'|translate)}}
                 </td>
                 <td class="admin-edit text-right" *jhiHasAnyAuthority="'ROLE_ADMIN'">
                     <div class="btn-group flex-btn-group-container">

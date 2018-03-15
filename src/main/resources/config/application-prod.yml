@@ -41,16 +41,27 @@ spring:
             hibernate.generate_statistics: false
             hibernate.cache.region.factory_class: io.github.jhipster.config.jcache.NoDefaultJCacheRegionFactory
     mail:
-        host: mailcluster.loopia.se
+        host: smtp.gmail.com
         port: 587
-        username: info@avonniv.com
-        password: UNy7Yup2
+        username: courzecornermail@gmail.com
+        password: CourzeCorner123456
         protocol: smtp
         tls: true
         properties.mail.smtp:
             auth: true
             starttls.enable: true
-            ssl.trust: mailcluster.loopia.se
+            ssl.trust: smtp.gmail.com
+#    mail:
+#        host: mailcluster.loopia.se
+#        port: 587
+#        username: info@avonniv.com
+#        password: UNy7Yup2
+#        protocol: smtp
+#        tls: true
+#        properties.mail.smtp:
+#            auth: true
+#            starttls.enable: true
+#            ssl.trust: mailcluster.loopia.se
     thymeleaf:
         cache: true
 
@@ -98,7 +109,8 @@ jhipster:
             max-entries: 1000 # Number of objects in each cache entry
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: info@avonniv.com
-        base-url: http://avonniv.com/ # Modify according to your server's URL
+#        base-url: http://avonniv.com/ # Modify according to your server's URL
+        base-url: http://avonniv.courzecorner.com/ # Modify according to your server's URL
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         graphite:

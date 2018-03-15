@@ -101,4 +101,10 @@ public class PreferencesService {
             })
             .map(PreferencesDTO::new);
     }
+
+    public void removeByUser(String login) {
+        preferencesRepository.findAllByUserLogin(login).forEach(preferences -> {
+            preferencesRepository.delete(preferences);
+        });
+    }
 }

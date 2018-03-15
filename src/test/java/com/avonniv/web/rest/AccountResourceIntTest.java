@@ -7,6 +7,7 @@ import com.avonniv.repository.AuthorityRepository;
 import com.avonniv.repository.UserRepository;
 import com.avonniv.security.AuthoritiesConstants;
 import com.avonniv.service.MailService;
+import com.avonniv.service.PreferencesService;
 import com.avonniv.service.UserService;
 import com.avonniv.service.dto.UserDTO;
 import com.avonniv.web.rest.vm.KeyAndPasswordVM;
@@ -61,6 +62,9 @@ public class AccountResourceIntTest {
     private UserService userService;
 
     @Autowired
+    private PreferencesService preferencesService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -82,10 +86,10 @@ public class AccountResourceIntTest {
         doNothing().when(mockMailService).sendActivationEmail(anyObject());
 
         AccountResource accountResource =
-            new AccountResource(userRepository, userService, mockMailService);
+            new AccountResource(userRepository, userService, mockMailService, preferencesService);
 
         AccountResource accountUserMockResource =
-            new AccountResource(userRepository, mockUserService, mockMailService);
+            new AccountResource(userRepository, mockUserService, mockMailService, preferencesService);
 
         this.restMvc = MockMvcBuilders.standaloneSetup(accountResource)
             .setMessageConverters(httpMessageConverters)

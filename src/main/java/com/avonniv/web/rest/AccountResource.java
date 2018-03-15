@@ -5,6 +5,7 @@ import com.avonniv.repository.UserRepository;
 import com.avonniv.security.AuthoritiesConstants;
 import com.avonniv.security.SecurityUtils;
 import com.avonniv.service.MailService;
+import com.avonniv.service.PreferencesService;
 import com.avonniv.service.UserService;
 import com.avonniv.service.dto.UserDTO;
 import com.avonniv.web.rest.util.HeaderUtil;
@@ -41,12 +42,15 @@ public class AccountResource {
 
     private final MailService mailService;
 
+    private final PreferencesService preferencesService;
+
     public AccountResource(UserRepository userRepository, UserService userService,
-                           MailService mailService) {
+                           MailService mailService, PreferencesService preferencesService) {
 
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
+        this.preferencesService = preferencesService;
     }
 
     /**
@@ -232,6 +236,7 @@ public class AccountResource {
     public ResponseEntity<Void> deleteUser() {
         final String name = SecurityUtils.getCurrentUserLogin();
         log.debug("REST request to delete user: {}", name);
+        preferencesService.removeByUser(name);
         userService.deleteUser(name);
         return ResponseEntity.ok().headers(HeaderUtil.createAlert("areaManagement.deleted", name)).build();
     }

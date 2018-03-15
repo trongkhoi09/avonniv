@@ -6,6 +6,7 @@ import com.avonniv.domain.User;
 import com.avonniv.repository.UserRepository;
 import com.avonniv.security.AuthoritiesConstants;
 import com.avonniv.service.MailService;
+import com.avonniv.service.PreferencesService;
 import com.avonniv.service.UserService;
 import com.avonniv.service.dto.UserDTO;
 import com.avonniv.service.mapper.UserMapper;
@@ -80,6 +81,9 @@ public class UserResourceIntTest {
     private UserService userService;
 
     @Autowired
+    private PreferencesService preferencesService;
+
+    @Autowired
     private UserMapper userMapper;
 
     @Autowired
@@ -101,7 +105,7 @@ public class UserResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        UserResource userResource = new UserResource(userRepository, mailService, userService);
+        UserResource userResource = new UserResource(userRepository, mailService, userService, preferencesService);
         this.restUserMockMvc = MockMvcBuilders.standaloneSetup(userResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

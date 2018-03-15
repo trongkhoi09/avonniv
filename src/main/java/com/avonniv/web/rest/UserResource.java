@@ -1,6 +1,7 @@
 package com.avonniv.web.rest;
 
 import com.avonniv.config.Constants;
+import com.avonniv.service.PreferencesService;
 import com.codahale.metrics.annotation.Timed;
 import com.avonniv.domain.User;
 import com.avonniv.repository.UserRepository;
@@ -67,12 +68,15 @@ public class UserResource {
 
     private final UserService userService;
 
+    private final PreferencesService preferencesService;
+
     public UserResource(UserRepository userRepository, MailService mailService,
-            UserService userService) {
+            UserService userService, PreferencesService preferencesService) {
 
         this.userRepository = userRepository;
         this.mailService = mailService;
         this.userService = userService;
+        this.preferencesService = preferencesService;
     }
 
     /**
@@ -184,6 +188,7 @@ public class UserResource {
     @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteUser(@PathVariable String login) {
         log.debug("REST request to delete User: {}", login);
+        preferencesService.removeByUser(login);
         userService.deleteUser(login);
         return ResponseEntity.ok().headers(HeaderUtil.createAlert( "userManagement.deleted", login)).build();
     }

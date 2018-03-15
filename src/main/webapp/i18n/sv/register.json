@@ -22,6 +22,7 @@
         },
         "Terms1":"Jag godkänner att Avonniv kan lagra min email.",
         "Terms2":"Jag godkänner att Avonniv kan skicka mig email om uppdateringar i utlysningar.",
-        "Terms3":"Jag godkänner Avonnivs <a href=''>användarvillkor.</a>"
+        "Terms3":"Jag godkänner Avonnivs ",
+        "TermsLink": "användarvillkor."
     }
 }

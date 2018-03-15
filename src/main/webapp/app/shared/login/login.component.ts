@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer} from '@angular/core';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
 import {EventManager, JhiLanguageService} from 'ng-jhipster';
 
@@ -7,6 +7,7 @@ import {LoginService} from './login.service';
 import {StateStorageService} from '../auth/state-storage.service';
 import {Register} from '../../account/register/register.service';
 import {PasswordResetModalService} from '../../account/password-reset/init/password-reset-init-modal.service';
+import {TermsModalComponent} from './terms/terms.component';
 
 @Component({
     selector: 'jhi-login-modal',
@@ -43,7 +44,8 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
                 private elementRef: ElementRef,
                 private renderer: Renderer,
                 private router: Router,
-                public activeModal: NgbActiveModal) {
+                public activeModal: NgbActiveModal,
+                public modalService: NgbModal) {
         this.credentials = {};
     }
 
@@ -135,5 +137,10 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
         } else {
             this.error = 'ERROR';
         }
+    }
+
+    openTerms() {
+        this.activeModal.dismiss('cancel');
+        const modalRef = this.modalService.open(TermsModalComponent);
     }
 }

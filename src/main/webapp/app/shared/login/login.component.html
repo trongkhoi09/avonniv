@@ -123,8 +123,12 @@
                     <a class="check-terms" [ngClass]="terms3?'':'unchecked'"
                        (click)="terms3=!terms3">
                         <i class="fa fa-check" aria-hidden="true"></i>
-                        <span jhiTranslate="register.Terms3">I agree to Avonniv's Terms & Conditions.</span>
+                        <div class="link-terms">
+                            <span jhiTranslate="register.Terms3" class="terms-condition">I agree to Avonniv's</span>
+                            <a (click)="openTerms()" href="#" jhiTranslate="register.TermsLink"> Terms & Conditions.</a>
+                        </div>
                     </a>
+
                 </div>
                 <!--<div class="form-group">-->
                 <!--<input type="password" class="form-control" id="confirmPassword" name="confirmPassword"-->
@@ -147,14 +151,15 @@
                 <!--</div>-->
                 <!--</div>-->
                 <div class="text-center">
-                    <button type="submit" [disabled]="registerForm.form.invalid || !terms1 || !terms2 || !terms3" class="btn btn-primary btn-block"
+                    <button type="submit" [disabled]="registerForm.form.invalid || !terms1 || !terms2 || !terms3"
+                            class="btn btn-primary btn-block"
                             jhiTranslate="register.form.button">Register
                     </button>
                 </div>
             </form>
         </div>
         <!--<div class="bottom-text text-center">-->
-            <!--<span>By clicking, I accept the <a>Terms of Service</a></span>-->
+        <!--<span>By clicking, I accept the <a>Terms of Service</a></span>-->
         <!--</div>-->
     </div>
     <div *ngSwitchCase="false" class="form-sign-in">
@@ -176,7 +181,8 @@
                                jhiTranslate="global.messages.validate.email.required">
                             Your email is required.
                         </small>
-                        <small class="form-text text-danger" *ngIf="usernameLogin.errors.invalid||usernameLogin.errors.pattern"
+                        <small class="form-text text-danger"
+                               *ngIf="usernameLogin.errors.invalid||usernameLogin.errors.pattern"
                                jhiTranslate="global.messages.validate.email.invalid">
                             Your email is invalid.
                         </small>
@@ -216,10 +222,11 @@
                         <i class="fa fa-check" aria-hidden="true"></i>
                         <span jhiTranslate="login.form.rememberme">Remember me</span>
                     </a>
-                        <!--<input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe"-->
-                               <!--[(ngModel)]="rememberMe" checked>-->
-                        <!--<span jhiTranslate="login.form.rememberme">Remember me</span>-->
-                    <a class="request-reset-password" (click)="requestResetPassword()" jhiTranslate="login.password.forgot">Forgot password?</a>
+                    <!--<input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe"-->
+                    <!--[(ngModel)]="rememberMe" checked>-->
+                    <!--<span jhiTranslate="login.form.rememberme">Remember me</span>-->
+                    <a class="request-reset-password" (click)="requestResetPassword()"
+                       jhiTranslate="login.password.forgot">Forgot password?</a>
                 </div>
                 <div class="text-center">
                     <button type="submit" [disabled]="loginForm.form.invalid" class="btn btn-primary btn-block"

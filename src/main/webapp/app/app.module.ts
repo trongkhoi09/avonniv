@@ -26,6 +26,7 @@ import {
     PageRibbonComponent, ProfileService
 } from './layouts';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {TermsModalComponent} from './shared/login/terms/terms.component';
 
 @NgModule({
     imports: [
@@ -51,10 +52,12 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
         PageRibbonComponent,
         ActiveMenuDirective,
         FooterComponent,
-        GrantSchoolDescriptionModalComponent
+        GrantSchoolDescriptionModalComponent,
+        TermsModalComponent
     ],
     entryComponents: [
-        GrantSchoolDescriptionModalComponent
+        GrantSchoolDescriptionModalComponent,
+        TermsModalComponent
     ],
     providers: [
         ProfileService,

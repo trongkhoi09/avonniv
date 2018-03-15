@@ -22,6 +22,7 @@
         },
         "Terms1":"I agree to that Avonniv can store my email.",
         "Terms2":"I agree to that Avonniv can send me notification emails about grant updates.",
-        "Terms3":"I agree to Avonniv's <a href=''>Terms & Conditions.</a>"
+        "Terms3":"I agree to Avonniv's ",
+        "TermsLink": "Terms & Conditions."
     }
 }

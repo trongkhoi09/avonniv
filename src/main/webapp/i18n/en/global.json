@@ -43,9 +43,9 @@
             "password": "Password",
             "oldpassword": "Old password",
             "oldpassword.placeholder": "Old password",
-            "newpassword": "New password",
-            "newpassword.placeholder": "New password",
-            "confirmpassword": "New password confirmation",
+            "newpassword": "Password",
+            "newpassword.placeholder": "Password",
+            "confirmpassword": "Password confirmation",
             "confirmpassword.placeholder": "Confirm new password",
             "email": "Email",
             "email.placeholder": "Your email"

@@ -17,7 +17,7 @@
             "error": {
                 "fail": "<strong>Registreringen misslyckades!</strong> Prova igen senare.",
                 "userexists": "<strong>Användarnamnet finns redan!</strong> Prova ett annat användarnamn.",
-                "emailexists": "<strong>Mailadressen är används redan!</strong> Prova gärna en annan mailadress."
+                "emailexists": "<strong>Mailadressen används redan!</strong> Prova gärna en annan mailadress."
             }
         },
         "Terms1":"Jag godkänner att Avonniv kan lagra min email.",

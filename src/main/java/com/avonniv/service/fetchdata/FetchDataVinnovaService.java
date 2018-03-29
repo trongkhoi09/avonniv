@@ -57,7 +57,8 @@ public class FetchDataVinnovaService {
     }
 
     //43200000 millisecond = 12 hour
-    @Scheduled(fixedDelay = 21600000)
+    //run taks every 00h and 12h AM everyday
+    @Scheduled(cron = "0 0 0,12 * * ?", zone = "CET")
     public void autoFetchDataFromVinnova() {
         try {
             Instant now = Instant.now();

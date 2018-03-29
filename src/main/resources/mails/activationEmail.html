@@ -1,49 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title th:text="#{email.activation.title}">JHipster activation</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link rel="shortcut icon" href="${baseUrl}/favicon.ico" />
-    </head>
-    <body style="max-width: 600px; box-shadow: 1px 2px 4px rgba(0, 0, 0, .5); margin: 0 auto;">
-        <div style="background-color: #193c7e;">
-            <a th:href="@{|${baseUrl}/#/grants|}"
-               style="display: block ;padding:10px 0 10px 10%">
-                <div th:style="'background: url('+|cid:thymeleaf-logo|+');background-repeat: no-repeat;background-size: 130px 32px;height: 32px; width: 130px;'"></div>
-            </a>
-        </div>
-        <div style="padding: 20px 24px 20px 32px;">
-            <p th:text="#{email.activation.greeting(${user.login})}">
-                Hello
-            </p>
-            <p th:text="#{email.activation.text1}">
-                Your JHipster account has been created, please click on the URL below to activate it:
-            </p>
-            <p>
-                <a th:href="@{|${baseUrl}/#/activate?key=${user.activationKey}|}"
-                   th:text="#{email.activation.clickhere}">Activation Link</a>
-            </p>
-            <p>
-                <span th:text="#{email.activation.text2}">Regards, </span>
-                <br/>
-                <em th:text="#{email.signature}">JHipster.</em>
-            </p>
-        </div>
-        <div style="background-color: #373d42">
-            <div style="color: #c7d0db; text-align: center; padding-top: 20px; padding-bottom: 15px;">
-                <span th:text="#{avonniv.follow}">Follow @Avonniv</span> | <span
-                th:text="#{avonniv.visit}">Visit avonniv.com</span> | <span
-                th:text="#{avonniv.unsubscribe}">Unsubscribe</span>
-            </div>
-            <div style="text-align: center;">
-                <img style="height: 32px;margin: 10px 20px 10px 20px;" src="content/facebook-logo.png"
-                     data-th-src="|cid:thymeleaf-facebook-logo|"/>
-                <img style="height: 32px;margin: 10px 20px 10px 20px;" src="content/linkedin-logo.png"
-                     data-th-src="|cid:thymeleaf-linkedin-logo|"/>
-            </div>
-            <div style="color: #c7d0db; text-align: center; padding-top: 10px; padding-bottom: 35px;">
-                <span th:text="#{avonniv.copyright}">Copyright © 2017 Avonniv. All rights reserved.</span>
-            </div>
-        </div>
-    </body>
+<head>
+    <title th:text="#{email.activation.title}">JHipster activation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="shortcut icon" href="${baseUrl}/favicon.ico"/>
+</head>
+<body style="max-width: 600px; box-shadow: 1px 2px 4px rgba(0, 0, 0, .5); margin: 0 auto;">
+<div style="background-color: #193c7e;">
+    <a th:href="@{|${baseUrl}/#/grants|}"
+       style="display: block ;padding:10px 0 10px 10%">
+        <div
+            th:style="'background: url('+|cid:thymeleaf-logo|+');background-repeat: no-repeat;background-size: 130px 32px;height: 32px; width: 130px;'"></div>
+    </a>
+</div>
+<div style="padding: 20px 24px 20px 32px;">
+    <p th:text="#{email.activation.greeting(${user.login})}">
+        Hello
+    </p>
+    <p th:text="#{email.activation.text1}">
+        Your JHipster account has been created, please click on the URL below to activate it:
+    </p>
+    <p>
+        <a th:href="@{|${baseUrl}/#/activate?key=${user.activationKey}|}"
+           th:text="#{email.activation.clickhere}">Activation Link</a>
+    </p>
+    <p>
+        <span th:text="#{email.activation.text2}">Regards, </span>
+        <br/>
+        <em th:text="#{email.signature}">JHipster.</em>
+    </p>
+</div>
+<div style="background-color: #373d42">
+    <div style="color: #c7d0db; text-align: center; padding-top: 20px; padding-bottom: 15px;">
+        <span th:text="#{avonniv.follow}">Follow @Avonniv</span> | <span
+        th:text="#{avonniv.visit}">Visit avonniv.com</span> | <span
+        th:text="#{avonniv.unsubscribe}">Unsubscribe</span>
+    </div>
+    <div style="text-align: center;">
+        <a href="https://www.facebook.com/avonniv/" style="display: inline-block;margin: 10px 20px 10px 20px;">
+            <img style="height: 32px;" src="content/facebook-logo.png"
+                 data-th-src="|cid:thymeleaf-facebook-logo|"/>
+        </a>
+        <a href="https://www.linkedin.com/company/avonniv/" style="display: inline-block;margin: 10px 20px 10px 20px;">
+            <img style="height: 32px;" src="content/linkedin-logo.png"
+                 data-th-src="|cid:thymeleaf-linkedin-logo|"/>
+        </a>
+    </div>
+    <div style="color: #c7d0db; text-align: center; padding-top: 10px; padding-bottom: 35px;">
+        <span th:text="#{avonniv.copyright}">Copyright © 2017 Avonniv. All rights reserved.</span>
+    </div>
+</div>
+</body>
 </html>

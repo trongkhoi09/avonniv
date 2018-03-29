@@ -72,15 +72,9 @@
                         <!--</div>-->
                     <!--</div>-->
                 <!--</div>-->
-                <div class="form-group">
-                    <div class="">
-                        <label class="" for="login"
-                               jhiTranslate="global.form.email">Email</label>
-                        <input type="text" class="form-control" id="login" name="login"
-                               placeholder="{{'global.form.email.placeholder' | translate}}"
-                               [(ngModel)]="settingsAccount.login" disabled
-                               #loginInput="ngModel" required>
-                    </div>
+                <div class="profile-email">
+                    <label jhiTranslate="global.form.email">Email</label>
+                    <span>{{account.login}}</span>
                 </div>
                 <div class="form-group " *ngIf="languages && languages.length > 0">
                     <div class="">

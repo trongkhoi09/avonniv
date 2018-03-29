@@ -87,7 +87,12 @@
         }
 
         .edit-profile {
-            padding: 22px 32px 18px 32px;
+            padding: 31px 32px 0px 32px;;
+            font-size: 14px;
+            color: #515c7f;
+            .profile-email{
+                margin-bottom: 37px;
+            }
             label {
                 margin-bottom: 0px;
                 width: 110px;
@@ -99,22 +104,11 @@
                 margin-left: 98px;
             }
             .form-group {
+                margin-bottom: 37px;
                 position: relative;
                 label {
                     position: absolute;
                     top: 9px;
-                }
-                .form-control {
-                    width: 288px;
-                    margin-left: 110px;
-                    height: 36px;
-                    border-radius: 3px;
-                    background-color: #ffffff;
-                    border: solid 1px #aab3c3;
-                    font-size: 14px;
-                    text-align: left;
-                    color: #515c7f;
-                    padding: 11px 18px 7px 18px;
                 }
                 .language {
                     margin-left: 110px;

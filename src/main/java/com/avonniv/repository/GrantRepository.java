@@ -14,7 +14,7 @@ public interface GrantRepository extends JpaRepository<Grant, Long> {
 
     List<Grant> findAllByCloseDateBefore(Instant dateBefore);
 
-    List<Grant> findAllByGrantProgramIdAndStatusAndIdIsNotIn(Long id, int status,  List<Long> listIgnore);
+    List<Grant> findAllByGrantProgramIdAndStatusAndIdIsNotIn(Long id, int status, List<Long> listIgnore);
 
     List<Grant> findAllByStatusInAndOpenDateBefore(List<Integer> listStatus, Instant dateBefore);
 
@@ -35,6 +35,8 @@ public interface GrantRepository extends JpaRepository<Grant, Long> {
     Page<Grant> findAllByGrantProgram_Publisher_NameInAndStatusInOrderByGrantProgram_Publisher_NameAsc(Pageable pageable, List<String> listPublisherId, List<Integer> status);
 
     Page<Grant> findAllByTitleLikeAndStatusIn(Pageable pageable, String search, List<Integer> listStatus);
+
+    Page<Grant> findAllByTitleLikeAndStatusInOrDescriptionLikeAndStatusIn(Pageable pageable, String searchTitle,List<Integer> listStatusForTile, String searchDescription, List<Integer> listStatusForDescription);
 
     Integer countAllByStatusInAndGrantProgram_Publisher_CrawledIsTrue(List<Integer> status);
 }

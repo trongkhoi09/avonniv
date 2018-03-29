@@ -29,6 +29,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -92,7 +94,7 @@ public class GrantService {
 
 
     @Transactional(readOnly = true)
-    public List<Grant> getAllByGrantProgramIdAndStatus(Long grantProgramId, int status,  List<Long> listIgnore) {
+    public List<Grant> getAllByGrantProgramIdAndStatus(Long grantProgramId, int status, List<Long> listIgnore) {
         return grantRepository.findAllByGrantProgramIdAndStatusAndIdIsNotIn(grantProgramId, status, listIgnore);
     }
 
@@ -143,7 +145,8 @@ public class GrantService {
     @Transactional(readOnly = true)
     public Page<GrantDTO> getAll(GrantFilter grantFilter, Pageable pageable) {
         if (grantFilter.getSearch() != null && !grantFilter.getSearch().trim().isEmpty()) {
-            return grantRepository.findAllByTitleLikeAndStatusIn(pageable, "%" + grantFilter.getSearch().trim() + "%", Arrays.asList(GrantDTO.Status.open.getValue(), GrantDTO.Status.coming.getValue())).map(GrantDTO::new);
+            String searchDescription = "%" + formatStringSearch(grantFilter.getSearch().trim()) + "%";
+            return grantRepository.findAllByTitleLikeAndStatusInOrDescriptionLikeAndStatusIn(pageable, "%" + grantFilter.getSearch().trim() + "%", Arrays.asList(GrantDTO.Status.open.getValue(), GrantDTO.Status.coming.getValue()), searchDescription, Arrays.asList(GrantDTO.Status.open.getValue(), GrantDTO.Status.coming.getValue())).map(GrantDTO::new);
         }
         List<String> listPublisher = new ArrayList<>();
         listPublisher.addAll(grantFilter.getPublisherDTOs());
@@ -279,5 +282,18 @@ public class GrantService {
                 }
             }
         }
+    }
+
+    private String formatStringSearch(String search) {
+        String regex = "(:|d+)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(search);
+        while (matcher.find()) {
+            String resultCharacter = matcher.group(1).trim();
+            search = search.replaceAll(resultCharacter, " " + resultCharacter + " ");
+        }
+        search = search.replaceAll("\\s+", "%");
+
+        return search;
     }
 }

@@ -34,6 +34,8 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
     errorUserExists: string;
     registerAccount: any;
     success: boolean;
+    validatorEmail: boolean;
+    validatorPasword: boolean;
 
     constructor(private eventManager: EventManager,
                 private languageService: JhiLanguageService,

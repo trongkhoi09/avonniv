@@ -110,7 +110,7 @@ jhipster:
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: info@avonniv.com
 #        base-url: http://avonniv.com # Modify according to your server's URL
-        base-url: http://avonniv.courzecorner.com # Modify according to your server's URL
+        base-url: http://www.avonniv.com # Modify according to your server's URL
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         graphite:

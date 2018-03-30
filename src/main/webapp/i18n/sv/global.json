@@ -43,9 +43,9 @@
             "password": "Lösenord",
             "oldpassword": "Gammalt lösenord",
             "oldpassword.placeholder": "Gammalt lösenord",
-            "newpassword": "Nytt lösenord",
-            "newpassword.placeholder": "Nytt lösenord",
-            "confirmpassword": "Bekräfta nytt lösenord",
+            "newpassword": "Lösenord",
+            "newpassword.placeholder": "Lösenord",
+            "confirmpassword": "Bekräfta Lösenord",
             "confirmpassword.placeholder": "Bekräfta det nya lösenordet",
             "email": "Mailadress",
             "email.placeholder": "Din mailadress"

@@ -16,7 +16,8 @@
                     <label class="form-check-label">
                         <input class="form-check-input" type="radio" [(ngModel)]="isRegistration"
                                name="inlineRadioOptions"
-                               [value]="true">
+                               [value]="true"
+                        (click)="validatorEmail=false; validatorPasword=false">
                         <span class="text" jhiTranslate="register.title">Registration</span>
                     </label>
                 </div>
@@ -26,7 +27,8 @@
                     <label class="form-check-label">
                         <input class="form-check-input" type="radio" [(ngModel)]="isRegistration"
                                name="inlineRadioOptions"
-                               [value]="false">
+                               [value]="false"
+                               (click)="validatorEmail=false; validatorPasword=false">
                         <span class="text" jhiTranslate="login.title">Sign in</span>
                     </label>
                 </div>
@@ -61,7 +63,7 @@
                     <input type="text" class="form-control" [(ngModel)]="registerAccount.login" id="login" name="login"
                            #login="ngModel" placeholder="{{'global.form.email.placeholder' | translate}}"
                            required minlength="5" maxlength="100" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
-                    <div *ngIf="login.dirty && login.invalid">
+                    <div *ngIf="validatorEmail">
                         <small class="form-text text-danger" *ngIf="login.errors.required"
                                jhiTranslate="global.messages.validate.email.required">
                             Your email is required.
@@ -89,7 +91,7 @@
                     <span class="" (click)="showPassword=!showPassword">
                         <i [ngClass]="showPassword?'fa fa-eye-slash':'fa fa-eye'" aria-hidden="true"></i>
                     </span>
-                    <div *ngIf="password.dirty && password.invalid">
+                    <div *ngIf="validatorPasword">
                         <small class="form-text text-danger" *ngIf="password.errors.required"
                                jhiTranslate="global.messages.validate.newpassword.required">
                             Your password is required.
@@ -151,9 +153,10 @@
                 <!--</div>-->
                 <!--</div>-->
                 <div class="text-center">
-                    <button type="submit" [disabled]="registerForm.form.invalid || !terms1 || !terms2 || !terms3"
+                    <button type="submit" [disabled]="!terms1 || !terms2 || !terms3"
                             class="btn btn-primary btn-block"
-                            jhiTranslate="register.form.button">Register
+                            jhiTranslate="register.form.button"
+                    (click)="validatorPasword=true; validatorEmail=true">Register
                     </button>
                 </div>
             </form>
@@ -176,7 +179,7 @@
                            name="usernameLogin"
                            #usernameLogin="ngModel" placeholder="{{'global.form.email.placeholder' | translate}}"
                            required minlength="5" maxlength="100" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
-                    <div *ngIf="usernameLogin.dirty && usernameLogin.invalid">
+                    <div *ngIf="validatorEmail">
                         <small class="form-text text-danger" *ngIf="usernameLogin.errors.required"
                                jhiTranslate="global.messages.validate.email.required">
                             Your email is required.
@@ -200,11 +203,12 @@
                     <input [type]="showPassword ? 'text' : 'password'" class="form-control" name="password" id="passwordLogin"
                            #passwordLogin="ngModel"
                            placeholder="{{'login.form.password.placeholder' | translate}}"
-                           [(ngModel)]="password" minlength=4 maxlength=50 required>
+                           [(ngModel)]="password" minlength=4 maxlength=50 required
+                           (click)="validatorEmail=true">
                     <span class="show-password" (click)="showPassword=!showPassword">
                         <i [ngClass]="showPassword?'fa fa-eye-slash':'fa fa-eye'" aria-hidden="true"></i>
                     </span>
-                    <div *ngIf="passwordLogin.dirty && passwordLogin.invalid">
+                    <div *ngIf="validatorPasword">
                         <small class="form-text text-danger" *ngIf="passwordLogin.errors.required"
                                jhiTranslate="global.messages.validate.newpassword.required">
                             Your password is required.
@@ -232,7 +236,7 @@
                        jhiTranslate="login.password.forgot">Forgot password?</a>
                 </div>
                 <div class="text-center">
-                    <button type="submit" [disabled]="loginForm.form.invalid" class="btn btn-primary btn-block"
+                    <button type="submit" (click)="validatorPasword=true; validatorEmail=true" class="btn btn-primary btn-block"
                             jhiTranslate="login.form.button">Sign in
                     </button>
                 </div>

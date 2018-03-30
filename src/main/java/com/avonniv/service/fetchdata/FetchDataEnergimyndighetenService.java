@@ -47,7 +47,8 @@ public class FetchDataEnergimyndighetenService {
     }
 
     //21600000 millisecond = 6 hour
-    @Scheduled(fixedDelay = 21600000)
+    //run taks every 00h and 12h AM everyday
+    @Scheduled(cron = "0 0 1,13 * * ?", zone = "CET")
     public void autoFetchDataFromFormas() {
         try {
             String name = "Energimyndigheten";

@@ -42,7 +42,8 @@ public class FetchDataTillvaxtVerketService {
     }
 
     //43200000 millisecond = 12 hour
-    @Scheduled(fixedDelay = 21600000)
+    //run taks every 00h and 12h AM everyday
+    @Scheduled(cron = "0 0 4,16 * * ?", zone = "CET")
     public void autoFetchDataFromFormas() {
         try {
             String name = "Tillväxtverket";

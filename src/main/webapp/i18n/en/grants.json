@@ -16,7 +16,7 @@
             "editGrant": "Grant",
             "editGrantProgram": "Grant program"
         },
-        "show": "Visa",
+        "show": "Show",
         "ofItem": "of {{numberItem}} items"
     },
     "grant": {

@@ -10,8 +10,7 @@ export class UserRouteAccessService implements CanActivate {
 
     constructor(private router: Router,
                 private loginModalService: LoginModalService,
-                private principal: Principal,
-                private stateStorageService: StateStorageService) {
+                private principal: Principal) {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Promise<boolean> {
@@ -32,8 +31,7 @@ export class UserRouteAccessService implements CanActivate {
                 return true;
             }
 
-            this.stateStorageService.storeUrl(url);
-            this.router.navigate(['accessdenied']).then(() => {
+            this.router.navigate(['/'], {queryParams: {tab: url}}).then(() => {
                 // only show the login dialog, if the user hasn't logged in yet
                 if (!account) {
                     this.loginModalService.open();

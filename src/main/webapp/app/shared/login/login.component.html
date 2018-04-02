@@ -17,7 +17,7 @@
                         <input class="form-check-input" type="radio" [(ngModel)]="isRegistration"
                                name="inlineRadioOptions"
                                [value]="true"
-                        (click)="validatorEmail=false; validatorPasword=false">
+                        (click)="validatorEmail=false; validatorPasword=false; $event.stopPropagation();">
                         <span class="text" jhiTranslate="register.title">Registration</span>
                     </label>
                 </div>
@@ -28,7 +28,7 @@
                         <input class="form-check-input" type="radio" [(ngModel)]="isRegistration"
                                name="inlineRadioOptions"
                                [value]="false"
-                               (click)="validatorEmail=false; validatorPasword=false">
+                               (click)="validatorEmail=false; validatorPasword=false; $event.stopPropagation();">
                         <span class="text" jhiTranslate="login.title">Sign in</span>
                     </label>
                 </div>

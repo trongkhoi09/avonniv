@@ -78,10 +78,9 @@ public class MailService {
             message.setFrom(jHipsterProperties.getMail().getFrom());
             message.setSubject(subject);
             message.setText(content, isHtml);
-
-            message.addInline(LOGO, new ClassPathResource(THYMELEAF_LOGO_IMAGE), PNG_MIME);
-            message.addInline(FACEBOOK_LOGO, new ClassPathResource(THYMELEAF_FACEBOOK_LOGO_IMAGE), PNG_MIME);
-            message.addInline(LINKEDIN_LOGO, new ClassPathResource(THYMELEAF_LINKEDIN_LOGO_IMAGE), PNG_MIME);
+//            message.addInline(LOGO, new ClassPathResource(THYMELEAF_LOGO_IMAGE), PNG_MIME);
+//            message.addInline(FACEBOOK_LOGO, new ClassPathResource(THYMELEAF_FACEBOOK_LOGO_IMAGE), PNG_MIME);
+//            message.addInline(LINKEDIN_LOGO, new ClassPathResource(THYMELEAF_LINKEDIN_LOGO_IMAGE), PNG_MIME);
 
             javaMailSender.send(mimeMessage);
             log.debug("Sent email to User '{}'", to);

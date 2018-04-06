@@ -9,8 +9,8 @@
 <div style="background-color: #193c7e;">
     <a th:href="@{|${baseUrl}/#/|}"
        style="display: block ;padding:10px 0 10px 10%">
-        <div
-            th:style="'background: url('+|cid:thymeleaf-logo|+');background-repeat: no-repeat;background-size: 130px 32px;height: 32px; width: 130px;'"></div>
+        <!--<div th:style="'background: url('+|cid:thymeleaf-logo|+');background-repeat: no-repeat;background-size: 130px 32px;height: 32px; width: 130px;'"></div>-->
+        <div th:style="'background: url('+@{|${baseUrl}/icons/header.png|}+');background-repeat: no-repeat;background-size: 130px 32px;height: 32px; width: 130px;'"></div>
     </a>
 </div>
 <div style="padding: 20px 24px 20px 32px;">
@@ -37,13 +37,19 @@
         th:text="#{avonniv.unsubscribe}">Unsubscribe</span>
     </div>
     <div style="text-align: center;">
+        <!--<a href="https://www.facebook.com/avonniv/" style="display: inline-block;margin: 10px 20px 10px 20px;">-->
+        <!--<img style="height: 32px;" src="content/facebook-logo.png"-->
+        <!--data-th-src="|cid:thymeleaf-facebook-logo|"/>-->
+        <!--</a>-->
+        <!--<a href="https://www.linkedin.com/company/avonniv/" style="display: inline-block;margin: 10px 20px 10px 20px;">-->
+        <!--<img style="height: 32px;" src="content/linkedin-logo.png"-->
+        <!--data-th-src="|cid:thymeleaf-linkedin-logo|"/>-->
+        <!--</a>-->
         <a href="https://www.facebook.com/avonniv/" style="display: inline-block;margin: 10px 20px 10px 20px;">
-            <img style="height: 32px;" src="content/facebook-logo.png"
-                 data-th-src="|cid:thymeleaf-facebook-logo|"/>
+            <img style="height: 32px;" th:src="@{|${baseUrl}/icons/facebook-logo.png|}"/>
         </a>
         <a href="https://www.linkedin.com/company/avonniv/" style="display: inline-block;margin: 10px 20px 10px 20px;">
-            <img style="height: 32px;" src="content/linkedin-logo.png"
-                 data-th-src="|cid:thymeleaf-linkedin-logo|"/>
+            <img style="height: 32px;" th:src="@{|${baseUrl}/icons/linkedin-logo.png|}"/>
         </a>
     </div>
     <div style="color: #c7d0db; text-align: center; padding-top: 10px; padding-bottom: 35px;">

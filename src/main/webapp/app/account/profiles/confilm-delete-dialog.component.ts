@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertService, EventManager } from 'ng-jhipster';
 import {AccountService , LoginService} from '../../shared';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'jhi-user-delete-dialog',
@@ -15,7 +16,8 @@ export class ModalDeleteDialogComponent implements OnInit {
         private alertService: AlertService,
         private eventManager: EventManager,
         private accountService: AccountService,
-        private loginService: LoginService
+        private loginService: LoginService,
+        private router: Router
     ) {
     }
 
@@ -29,7 +31,7 @@ export class ModalDeleteDialogComponent implements OnInit {
                 content: 'Deleted a user'});
             this.activeModal.dismiss(true);
             this.loginService.logout();
-            window.location.replace('http://avonniv.courzecorner.com/#/');
+            this.router.navigate([ '/']);
         });
         this.alertService.success('areaManagement.deleted', { param : name }, null);
     }

@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer} from '@angular/core';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 import {EventManager, JhiLanguageService} from 'ng-jhipster';
 
 import {LoginService} from './login.service';
@@ -47,7 +47,8 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
                 private renderer: Renderer,
                 private router: Router,
                 public activeModal: NgbActiveModal,
-                public modalService: NgbModal) {
+                public modalService: NgbModal,
+                private activatedRoute: ActivatedRoute) {
         this.credentials = {};
     }
 
@@ -101,12 +102,14 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
                 content: 'Sending Authentication Success'
             });
 
-            // // previousState was set in the authExpiredInterceptor before being redirected to login modal.
-            // // since login is succesful, go to stored previousState and clear previousState
-            const redirect = this.stateStorageService.getUrl();
-            if (redirect) {
-                this.router.navigate([redirect]);
-            }
+            this.activatedRoute.queryParams.subscribe((params: Params) => {
+                let tab = params['tab'];
+                console.log('page: ' + tab, params);
+                if (tab != null) {
+                    this.router.navigate([tab]);
+                }
+            });
+
         }).catch(() => {
             this.authenticationError = true;
         });

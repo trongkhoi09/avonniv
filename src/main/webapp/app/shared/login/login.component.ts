@@ -103,7 +103,7 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
             });
 
             this.activatedRoute.queryParams.subscribe((params: Params) => {
-                let tab = params['tab'];
+                const tab = params['tab'];
                 console.log('page: ' + tab, params);
                 if (tab != null) {
                     this.router.navigate([tab]);

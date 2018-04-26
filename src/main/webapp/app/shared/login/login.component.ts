@@ -32,8 +32,10 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
     error: string;
     errorEmailExists: string;
     errorUserExists: string;
+    errorReSendEmail: string;
     registerAccount: any;
     success: boolean;
+    reSendEmail: boolean;
     validatorEmail: boolean;
     validatorPasword: boolean;
 
@@ -56,6 +58,7 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
         this.renderer.setElementClass(document.body, 'position-active', true);
         this.languageService.addLocation('login');
         this.success = false;
+        this.reSendEmail = false;
         this.registerAccount = {};
     }
 
@@ -125,6 +128,7 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
         this.error = null;
         this.errorUserExists = null;
         this.errorEmailExists = null;
+        this.errorReSendEmail = null;
         this.languageService.getCurrent().then((key) => {
             this.registerAccount.langKey = key;
             this.registerService.save(this.registerAccount).subscribe(() => {
@@ -148,4 +152,18 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
         this.activeModal.dismiss('cancel');
         const modalRef = this.modalService.open(TermsModalComponent);
     }
+
+    resendActivateEmail() {
+        this.success = null;
+        this.registerService.reset(this.registerAccount.login).subscribe(() => {
+            this.reSendEmail = true;
+        }, (response) => this.processErrorReSendEmail(response));
+    }
+
+    private processErrorReSendEmail(response) {
+        if (response.status === 400 && response._body === 'this user does not exist') {
+            this.errorReSendEmail = 'ERROR';
+        }
+    }
+
 }

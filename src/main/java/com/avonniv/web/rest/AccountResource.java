@@ -85,6 +85,24 @@ public class AccountResource {
     }
 
     /**
+     * resend email activate account
+     * @param login
+     * @return
+     */
+    @GetMapping("/register/resubmit")
+    @Timed
+    public ResponseEntity reSendActivateEmail(@RequestParam(value = "login") String login){
+        HttpHeaders textPlainHeaders = new HttpHeaders();
+        textPlainHeaders.setContentType(MediaType.TEXT_PLAIN);
+        return userRepository.findOneByLogin(login.toLowerCase())
+            .map(user -> {
+                mailService.sendActivationEmail(user);
+                return  new ResponseEntity<>(HttpStatus.RESET_CONTENT);
+            })
+            .orElse(new ResponseEntity<>("this user does not exist", textPlainHeaders, HttpStatus.BAD_REQUEST));
+    }
+
+    /**
      * GET  /activate : activate the registered user.
      *
      * @param key the activation key

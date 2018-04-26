@@ -14,6 +14,13 @@
                 }
             },
             "success": "<strong>Användarnamn sparat!</strong> Kontrollera din mail för bekräftelse.",
+            "resubmit": {
+                "resend": "om du vill",
+                "if": "Om du inte får ett mail inom 5 minuter klickar du på ",
+                "toSubmit": "skicka in igen.",
+                "reSendEmailSuccess": "Skicka e-post igen.",
+                "reSendEmailError": "Ett fel uppstod, försök igen senare!."
+            },
             "error": {
                 "fail": "<strong>Registreringen misslyckades!</strong> Prova igen senare.",
                 "userexists": "<strong>Användarnamnet finns redan!</strong> Prova ett annat användarnamn.",

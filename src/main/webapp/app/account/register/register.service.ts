@@ -10,4 +10,9 @@ export class Register {
     save(account: any): Observable<any> {
         return this.http.post('api/register', account);
     }
+
+    reset(login: string): Observable<any> {
+        console.log('resend email ' + login );
+        return this.http.get('api/register/resubmit?login=' + login);
+    }
 }

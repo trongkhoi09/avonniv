@@ -68,9 +68,9 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
 
     ngAfterViewInit() {
         if (this.isRegistration) {
-            this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#login'), 'focus', []);
+            this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#login'), '', []);
         } else {
-            this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#usernameLogin'), 'focus', []);
+            this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#usernameLogin'), '', []);
         }
     }
 

@@ -17,7 +17,7 @@
                         <input class="form-check-input" type="radio" [(ngModel)]="isRegistration"
                                name="inlineRadioOptions"
                                [value]="true"
-                        (click)="validatorEmail=false; validatorPasword=false; $event.stopPropagation();">
+                               (click)="onSwitch($event)">
                         <span class="text" jhiTranslate="register.title">Registration</span>
                     </label>
                 </div>
@@ -28,7 +28,7 @@
                         <input class="form-check-input" type="radio" [(ngModel)]="isRegistration"
                                name="inlineRadioOptions"
                                [value]="false"
-                               (click)="validatorEmail=false; validatorPasword=false; $event.stopPropagation();">
+                               (click)="onSwitch($event)">
                         <span class="text" jhiTranslate="login.title">Sign in</span>
                     </label>
                 </div>
@@ -37,7 +37,7 @@
     </div>
     <div *ngSwitchCase="true" class="form-register">
         <div class="">
-            <div class="alert alert-success" *ngIf="success" >
+            <div class="alert alert-success" *ngIf="success">
                 <div jhiTranslate="register.messages.success">
                     <strong>Registration saved!</strong> Please check your email for confirmation.
                 </div>
@@ -49,11 +49,13 @@
                 </div>
             </div>
 
-            <div class="alert alert-success" *ngIf="reSendEmail" jhiTranslate="register.messages.resubmit.reSendEmailSuccess">
+            <div class="alert alert-success" *ngIf="reSendEmail"
+                 jhiTranslate="register.messages.resubmit.reSendEmailSuccess">
                 Resend email successfully.
             </div>
 
-            <div class="alert alert-success" *ngIf="errorReSendEmail" jhiTranslate="register.messages.resubmit.reSendEmailError">
+            <div class="alert alert-success" *ngIf="errorReSendEmail"
+                 jhiTranslate="register.messages.resubmit.reSendEmailError">
                 An error occurred please try again later!.
             </div>
 
@@ -74,11 +76,13 @@
             <!--</div>-->
         </div>
         <div class="">
-            <form name="form" role="form" (ngSubmit)="register()" #registerForm="ngForm" *ngIf="!success && !reSendEmail">
+            <form name="form" role="form" (ngSubmit)="register()" #registerForm="ngForm"
+                  *ngIf="!success && !reSendEmail">
                 <div class="form-group">
                     <input type="text" class="form-control" [(ngModel)]="registerAccount.login" id="login" name="login"
                            #login="ngModel" placeholder="{{'global.form.email.placeholder' | translate}}"
-                           required minlength="5" maxlength="100" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                           required minlength="5" maxlength="100"
+                           pattern="[a-z0-9A-Z._%+-]+@[a-z0-9A-Z.-]+\.[a-zA-Z]{2,3}$">
                     <div *ngIf="validatorEmail">
                         <small class="form-text text-danger" *ngIf="login.errors.required"
                                jhiTranslate="global.messages.validate.email.required">
@@ -103,7 +107,8 @@
                            name="password" #password="ngModel"
                            id="password-field"
                            placeholder="{{'global.form.newpassword.placeholder' | translate}}"
-                           [(ngModel)]="registerAccount.password" minlength=4 maxlength=50 required>
+                           [(ngModel)]="registerAccount.password" minlength=4 maxlength=50 required
+                           (focus)="validatorEmail=true">
                     <span class="" (click)="showPassword=!showPassword">
                         <i [ngClass]="showPassword?'fa fa-eye-slash':'fa fa-eye'" aria-hidden="true"></i>
                     </span>
@@ -172,7 +177,7 @@
                     <button type="submit" [disabled]="!terms1 || !terms2 || !terms3"
                             class="btn btn-primary btn-block"
                             jhiTranslate="register.form.button"
-                    (click)="validatorPasword=true; validatorEmail=true">Register
+                            (click)="validatorPasword=true; validatorEmail=true">Register
                     </button>
                 </div>
             </form>
@@ -194,7 +199,8 @@
                     <input type="text" class="form-control" [(ngModel)]="username" id="usernameLogin"
                            name="usernameLogin"
                            #usernameLogin="ngModel" placeholder="{{'global.form.email.placeholder' | translate}}"
-                           required minlength="5" maxlength="100" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                           required minlength="5" maxlength="100"
+                           pattern="[a-z0-9A-Z._%+-]+@[a-z0-9A-Z.-]+\.[a-zA-Z]{2,3}$">
                     <div *ngIf="validatorEmail">
                         <small class="form-text text-danger" *ngIf="usernameLogin.errors.required"
                                jhiTranslate="global.messages.validate.email.required">
@@ -216,11 +222,12 @@
                     </div>
                 </div>
                 <div class="form-group show-password">
-                    <input [type]="showPassword ? 'text' : 'password'" class="form-control" name="password" id="passwordLogin"
+                    <input [type]="showPassword ? 'text' : 'password'" class="form-control" name="password"
+                           id="passwordLogin"
                            #passwordLogin="ngModel"
                            placeholder="{{'login.form.password.placeholder' | translate}}"
                            [(ngModel)]="password" minlength=4 maxlength=50 required
-                           (click)="validatorEmail=true">
+                           (focus)="validatorEmail=true">
                     <span class="show-password" (click)="showPassword=!showPassword">
                         <i [ngClass]="showPassword?'fa fa-eye-slash':'fa fa-eye'" aria-hidden="true"></i>
                     </span>
@@ -252,7 +259,8 @@
                        jhiTranslate="login.password.forgot">Forgot password?</a>
                 </div>
                 <div class="text-center">
-                    <button type="submit" (click)="validatorPasword=true; validatorEmail=true" class="btn btn-primary btn-block"
+                    <button type="submit" (click)="validatorPasword=true; validatorEmail=true"
+                            class="btn btn-primary btn-block"
                             jhiTranslate="login.form.button">Sign in
                     </button>
                 </div>

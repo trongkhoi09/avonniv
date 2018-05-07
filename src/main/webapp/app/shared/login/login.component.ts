@@ -73,6 +73,11 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
             this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#login'), '', []);
         } else {
             this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#usernameLogin'), '', []);
+            setTimeout(() => {
+                this.username = this.elementRef.nativeElement.querySelector('#usernameLogin').value;
+                this.password = this.elementRef.nativeElement.querySelector('#passwordLogin').value;
+            }, 500);
+            this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#usernameLogin'), 'focus', []);
         }
     }
 

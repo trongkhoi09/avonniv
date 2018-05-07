@@ -60,6 +60,8 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
         this.success = false;
         this.reSendEmail = false;
         this.registerAccount = {};
+        this.validatorEmail = false;
+        this.validatorPasword = false;
     }
 
     ngOnDestroy() {
@@ -89,7 +91,7 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
 
     login() {
         this.loginService.login({
-            username: this.username,
+            username: this.username.toLowerCase(),
             password: this.password,
             rememberMe: this.rememberMe
         }).then(() => {
@@ -131,6 +133,7 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
         this.errorReSendEmail = null;
         this.languageService.getCurrent().then((key) => {
             this.registerAccount.langKey = key;
+            this.registerAccount.login = this.registerAccount.login.toLowerCase();
             this.registerService.save(this.registerAccount).subscribe(() => {
                 this.success = true;
             }, (response) => this.processError(response));
@@ -164,6 +167,14 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
         if (response.status === 400 && response._body === 'this user does not exist') {
             this.errorReSendEmail = 'ERROR';
         }
+    }
+
+    onSwitch(e) {
+        console.log('email:' + this.validatorEmail);
+        console.log('password:' + this.validatorPasword);
+        this.validatorEmail = false;
+        this.validatorPasword = false;
+        e.stopPropagation();
     }
 
 }

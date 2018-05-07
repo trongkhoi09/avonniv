@@ -69,19 +69,16 @@ public class AccountResource {
 
         return userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase())
             .map(user -> new ResponseEntity<>("email address already in use", textPlainHeaders, HttpStatus.BAD_REQUEST))
-            .orElseGet(() -> userRepository.findOneByLogin(managedUserVM.getLogin())
-                .map(user -> new ResponseEntity<>("email address already in use", textPlainHeaders, HttpStatus.BAD_REQUEST))
                 .orElseGet(() -> {
                     User user = userService
-                        .createUser(managedUserVM.getLogin(), managedUserVM.getPassword(),
+                        .createUser(managedUserVM.getLogin().toLowerCase(), managedUserVM.getPassword(),
                             managedUserVM.getFirstName(), managedUserVM.getLastName(),
                              managedUserVM.getImageUrl(),
                             managedUserVM.getLangKey());
 
                     mailService.sendActivationEmail(user);
                     return new ResponseEntity<>(HttpStatus.CREATED);
-                })
-            );
+                });
     }
 
     /**
@@ -104,7 +101,6 @@ public class AccountResource {
 
     /**
      * GET  /activate : activate the registered user.
-     *
      * @param key the activation key
      * @return the ResponseEntity with status 200 (OK) and the activated user in body, or status 500 (Internal Server Error) if the user couldn't be activated
      */

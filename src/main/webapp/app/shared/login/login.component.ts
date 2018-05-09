@@ -62,6 +62,10 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
         this.registerAccount = {};
         this.validatorEmail = false;
         this.validatorPasword = false;
+        this.terms1 = false;
+        this.terms2 = false;
+        this.terms3 = false;
+        this.showPassword = false;
     }
 
     ngOnDestroy() {
@@ -87,9 +91,6 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
             username: null,
             password: null,
             rememberMe: true,
-            terms1: true,
-            terms2: true,
-            terms3: true
         };
         this.authenticationError = false;
         this.activeModal.dismiss('cancel');
@@ -176,11 +177,17 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
     }
 
     onSwitch(e) {
-        console.log('email:' + this.validatorEmail);
-        console.log('password:' + this.validatorPasword);
+        this.showPassword = false;
         this.validatorEmail = false;
         this.validatorPasword = false;
+        console.log('email:' + this.validatorEmail);
+        console.log('password:' + this.validatorPasword);
         e.stopPropagation();
     }
 
+    onClickterms() {
+        this.validatorEmail = false;
+        this.validatorPasword = false;
+        console.log('terms1: ' + this.terms1 + ' terms2:  ' + this.terms2 + ' terms3: ' + this.terms3);
+    }
 }

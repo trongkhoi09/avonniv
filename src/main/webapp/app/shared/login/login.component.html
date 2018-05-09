@@ -130,21 +130,21 @@
                 </div>
                 <div class="form-check">
                     <a class="check-terms" [ngClass]="terms1?'':'unchecked'"
-                       (click)="terms1=!terms1">
+                       (click)="terms1=!terms1; onClickterms()">
                         <i class="fa fa-check" aria-hidden="true"></i>
                         <span jhiTranslate="register.Terms1">I agree to that Avonniv can store my email.</span>
                     </a>
                 </div>
                 <div class="form-check">
                     <a class="check-terms" [ngClass]="terms2?'':'unchecked'"
-                       (click)="terms2=!terms2">
+                       (click)="terms2=!terms2; onClickterms()">
                         <i class="fa fa-check" aria-hidden="true"></i>
                         <span jhiTranslate="register.Terms2">I agree to that Avonniv can send me notification emails about grant updates.</span>
                     </a>
                 </div>
                 <div class="form-check">
                     <a class="check-terms" [ngClass]="terms3?'':'unchecked'"
-                       (click)="terms3=!terms3">
+                       (click)="terms3=!terms3; onClickterms()">
                         <i class="fa fa-check" aria-hidden="true"></i>
                         <div class="link-terms">
                             <span jhiTranslate="register.Terms3" class="terms-condition">I agree to Avonniv's</span>

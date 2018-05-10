@@ -82,7 +82,9 @@
                     <input type="text" class="form-control" [(ngModel)]="registerAccount.login" id="login" name="login"
                            #login="ngModel" placeholder="{{'global.form.email.placeholder' | translate}}"
                            required minlength="5" maxlength="100"
-                           pattern="[a-z0-9A-Z._%+-]+@[a-z0-9A-Z.-]+\.[a-zA-Z]{2,3}$">
+                           pattern="[a-z0-9A-Z._%+-]+@[a-z0-9A-Z.-]+\.[a-zA-Z]{2,3}$"
+                           (blur)="validatorEmail= true"
+                           (focus)="validatorEmail=false">
                     <div *ngIf="validatorEmail && login.invalid && (login.dirty || login.touched)">
                         <small class="form-text text-danger" *ngIf="login.errors.required"
                                jhiTranslate="global.messages.validate.email.required">
@@ -108,11 +110,12 @@
                            id="password-field"
                            placeholder="{{'global.form.newpassword.placeholder' | translate}}"
                            [(ngModel)]="registerAccount.password" minlength=4 maxlength=50 required
-                           (click)="validatorEmail=true">
+                           (blur)="validatorPasword=true"
+                           (focus)="validatorPasword=false">
                     <span class="" (click)="showPassword=!showPassword">
                         <i [ngClass]="showPassword?'fa fa-eye-slash':'fa fa-eye'" aria-hidden="true"></i>
                     </span>
-                    <div *ngIf="passwordLogin && password.invalid && (password.dirty || password.touched) ">
+                    <div *ngIf="validatorPasword && password.invalid && (password.dirty || password.touched) ">
                         <small class="form-text text-danger" *ngIf="password.errors.required"
                                jhiTranslate="global.messages.validate.newpassword.required">
                             Your password is required.
@@ -176,8 +179,12 @@
                 <div class="text-center">
                     <button type="submit" [disabled]="!terms1 || !terms2 || !terms3"
                             class="btn btn-primary btn-block"
+<<<<<<< HEAD
                             jhiTranslate="register.form.button"
                             (click)="onclickSubmit()">Register
+=======
+                            jhiTranslate="register.form.button">Register
+>>>>>>> AVON-167 Registration form
                     </button>
                 </div>
             </form>
@@ -200,7 +207,13 @@
                            name="usernameLogin"
                            #usernameLogin="ngModel" placeholder="{{'global.form.email.placeholder' | translate}}"
                            required minlength="5" maxlength="100"
+<<<<<<< HEAD
                            pattern="[a-z0-9A-Z._%+-]+@[a-z0-9A-Z.-]+\.[a-zA-Z]{2,3}$">
+=======
+                           pattern="[a-z0-9A-Z._%+-]+@[a-z0-9A-Z.-]+\.[a-zA-Z]{2,3}$"
+                           (blur)="validatorEmail=true"
+                           (focus)="validatorEmail = false">
+>>>>>>> AVON-167 Registration form
                     <div *ngIf="usernameLogin.invalid && (usernameLogin.dirty || usernameLogin.touched) && validatorEmail">
                         <small class="form-text text-danger" *ngIf="usernameLogin.errors.required"
                                jhiTranslate="global.messages.validate.email.required">
@@ -227,7 +240,12 @@
                            #passwordLogin="ngModel"
                            placeholder="{{'login.form.password.placeholder' | translate}}"
                            [(ngModel)]="password" minlength=4 maxlength=50 required
+<<<<<<< HEAD
                            (click)="validatorEmail=true">
+=======
+                           (blur)="validatorPasword=true"
+                           (focus)="validatorPasword = false;">
+>>>>>>> AVON-167 Registration form
                     <span class="show-password" (click)="showPassword=!showPassword">
                         <i [ngClass]="showPassword?'fa fa-eye-slash':'fa fa-eye'" aria-hidden="true"></i>
                     </span>
@@ -259,7 +277,11 @@
                        jhiTranslate="login.password.forgot">Forgot password?</a>
                 </div>
                 <div class="text-center">
+<<<<<<< HEAD
                     <button type="submit" (click)="onclickSubmit()"
+=======
+                    <button type="submit"
+>>>>>>> AVON-167 Registration form
                             class="btn btn-primary btn-block"
                             jhiTranslate="login.form.button">Sign in
                     </button>

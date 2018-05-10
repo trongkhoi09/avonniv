@@ -141,9 +141,11 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
         this.errorUserExists = null;
         this.errorEmailExists = null;
         this.errorReSendEmail = null;
+        if (this.registerAccount.login != null) {
+            this.registerAccount.login = this.registerAccount.login.toLowerCase();
+        }
         this.languageService.getCurrent().then((key) => {
             this.registerAccount.langKey = key;
-            this.registerAccount.login = this.registerAccount.login.toLowerCase();
             this.registerService.save(this.registerAccount).subscribe(() => {
                 this.success = true;
             }, (response) => this.processError(response));
@@ -183,13 +185,6 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
         this.showPassword = false;
         this.validatorEmail = false;
         this.validatorPasword = false;
-        console.log('email:' + this.validatorEmail);
-        console.log('password:' + this.validatorPasword);
         e.stopPropagation();
-    }
-
-    onclickSubmit() {
-        this.validatorPasword = true;
-        this.validatorEmail = true;
     }
 }

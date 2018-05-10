@@ -66,9 +66,12 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
         this.terms2 = false;
         this.terms3 = false;
         this.showPassword = false;
+        console.log('validatorEmail: ' + this.validatorEmail);
     }
 
     ngOnDestroy() {
+        this.validatorEmail = false;
+        this.validatorPasword = false;
         this.renderer.setElementClass(document.body, 'position-active', false);
     }
 
@@ -185,9 +188,8 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
         e.stopPropagation();
     }
 
-    onClickterms() {
-        this.validatorEmail = false;
-        this.validatorPasword = false;
-        console.log('terms1: ' + this.terms1 + ' terms2:  ' + this.terms2 + ' terms3: ' + this.terms3);
+    onclickSubmit() {
+        this.validatorPasword = true;
+        this.validatorEmail = true;
     }
 }

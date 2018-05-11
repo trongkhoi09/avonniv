@@ -179,19 +179,14 @@
                 <div class="text-center">
                     <button type="submit" [disabled]="!terms1 || !terms2 || !terms3"
                             class="btn btn-primary btn-block"
-<<<<<<< HEAD
-                            jhiTranslate="register.form.button"
-                            (click)="onclickSubmit()">Register
-=======
                             jhiTranslate="register.form.button">Register
->>>>>>> AVON-167 Registration form
                     </button>
                 </div>
             </form>
         </div>
-        <div class="bottom-text text-center">
-        <span>By clicking, I accept the <a>Terms of Service</a></span>
-        </div>
+        <!--<div class="bottom-text text-center">-->
+        <!--<span>By clicking, I accept the <a>Terms of Service</a></span>-->
+        <!--</div>-->
     </div>
     <div *ngSwitchCase="false" class="form-sign-in">
         <div class="">
@@ -207,13 +202,9 @@
                            name="usernameLogin"
                            #usernameLogin="ngModel" placeholder="{{'global.form.email.placeholder' | translate}}"
                            required minlength="5" maxlength="100"
-<<<<<<< HEAD
-                           pattern="[a-z0-9A-Z._%+-]+@[a-z0-9A-Z.-]+\.[a-zA-Z]{2,3}$">
-=======
                            pattern="[a-z0-9A-Z._%+-]+@[a-z0-9A-Z.-]+\.[a-zA-Z]{2,3}$"
                            (blur)="validatorEmail=true"
                            (focus)="validatorEmail = false">
->>>>>>> AVON-167 Registration form
                     <div *ngIf="usernameLogin.invalid && (usernameLogin.dirty || usernameLogin.touched) && validatorEmail">
                         <small class="form-text text-danger" *ngIf="usernameLogin.errors.required"
                                jhiTranslate="global.messages.validate.email.required">
@@ -240,12 +231,8 @@
                            #passwordLogin="ngModel"
                            placeholder="{{'login.form.password.placeholder' | translate}}"
                            [(ngModel)]="password" minlength=4 maxlength=50 required
-<<<<<<< HEAD
-                           (click)="validatorEmail=true">
-=======
                            (blur)="validatorPasword=true"
                            (focus)="validatorPasword = false;">
->>>>>>> AVON-167 Registration form
                     <span class="show-password" (click)="showPassword=!showPassword">
                         <i [ngClass]="showPassword?'fa fa-eye-slash':'fa fa-eye'" aria-hidden="true"></i>
                     </span>
@@ -277,11 +264,7 @@
                        jhiTranslate="login.password.forgot">Forgot password?</a>
                 </div>
                 <div class="text-center">
-<<<<<<< HEAD
-                    <button type="submit" (click)="onclickSubmit()"
-=======
                     <button type="submit"
->>>>>>> AVON-167 Registration form
                             class="btn btn-primary btn-block"
                             jhiTranslate="login.form.button">Sign in
                     </button>

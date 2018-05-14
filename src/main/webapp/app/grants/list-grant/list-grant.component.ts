@@ -127,17 +127,8 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     showDescription(grantDTO) {
-        if (window.innerWidth < 992) {
-            this.router.navigate(['/', {outlets: {popup: 'description-grant/' + grantDTO.id}}]);
-            ga('send', 'event', 'grantlist', 'open dialog ' +  grantDTO.title);
-        }
-    }
-
-    gotoExternalUrl(externalUrl) {
-        if (window.innerWidth >= 992) {
-            window.open(externalUrl, '_blank');
-            ga('send', 'event', 'grantlist', 'go to ' +  externalUrl);
-        }
+        this.router.navigate(['/', {outlets: {popup: 'description-grant/' + grantDTO.id}}]);
+        ga('send', 'event', 'grantlist', 'open dialog ' +  grantDTO.title);
     }
 
     loadPage(page: number) {

@@ -98,10 +98,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     showDescription(grantDTO) {
-        if (window.innerWidth < 992) {
-            this.router.navigate(['/', {outlets: {popup: 'description-grant/' + grantDTO.id}}]);
-            ga('send', 'event', 'mostRecent', 'open dialog ' + grantDTO.title);
-        }
+        this.router.navigate(['/', {outlets: {popup: 'description-grant/' + grantDTO.id}}]);
+        ga('send', 'event', 'mostRecent', 'open dialog ' + grantDTO.title);
     }
 
     gotoExternalUrl(externalUrl) {

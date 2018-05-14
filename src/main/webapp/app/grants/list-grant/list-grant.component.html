@@ -42,15 +42,15 @@
             </div>
             <tbody *ngIf="grantDTOs.length!=0">
             <tr *ngFor="let grantDTO of grantDTOs; let i = index" class="row m-0"
-                (click)="showDescription(grantDTO)">
+                (click)="showDescription(grantDTO)" style="cursor: pointer">
                 <td class="publisher">
                     <span>{{grantDTO.grantProgramDTO.publisherDTO.name}}</span>
                 </td>
                 <td class="title">
-                    <a *ngIf="grantDTO.externalUrl" (click)="gotoExternalUrl(grantDTO.externalUrl)"
+                    <div *ngIf="grantDTO.externalUrl"
                        href="javascript:void(0)">
                         {{grantDTO.title}}
-                    </a>
+                    </div>
                     <span *ngIf="!grantDTO.externalUrl">
                             {{grantDTO.title}}
                     </span>
@@ -61,9 +61,7 @@
                 <!--</td>-->
                 <td class="description">
                     {{grantDTO.description?sliceDescription(grantDTO):('global.notAvailable'|translate)}}
-                    <a [routerLink]="['/', { outlets: { popup: 'description-grant/'+ grantDTO.id} }]"
-                       replaceUrl="true"
-                       *ngIf="isSliceDescription(grantDTO)">more...</a>
+                    <a *ngIf="isSliceDescription(grantDTO)">...</a>
                 </td>
                 <td class="finance-description"
                     [innerHTML]="grantDTO.financeDescription?getFinanceDescription(grantDTO):('global.notAvailable'|translate)">

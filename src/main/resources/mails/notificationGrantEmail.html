@@ -16,8 +16,9 @@
     </div>
     <div th:if="${not #lists.isEmpty(grants)}"
          style="margin: 0; border: 1px solid #cccccc;line-height: 150%;">
-        <div th:each="grant,iter : ${grants}"
-             th:style="'padding: 16px 20px;background-color: '+ ${iter.index%2==0?'#f9fcff':'#ffffff'}">
+        <a th:each="grant,iter : ${grants}"
+             th:style="'display: block; text-decoration: none; padding: 16px 20px;background-color: '+ ${iter.index%2==0?'#f9fcff':'#ffffff'}"
+             th:href="@{|${baseUrl}/#/grants(popup:description-grant/${grant.id})|}">
             <div th:text="${grant.title}"
                  style="font-weight: bold;font-size: 15px;line-height: 18px; color: #0070bf;padding: 0;margin: 0">
             </div>
@@ -36,7 +37,7 @@
                 <span style="font-weight: bold;" th:text="#{email.notification.grant.table.publisher}">Publisher</span>:
                 <span th:text="${grant.grantProgramDTO.publisherDTO.name}"></span>
             </div>
-        </div>
+        </a>
     </div>
     <div style="background-color: #373d42">
         <div style="color: #c7d0db; text-align: center; padding-top: 20px; padding-bottom: 15px;">

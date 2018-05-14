@@ -163,8 +163,8 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
         }
     }
 
-    openTerms() {
-        this.activeModal.dismiss('cancel');
+    openTerms(e) {
+        e.stopPropagation();
         const modalRef = this.modalService.open(TermsModalComponent);
     }
 

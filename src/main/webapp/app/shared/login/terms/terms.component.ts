@@ -1,5 +1,6 @@
-import {Component, Input} from '@angular/core';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Component} from '@angular/core';
+import {NgbActiveModal, NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {JhiLoginModalComponent} from '../login.component';
 
 @Component({
     selector: 'jhi-terms-component',
@@ -8,7 +9,10 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class TermsModalComponent {
 
-    constructor(public activeModal: NgbActiveModal) {
+    modalRef: NgbModalRef;
+
+    constructor(private activeModal: NgbActiveModal,
+                private modalService: NgbModal) {
     }
 
     dismis() {

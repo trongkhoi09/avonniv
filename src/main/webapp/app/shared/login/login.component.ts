@@ -76,17 +76,6 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
     }
 
     ngAfterViewInit() {
-        if (!this.isRegistration) {
-            setTimeout(() => {
-                this.username = this.elementRef.nativeElement.querySelector('#usernameLogin').value;
-                this.password = this.elementRef.nativeElement.querySelector('#passwordLogin').value;
-            }, 500);
-        } else {
-            setTimeout(() => {
-                this.registerAccount.login = this.elementRef.nativeElement.querySelector('#login').value;
-                this.registerAccount.password = this.elementRef.nativeElement.querySelector('#password').value;
-            }, 500);
-        }
     }
 
     cancel() {
@@ -186,5 +175,19 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
         this.validatorEmail = false;
         this.validatorPasword = false;
         e.stopPropagation();
+    }
+
+    processHanleAutoFillOnIOSDevice() {
+        if (!navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+           return ;
+        }
+
+        if (!this.isRegistration) {
+            this.username = this.elementRef.nativeElement.querySelector('#usernameLogin').value;
+            this.password = this.elementRef.nativeElement.querySelector('#passwordLogin').value;
+        } else {
+            this.registerAccount.login = this.elementRef.nativeElement.querySelector('#login').value;
+            this.registerAccount.password = this.elementRef.nativeElement.querySelector('#password').value;
+        }
     }
 }

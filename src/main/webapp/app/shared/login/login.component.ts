@@ -89,8 +89,11 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
     }
 
     login() {
+        if (this.username != null) {
+            this.username = this.username.toLowerCase();
+        }
         this.loginService.login({
-            username: this.username.toLowerCase(),
+            username: this.username,
             password: this.password,
             rememberMe: this.rememberMe
         }).then(() => {

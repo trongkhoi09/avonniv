@@ -62,9 +62,6 @@ public class FetchDataSMEService {
         return "http://ec.europa.eu/research/participants/portal/data/call/topics/" + topicFileName + ".json";
     }
 
-    //43200000 millisecond = 12 hour
-    //run taks every 00h and 12h AM everyday
-    @Scheduled(cron = "0 0 3,15 * * ?", zone = "CET")
     public void autoFetchDataFromSME() {
         try {
             Instant now = Instant.now();

@@ -41,9 +41,6 @@ public class FetchDataTillvaxtVerketService {
         this.grantProgramService = grantProgramService;
     }
 
-    //43200000 millisecond = 12 hour
-    //run taks every 00h and 12h AM everyday
-    @Scheduled(cron = "0 0 4,16 * * ?", zone = "CET")
     public void autoFetchDataFromFormas() {
         try {
             String name = "Tillväxtverket";

@@ -237,7 +237,6 @@ public class GrantService {
         }
     }
 
-    @Scheduled(cron = "0 0 14 * * WED", zone = "CET")
     public void notificationEmail() {
         List<User> users = userService.getAllUserNotification();
         List<User> usersPublisherEmpty = new ArrayList<>();

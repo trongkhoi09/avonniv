@@ -1,32 +1,61 @@
-import { Injectable, Inject } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
-import { LocalStorageService } from 'ng2-webstorage';
+import {Injectable} from '@angular/core';
+import {Http, Headers} from '@angular/http';
+import {Observable} from 'rxjs/Rx';
+import {LocalStorageService} from 'ng2-webstorage';
 
 import {Base64, EventManager} from 'ng-jhipster';
+import {OauthClientDetailService} from '../oauth-client-detail/oauth-client-detail.service';
 
 @Injectable()
 export class AuthServerProvider {
+
+    private clientId: string;
+    private secret: string;
 
     constructor(
         private eventManager: EventManager,
         private http: Http,
         private base64: Base64,
-        private $localStorage: LocalStorageService
-    ) {}
+        private $localStorage: LocalStorageService,
+        private oauth: OauthClientDetailService
+    ) {
+        this.oauth.findAll().subscribe(
+            (res) => {
+                this.handleClientId(res);
+            });
+    }
+
+    handleClientId(res) {
+        let loop = true;
+        res.forEach((auth) => {
+            if (loop) {
+                const additionalInfomation = JSON.parse(auth.additionalInformation);
+                if (additionalInfomation['web'] === true) {
+                    this.clientId = auth.clientId;
+                    this.secret = auth.clientSecret;
+                    loop = false;
+                }
+            }
+        });
+
+        if (loop) {
+            this.clientId = res[0].clientId;
+            this.secret = res[0].clientSecret;
+        }
+    }
 
     getToken() {
         return this.$localStorage.retrieve('authenticationToken');
     }
 
     login(credentials): Observable<any> {
-        const data = 'username=' +  encodeURIComponent(credentials.username) + '&password=' +
+        const data = 'username=' + encodeURIComponent(credentials.username) + '&password=' +
             encodeURIComponent(credentials.password) + '&grant_type=password&scope=read%20write&' +
-            'client_secret=my-secret-token-to-change-in-production&client_id=Avonnivapp';
-        const headers = new Headers ({
+            `client_secret=${this.secret}&client_id=${this.clientId}`;
+        const headers = new Headers({
             'Content-Type': 'application/x-www-form-urlencoded',
             'Accept': 'application/json',
-            'Authorization': 'Basic ' + this.base64.encode('Avonnivapp' + ':' + 'my-secret-token-to-change-in-production')
+            'Authorization': 'Basic ' + this.base64.encode(`${this.clientId}` + ':' + `${this.secret}`)
         });
 
         return this.http.post('oauth/token', data, {
@@ -45,13 +74,13 @@ export class AuthServerProvider {
     }
 
     loginByRefreshToken(refresh_token): Observable<any> {
-        const data = 'refresh_token=' +  encodeURIComponent(refresh_token) +
+        const data = 'refresh_token=' + encodeURIComponent(refresh_token) +
             '&grant_type=refresh_token&scope=read%20write&' +
-            'client_secret=my-secret-token-to-change-in-production&client_id=Avonnivapp';
-        const headers = new Headers ({
+            `client_secret=${this.secret}&client_id=${this.clientId}`;
+        const headers = new Headers({
             'Content-Type': 'application/x-www-form-urlencoded',
             'Accept': 'application/json',
-            'Authorization': 'Basic ' + this.base64.encode('Avonnivapp' + ':' + 'my-secret-token-to-change-in-production')
+            'Authorization': 'Basic ' + this.base64.encode(`${this.clientId}` + ':' + `${this.secret}`)
         });
 
         return this.http.post('oauth/token', data, {
@@ -80,4 +109,5 @@ export class AuthServerProvider {
             observer.complete();
         });
     }
+
 }

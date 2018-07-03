@@ -1,15 +1,16 @@
 package com.avonniv.service;
 
+import com.avonniv.config.Constants;
 import com.avonniv.domain.Authority;
 import com.avonniv.domain.User;
 import com.avonniv.repository.AuthorityRepository;
-import com.avonniv.config.Constants;
+import com.avonniv.repository.OauthClientDetailRepository;
 import com.avonniv.repository.UserRepository;
 import com.avonniv.security.AuthoritiesConstants;
 import com.avonniv.security.SecurityUtils;
-import com.avonniv.service.util.RandomUtil;
+import com.avonniv.service.dto.OauthClientDetailDTO;
 import com.avonniv.service.dto.UserDTO;
-
+import com.avonniv.service.util.RandomUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -22,7 +23,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -42,11 +46,14 @@ public class UserService {
 
     private final AuthorityRepository authorityRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JdbcTokenStore jdbcTokenStore, AuthorityRepository authorityRepository) {
+    private final OauthClientDetailRepository oauthClientDetailRepository;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JdbcTokenStore jdbcTokenStore, AuthorityRepository authorityRepository, OauthClientDetailRepository oauthClientDetailRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jdbcTokenStore = jdbcTokenStore;
         this.authorityRepository = authorityRepository;
+        this.oauthClientDetailRepository = oauthClientDetailRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -267,5 +274,9 @@ public class UserService {
      */
     public List<String> getAuthorities() {
         return authorityRepository.findAll().stream().map(Authority::getName).collect(Collectors.toList());
+    }
+
+    public List<OauthClientDetailDTO> getAllOauthClientDetail() {
+        return oauthClientDetailRepository.findAll().stream().map(OauthClientDetailDTO::new).collect(Collectors.toList());
     }
 }

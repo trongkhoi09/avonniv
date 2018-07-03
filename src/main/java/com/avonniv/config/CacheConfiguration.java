@@ -49,6 +49,7 @@ public class CacheConfiguration {
             cm.createCache(com.avonniv.domain.Publisher.class.getName(), jcacheConfiguration);
             cm.createCache(com.avonniv.domain.CrawlHistory.class.getName(), jcacheConfiguration);
             cm.createCache(com.avonniv.domain.Preferences.class.getName(), jcacheConfiguration);
+            cm.createCache(com.avonniv.domain.OauthClientDetail.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

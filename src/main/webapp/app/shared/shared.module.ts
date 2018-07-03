@@ -22,6 +22,7 @@ import {
     GrantProgramService,
     AreaService
 } from './';
+import {OauthClientDetailService} from './oauth-client-detail/oauth-client-detail.service';
 
 @NgModule({
     imports: [
@@ -48,7 +49,8 @@ import {
         GrantService,
         PreferencesService,
         GrantProgramService,
-        AreaService
+        AreaService,
+        OauthClientDetailService,
     ],
     entryComponents: [JhiLoginModalComponent],
     exports: [

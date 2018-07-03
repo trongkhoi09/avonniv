@@ -2,6 +2,7 @@ package com.avonniv.web.rest;
 
 import com.avonniv.config.Constants;
 import com.avonniv.service.PreferencesService;
+import com.avonniv.service.dto.OauthClientDetailDTO;
 import com.codahale.metrics.annotation.Timed;
 import com.avonniv.domain.User;
 import com.avonniv.repository.UserRepository;
@@ -191,5 +192,12 @@ public class UserResource {
         preferencesService.removeByUser(login);
         userService.deleteUser(login);
         return ResponseEntity.ok().headers(HeaderUtil.createAlert( "userManagement.deleted", login)).build();
+    }
+
+    @GetMapping("/users/oauth")
+    @Timed
+    public ResponseEntity<List<OauthClientDetailDTO>> getAllOauthClientDetail() {
+        final List<OauthClientDetailDTO> page = userService.getAllOauthClientDetail();
+        return new ResponseEntity<>(page, new HttpHeaders(), HttpStatus.OK);
     }
 }

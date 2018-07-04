@@ -19,10 +19,14 @@ export class AuthServerProvider {
         private $localStorage: LocalStorageService,
         private oauth: OauthClientDetailService
     ) {
-        this.oauth.findAll().subscribe(
-            (res) => {
-                this.handleClientId(res);
-            });
+        this.getClientId();
+    }
+
+    getClientId(): Observable<any> {
+        if (this.secret != null && this.clientId != null) {
+            return;
+        }
+
     }
 
     handleClientId(res) {
@@ -48,7 +52,21 @@ export class AuthServerProvider {
         return this.$localStorage.retrieve('authenticationToken');
     }
 
-    login(credentials): Observable<any> {
+    login(credentials) {
+        return new Promise((resolve, reject) => {
+            if (this.clientId == null || this.secret == null) {
+                this.oauth.findAll().subscribe(
+                    (res) => {
+                        this.handleClientId(res);
+                        resolve(this.loginFunction(credentials));
+                    });
+            }else {
+                resolve(this.loginFunction(credentials));
+            }
+        });
+    }
+
+    loginFunction(credentials) {
         const data = 'username=' + encodeURIComponent(credentials.username) + '&password=' +
             encodeURIComponent(credentials.password) + '&grant_type=password&scope=read%20write&' +
             `client_secret=${this.secret}&client_id=${this.clientId}`;
@@ -73,7 +91,21 @@ export class AuthServerProvider {
         }
     }
 
-    loginByRefreshToken(refresh_token): Observable<any> {
+    loginByRefreshToken(refresh_token) {
+        return new Promise((resolve, reject) => {
+            if (this.clientId == null || this.secret == null) {
+                this.oauth.findAll().subscribe(
+                    (res) => {
+                        this.handleClientId(res);
+                        resolve(this.handleTokenFunction(refresh_token));
+                    });
+            }else {
+                resolve(this.handleTokenFunction(refresh_token));
+            }
+        });
+    }
+
+    handleTokenFunction(refresh_token) {
         const data = 'refresh_token=' + encodeURIComponent(refresh_token) +
             '&grant_type=refresh_token&scope=read%20write&' +
             `client_secret=${this.secret}&client_id=${this.clientId}`;

@@ -194,10 +194,4 @@ public class UserResource {
         return ResponseEntity.ok().headers(HeaderUtil.createAlert( "userManagement.deleted", login)).build();
     }
 
-    @GetMapping("/users/oauth")
-    @Timed
-    public ResponseEntity<List<OauthClientDetailDTO>> getAllOauthClientDetail() {
-        final List<OauthClientDetailDTO> page = userService.getAllOauthClientDetail();
-        return new ResponseEntity<>(page, new HttpHeaders(), HttpStatus.OK);
-    }
 }

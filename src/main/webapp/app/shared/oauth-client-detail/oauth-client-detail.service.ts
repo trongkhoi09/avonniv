@@ -5,7 +5,7 @@ import {Http, Response} from '@angular/http';
 
 @Injectable()
 export class OauthClientDetailService {
-    private resourceUrl = 'api/users/oauth';
+    private resourceUrl = 'api/oauth';
 
     constructor(private http: Http) { }
 

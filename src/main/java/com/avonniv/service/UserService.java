@@ -275,8 +275,4 @@ public class UserService {
     public List<String> getAuthorities() {
         return authorityRepository.findAll().stream().map(Authority::getName).collect(Collectors.toList());
     }
-
-    public List<OauthClientDetailDTO> getAllOauthClientDetail() {
-        return oauthClientDetailRepository.findAll().stream().map(OauthClientDetailDTO::new).collect(Collectors.toList());
-    }
 }

@@ -6,6 +6,7 @@ import { MockActivatedRoute } from '../../../helpers/mock-route.service';
 import { LoginModalService } from '../../../../../../main/webapp/app/shared';
 import { Activate } from '../../../../../../main/webapp/app/account/activate/activate.service';
 import { ActivateComponent } from '../../../../../../main/webapp/app/account/activate/activate.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('Component Tests', () => {
 
@@ -15,7 +16,7 @@ describe('Component Tests', () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                imports: [AvonnivTestModule],
+                imports: [AvonnivTestModule, RouterTestingModule],
                 declarations: [ActivateComponent],
                 providers: [
                     Activate,
@@ -25,7 +26,7 @@ describe('Component Tests', () => {
                     },
                     {
                         provide: LoginModalService,
-                        useValue: null
+                        useValue: ''
                     }
                 ]
             }).overrideTemplate(ActivateComponent, '')

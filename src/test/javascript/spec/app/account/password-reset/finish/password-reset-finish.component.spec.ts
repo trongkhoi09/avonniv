@@ -6,6 +6,7 @@ import { AvonnivTestModule } from '../../../../test.module';
 import { PasswordResetFinishComponent } from '../../../../../../../main/webapp/app/account/password-reset/finish/password-reset-finish.component';
 import { PasswordResetFinish } from '../../../../../../../main/webapp/app/account/password-reset/finish/password-reset-finish.service';
 import { MockActivatedRoute } from '../../../../helpers/mock-route.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 
 describe('Component Tests', () => {
@@ -17,7 +18,7 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             fixture = TestBed.configureTestingModule({
-                imports: [AvonnivTestModule],
+                imports: [AvonnivTestModule, RouterTestingModule],
                 declarations: [PasswordResetFinishComponent],
                 providers: [
                     PasswordResetFinish,

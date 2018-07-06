@@ -35,16 +35,16 @@ export class AuthServerProvider {
             if (loop) {
                 const additionalInfomation = JSON.parse(auth.additionalInformation);
                 if (additionalInfomation['web'] === true) {
-                    this.clientId = auth.clientId;
-                    this.secret = auth.clientSecret;
+                    this.clientId = encodeURIComponent(auth.clientId);
+                    this.secret = encodeURIComponent(auth.clientSecret);
                     loop = false;
                 }
             }
         });
 
         if (loop) {
-            this.clientId = res[0].clientId;
-            this.secret = res[0].clientSecret;
+            this.clientId = encodeURIComponent(res[0].clientId);
+            this.secret = encodeURIComponent(res[0].clientSecret);
         }
     }
 

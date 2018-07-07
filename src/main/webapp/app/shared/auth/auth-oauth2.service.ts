@@ -57,8 +57,6 @@ export class AuthServerProvider {
     }
 
     loginFunction(credentials) {
-        console.log('ClientId: ' + this.clientId);
-        console.log('Secret: ' + this.secret);
         const data = 'username=' + encodeURIComponent(credentials.username) + '&password=' +
             encodeURIComponent(credentials.password) + '&grant_type=password&scope=read%20write&' +
             `client_secret=${encodeURIComponent(this.secret)}&client_id=${encodeURIComponent(this.clientId)}`;

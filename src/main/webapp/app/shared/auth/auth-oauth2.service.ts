@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
+import {Headers, Http} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import {LocalStorageService} from 'ng2-webstorage';
 
@@ -12,21 +12,11 @@ export class AuthServerProvider {
     private clientId: string;
     private secret: string;
 
-    constructor(
-        private eventManager: EventManager,
-        private http: Http,
-        private base64: Base64,
-        private $localStorage: LocalStorageService,
-        private oauth: OauthClientDetailService
-    ) {
-        this.getClientId();
-    }
-
-    getClientId(): Observable<any> {
-        if (this.secret != null && this.clientId != null) {
-            return;
-        }
-
+    constructor(private eventManager: EventManager,
+                private http: Http,
+                private base64: Base64,
+                private $localStorage: LocalStorageService,
+                private oauth: OauthClientDetailService) {
     }
 
     handleClientId(res) {
@@ -60,13 +50,15 @@ export class AuthServerProvider {
                         this.handleClientId(res);
                         resolve(this.loginFunction(credentials));
                     });
-            }else {
+            } else {
                 resolve(this.loginFunction(credentials));
             }
         });
     }
 
     loginFunction(credentials) {
+        console.log('ClientId: ' + this.clientId);
+        console.log('Secret: ' + this.secret);
         const data = 'username=' + encodeURIComponent(credentials.username) + '&password=' +
             encodeURIComponent(credentials.password) + '&grant_type=password&scope=read%20write&' +
             `client_secret=${this.secret}&client_id=${this.clientId}`;
@@ -99,7 +91,7 @@ export class AuthServerProvider {
                         this.handleClientId(res);
                         resolve(this.handleTokenFunction(refresh_token));
                     });
-            }else {
+            } else {
                 resolve(this.handleTokenFunction(refresh_token));
             }
         });

@@ -25,16 +25,16 @@ export class AuthServerProvider {
             if (loop) {
                 const additionalInfomation = JSON.parse(auth.additionalInformation);
                 if (additionalInfomation['web'] === true) {
-                    this.clientId = encodeURIComponent(auth.clientId);
-                    this.secret = encodeURIComponent(auth.clientSecret);
+                    this.clientId = (auth.clientId);
+                    this.secret = (auth.clientSecret);
                     loop = false;
                 }
             }
         });
 
         if (loop) {
-            this.clientId = encodeURIComponent(res[0].clientId);
-            this.secret = encodeURIComponent(res[0].clientSecret);
+            this.clientId = (res[0].clientId);
+            this.secret = (res[0].clientSecret);
         }
     }
 
@@ -61,7 +61,7 @@ export class AuthServerProvider {
         console.log('Secret: ' + this.secret);
         const data = 'username=' + encodeURIComponent(credentials.username) + '&password=' +
             encodeURIComponent(credentials.password) + '&grant_type=password&scope=read%20write&' +
-            `client_secret=${this.secret}&client_id=${this.clientId}`;
+            `client_secret=${encodeURIComponent(this.secret)}&client_id=${encodeURIComponent(this.clientId)}`;
         const headers = new Headers({
             'Content-Type': 'application/x-www-form-urlencoded',
             'Accept': 'application/json',
@@ -100,7 +100,7 @@ export class AuthServerProvider {
     handleTokenFunction(refresh_token) {
         const data = 'refresh_token=' + encodeURIComponent(refresh_token) +
             '&grant_type=refresh_token&scope=read%20write&' +
-            `client_secret=${this.secret}&client_id=${this.clientId}`;
+            `client_secret=${encodeURIComponent(this.secret)}&client_id=${encodeURIComponent(this.clientId)}`;
         const headers = new Headers({
             'Content-Type': 'application/x-www-form-urlencoded',
             'Accept': 'application/json',

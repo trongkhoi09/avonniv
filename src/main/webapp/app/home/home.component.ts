@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, Input, OnDestroy, OnInit} from '@angular/core';
 import {NgbActiveModal, NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {AlertService, EventManager} from 'ng-jhipster';
 
@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     account: Account;
     modalRef: NgbModalRef;
     grantDTOs: GrantDTO[] = [];
+    isMobile: boolean;
 
     constructor(private principal: Principal,
                 private loginModalService: LoginModalService,
@@ -42,6 +43,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             (res: ResponseWrapper) => this.onError(res.json)
         );
         window.scrollTo(0, 0);
+        this.checkMobile();
     }
 
     private onSuccess(data, headers) {
@@ -103,7 +105,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     gotoExternalUrl(externalUrl) {
-        if (window.innerWidth >= 992) {
+        if (!this.isMobile) {
             window.open(externalUrl, '_blank');
             ga('send', 'event', 'mostRecent', 'go to ' +  externalUrl);
         }
@@ -117,5 +119,17 @@ export class HomeComponent implements OnInit, OnDestroy {
     openMostRecent(grantDTO) {
         this.router.navigate([ '/', { outlets: { popup: 'description-grant/' + grantDTO.id } }]);
         ga('send', 'event', 'mostRecent', 'show dialog ' + grantDTO.title );
+    }
+    checkMobile() {
+        if (window.innerWidth >= 992) {
+            this.isMobile = false;
+        } else {
+            this.isMobile = true;
+        }
+    }
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+       this.checkMobile();
     }
 }

@@ -1,11 +1,20 @@
-import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
-import {AlertService, EventManager, ParseLinks} from 'ng-jhipster';
+import {
+    Component,
+    EventEmitter,
+    HostListener,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    Output,
+    SimpleChanges
+} from '@angular/core';
+import {AlertService, EventManager, JhiLanguageService, ParseLinks} from 'ng-jhipster';
 import {ResponseWrapper} from '../../shared/model/response-wrapper.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GrantService} from '../../shared/grant/grant.service';
 import {ITEMS_PER_PAGE} from '../../shared/constants/pagination.constants';
 import {GrantDTO, Principal} from '../../shared';
-import {JhiLanguageService} from 'ng-jhipster';
 
 declare const ga: Function;
 
@@ -23,7 +32,9 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
         search: ''
     };
     @Output() fnCallBack = new EventEmitter();
+    @Input() viewList = true;
 
+    viewListOld = this.viewList;
     routeData: any;
     links: any;
     totalItems: any;
@@ -99,7 +110,13 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        this.ngOnInit();
+        this.checkIsMobile();
+        if (this.viewList === this.viewListOld) {
+            this.ngOnInit();
+        } else {
+            this.viewListOld = this.viewList;
+        }
+
     }
 
     isAdmin() {
@@ -128,7 +145,7 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
 
     showDescription(grantDTO) {
         this.router.navigate(['/', {outlets: {popup: 'description-grant/' + grantDTO.id}}]);
-        ga('send', 'event', 'grantlist', 'open dialog ' +  grantDTO.title);
+        ga('send', 'event', 'grantlist', 'open dialog ' + grantDTO.title);
     }
 
     loadPage(page: number) {
@@ -232,5 +249,21 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
                 return Number(Number(grantDTO.financeDescription).toFixed(1)).toLocaleString() + ' EUR';
             }
         }
+    }
+
+    checkIsMobile(resize = false) {
+        if (window.innerWidth < 992) {
+            this.viewList = true;
+        } else {
+            if (resize) {
+                this.viewList = this.viewListOld;
+            }
+
+        }
+    }
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+        this.checkIsMobile(true);
     }
 }

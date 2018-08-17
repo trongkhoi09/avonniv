@@ -71,6 +71,8 @@
                         </a>
                     </div>
                     <div class="col text-right custom-number-item">
+                        <span class="view-mode" ngClass="{{!viewList ? 'active-mode': ''}}"><i class="fa fa-th fa-2x" aria-hidden="true" (click)="onChangeView(false)"></i></span>
+                        <span class="view-mode"  ngClass="{{viewList ? 'active-mode': ''}}"><i class="fa fa-bars fa-2x" aria-hidden="true" (click)="onChangeView(true)"></i></span>
                         <span jhiTranslate="grants.show">Visa</span>
                         <div ngbDropdown class="dropdown-custom">
                             <button class="btn btn-outline-primary btn-custom" id="dropdownBasic" ngbDropdownToggle>
@@ -89,7 +91,9 @@
                 </div>
                 <div class="row">
                     <jhi-list-grant *ngIf='loadPublisherFinished' [data]='data'
-                                    (fnCallBack)='handleUpdated($event)'></jhi-list-grant>
+                                    (fnCallBack)='handleUpdated($event)'
+                                    [viewList]="viewList"
+                    ></jhi-list-grant>
                 </div>
             </div>
         </div>

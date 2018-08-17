@@ -38,6 +38,8 @@ export class GrantsComponent implements OnInit, OnDestroy {
     data = this.grantFilter;
     authenticationSuccess: Subscription;
 
+    viewList= true;
+
     constructor(private areaService: AreaService,
                 private eventManager: EventManager,
                 private route: ActivatedRoute,
@@ -196,6 +198,10 @@ export class GrantsComponent implements OnInit, OnDestroy {
     opentOtherPublisher(publisherName) {
         this.router.navigate(['/', { outlets: { popup: 'other-publisher/' + publisherName} } ]);
         ga('send', 'event', 'other publisher', 'open otherpublisher ' + publisherName);
+    }
+
+    onChangeView(view: boolean  ) {
+        this.viewList = view;
     }
 
 }

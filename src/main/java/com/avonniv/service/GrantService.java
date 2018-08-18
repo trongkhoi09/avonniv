@@ -106,7 +106,7 @@ public class GrantService {
     @Transactional(readOnly = true)
     public Optional<List<Grant>> getRecentGrants() {
         return Optional.of(grantRepository.findAllByStatusInOrderByCreatedDateDesc(
-            new PageRequest(0, 3),
+            new PageRequest(0, 4),
             Arrays.asList(GrantDTO.Status.open.getValue(), GrantDTO.Status.coming.getValue()))
         );
     }

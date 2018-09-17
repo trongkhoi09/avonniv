@@ -1,9 +1,7 @@
 package com.avonniv.service;
 
-import com.avonniv.domain.Grant;
-import com.avonniv.domain.GrantFilter;
-import com.avonniv.domain.GrantProgram;
-import com.avonniv.domain.User;
+import com.avonniv.domain.*;
+import com.avonniv.repository.AreaRepository;
 import com.avonniv.repository.GrantProgramRepository;
 import com.avonniv.repository.GrantRepository;
 import com.avonniv.service.dto.GrantDTO;
@@ -12,23 +10,14 @@ import com.avonniv.service.fetchdata.Util;
 import org.jsoup.Jsoup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -49,16 +38,21 @@ public class GrantService {
 
     private final MailService mailService;
 
+    private final AreaRepository areaRepository;
+
+
     public GrantService(GrantRepository grantRepository,
                         UserService userService,
                         MailService mailService,
                         PreferencesService preferencesService,
-                        GrantProgramRepository grantProgramRepository) {
+                        GrantProgramRepository grantProgramRepository,
+                        AreaRepository areaRepository) {
         this.grantRepository = grantRepository;
         this.grantProgramRepository = grantProgramRepository;
         this.mailService = mailService;
         this.userService = userService;
         this.preferencesService = preferencesService;
+        this.areaRepository = areaRepository;
     }
 
     public Grant createGrantCall(GrantDTO grantDTO) {
@@ -203,6 +197,34 @@ public class GrantService {
             } else {
                 return new PageImpl<>(new ArrayList<>(), pageable, 0L);
             }
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public Page<GrantDTO> getAllByFilter(GrantFilter grantFilter, Pageable pageable) {
+        List<String> listPublisher = new ArrayList<>();
+        listPublisher.addAll(grantFilter.getPublisherDTOs());
+
+        List<Integer> statuses = new ArrayList<>();
+        if (grantFilter.isComingGrant()) statuses.add(GrantDTO.Status.coming.getValue());
+        if (grantFilter.isOpenGrant()) statuses.add(GrantDTO.Status.open.getValue());
+
+        if (statuses.size() == 0 || listPublisher.size() == 0)
+            return new PageImpl<>(new ArrayList<>(), pageable, 0L);
+
+        if (grantFilter.getSearch() != null && !grantFilter.getSearch().trim().isEmpty()) {
+            String keySearch = grantFilter.getSearch().trim();
+            Area area = areaRepository.findOneByName(keySearch).orElse(null);
+            if (area != null) {
+                List<GrantProgram> grantPrograms = grantProgramRepository.findAllByAreasContains(area);
+                return grantRepository.findAllByGrantProgramInAndGrantProgram_Publisher_NameInAndStatusInOrderByGrantProgram_Publisher_NameDesc(pageable, grantPrograms, listPublisher, statuses).map(GrantDTO::new);
+            } else {
+                String searchDescription = "%" + formatStringSearch(keySearch) + "%";
+                return grantRepository.findAllByGrantProgram_Publisher_NameInAndTitleLikeAndStatusInOrGrantProgram_Publisher_NameInAndDescriptionLikeAndStatusInOrderByGrantProgram_Publisher_NameAsc
+                    (pageable, listPublisher, "%" + keySearch + "%", statuses, listPublisher, searchDescription, statuses).map(GrantDTO::new);
+            }
+        } else {
+            return new PageImpl<>(new ArrayList<>(), pageable, 0L);
         }
     }
 

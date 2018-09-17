@@ -116,7 +116,6 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
         } else {
             this.viewListOld = this.viewList;
         }
-
     }
 
     isAdmin() {
@@ -129,6 +128,21 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
         this.grantFilter.sort = this.sort();
         if (JSON.stringify(this.grantFilter) !== JSON.stringify(this.oldGrantFilter)) {
             this.grantService.query(this.grantFilter).subscribe(
+                (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
+                (res: ResponseWrapper) => this.onError(res.json)
+            );
+        }
+    }
+
+    filterAll(search) {
+        console.log('data', this.data);
+        this.grantFilter.search = search;
+        this.grantFilter.page = this.page - 1;
+        this.grantFilter.size = this.itemsPerPage;
+        this.grantFilter.sort = this.sort();
+        console.log('grantFilter',  this.grantFilter);
+        if (JSON.stringify(this.grantFilter) !== JSON.stringify(this.oldGrantFilter)) {
+            this.grantService.querySearch(this.grantFilter).subscribe(
                 (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
                 (res: ResponseWrapper) => this.onError(res.json)
             );

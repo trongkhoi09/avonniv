@@ -50,6 +50,12 @@
         }
         .area {
             margin-bottom: 28px;
+            .title {
+                margin-bottom: 7px;
+            }
+            .input-search-area {
+               margin-top: 7px;
+            }
             .form-control {
                 width: 168px;
                 height: 32px;

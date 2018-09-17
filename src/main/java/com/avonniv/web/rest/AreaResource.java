@@ -108,6 +108,14 @@ public class AreaResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/search/{searchName}")
+    @Timed
+    public ResponseEntity<List<AreaDTO>> searchAllAreas(@ApiParam Pageable pageable, @PathVariable String searchName) {
+        final Page<AreaDTO> page = areaService.search(pageable, searchName);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/areas");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
     @GetMapping("/{name}")
     @Timed
     public ResponseEntity<AreaDTO> getArea(@PathVariable String name) {

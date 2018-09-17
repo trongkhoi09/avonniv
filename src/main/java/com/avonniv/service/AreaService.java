@@ -68,6 +68,12 @@ public class AreaService {
     }
 
     @Transactional(readOnly = true)
+    public Page<AreaDTO> search(Pageable pageable, String name) {
+        String keyName = "%" + name + "%";
+        return areaRepository.findAllByNameLike(keyName, pageable).map(AreaDTO::new);
+    }
+
+    @Transactional(readOnly = true)
     public Optional<Area> getAreaByName(String name) {
         return areaRepository.findOneByName(name);
     }

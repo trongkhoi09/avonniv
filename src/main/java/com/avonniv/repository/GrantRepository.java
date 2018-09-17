@@ -1,11 +1,14 @@
 package com.avonniv.repository;
 
+import com.avonniv.domain.Area;
 import com.avonniv.domain.Grant;
+import com.avonniv.domain.GrantProgram;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.Instant;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,4 +42,7 @@ public interface GrantRepository extends JpaRepository<Grant, Long> {
     Page<Grant> findAllByTitleLikeAndStatusInOrDescriptionLikeAndStatusIn(Pageable pageable, String searchTitle,List<Integer> listStatusForTile, String searchDescription, List<Integer> listStatusForDescription);
 
     Integer countAllByStatusInAndGrantProgram_Publisher_CrawledIsTrue(List<Integer> status);
+
+    Page<Grant> findAllByGrantProgram_Publisher_NameInAndTitleLikeAndStatusInOrGrantProgram_Publisher_NameInAndDescriptionLikeAndStatusInOrderByGrantProgram_Publisher_NameAsc(Pageable pageable, List<String> listPublisherIdWithTitle,String title, List<Integer> statusWithTitle, List<String> listPublisherIdWithDescription,String Description, List<Integer> statusWithDescription);
+    Page<Grant> findAllByGrantProgramInAndGrantProgram_Publisher_NameInAndStatusInOrderByGrantProgram_Publisher_NameDesc(Pageable pageable, List<GrantProgram> grantPrograms, List<String> listPublisherId,  List<Integer> statuses);
 }

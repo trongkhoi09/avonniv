@@ -1,12 +1,18 @@
-import {Component, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import {Component, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {
-    AreaDTO, AreaService, ITEMS_PER_PAGE, PreferencesService, Principal, PublisherDTO,
+    AreaDTO,
+    AreaService,
+    ITEMS_PER_PAGE,
+    PreferencesService,
+    Principal,
+    PublisherDTO,
     PublisherService
 } from '../shared';
 import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute, Router} from '@angular/router';
 import {EventManager} from 'ng-jhipster';
 import {Subscription} from 'rxjs/Rx';
+import {ListGrantComponent} from './list-grant/list-grant.component';
 
 declare const ga: Function;
 
@@ -18,6 +24,8 @@ declare const ga: Function;
     ]
 })
 export class GrantsComponent implements OnInit, OnDestroy {
+
+    @ViewChild(ListGrantComponent) listGrantComponent: ListGrantComponent;
     routeSub: any;
     currentAccount: any;
     numberItem = 0;
@@ -38,7 +46,9 @@ export class GrantsComponent implements OnInit, OnDestroy {
     data = this.grantFilter;
     authenticationSuccess: Subscription;
 
-    viewList= true;
+    viewList = true;
+    dataSelected: string;
+    search = false;
 
     constructor(private areaService: AreaService,
                 private eventManager: EventManager,
@@ -102,7 +112,7 @@ export class GrantsComponent implements OnInit, OnDestroy {
         data.publisherDTOs = publisherDTOs;
         data.areaDTOs = areaDTOs;
         this.data = Object.assign({}, data);
-        ga('send', 'event', 'filter', 'openGrant: ' +  this.grantFilter.openGrant + '; comingGrant: ' + this.grantFilter.comingGrant );
+        ga('send', 'event', 'filter', 'openGrant: ' + this.grantFilter.openGrant + '; comingGrant: ' + this.grantFilter.comingGrant);
         ga('send', 'event', 'filter', filter);
     }
 
@@ -188,7 +198,6 @@ export class GrantsComponent implements OnInit, OnDestroy {
 
     setActivateClicking() {
         if (this.principal.isShowFilter()) {
-            console.log('opent');
             this.ref.addClass(document.getElementById('trans-parent'), 'trans-parent');
         } else {
             this.ref.removeClass(document.getElementById('trans-parent'), 'trans-parent');
@@ -196,12 +205,22 @@ export class GrantsComponent implements OnInit, OnDestroy {
     }
 
     opentOtherPublisher(publisherName) {
-        this.router.navigate(['/', { outlets: { popup: 'other-publisher/' + publisherName} } ]);
+        this.router.navigate(['/', {outlets: {popup: 'other-publisher/' + publisherName}}]);
         ga('send', 'event', 'other publisher', 'open otherpublisher ' + publisherName);
     }
 
-    onChangeView(view: boolean  ) {
+    onChangeView(view: boolean) {
         this.viewList = view;
+    }
+
+    onSelect(e) {
+        this.listGrantComponent.filterAll(this.dataSelected);
+    }
+
+    onKeyPress(e) {
+        if (e.code === 'Enter') {
+            this.listGrantComponent.filterAll(this.dataSelected);
+        }
     }
 
 }

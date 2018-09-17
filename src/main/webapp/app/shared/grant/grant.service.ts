@@ -19,6 +19,12 @@ export class GrantService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    querySearch(req?: any): Observable<ResponseWrapper> {
+        const options = createRequestGrantOption(req);
+        return this.http.get(`${this.resourceUrl}/filter`, options)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
     count(): Observable<Number> {
         return this.http.get(`${this.resourceUrl}/count`)
             .map((res: Response) => res.json());

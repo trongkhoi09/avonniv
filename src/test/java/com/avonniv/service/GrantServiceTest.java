@@ -57,7 +57,7 @@ public class GrantServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        grantService = new GrantService(grantRepository, userService, mailService, preferencesService, grantProgramRepository);
+        grantService = new GrantService(grantRepository, userService, mailService, preferencesService, grantProgramRepository, areaRepository);
         Set<Area> areas = new HashSet<>();
         for (int i = 0; i < 4; i++) {
             Area area = new Area();

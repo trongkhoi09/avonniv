@@ -67,6 +67,21 @@ public class GrantResource {
         return new ResponseEntity<>(list, headers, HttpStatus.OK);
     }
 
+    @GetMapping("/filter")
+    @Timed
+    public ResponseEntity<List<GrantDTO>> getAllGrantFilter(@ApiParam GrantFilter grantFilter, @ApiParam Pageable pageable) {
+        final Page<GrantDTO> page = grantService.getAllByFilter(grantFilter, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/grant");
+        List<GrantDTO> list = page.getContent().stream().map(grantDTO -> {
+            if (grantDTO.getDescription() != null) {
+                String description = Jsoup.parse(grantDTO.getDescription()).text();
+                grantDTO.setDescription(description);
+            }
+            return grantDTO;
+        }).collect(Collectors.toList());
+        return new ResponseEntity<>(list, headers, HttpStatus.OK);
+    }
+
     @GetMapping("/count")
     @Timed
     public ResponseEntity<Integer> getCount() {

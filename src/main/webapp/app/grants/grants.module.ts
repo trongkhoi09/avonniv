@@ -2,6 +2,7 @@ import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {RouterModule} from '@angular/router';
 
 import {AvonnivSharedModule} from '../shared';
+import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
 
 import {
     grantsRoute,
@@ -19,6 +20,7 @@ import {ListGrantComponent} from './list-grant/list-grant.component';
 @NgModule({
     imports: [
         AvonnivSharedModule,
+        TypeaheadModule.forRoot(),
         RouterModule.forRoot(grantsRoute, {useHash: true})
     ],
     declarations: [

@@ -17,7 +17,8 @@
             "editGrantProgram": "Grant program"
         },
         "show": "Show",
-        "ofItem": "of {{numberItem}} items"
+        "ofItem": "of {{numberItem}} items",
+        "status": "Status"
     },
     "grant": {
         "edit": "Edit a grant"

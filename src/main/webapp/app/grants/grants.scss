@@ -160,26 +160,6 @@
             .icon-filter {
                 display: none;
             }
-            a {
-                margin-bottom: 6px;
-                display: inline-block;
-                margin-right: 46px;
-            }
-            span i {
-                font-size: 20px;
-                width: 24px;
-                height: 24px;
-                padding: 1px;
-                background-color: #ffffff;
-                border: solid 1px #ccd5e1;
-                border-radius: 2px;
-                color: #3b4c67;
-            }
-            .unchecked {
-                span i {
-                    color: transparent;
-                }
-            }
         }
         jhi-list-grant {
             width: 100%;
@@ -195,11 +175,6 @@
             }
             .grant-filter-type {
                 font-size: 14px;
-                span i {
-                    font-size: 14px;
-                    width: 18px;
-                    height: 18px;
-                }
                 a {
                     margin-right: 15px;
                 }
@@ -289,11 +264,6 @@
                             content: url("../../content/images/filter_full.png");
                         }
                     }
-                }
-                span i {
-                    font-size: 14px;
-                    width: 18px;
-                    height: 18px;
                 }
                 a {
                     margin-right: 10px;

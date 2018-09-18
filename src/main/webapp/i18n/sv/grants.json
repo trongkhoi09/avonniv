@@ -17,7 +17,8 @@
             "editGrantProgram": "Utlysningsprogram"
         },
         "show": "Visa",
-        "ofItem": "av {{numberItem}} objekt"
+        "ofItem": "av {{numberItem}} objekt",
+        "status": "Status"
     },
     "grant": {
         "edit": "Ändra en utlysning"

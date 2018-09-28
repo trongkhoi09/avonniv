@@ -5,27 +5,42 @@
     }
 
 }
-.modal-body{
+
+.modal-body {
     padding: 46px 48px 35px 39px;
-    .title{
+    .title {
         font-size: 24px;
         line-height: 0.92;
         text-align: left;
-        color: #0d2164;
-        margin-bottom: 32px;
+        color: #276cf2;
+        margin-bottom: 5px;
     }
-    .description{
-        font-size: 14px;
-        line-height: 1.57;
-        text-align: left;
-        color: #515c7f;
+    .publisher {
+        font-weight: 500;
+        color: black;
+        margin-bottom: 20px;
+    }
+    .content {
+        display: flex;
+        .label-grant {
+            font-weight: 600;
+            color: #292b2c;
+        }
+        .content-grant {
+            font-size: 14px;
+            line-height: 1.57;
+            text-align: left;
+            color: #515c7f;
+            margin-top: 4px;
+            margin-left: 5px;
+        }
     }
 
     .close-btn {
         display: none;
     }
 
-    .button-more{
+    .button-more {
         margin-top: 20px;
         display: inline-block;
         padding: 10px 32px 10px 32px;
@@ -35,6 +50,14 @@
         font-weight: 500;
         text-align: center;
         color: #ffffff;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .modal-body {
+        .content {
+            display: block;
+        }
     }
 }
 

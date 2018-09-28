@@ -13,6 +13,7 @@ import {GrantDTO} from '../../shared';
 })
 export class JhiDescriptionGrantModalComponent implements OnInit {
     grantDTO: GrantDTO;
+    formatDate = 'MM/dd/yyyy';
 
     constructor(public activeModal: NgbActiveModal) {
     }

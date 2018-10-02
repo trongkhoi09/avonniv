@@ -6,6 +6,7 @@ import {Account, GrantDTO, GrantService, LoginModalService, Principal, ResponseW
 import {Router} from '@angular/router';
 
 import {GrantSchoolDescriptionModalComponent} from './grant-school/grant-school.component';
+import {sliceString} from '../grants/grants.constance';
 
 declare const ga: Function;
 
@@ -92,6 +93,13 @@ export class HomeComponent implements OnInit, OnDestroy {
         return (description != null && description.length > index);
     }
 
+    sliceText(text: string, fontSize: number, numberLine: number, width: number) {
+        return sliceString(text, fontSize, numberLine, width)[0];
+    }
+
+    getNumberLineText(text: string, fontSize: number, numberLine: number, width: number) {
+        return sliceString(text, fontSize, numberLine, width)[1];
+    }
     open(grantSchoolDescription) {
         const modalRef = this.modalService.open(GrantSchoolDescriptionModalComponent);
         modalRef.componentInstance.grantSchoolDescription = grantSchoolDescription;

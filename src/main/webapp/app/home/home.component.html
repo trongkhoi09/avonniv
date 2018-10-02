@@ -13,7 +13,7 @@
                         <div class="card-block">
                             <div class="card-title">
                                 <div *ngIf="grantDTO.externalUrl">
-                                    {{grantDTO.title}}
+                                    {{sliceText(grantDTO.title, 24, 3, 330)}}
                                 </div>
                                 <span *ngIf="!grantDTO.externalUrl">{{grantDTO.title}}</span>
                             </div>
@@ -25,8 +25,7 @@
                                     <!--<span>{{grantDTO.openDate? (grantDTO.openDate| date: 'dd MMM yyyy'):('global.notAvailable'|translate)}}</span>-->
                                 <!--</div>-->
                                 <div>
-                                    <span>{{grantDTO.description?sliceDescription(grantDTO):('global.notAvailable'|translate)}}
-                                    <a *ngIf="isSliceDescription(grantDTO)">...</a>
+                                    <span>{{grantDTO.description?sliceText(grantDTO.description, 16, 7 - getNumberLineText(grantDTO.title, 24, 3, 330), 330):('global.notAvailable'|translate)}}
                                     </span>
                                 </div>
                             </div>

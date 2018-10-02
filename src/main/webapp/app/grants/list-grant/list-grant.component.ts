@@ -15,6 +15,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {GrantService} from '../../shared/grant/grant.service';
 import {ITEMS_PER_PAGE} from '../../shared/constants/pagination.constants';
 import {GrantDTO, Principal} from '../../shared';
+import {sliceString} from '../grants.constance';
 
 declare const ga: Function;
 
@@ -140,7 +141,7 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
         this.grantFilter.page = this.page - 1;
         this.grantFilter.size = this.itemsPerPage;
         this.grantFilter.sort = this.sort();
-        console.log('grantFilter',  this.grantFilter);
+        console.log('grantFilter', this.grantFilter);
         if (JSON.stringify(this.grantFilter) !== JSON.stringify(this.oldGrantFilter)) {
             this.grantService.querySearch(this.grantFilter).subscribe(
                 (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
@@ -251,6 +252,14 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
         const description = grantDTO.description;
         const index = 200;
         return (description != null && description.length > index);
+    }
+
+    sliceText(text: string, fontSize: number, numberLine: number, width: number) {
+       return sliceString(text, fontSize, numberLine, width)[0];
+    }
+
+    getNumberLineText(text: string, fontSize: number, numberLine: number, width: number) {
+        return sliceString(text, fontSize, numberLine, width)[1];
     }
 
     getFinanceDescription(grantDTO) {

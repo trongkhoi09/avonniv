@@ -1,0 +1,68 @@
+.card {
+    border: 0;
+    border-radius: 10px;
+    background-color: #f4f5f7;
+    padding: 1.25rem;
+    .grant-block {
+        overflow: hidden;
+        .card-title {
+            font-size: 24px;
+            line-height: 1.42;
+            text-align: left;
+            color: #276cf2;
+            max-height: 102px;
+            a:focus, a:hover {
+                color: #014c8c;
+                text-decoration: none;
+            }
+        }
+        .card-text {
+            font-size: 16px;
+            line-height: 2;
+            text-align: left;
+            color: #545454;
+            .publisher {
+                font-weight: bold;
+            }
+            a {
+                color: #276cf2;
+            }
+        }
+        .card-description {
+            letter-spacing: 1.15px;
+        }
+    }
+
+}
+
+@media screen and (max-width: 991px) {
+
+}
+
+@media screen and (max-width: 480px) {
+    .card {
+        height: 100%;
+        .card-title {
+            font-size: 24px;
+            line-height: 1.42;
+            text-align: left;
+            color: #276cf2;
+            a:focus, a:hover {
+                color: #014c8c;
+                text-decoration: none;
+            }
+        }
+        .card-text {
+            font-size: 16px;
+            line-height: 2;
+            text-align: left;
+            color: #545454;
+            .publisher {
+                font-weight: bold;
+            }
+            a {
+                color: #276cf2;
+            }
+        }
+    }
+}

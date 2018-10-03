@@ -112,28 +112,7 @@
                                 </div>
                                 <div *ngFor="let grantDTO of grantDTOs; let i = index" class="col-md-12 col-lg-3 grant">
                                     <!--<div class="col-md-4 grant">-->
-                                    <div class="card" (click)="showDescription(grantDTO)" style="cursor: pointer">
-                                        <div class="card-block">
-                                            <div class="card-title">
-                                                <div *ngIf="grantDTO.externalUrl">
-                                                    {{sliceText(grantDTO.title, 24, 3, 330)}}
-                                                </div>
-                                                <span *ngIf="!grantDTO.externalUrl">{{grantDTO.title}}</span>
-                                            </div>
-                                            <div class="card-text">
-                                                <div class="publisher">
-                                                    <span>{{grantDTO.grantProgramDTO.publisherDTO.name}}</span>
-                                                </div>
-                                                <!--<div>-->
-                                                <!--<span>{{grantDTO.openDate? (grantDTO.openDate| date: 'dd MMM yyyy'):('global.notAvailable'|translate)}}</span>-->
-                                                <!--</div>-->
-                                                <div>
-                                    <span>{{grantDTO.description?sliceText(grantDTO.description, 16, 7 - getNumberLineText(grantDTO.title, 24, 3, 330), 330):('global.notAvailable'|translate)}}
-                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <jhi-grant [grantDTO]="grantDTO"></jhi-grant>
                                 </div>
                             </div>
                         </div>

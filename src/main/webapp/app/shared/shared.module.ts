@@ -23,6 +23,8 @@ import {
     AreaService
 } from './';
 import {OauthClientDetailService} from './oauth-client-detail/oauth-client-detail.service';
+import {GrantDetailComponent} from './grant-share/grant-detail.component';
+import {EllipsisDirective} from './ellipsis/ellipsis.directive';
 
 @NgModule({
     imports: [
@@ -31,7 +33,9 @@ import {OauthClientDetailService} from './oauth-client-detail/oauth-client-detai
     ],
     declarations: [
         JhiLoginModalComponent,
-        HasAnyAuthorityDirective
+        HasAnyAuthorityDirective,
+        EllipsisDirective,
+        GrantDetailComponent
     ],
     providers: [
         CookieService,
@@ -57,7 +61,8 @@ import {OauthClientDetailService} from './oauth-client-detail/oauth-client-detai
         AvonnivSharedCommonModule,
         JhiLoginModalComponent,
         HasAnyAuthorityDirective,
-        DatePipe
+        DatePipe,
+        GrantDetailComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 

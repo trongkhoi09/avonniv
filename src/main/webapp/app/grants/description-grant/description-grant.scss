@@ -21,7 +21,8 @@
         margin-bottom: 20px;
     }
     .content {
-        display: flex;
+        display: block;
+        overflow: hidden;
         .label-grant {
             font-weight: 600;
             color: #292b2c;

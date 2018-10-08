@@ -3,14 +3,6 @@
         <strong>{{grantDTO.title}}</strong>
     </div>
     <div class="publisher">{{grantDTO.grantProgramDTO.publisherDTO.name}}</div>
-    <div class="content" *ngIf="grantDTO.description">
-        <span jhiTranslate="grants.description" class="label-grant">Description</span><span>: </span>
-        <span class="content-grant description" [innerHTML]="grantDTO.description"></span>
-    </div>
-    <div class="content" *ngIf="grantDTO.financeDescription">
-        <span jhiTranslate="grants.financeDescription" class="label-grant">Funding</span><span>: </span>
-        <span class="content-grant" >{{grantDTO.financeDescription?getFinanceDescription(grantDTO):('global.notAvailable'|translate)}}</span>
-    </div>
     <div class="open-date content" *ngIf="grantDTO.openDate">
         <span jhiTranslate="grants.openDate" class="label-grant">Open date</span><span>: </span>
         <span class="content-grant"> {{grantDTO.openDate? (grantDTO.openDate| date:
@@ -20,6 +12,14 @@
         <span jhiTranslate="grants.closeDate" class="label-grant">Close date</span><span>: </span>
         <span class="content-grant"> {{grantDTO.closeDate? (grantDTO.closeDate| date:
                                 this.formatDate):('global.notAvailable'|translate)}}</span>
+    </div>
+    <div class="content" *ngIf="grantDTO.financeDescription">
+        <span jhiTranslate="grants.financeDescription" class="label-grant">Funding</span><span>: </span>
+        <span class="content-grant" >{{grantDTO.financeDescription?getFinanceDescription(grantDTO):('global.notAvailable'|translate)}}</span>
+    </div>
+    <div class="content" *ngIf="grantDTO.description">
+        <span jhiTranslate="grants.description" class="label-grant">Description</span><span>: </span>
+        <span class="content-grant description" [innerHTML]="grantDTO.description"></span>
     </div>
     <div class="text-center">
         <button type="button" class="btn btn-primary button-more" (click)="openNewTab()" jhiTranslate="entity.action.moreInfo">

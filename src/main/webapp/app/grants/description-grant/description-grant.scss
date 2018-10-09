@@ -34,7 +34,13 @@
             color: #515c7f;
             margin-top: 4px;
             margin-left: 5px;
+            &.inline-description {
+                *:first-child {
+                    display: inline;
+                }
+            }
         }
+
     }
 
     .close-btn {

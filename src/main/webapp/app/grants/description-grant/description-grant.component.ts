@@ -58,6 +58,13 @@ export class JhiDescriptionGrantModalComponent implements OnInit {
             }
         }
     }
+
+    isEnergimyndigheten() {
+        if (this.grantDTO.grantProgramDTO.publisherDTO.name === 'Energimyndigheten') {
+            return true;
+        }
+        return false;
+    }
 }
 
 @Component({

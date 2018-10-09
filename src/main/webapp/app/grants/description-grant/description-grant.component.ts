@@ -11,7 +11,7 @@ import {EventManager, JhiLanguageService} from 'ng-jhipster';
     styleUrls: [
         'description-grant.scss'
     ],
-    encapsulation: ViewEncapsulation.Native
+    encapsulation: ViewEncapsulation.None
 })
 export class JhiDescriptionGrantModalComponent implements OnInit {
     grantDTO: GrantDTO;
@@ -64,7 +64,7 @@ export class JhiDescriptionGrantModalComponent implements OnInit {
         if (this.grantDTO.grantProgramDTO.publisherDTO.name === 'Energimyndigheten') {
             return true;
         }
-        return false;
+        return true;
     }
 }
 

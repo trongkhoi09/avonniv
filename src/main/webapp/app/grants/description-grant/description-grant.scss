@@ -35,7 +35,7 @@
             margin-top: 4px;
             margin-left: 5px;
             &.inline-description {
-                *:first-child {
+                > *:first-child {
                     display: inline;
                 }
             }

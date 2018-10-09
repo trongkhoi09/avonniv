@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {NgbActiveModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {ActivatedRoute} from '@angular/router';
 import {DescriptionGrantModalService} from './description-grant-modal.service';
@@ -10,7 +10,8 @@ import {EventManager, JhiLanguageService} from 'ng-jhipster';
     templateUrl: './description-grant.component.html',
     styleUrls: [
         'description-grant.scss'
-    ]
+    ],
+    encapsulation: ViewEncapsulation.Native
 })
 export class JhiDescriptionGrantModalComponent implements OnInit {
     grantDTO: GrantDTO;

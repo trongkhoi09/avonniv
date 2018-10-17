@@ -50,7 +50,7 @@
                                    [typeahead]="areaDTOs"
                                    typeaheadOptionField="name"
                                    [typeaheadOptionsLimit]="10"
-                                   placeholder="typing..."
+                                   placeholder="{{'grants.type' | translate}}"
                                    class="form-control"
                                    (typeaheadOnSelect)="onSelect($event)"
                                    (keypress)="onKeyPress($event)"

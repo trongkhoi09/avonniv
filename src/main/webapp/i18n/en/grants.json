@@ -18,7 +18,8 @@
         },
         "show": "Show",
         "ofItem": "of {{numberItem}} items",
-        "status": "Status"
+        "status": "Status",
+        "type": "Type ..."
     },
     "grant": {
         "edit": "Edit a grant"

@@ -18,7 +18,8 @@
         },
         "show": "Visa",
         "ofItem": "av {{numberItem}} objekt",
-        "status": "Status"
+        "status": "Status",
+        "type": "Skriv ..."
     },
     "grant": {
         "edit": "Ändra en utlysning"

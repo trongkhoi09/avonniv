@@ -46,7 +46,7 @@ export class GrantsComponent implements OnInit, OnDestroy {
     data = this.grantFilter;
     authenticationSuccess: Subscription;
 
-    viewList = true;
+    viewList = false;
     dataSelected: string;
     search = false;
 

@@ -101,8 +101,11 @@
                         </a>
                     </div>
                     <div class="col text-right custom-number-item">
-                        <span class="view-mode" ngClass="{{!viewList ? 'active-mode': ''}}"><i class="fa fa-th fa-2x" aria-hidden="true" (click)="onChangeView(false)"></i></span>
-                        <span class="view-mode"  ngClass="{{viewList ? 'active-mode': ''}}"><i class="fa fa-bars fa-2x" aria-hidden="true" (click)="onChangeView(true)"></i></span>
+                        <div class="view-mode-container">
+                            <span class="view-mode" ngClass="{{!viewList ? 'active-mode': ''}}"><i class="fa fa-th fa-1x" aria-hidden="true" (click)="onChangeView(false)"></i></span>
+                            <span class="view-mode"  ngClass="{{viewList ? 'active-mode': ''}}"><i class="fa fa-bars fa-1x" aria-hidden="true" (click)="onChangeView(true)"></i></span>
+                        </div>
+
                         <span jhiTranslate="grants.show">Visa</span>
                         <div ngbDropdown class="dropdown-custom">
                             <button class="btn btn-outline-primary btn-custom" id="dropdownBasic" ngbDropdownToggle>

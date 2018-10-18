@@ -109,21 +109,25 @@
         background-color: #f9fcff;
         flex: 1;
         position: relative;
-        padding: 19px 28px 0px 27px;
+        padding: 19px 28px 0 27px;
         .custom-number-item {
-            .view-mode {
-                visibility: visible;
-                margin-left: 3px;
-                margin-right: 3px;
-                cursor: pointer;
+            .view-mode-container {
                 display: inline-block;
-                padding: 4px;
-                border-radius: 3px;
-                border: 1px solid #f9fcff;
-                &.active-mode {
-                    border-color: #393939
+                height: 36px;
+                .view-mode {
+                    visibility: visible;
+                    margin-left: 3px;
+                    cursor: pointer;
+                    display: inline-block;
+                    padding: 4px 10px 5px 10px;
+                    border-radius: 3px;
+                    border: 1px solid #f9fcff;
+                    &.active-mode {
+                        border-color: #393939
+                    }
                 }
             }
+
             .dropdown-custom {
                 display: inline-block;
                 span {

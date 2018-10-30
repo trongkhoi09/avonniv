@@ -1,8 +1,8 @@
 {
     "grants": {
         "title": "Grants",
-        "openGrants": "Open grants",
-        "comingGrants": "Coming grants",
+        "openGrants": "Open",
+        "comingGrants": "Coming",
         "publisher": "Grantmakers",
         "area": "Area",
         "titleData": "Title",

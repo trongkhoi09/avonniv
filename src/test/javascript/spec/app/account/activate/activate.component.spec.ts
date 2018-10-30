@@ -26,7 +26,7 @@ describe('Component Tests', () => {
                     },
                     {
                         provide: LoginModalService,
-                        useValue: ''
+                        useValue: null
                     }
                 ]
             }).overrideTemplate(ActivateComponent, '')

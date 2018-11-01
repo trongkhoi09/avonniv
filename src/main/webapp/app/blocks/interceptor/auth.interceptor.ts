@@ -17,7 +17,6 @@ export class AuthInterceptor extends HttpInterceptor {
         if (token && token.expires_at && token.expires_at > new Date().getTime()) {
             options.headers.append('AuthorizationCustom', 'Bearer ' + token.access_token);
         }
-        console.log(options);
         return options;
     }
 

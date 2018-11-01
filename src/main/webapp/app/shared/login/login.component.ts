@@ -66,7 +66,6 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
         this.terms2 = false;
         this.terms3 = false;
         this.showPassword = false;
-        console.log('validatorEmail: ' + this.validatorEmail);
     }
 
     ngOnDestroy() {
@@ -111,7 +110,6 @@ export class JhiLoginModalComponent implements OnInit, OnDestroy, AfterViewInit 
 
             this.activatedRoute.queryParams.subscribe((params: Params) => {
                 const tab = params['tab'];
-                console.log('page: ' + tab, params);
                 if (tab != null) {
                     this.router.navigate([tab]);
                 }

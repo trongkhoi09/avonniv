@@ -12,7 +12,6 @@ export class Register {
     }
 
     reset(login: string): Observable<any> {
-        console.log('resend email ' + login );
         return this.http.get('api/register/resubmit?login=' + login);
     }
 }

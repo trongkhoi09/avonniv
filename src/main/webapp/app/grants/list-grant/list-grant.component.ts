@@ -49,6 +49,7 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
     listPage = [];
     maxSize = 7;
     formatDate = 'MM/dd/yyyy';
+    request: any;
 
     grantFilter = {
         page: 0,
@@ -130,7 +131,10 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
         this.grantFilter.size = this.itemsPerPage;
         this.grantFilter.sort = this.sort();
         if (JSON.stringify(this.grantFilter) !== JSON.stringify(this.oldGrantFilter)) {
-            this.grantService.query(this.grantFilter).subscribe(
+            if (this.request) {
+                this.request.unsubscribe();
+            }
+           this.request = this.grantService.query(this.grantFilter).subscribe(
                 (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
                 (res: ResponseWrapper) => this.onError(res.json)
             );

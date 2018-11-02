@@ -1,6 +1,7 @@
 import {AfterContentInit, Component, Input, ViewChild, ElementRef, Renderer2} from '@angular/core';
 import {GrantDTO} from '../index';
 import {Router} from '@angular/router';
+import {DescriptionGrantModalService, JhiDescriptionGrantModalComponent} from '../description-grant/';
 declare const ga: Function;
 
 @Component({
@@ -40,11 +41,11 @@ export class GrantDetailComponent implements AfterContentInit {
     constructor(
         private router: Router,
         private render2: Renderer2,
+        private descriptionGrantModalService: DescriptionGrantModalService
     ) {
     }
 
     showDescription(grantDTO) {
-        this.router.navigate(['/', {outlets: {popup: 'description-grant/' + grantDTO.id}}]);
-        ga('send', 'event', 'grantlist', 'open dialog ' + grantDTO.title);
+        this.descriptionGrantModalService.open(grantDTO);
     }
 }

@@ -25,6 +25,8 @@ import {
 import {OauthClientDetailService} from './oauth-client-detail/oauth-client-detail.service';
 import {GrantDetailComponent} from './grant-share/grant-detail.component';
 import {EllipsisDirective} from './ellipsis/ellipsis.directive';
+import {JhiDescriptionGrantModalComponent} from './description-grant/description-grant.component';
+import {DescriptionGrantModalService} from './description-grant/description-grant-modal.service';
 
 @NgModule({
     imports: [
@@ -35,7 +37,8 @@ import {EllipsisDirective} from './ellipsis/ellipsis.directive';
         JhiLoginModalComponent,
         HasAnyAuthorityDirective,
         EllipsisDirective,
-        GrantDetailComponent
+        GrantDetailComponent,
+        JhiDescriptionGrantModalComponent
     ],
     providers: [
         CookieService,
@@ -55,8 +58,9 @@ import {EllipsisDirective} from './ellipsis/ellipsis.directive';
         GrantProgramService,
         AreaService,
         OauthClientDetailService,
+        DescriptionGrantModalService
     ],
-    entryComponents: [JhiLoginModalComponent],
+    entryComponents: [JhiLoginModalComponent, JhiDescriptionGrantModalComponent],
     exports: [
         AvonnivSharedCommonModule,
         JhiLoginModalComponent,

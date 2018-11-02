@@ -16,6 +16,7 @@ import {GrantService} from '../../shared/grant/grant.service';
 import {ITEMS_PER_PAGE} from '../../shared/constants/pagination.constants';
 import {GrantDTO, Principal} from '../../shared';
 import {sliceString} from '../grants.constance';
+import {DescriptionGrantModalService} from '../../shared/description-grant';
 
 declare const ga: Function;
 
@@ -68,7 +69,8 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
                 private principal: Principal,
                 private activatedRoute: ActivatedRoute,
                 private languageService: JhiLanguageService,
-                private router: Router) {
+                private router: Router,
+                private descriptionGrantModalService: DescriptionGrantModalService) {
         this.itemsPerPage = ITEMS_PER_PAGE;
     }
 
@@ -157,8 +159,7 @@ export class ListGrantComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     showDescription(grantDTO) {
-        this.router.navigate(['/', {outlets: {popup: 'description-grant/' + grantDTO.id}}]);
-        ga('send', 'event', 'grantlist', 'open dialog ' + grantDTO.title);
+        this.descriptionGrantModalService.open(grantDTO);
     }
 
     loadPage(page: number) {

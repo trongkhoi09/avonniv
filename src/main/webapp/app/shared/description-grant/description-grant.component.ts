@@ -1,8 +1,6 @@
-import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {NgbActiveModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {ActivatedRoute} from '@angular/router';
-import {DescriptionGrantModalService} from './description-grant-modal.service';
-import {GrantDTO} from '../../shared';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {GrantDTO} from '../index';
 import {EventManager, JhiLanguageService} from 'ng-jhipster';
 
 @Component({
@@ -65,33 +63,5 @@ export class JhiDescriptionGrantModalComponent implements OnInit {
             return true;
         }
         return true;
-    }
-}
-
-@Component({
-    selector: 'jhi-description-grant-dialog',
-    template: ''
-})
-export class DescriptionGrantDialogComponent implements OnInit, OnDestroy {
-
-    modalRef: NgbModalRef;
-    routeSub: any;
-
-    constructor(private route: ActivatedRoute,
-                private descriptionGrantModalService: DescriptionGrantModalService) {
-    }
-
-    ngOnInit() {
-        this.routeSub = this.route.params.subscribe((params) => {
-            if (params['id']) {
-                this.modalRef = this.descriptionGrantModalService.open(JhiDescriptionGrantModalComponent, params['id']);
-            } else {
-                this.modalRef = this.descriptionGrantModalService.open(JhiDescriptionGrantModalComponent);
-            }
-        });
-    }
-
-    ngOnDestroy() {
-        this.routeSub.unsubscribe();
     }
 }

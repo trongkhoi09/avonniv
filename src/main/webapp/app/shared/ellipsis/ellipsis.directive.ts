@@ -74,6 +74,10 @@ export class EllipsisDirective implements AfterViewInit {
      */
     private clipText(): void {
         const el: HTMLElement = this.el.nativeElement;
+        if (this.hasOverflow && el.innerText.length > 300) {
+            const tx  = el.innerText.slice(0, 300);
+            el.innerText = tx;
+        }
         let text = el.innerText.split(' ');
         while (this.hasOverflow && text.length > 0) {
             text = text.slice(0, -1);

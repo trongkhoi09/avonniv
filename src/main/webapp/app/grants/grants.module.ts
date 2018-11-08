@@ -13,6 +13,7 @@ import {
 } from './';
 import {GrantsResolvePagingParams} from './grants.route';
 import {ListGrantComponent} from './list-grant/list-grant.component';
+import {DescriptionGrantDialogComponent} from './description-grant/description-grant-dialog';
 
 @NgModule({
     imports: [
@@ -24,7 +25,8 @@ import {ListGrantComponent} from './list-grant/list-grant.component';
         GrantsComponent,
         JhiOtherPublisherModalComponent,
         OtherPublisherDialogComponent,
-        ListGrantComponent
+        ListGrantComponent,
+        DescriptionGrantDialogComponent
     ],
     entryComponents: [
         JhiOtherPublisherModalComponent,

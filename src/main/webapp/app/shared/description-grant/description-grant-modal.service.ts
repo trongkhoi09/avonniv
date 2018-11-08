@@ -1,7 +1,6 @@
 import {Component, Injectable} from '@angular/core';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
-import {Router} from '@angular/router';
 import {GrantDTO, GrantService} from '../index';
 import {JhiDescriptionGrantModalComponent} from './description-grant.component';
 
@@ -9,7 +8,8 @@ import {JhiDescriptionGrantModalComponent} from './description-grant.component';
 export class DescriptionGrantModalService {
     private isOpen = false;
 
-    constructor(private modalService: NgbModal) {
+    constructor(private modalService: NgbModal,
+                private grantService: GrantService) {
     }
 
     open(grant: GrantDTO): NgbModalRef {
@@ -21,6 +21,15 @@ export class DescriptionGrantModalService {
         if (grant) {
             this.descriptionGrantModalRef(JhiDescriptionGrantModalComponent, grant);
         } else {
+            return this.descriptionGrantModalRef(JhiDescriptionGrantModalComponent, new GrantDTO());
+        }
+    }
+
+    openWithGrantId(grantId) {
+        if (grantId) {
+              this.grantService.find(grantId).subscribe((grantDTO) => this.descriptionGrantModalRef(JhiDescriptionGrantModalComponent, grantDTO));
+
+            } else {
             return this.descriptionGrantModalRef(JhiDescriptionGrantModalComponent, new GrantDTO());
         }
     }
